@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 5, 2018 4:14:33 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="negocio.Puestos" table="puestos" catalog="bolsaempleo" optimistic-lock="version">
+        <id name="idPuesto" type="java.lang.Integer">
+            <column name="idPuesto" />
+            <generator class="identity" />
+        </id>
+        <property name="nombrePuesto" type="string">
+            <column name="nombrePuesto" length="10" />
+        </property>
+        <property name="salario" type="java.lang.Float">
+            <column name="salario" precision="12" scale="0" />
+        </property>
+        <property name="descripcionPuesto" type="string">
+            <column name="descripcionPuesto" length="10" />
+        </property>
+        <property name="ubicacion" type="string">
+            <column name="ubicacion" length="10" />
+        </property>
+        <set name="puestosPublicadoses" table="puestos_publicados" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idPuesto" not-null="true" />
+            </key>
+            <one-to-many class="negocio.PuestosPublicados" />
+        </set>
+        <set name="aplicados" table="aplicado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idPuesto" not-null="true" />
+            </key>
+            <one-to-many class="negocio.Aplicado" />
+        </set>
+        <set name="caracteristicasIncluidoses" table="caracteristicas_incluidos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idPuesto" />
+            </key>
+            <one-to-many class="negocio.CaracteristicasIncluidos" />
+        </set>
+    </class>
+</hibernate-mapping>

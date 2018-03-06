@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 5, 2018 4:14:33 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="negocio.Oferente" table="oferente" catalog="bolsaempleo" optimistic-lock="version">
+        <id name="cedulaOferente" type="string">
+            <column name="cedulaOferente" length="15" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombreOferente" type="string">
+            <column name="nombreOferente" length="10" />
+        </property>
+        <property name="primerApellido" type="string">
+            <column name="primerApellido" length="10" />
+        </property>
+        <property name="segundoApellido" type="string">
+            <column name="segundoApellido" length="10" />
+        </property>
+        <property name="celular" type="string">
+            <column name="celular" length="12" />
+        </property>
+        <property name="nacionalidad" type="string">
+            <column name="nacionalidad" length="10" />
+        </property>
+        <property name="correoOferente" type="string">
+            <column name="correoOferente" length="15" />
+        </property>
+        <property name="ubicacion" type="string">
+            <column name="ubicacion" length="10" />
+        </property>
+        <set name="aplicados" table="aplicado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cedulaOferente" length="15" not-null="true" />
+            </key>
+            <one-to-many class="negocio.Aplicado" />
+        </set>
+        <set name="serviciosPublicadoses" table="servicios_publicados" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cedulaOferente" length="15" not-null="true" />
+            </key>
+            <one-to-many class="negocio.ServiciosPublicados" />
+        </set>
+    </class>
+</hibernate-mapping>

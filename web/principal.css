@@ -1,0 +1,57 @@
+ 
+body {
+    background-color: #F7F2E0;
+}
+
+h1 {
+    color : #8A2048;
+	   font-family : Impact, Charcoal, sans-serif;
+	   text-align : center;
+	   font-weight: normal;
+}
+
+p {
+    font-family: verdana;
+    font-size: 20px;
+}
+
+a {
+
+         color : #8A2048;
+	   font-family :  sans-serif;
+         text-align : center;
+		 font-family : Impact, Charcoal, sans-serif;
+
+
+}
+
+ 
+ ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+           text-align: center;
+	   color : #8A2048;
+	   font-family : "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	   text-align : center;
+	   font-weight: normal;
+}
+
+div.div1 {
+
+
+    width:500px;
+    margin: margin-left;
+    border: 3px solid #ffe6f9;
+	
+
+
+}
+
+form {
+
+      color : #8A2048;
+	   font-family : Impact, Charcoal, sans-serif;
+	   text-align : left;
+	   font-weight: normal;
+
+
+}
+

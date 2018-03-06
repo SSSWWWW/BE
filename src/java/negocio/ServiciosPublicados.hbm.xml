@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 5, 2018 4:14:33 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="negocio.ServiciosPublicados" table="servicios_publicados" catalog="bolsaempleo" optimistic-lock="version">
+        <composite-id name="id" class="negocio.ServiciosPublicadosId">
+            <key-property name="idServicio" type="int">
+                <column name="idServicio" />
+            </key-property>
+            <key-property name="cedulaOferente" type="string">
+                <column name="cedulaOferente" length="15" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="oferente" class="negocio.Oferente" update="false" insert="false" fetch="select">
+            <column name="cedulaOferente" length="15" not-null="true" />
+        </many-to-one>
+        <many-to-one name="servicios" class="negocio.Servicios" update="false" insert="false" fetch="select">
+            <column name="idServicio" not-null="true" />
+        </many-to-one>
+        <property name="estadoServicio" type="java.lang.Boolean">
+            <column name="estadoServicio" />
+        </property>
+    </class>
+</hibernate-mapping>

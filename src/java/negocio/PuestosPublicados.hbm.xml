@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 5, 2018 4:14:33 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="negocio.PuestosPublicados" table="puestos_publicados" catalog="bolsaempleo" optimistic-lock="version">
+        <composite-id name="id" class="negocio.PuestosPublicadosId">
+            <key-property name="idPuesto" type="int">
+                <column name="idPuesto" />
+            </key-property>
+            <key-property name="idEmp" type="int">
+                <column name="idEmp" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="empresa" class="negocio.Empresa" update="false" insert="false" fetch="select">
+            <column name="idEmp" not-null="true" />
+        </many-to-one>
+        <many-to-one name="puestos" class="negocio.Puestos" update="false" insert="false" fetch="select">
+            <column name="idPuesto" not-null="true" />
+        </many-to-one>
+        <property name="estadoPuesto" type="java.lang.Boolean">
+            <column name="estadoPuesto" />
+        </property>
+    </class>
+</hibernate-mapping>
