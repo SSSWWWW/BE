@@ -5,17 +5,28 @@
 
 <link rel = "stylesheet" href = "principal.css">
    
-  <head >
-
+  <head>
     <title>Bolsa Empleo</title>
   </head>
+  
   <body>
       
        <h1> Bolsa Empleo </h1>
   
   
-          <div class = "div1"><br> <a href = "registroempresa.html" target = "_self">Registro empresa</a><br><br>
-           <a href = "registrooferente.html" target = "_self">Registro oferente</a><br><br></div><br>
+          <div class = "dropdown">
+              
+              
+              <button class="dropbtn">Registro</button>
+              <div class="dropdown-content">
+              <a href="registroempresa.html">Registro empresa</a>
+              <a href="registrooferente.html">Registro oferente</a>
+               
+            </div><br><br><br>
+          
+              
+              <!--a href = "registroempresa.html" target = "_self">Registro empresa</a><br><br>
+              <a href = "registrooferente.html" target = "_self">Registro oferente</a><br><br></div><br>
 		   
 		   <!--a href="registrooferente.html" target="frame" >Registro Oferente</a>
 		   <a href="registroempresa.html" target="frame" >Registro Empresa</a>
@@ -25,7 +36,7 @@
 		 <form class = "formbusvac" name="busqueda vacantes" action="22-html5-search-input.php" method="POST">
 	<input type="search" placeholder = "Buscar vacantes" name="busquedavacante">
 	<input type="submit" value="Buscar">
-</form>
+                </form>
   
      
   </body>
