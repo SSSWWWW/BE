@@ -48,16 +48,16 @@ Contributor(s):
     <property name="hibernate.connection.password">root</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    <mapping resource="negocio/Aplicado.hbm.xml"/>
-    <mapping resource="negocio/Empresa.hbm.xml"/>
-    <mapping resource="negocio/HabilidadesIncluidas.hbm.xml"/>
-    <mapping resource="negocio/CaracteristicasIncluidos.hbm.xml"/>
-    <mapping resource="negocio/ServiciosPublicados.hbm.xml"/>
-    <mapping resource="negocio/Oferente.hbm.xml"/>
-    <mapping resource="negocio/Caracteristicas.hbm.xml"/>
-    <mapping resource="negocio/Habilidades.hbm.xml"/>
-    <mapping resource="negocio/PuestosPublicados.hbm.xml"/>
-    <mapping resource="negocio/Servicios.hbm.xml"/>
-    <mapping resource="negocio/Puestos.hbm.xml"/>
+    <mapping resource="entidades/Aplicado.hbm.xml"/>
+    <mapping resource="entidades/Empresa.hbm.xml"/>
+    <mapping resource="entidades/HabilidadesIncluidas.hbm.xml"/>
+    <mapping resource="entidades/CaracteristicasIncluidos.hbm.xml"/>
+    <mapping resource="entidades/ServiciosPublicados.hbm.xml"/>
+    <mapping resource="entidades/Oferente.hbm.xml"/>
+    <mapping resource="entidades/Caracteristicas.hbm.xml"/>
+    <mapping resource="entidades/Habilidades.hbm.xml"/>
+    <mapping resource="entidades/PuestosPublicados.hbm.xml"/>
+    <mapping resource="entidades/Servicios.hbm.xml"/>
+    <mapping resource="entidades/Puestos.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
