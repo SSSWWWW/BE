@@ -72,7 +72,7 @@ public class RelDatabase {
             System.out.println("database " + database);
             System.out.println("server " + server);
             System.out.println("port " + port);
-            System.out.println("driver " + driver);
+                System.out.println("driver " + driver);
             
        
             
@@ -92,6 +92,7 @@ public class RelDatabase {
         Class.forName("com.mysql.jdbc.Driver").newInstance();
         cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+database , user , password);
         stmt = cnx.createStatement();
+        System.out.println("conectado");
 
     } catch (Exception ex) {
         System.out.println(ex.toString());

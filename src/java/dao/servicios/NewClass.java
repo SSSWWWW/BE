@@ -17,11 +17,13 @@ public class NewClass {
     
       public static void main(String[] args) throws SQLException, ClassNotFoundException, Exception {
           
+          Dao d;
           
-          Dao d = new Dao();
+          d = new Dao();
           
-          Oferente of = new Oferente("23333333", "Juan" , "Perez" , "Zeledon" , "83737373" , "Costarricense" , "jpz@hmail.com" , "Perez zeledon" );
+       //   Oferente of = new Oferente("23333333", "Juan" , "Perez" , "Zeledon" , "83737373" , "CR" , "jpz@hmail.com" , "HER" );
           
+       Oferente of = new Oferente("343426666", "Jon" , "Paz" , "Zel" , "45323455" , "CR" , "ccc@hmail.com" , "CAR" );
           
         d.OferenteAdd(of);
           

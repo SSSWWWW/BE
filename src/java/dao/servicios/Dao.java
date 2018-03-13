@@ -7,6 +7,7 @@ package dao.servicios;
 
 import entidades.Oferente;
 import java.io.IOException;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -56,9 +57,15 @@ public class Dao {
        
        
         public void OferenteAdd(Oferente p) throws Exception{
-        String sql="insert into oferente (cedulaOferente , nombreOferente , primerApellido , segundoApellido , celular, nacionalidad, correoOferente, ubicacion  ) "+
+           
+            
+            System.out.println("en oferenteAdd");
+        String sql="insert into bolsaempleo.oferente (cedulaOferente , nombreOferente , primerApellido , segundoApellido , celular, nacionalidad, correoOferente, ubicacion  ) "+
                 "values(? ,? ,? ,? ,?, ?, ?, ?)";
+        //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
+        db.getConnection();
         PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
+        System.out.println("despues de prepared" );
         preparedStmt.setString (1, p.getCedulaOferente());
         preparedStmt.setString (2, p.getNombreOferente());
         preparedStmt.setString (3, p.getPrimerApellido());
