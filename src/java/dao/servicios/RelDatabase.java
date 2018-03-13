@@ -31,6 +31,7 @@ import java.util.Properties;
 public class RelDatabase {
     public static final String PROPERTIES_FILE_NAME="/bolsaempleo.properties";        
     Connection cnx;
+    private Statement stmt;
     public RelDatabase(){
         cnx=this.getConnection();            
     }
@@ -78,12 +79,23 @@ public class RelDatabase {
             
             
             
-        String URL_conexion="jdbc:mysql://"+ server+":"+port+"/"+
+      /*  String URL_conexion="jdbc:mysql://"+ server+":"+port+"/"+
                     database+"?user="+user+"&password="+password;
-            Class.forName(driver).newInstance();
-            return DriverManager.getConnection(URL_conexion);
+        
+         System.out.println("url conexion "+URL_conexion);
+           Class.forName("com.mysql.jdbc.Driver");
             
             
+            return DriverManager.getConnection(URL_conexion);*/
+            
+           try {
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+database , user , password);
+        stmt = cnx.createStatement();
+
+    } catch (Exception ex) {
+        System.out.println(ex.toString());
+    }
             
             
          
