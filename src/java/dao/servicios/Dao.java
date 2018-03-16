@@ -6,6 +6,7 @@
 package dao.servicios;
 
 import entidades.Oferente;
+import entidades.Servicios;
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -117,6 +118,95 @@ public class Dao {
                 ec.setUbicacion(rs.getString("ubicacion"));
                    
             
+            return ec;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+        
+  /*************************************************************************************************************************/      
+        
+         public Servicios ServicioGet(String codigo) throws Exception{
+        String sql="select * from servicios  where idServicio='%s'";
+        sql = String.format(sql,codigo);
+        ResultSet rs =  db.executeQuery(sql);
+        if (rs.next()) {
+            return servicios(rs);
+        }
+        else{
+            throw new Exception ("Servicio no Existe");
+            
+        }
+    }
+         
+         
+         public Collection<Servicios> ServiciosGetAll(){
+        Vector<Servicios> estados=new Vector<Servicios>();
+        try {
+            String sql="select * from servicios";
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(servicios(rs));
+            }
+        } catch (SQLException ex) { }
+        return estados;        
+    }
+         
+         
+            public void ServiciosAdd(Servicios p) throws Exception{
+           
+            
+            System.out.println("en ServiciosAdd");
+        String sql="insert into bolsaempleo.servicios (idServicio , nombreServicio , salarioEsperado , descripcionDescripcion ) "+
+                "values(? ,? ,? ,? )";
+        //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
+        db.getConnection();
+        PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
+        System.out.println("despues de prepared" );
+        preparedStmt.setInt(1, p.getIdServicio());
+        preparedStmt.setString (2, p.getNombreServicio());
+        preparedStmt.setFloat(3, p.getSalarioEsperado());
+        preparedStmt.setString (4, p.getDescripcionDescripcion());
+      
+        
+      
+      
+       preparedStmt.execute();
+       
+    }
+            
+            
+                public void ServiciosDelete(Servicios p) throws Exception{
+        String sql="delete from bolsaempleo.servicios where idServicio='%s'";
+        sql = String.format(sql,p.getIdServicio());
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("Servicio no existe");
+        }
+    }
+                
+                 public void ServiciosUpdate(Servicios p) throws Exception{
+        String sql="update bolsaempleo.servicios set  nombreServicio='%s' , salarioEsperado='%s' , descripcionDescripcion='%s'"   +
+                "where idServicio='%s'";
+        sql=String.format(sql,p.getNombreServicio(),
+                p.getSalarioEsperado(),p.getDescripcionDescripcion());
+        
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("Servicio no existe");
+        }
+    }
+      
+        
+          private Servicios servicios(ResultSet rs){
+        try {
+            Servicios ec= new Servicios();
+          
+                ec.setDescripcionDescripcion(rs.getString("descripcion"));
+                ec.setNombreServicio(rs.getString("nombreServicio"));
+                ec.setSalarioEsperado(rs.getFloat("salarioEsperado"));
+                ec.setIdServicio(rs.getInt("idServicio"));
+               
             return ec;
         } catch (SQLException ex) {
             return null;
