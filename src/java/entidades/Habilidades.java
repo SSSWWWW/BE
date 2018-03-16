@@ -9,7 +9,8 @@ package entidades;
 public class Habilidades  implements java.io.Serializable {
 
 
-     private HabilidadesId id;
+      private int idHabilidad;
+     private String nombreHabilidad;
      private String areaTrabajo;
      private String especializacion;
 
@@ -17,22 +18,16 @@ public class Habilidades  implements java.io.Serializable {
     }
 
 	
-    public Habilidades(HabilidadesId id) {
-        this.id = id;
-    }
-    public Habilidades(HabilidadesId id, String areaTrabajo, String especializacion) {
-       this.id = id;
+
+    public Habilidades(HabilidadesId id, String areaTrabajo, String especializacion , int idHabilidad, String nombreHabilidad) {
+        
        this.areaTrabajo = areaTrabajo;
        this.especializacion = especializacion;
+        this.idHabilidad = idHabilidad;
+       this.nombreHabilidad = nombreHabilidad;
     }
    
-    public HabilidadesId getId() {
-        return this.id;
-    }
-    
-    public void setId(HabilidadesId id) {
-        this.id = id;
-    }
+   
     public String getAreaTrabajo() {
         return this.areaTrabajo;
     }
@@ -48,6 +43,20 @@ public class Habilidades  implements java.io.Serializable {
         this.especializacion = especializacion;
     }
 
+       public int getIdHabilidad() {
+        return this.idHabilidad;
+    }
+    
+    public void setIdHabilidad(int idHabilidad) {
+        this.idHabilidad = idHabilidad;
+    }
+    public String getNombreHabilidad() {
+        return this.nombreHabilidad;
+    }
+    
+    public void setNombreHabilidad(String nombreHabilidad) {
+        this.nombreHabilidad = nombreHabilidad;
+    }
 
 
 

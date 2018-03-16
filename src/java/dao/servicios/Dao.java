@@ -5,6 +5,7 @@
  */
 package dao.servicios;
 
+import entidades.Habilidades;
 import entidades.Oferente;
 import entidades.Servicios;
 import java.io.IOException;
@@ -30,6 +31,92 @@ public class Dao {
         db= new RelDatabase();
         
     }
+    
+    
+    
+                public void HabilidadesUpdate(Habilidades p) throws Exception{
+        String sql="update bolsaempleo.habilidades set  nombreHabilidad='%s', areaTrabajo='%s' , especializacion='%s'"   +
+                "where idHabilidad='%s'";
+        sql=String.format(sql,p.getNombreHabilidad(),
+                p.getAreaTrabajo(),p.getEspecializacion());
+        
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("habilidad no existe");
+        }
+    }
+    
+          public void HabilidadesDelete(Habilidades p) throws Exception{
+        String sql="delete from bolsaempleo.habilidades where idHabilidad='%s'";
+        sql = String.format(sql,p.getIdHabilidad());
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("Habilidad no existe");
+        }
+    }
+    
+      public void HabilidadesAdd(Habilidades p) throws Exception{
+           
+            
+            System.out.println("en oferenteAdd");
+        String sql="insert into bolsaempleo.habilidades (idHabilidad , nombreHabilidad , areaTrabajo , especializacion ) "+
+                "values(? ,? ,? ,?)";
+        //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
+        db.getConnection();
+        PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
+        System.out.println("despues de prepared" );
+        preparedStmt.setInt(1, p.getIdHabilidad());
+        preparedStmt.setString (2, p.getNombreHabilidad());
+        preparedStmt.setString (3, p.getAreaTrabajo());
+        preparedStmt.setString (4, p.getEspecializacion());
+      
+       preparedStmt.execute();
+       
+    }
+    
+    public Habilidades HabilidadesGet(String codigo) throws Exception{
+        String sql="select * from habilidades where idHabilidad='%s'";
+        sql = String.format(sql,codigo);
+        ResultSet rs =  db.executeQuery(sql);
+        if (rs.next()) {
+            return habilidades(rs);
+        }
+        else{
+            throw new Exception ("Habilidad no Existe");
+            
+        }
+    }
+    
+      public Collection<Habilidades> HabilidadesGetAll(){
+        Vector<Habilidades> estados=new Vector<Habilidades>();
+        try {
+            String sql="select * from habilidades";
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(habilidades(rs));
+            }
+        } catch (SQLException ex) { }
+        return estados;        
+    }
+       
+    
+    
+     private Habilidades habilidades(ResultSet rs){
+        try {
+            Habilidades ec= new Habilidades();
+          
+                ec.setAreaTrabajo(rs.getString("areaTrabajo"));
+                ec.setEspecializacion(rs.getString("especializacion"));
+                ec.setIdHabilidad(rs.getInt("idHabilidad"));
+                ec.setNombreHabilidad(rs.getString("nombreHabilidad"));
+        
+            return ec;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    
+    /***************************************************************************/
     
       public Oferente OferenteGet(String codigo) throws Exception{
         String sql="select * from oferente where cedulaOferente='%s'";
