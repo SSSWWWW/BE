@@ -25,7 +25,8 @@ public class NewClass {
           
        Oferente of = new Oferente("343426666", "Jon" , "Paz" , "Zel" , "45323455" , "CR" , "ccc@hmail.com" , "CAR" );
           
-        d.OferenteAdd(of);
+        //d.OferenteAdd(of);
+        d.OferenteDelete(of);
           
           
           

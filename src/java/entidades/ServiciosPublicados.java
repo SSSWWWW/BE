@@ -9,48 +9,44 @@ package entidades;
 public class ServiciosPublicados  implements java.io.Serializable {
 
 
-     private ServiciosPublicadosId id;
-     private Oferente oferente;
-     private Servicios servicios;
+    
      private Boolean estadoServicio;
+      private int idServicio;
+     private String cedulaOferente;
 
     public ServiciosPublicados() {
     }
 
-	
-    public ServiciosPublicados(ServiciosPublicadosId id, Oferente oferente, Servicios servicios) {
-        this.id = id;
-        this.oferente = oferente;
-        this.servicios = servicios;
-    }
-    public ServiciosPublicados(ServiciosPublicadosId id, Oferente oferente, Servicios servicios, Boolean estadoServicio) {
-       this.id = id;
-       this.oferente = oferente;
-       this.servicios = servicios;
-       this.estadoServicio = estadoServicio;
-    }
+    public ServiciosPublicados(ServiciosPublicadosId id, Oferente oferente, Servicios servicios, Boolean estadoServicio, int idServicio, String cedulaOferente) {
    
-    public ServiciosPublicadosId getId() {
-        return this.id;
+        this.estadoServicio = estadoServicio;
+        this.idServicio = idServicio;
+        this.cedulaOferente = cedulaOferente;
+    }
+
+    
+    
+	
+    
+
+    public int getIdServicio() {
+        return idServicio;
+    }
+
+    public void setIdServicio(int idServicio) {
+        this.idServicio = idServicio;
+    }
+
+    public String getCedulaOferente() {
+        return cedulaOferente;
+    }
+
+    public void setCedulaOferente(String cedulaOferente) {
+        this.cedulaOferente = cedulaOferente;
     }
     
-    public void setId(ServiciosPublicadosId id) {
-        this.id = id;
-    }
-    public Oferente getOferente() {
-        return this.oferente;
-    }
     
-    public void setOferente(Oferente oferente) {
-        this.oferente = oferente;
-    }
-    public Servicios getServicios() {
-        return this.servicios;
-    }
-    
-    public void setServicios(Servicios servicios) {
-        this.servicios = servicios;
-    }
+   
     public Boolean getEstadoServicio() {
         return this.estadoServicio;
     }

@@ -5,11 +5,13 @@
  */
 package dao.servicios;
 
+import entidades.Caracteristicas;
 import entidades.Empresa;
 import entidades.Habilidades;
 import entidades.Oferente;
 import entidades.Puestos;
 import entidades.Servicios;
+import entidades.ServiciosPublicados;
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -37,9 +39,213 @@ public class Dao {
     
     
     
+    /*private ServiciosPublicadosId id;
+     private Oferente oferente;
+     private Servicios servicios;
+     private Boolean estadoServicio;
+      private int idServicio;
+     private String cedulaOferente */
     
     
     
+    
+    
+      private ServiciosPublicados serviciosPublicados(ResultSet rs){
+        try {
+            ServiciosPublicados ec= new ServiciosPublicados();
+          
+                ec.setCedulaOferente(rs.getString("cedulaOferente"));
+                ec.setEstadoServicio(rs.getBoolean("estadoServicios"));
+                ec.setIdServicio(rs.getInt("idServicio"));
+                
+               
+        
+            return ec;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+     
+              public void ServiciosPublicadosUpdate(ServiciosPublicados p) throws Exception{
+        String sql="update bolsaempleo.servios_publicados set estadoServicio='%s'"   +
+                "where cedulaOferente='%s' and idServicio='%s'";
+        sql=String.format(sql,p.getEstadoServicio(),
+                p.getCedulaOferente(),p.getIdServicio());
+        
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("servicio no ha sido publicado");
+        }
+    }
+              
+              
+                 public void ServiciosPublicadosDelete(ServiciosPublicados p) throws Exception{
+        String sql="delete from bolsaempleo.servios_publicados where cedulaOferente='%s' and idServicio='%s'";
+        sql = String.format(sql,p.getCedulaOferente(), p.getIdServicio());
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("servicio no ha sido publicado");
+        }
+    }
+    
+        
+      public void ServiciosPublicadosAdd(ServiciosPublicados p) throws Exception{
+           
+            
+            System.out.println("en oferenteAdd");
+        String sql="insert into bolsaempleo.servios_publicados (cedulaOferente , idServicio , estadoServicio ) "+
+                "values(? ,? ,? )";
+        //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
+        db.getConnection();
+        PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
+        System.out.println("despues de prepared" );
+        preparedStmt.setString(1, p.getCedulaOferente());
+        preparedStmt.setInt (2, p.getIdServicio());
+        preparedStmt.setBoolean(3, p.getEstadoServicio());
+        
+      
+       preparedStmt.execute();
+       
+    }
+      
+      
+        public ServiciosPublicados ServiciosPublicadosGet(String codigo, int codigo2) throws Exception{
+        String sql="select * from servios_publicados where cedulaOferente='%s' and idServicio='%s'";
+        sql = String.format(sql,codigo,codigo2);
+        ResultSet rs =  db.executeQuery(sql);
+        if (rs.next()) {
+            return serviciosPublicados(rs);
+        }
+        else{
+            throw new Exception ("servicio no ha sido publicado");
+            
+        }
+    }
+        
+            public Collection<ServiciosPublicados> ServiciosPublicadosGetAll(){
+        Vector<ServiciosPublicados> estados=new Vector<ServiciosPublicados>();
+        try {
+            String sql="select * from servios_publicados";
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(serviciosPublicados(rs));
+            }
+        } catch (SQLException ex) { }
+        return estados;        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*********************************************************************/
+    
+    
+    
+    
+     private Caracteristicas caracteristicas(ResultSet rs){
+        try {
+            Caracteristicas ec= new Caracteristicas();
+          
+                ec.setIdCaracteristica(rs.getString("idCaracteristica"));
+                ec.setAreaTrabajo(rs.getString("areaTrabajo"));
+                ec.setEspecializacion(rs.getString("especializacion"));
+               
+        
+            return ec;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+     
+              public void CaracteristicasUpdate(Caracteristicas p) throws Exception{
+        String sql="update bolsaempleo.caracteristicas set areaTrabajo='%s', especializacion='%s'"   +
+                "where idCaracteristica='%s'";
+        sql=String.format(sql,p.getAreaTrabajo(),
+                p.getEspecializacion(),p.getIdCaracteristica());
+        
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("caracteristica no existe");
+        }
+    }
+              
+              
+                 public void CaracteristicasDelete(Caracteristicas p) throws Exception{
+        String sql="delete from bolsaempleo.caracteristicas where idCaracteristica='%s'";
+        sql = String.format(sql,p.getIdCaracteristica());
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("puesto no existe");
+        }
+    }
+    
+        
+      public void CaracteristicasAdd(Caracteristicas p) throws Exception{
+           
+            
+            System.out.println("en oferenteAdd");
+        String sql="insert into bolsaempleo.caracteristicas (idCaracteristica , areaTrabajo , especializacion ) "+
+                "values(? ,? ,? )";
+        //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
+        db.getConnection();
+        PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
+        System.out.println("despues de prepared" );
+        preparedStmt.setString(1, p.getIdCaracteristica());
+        preparedStmt.setString (2, p.getAreaTrabajo());
+        preparedStmt.setString (3, p.getEspecializacion());
+        
+      
+       preparedStmt.execute();
+       
+    }
+      
+      
+        public Caracteristicas CaracteristicasGet(String codigo) throws Exception{
+        String sql="select * from caracteristicas where idCaracteristica='%s'";
+        sql = String.format(sql,codigo);
+        ResultSet rs =  db.executeQuery(sql);
+        if (rs.next()) {
+            return caracteristicas(rs);
+        }
+        else{
+            throw new Exception ("puesto no Existe");
+            
+        }
+    }
+        
+            public Collection<Caracteristicas> CaracteristicasGetAll(){
+        Vector<Caracteristicas> estados=new Vector<Caracteristicas>();
+        try {
+            String sql="select * from caracteristicas";
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(caracteristicas(rs));
+            }
+        } catch (SQLException ex) { }
+        return estados;        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /**********************************************************************/
     
     
     
@@ -64,7 +270,7 @@ public class Dao {
         String sql="update bolsaempleo.puestos set nombrePuesto='%s', salario='%s' , descripcionPuesto='%s', ubicacion='%s'"   +
                 "where idPuesto='%s'";
         sql=String.format(sql,p.getNombrePuesto(),
-                p.getSalario(),p.getDescripcionPuesto(),p.getUbicacion());
+                p.getSalario(),p.getDescripcionPuesto(),p.getUbicacion(), p.getIdPuesto());
         
         int count=db.executeUpdate(sql);
         if (count==0){
@@ -154,7 +360,7 @@ public class Dao {
         String sql="update bolsaempleo.empresa set nombreEmp='%s', ubicacionEmp='%s' , latitud='%s', longitud='%s', descripcionEmp='%s', correoEmp='%s'"   +
                 "where idEmp='%s'";
         sql=String.format(sql,p.getNombreEmp(),
-                p.getUbicacionEmp(),p.getLatitud(),p.getLongitud(), p.getDescripcionEmp(),p.getCorreoEmp());
+                p.getUbicacionEmp(),p.getLatitud(),p.getLongitud(), p.getDescripcionEmp(),p.getCorreoEmp(), p.getIdEmp());
         
         int count=db.executeUpdate(sql);
         if (count==0){
@@ -231,7 +437,7 @@ public class Dao {
         String sql="update bolsaempleo.habilidades set  nombreHabilidad='%s', areaTrabajo='%s' , especializacion='%s'"   +
                 "where idHabilidad='%s'";
         sql=String.format(sql,p.getNombreHabilidad(),
-                p.getAreaTrabajo(),p.getEspecializacion());
+                p.getAreaTrabajo(),p.getEspecializacion(), p.getIdHabilidad());
         
         int count=db.executeUpdate(sql);
         if (count==0){
@@ -365,6 +571,7 @@ public class Dao {
          public void OferenteDelete(Oferente p) throws Exception{
         String sql="delete from bolsaempleo.oferente where cedulaOferente='%s'";
         sql = String.format(sql,p.getCedulaOferente());
+        db.getConnection();
         int count=db.executeUpdate(sql);
         if (count==0){
             throw new Exception("Oferente no existe");
@@ -375,7 +582,7 @@ public class Dao {
         String sql="update bolsaempleo.oferente set  nombreOferente='%s', primerApellido='%s' , segundoApellido='%s' , celular='%s', nacionalidad='%s' , correoOferente='%s' , ubicacion='%s'"   +
                 "where cedulaOferente='%s'";
         sql=String.format(sql,p.getNombreOferente(),
-                p.getPrimerApellido(),p.getSegundoApellido(),p.getCelular() , p.getNacionalidad(), p.getCorreoOferente(), p.getUbicacion());
+                p.getPrimerApellido(),p.getSegundoApellido(),p.getCelular() , p.getNacionalidad(), p.getCorreoOferente(), p.getUbicacion(), p.getCedulaOferente());
         
         int count=db.executeUpdate(sql);
         if (count==0){
@@ -469,7 +676,7 @@ public class Dao {
         String sql="update bolsaempleo.servicios set  nombreServicio='%s' , salarioEsperado='%s' , descripcionDescripcion='%s'"   +
                 "where idServicio='%s'";
         sql=String.format(sql,p.getNombreServicio(),
-                p.getSalarioEsperado(),p.getDescripcionDescripcion());
+                p.getSalarioEsperado(),p.getDescripcionDescripcion(), p.getIdServicio());
         
         int count=db.executeUpdate(sql);
         if (count==0){
