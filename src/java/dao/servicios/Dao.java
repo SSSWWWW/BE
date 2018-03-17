@@ -5,8 +5,10 @@
  */
 package dao.servicios;
 
+import entidades.Empresa;
 import entidades.Habilidades;
 import entidades.Oferente;
+import entidades.Puestos;
 import entidades.Servicios;
 import java.io.IOException;
 import java.sql.DriverManager;
@@ -33,6 +35,197 @@ public class Dao {
     }
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    private Puestos puestos(ResultSet rs){
+        try {
+            Puestos ec= new Puestos();
+          
+                ec.setDescripcionPuesto(rs.getString("descripcionPuesto"));
+                ec.setIdPuesto(rs.getInt("idPuesto"));
+                ec.setNombrePuesto(rs.getString("nombrePuesto"));
+                ec.setSalario(rs.getFloat("salario"));
+                ec.setUbicacion(rs.getString("ubicacion"));
+                
+        
+            return ec;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+     
+              public void PuestosUpdate(Puestos p) throws Exception{
+        String sql="update bolsaempleo.puestos set nombrePuesto='%s', salario='%s' , descripcionPuesto='%s', ubicacion='%s'"   +
+                "where idPuesto='%s'";
+        sql=String.format(sql,p.getNombrePuesto(),
+                p.getSalario(),p.getDescripcionPuesto(),p.getUbicacion());
+        
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("puestos no existe");
+        }
+    }
+              
+              
+                 public void PuestosDelete(Puestos p) throws Exception{
+        String sql="delete from bolsaempleo.puestos where idPuesto='%s'";
+        sql = String.format(sql,p.getIdPuesto());
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("puesto no existe");
+        }
+    }
+    
+        
+      public void PuestosAdd(Puestos p) throws Exception{
+           
+            
+            System.out.println("en oferenteAdd");
+        String sql="insert into bolsaempleo.puestos (nombrePuesto , salario , descripcionPuesto , ubicacion ) "+
+                "values(? ,? ,? ,?)";
+        //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
+        db.getConnection();
+        PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
+        System.out.println("despues de prepared" );
+        preparedStmt.setString(1, p.getNombrePuesto());
+        preparedStmt.setFloat (2, p.getSalario());
+        preparedStmt.setString (3, p.getDescripcionPuesto());
+        preparedStmt.setString (4, p.getUbicacion());
+      
+       preparedStmt.execute();
+       
+    }
+      
+      
+        public Puestos PuestosGet(String codigo) throws Exception{
+        String sql="select * from puestos where idPuesto='%s'";
+        sql = String.format(sql,codigo);
+        ResultSet rs =  db.executeQuery(sql);
+        if (rs.next()) {
+            return puestos(rs);
+        }
+        else{
+            throw new Exception ("puesto no Existe");
+            
+        }
+    }
+        
+            public Collection<Puestos> PuestosGetAll(){
+        Vector<Puestos> estados=new Vector<Puestos>();
+        try {
+            String sql="select * from puestos";
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(puestos(rs));
+            }
+        } catch (SQLException ex) { }
+        return estados;        
+    }
+    
+    
+    
+    
+    /***********************************************************************/
+     
+     private Empresa empresa(ResultSet rs){
+        try {
+            Empresa ec= new Empresa();
+          
+                ec.setCorreoEmp(rs.getString("correoEmpresa"));
+                ec.setDescripcionEmp(rs.getString("descripcionEmpresa"));
+                ec.setFechaRegistro(rs.getDate("fechaRegistro"));
+                ec.setIdEmp(rs.getInt("idEmpresa"));
+                ec.setNombreEmp(rs.getString("nombreEmpresa"));
+                ec.setUbicacionEmp(rs.getString("ubicacionEmpresa"));
+        
+            return ec;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+     
+              public void EmpresaUpdate(Empresa p) throws Exception{
+        String sql="update bolsaempleo.empresa set nombreEmp='%s', ubicacionEmp='%s' , latitud='%s', longitud='%s', descripcionEmp='%s', correoEmp='%s'"   +
+                "where idEmp='%s'";
+        sql=String.format(sql,p.getNombreEmp(),
+                p.getUbicacionEmp(),p.getLatitud(),p.getLongitud(), p.getDescripcionEmp(),p.getCorreoEmp());
+        
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("empresa no existe");
+        }
+    }
+              
+              
+                 public void EmpresaDelete(Empresa p) throws Exception{
+        String sql="delete from bolsaempleo.empresa where idEmp='%s'";
+        sql = String.format(sql,p.getIdEmp());
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("empresa no existe");
+        }
+    }
+    
+        
+      public void EmpresaAdd(Empresa p) throws Exception{
+           
+            
+            System.out.println("en oferenteAdd");
+        String sql="insert into bolsaempleo.empresa (nombreEmp , ubicacionEmp , latitud , longitud, descripcionEmp, correoEmp ) "+
+                "values(? ,? ,? ,? ,? ,?)";
+        //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
+        db.getConnection();
+        PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
+        System.out.println("despues de prepared" );
+        preparedStmt.setString(1, p.getNombreEmp());
+        preparedStmt.setString (2, p.getUbicacionEmp());
+        preparedStmt.setString (3, p.getLatitud());
+        preparedStmt.setString (4, p.getLongitud());
+        preparedStmt.setString (5, p.getDescripcionEmp());
+        preparedStmt.setString (6, p.getCorreoEmp());
+                
+      
+       preparedStmt.execute();
+       
+    }
+      
+      
+        public Empresa EmpresaGet(String codigo) throws Exception{
+        String sql="select * from empresa where idEmp='%s'";
+        sql = String.format(sql,codigo);
+        ResultSet rs =  db.executeQuery(sql);
+        if (rs.next()) {
+            return empresa(rs);
+        }
+        else{
+            throw new Exception ("Habilidad no Existe");
+            
+        }
+    }
+        
+            public Collection<Empresa> EmpresaGetAll(){
+        Vector<Empresa> estados=new Vector<Empresa>();
+        try {
+            String sql="select * from empresa";
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(empresa(rs));
+            }
+        } catch (SQLException ex) { }
+        return estados;        
+    }
+    
+    
+    
+    
+    
+    /********************************************************************/
     
                 public void HabilidadesUpdate(Habilidades p) throws Exception{
         String sql="update bolsaempleo.habilidades set  nombreHabilidad='%s', areaTrabajo='%s' , especializacion='%s'"   +

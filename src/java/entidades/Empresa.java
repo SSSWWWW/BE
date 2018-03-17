@@ -15,6 +15,8 @@ public class Empresa  implements java.io.Serializable {
      private Integer idEmp;
      private String nombreEmp;
      private String ubicacionEmp;
+     private String latitud;
+     private String longitud;
      private String descripcionEmp;
      private String correoEmp;
      private Date fechaRegistro;
@@ -23,14 +25,34 @@ public class Empresa  implements java.io.Serializable {
     public Empresa() {
     }
 
-    public Empresa(String nombreEmp, String ubicacionEmp, String descripcionEmp, String correoEmp, Date fechaRegistro, Set<PuestosPublicados> puestosPublicadoses) {
-       this.nombreEmp = nombreEmp;
-       this.ubicacionEmp = ubicacionEmp;
-       this.descripcionEmp = descripcionEmp;
-       this.correoEmp = correoEmp;
-       this.fechaRegistro = fechaRegistro;
-       this.puestosPublicadoses = puestosPublicadoses;
+    public Empresa(Integer idEmp, String nombreEmp, String ubicacionEmp, String latitud, String longitud, String descripcionEmp, String correoEmp, Date fechaRegistro) {
+        this.idEmp = idEmp;
+        this.nombreEmp = nombreEmp;
+        this.ubicacionEmp = ubicacionEmp;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.descripcionEmp = descripcionEmp;
+        this.correoEmp = correoEmp;
+        this.fechaRegistro = fechaRegistro;
     }
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
+    }
+
+  
    
     public Integer getIdEmp() {
         return this.idEmp;
