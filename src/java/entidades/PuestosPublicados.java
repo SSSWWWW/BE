@@ -9,48 +9,41 @@ package entidades;
 public class PuestosPublicados  implements java.io.Serializable {
 
 
-     private PuestosPublicadosId id;
-     private Empresa empresa;
-     private Puestos puestos;
+
+     private int idEmpresa;
+     private int idPuestos;
      private Boolean estadoPuesto;
 
     public PuestosPublicados() {
     }
 
-	
-    public PuestosPublicados(PuestosPublicadosId id, Empresa empresa, Puestos puestos) {
-        this.id = id;
-        this.empresa = empresa;
-        this.puestos = puestos;
-    }
-    public PuestosPublicados(PuestosPublicadosId id, Empresa empresa, Puestos puestos, Boolean estadoPuesto) {
-       this.id = id;
-       this.empresa = empresa;
-       this.puestos = puestos;
+
+    public PuestosPublicados( int idEmpresa, int idPuestos, Boolean estadoPuesto) {
+       
+       this.idEmpresa = idEmpresa;
+       this.idPuestos = idPuestos;
        this.estadoPuesto = estadoPuesto;
     }
    
-    public PuestosPublicadosId getId() {
-        return this.id;
+    public int getidPuestos() {
+        return this.idPuestos;
     }
     
-    public void setId(PuestosPublicadosId id) {
-        this.id = id;
+    public void setidPuestos(int idPuestos) {
+        this.idPuestos = idPuestos;
     }
-    public Empresa getEmpresa() {
-        return this.empresa;
-    }
-    
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
-    }
-    public Puestos getPuestos() {
-        return this.puestos;
+    public int getidEmpresa() {
+        return this.getidEmpresa();
     }
     
-    public void setPuestos(Puestos puestos) {
-        this.puestos = puestos;
+    public void setEmpresa(int empresa) {
+        this.idEmpresa = empresa;
     }
+    public int getPuestos() {
+        return this.idPuestos;
+    }
+    
+   
     public Boolean getEstadoPuesto() {
         return this.estadoPuesto;
     }
