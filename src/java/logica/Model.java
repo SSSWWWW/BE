@@ -7,6 +7,8 @@ package logica;
 
 import dao.datos.Dao;
 import entidades.Aplicado;
+import entidades.CaracteristicasIncluidos;
+import entidades.HabilidadesIncluidas;
 import entidades.PuestosPublicados;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -33,6 +35,51 @@ public class Model {
        
          dao = new Dao();
     }
+    
+      /*********************HABILIDADES INCLUIDAS********************************/
+    
+    
+        public void deleteHabilidadesIncluidas(HabilidadesIncluidas p) throws Exception{
+        dao.HabilidadesIncluidasDelete(p);
+    }
+
+      public void addHabilidadesIncluidas(HabilidadesIncluidas p) throws Exception{
+        dao.HabilidadesIncluidasAdd(p);
+    }
+      
+       public HabilidadesIncluidas getHabilidadesIncluidas(String id1, int id2) throws Exception{
+        return dao.HabilidadesIncluidasGet(id1, id2);
+    }
+       
+        public Collection<HabilidadesIncluidas> getAllHabilidadesIncluidas() throws Exception{
+         return  dao.HabilidadesIncluidasGetAll();
+    }
+    
+    
+    
+    
+     /*********************CARACTERISTICAS INCLUIDOS********************************/
+    
+    
+         public void deleteCaracteristicasIncluidos(CaracteristicasIncluidos p) throws Exception{
+        dao.CaracteristicasIncluidosDelete(p);
+    }
+
+      public void addCaracteristicasIncluidos(CaracteristicasIncluidos p) throws Exception{
+        dao.CaracteristicasIncluidosAdd(p);
+    }
+      
+       public CaracteristicasIncluidos getPuestosPublicados(int id1, String id2) throws Exception{
+        return dao.CaracteristicasIncluidosGet(id1, id2);
+    }
+       
+        public Collection<CaracteristicasIncluidos> getAllCaracteristicasIncluidos() throws Exception{
+         return  dao.CaracteristicasIncluidosGetAll();
+    }
+    
+    
+    
+    
     
     /************************PUESTOS PUBLICADOS********************************/
     
