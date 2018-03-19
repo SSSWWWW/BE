@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao.datos;
+package dao.servicios;
 
 import entidades.Aplicado;
 import entidades.Caracteristicas;
