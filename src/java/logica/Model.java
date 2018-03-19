@@ -7,8 +7,11 @@ package logica;
 
 import dao.datos.Dao;
 import entidades.Aplicado;
+import entidades.PuestosPublicados;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  *
@@ -31,9 +34,28 @@ public class Model {
          dao = new Dao();
     }
     
+    /************************PUESTOS PUBLICADOS********************************/
     
+     public void updatePuestosPublicados(PuestosPublicados p) throws Exception{
+        dao.PuestosPublicadosUpdate(p);
+    }
     
-    
+     public void deletePuestosPublicados(PuestosPublicados p) throws Exception{
+        dao.PuestosPublicadosDelete(p);
+    }
+
+      public void addPuestosPublicados(PuestosPublicados p) throws Exception{
+        dao.PuestosPublicadosAdd(p);
+    }
+      
+       public PuestosPublicados getPuestosPublicados(int id1, int id2) throws Exception{
+        return dao.PuestosPublicadosGet(id1, id2);
+    }
+       
+        public Collection<PuestosPublicados> getAllPuestosPublicados() throws Exception{
+         return  dao.PuestosPublicadosGetAll();
+    }
+     
     
     /********************************* APLICADO********************************/
     
@@ -45,12 +67,12 @@ public class Model {
         dao.AplicadoAdd(p);
     }
      
-      public void getAplicado(String id1, int id2) throws Exception{
-        dao.AplicadoGet(id1, id2);
+      public Aplicado getAplicado(String id1, int id2) throws Exception{
+        return dao.AplicadoGet(id1, id2);
     }
       
-       public void getAllAplicado() throws Exception{
-        dao.AplicadoGetAll();
+       public Collection<Aplicado> getAllAplicado() throws Exception{
+         return  dao.AplicadoGetAll();
     }
 
 
