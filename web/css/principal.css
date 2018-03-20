@@ -44,6 +44,12 @@ div.reg {
      font-family : Impact, Charcoal, sans-serif;
      
 }
+
+#Login {
+  display: table;
+  margin: 0 auto;
+}
+
 ul {
   display: inline;
   margin: 0;

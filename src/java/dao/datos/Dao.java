@@ -844,19 +844,38 @@ public class Dao {
         }
     }
     
-    /***************************************************************************/
+    /**
+     * @param of
+     * @return
+     * @throws java.lang.Exception *************************************************************************/
     
-      public Oferente OferenteGet(String codigo) throws Exception{
-        String sql="select * from oferente where cedulaOferente='%s'";
-        sql = String.format(sql,codigo);
+      public Oferente OferenteGet(Oferente of) throws Exception{
+        
+          
+          db.getConnection();
+          String sql="select * from oferente where cedulaOferente='%s'";
+        sql = String.format(sql, of.getCedulaOferente());
         ResultSet rs =  db.executeQuery(sql);
         if (rs.next()) {
+            System.out.println("retorna oferente");
             return oferente(rs);
         }
         else{
             throw new Exception ("Oferente no Existe");
             
         }
+        
+     /*  db.getConnection();
+        String sql="select * from "+
+                    "oferente of "+
+                    "where of.cedulaOferente='%s'";
+            sql=String.format(sql,of.getCedulaOferente());
+            ResultSet rs =  db.executeQuery(sql);
+             rs.next();
+            return oferente(rs);
+        */
+        
+        
     }
       
        public Collection<Oferente> OferenteGetAll(){

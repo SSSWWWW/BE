@@ -10,7 +10,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link rel = "stylesheet" href = "principal.css">
+<link rel = "stylesheet" href = "css/principal.css">
    
   <head>
     <title>Bolsa Empleo</title>
@@ -36,10 +36,22 @@
               </li>
             </ul>
           
+           <ul>
+              <li>
+                <a href="#">Inicio</a>
+                <ul>
+                 <li><a href="inicioEmpresa.jsp">Inicio empresa</a></li>
+                  <li><a href="inicioOferente.jsp">Inicio oferente</a></li>
+                </ul>
+              </li>
+            </ul>
+          
            <form class = "formbusvac" name="busqueda vacantes" action="22-html5-search-input.php" method="POST">
 	<input type="search" placeholder = "Buscar vacantes" name="busquedavacante">
 	<input type="submit" value="Buscar">
                 </form>
+          
+    
           
           </div>
   

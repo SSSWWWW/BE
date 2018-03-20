@@ -34,11 +34,11 @@ import java.util.Collections;
   */
 public class model {
     
-     private final Dao dao;
+     private  Dao dao;
      
       private static model uniqueInstance;
       
-         public static model instance() throws ClassNotFoundException, SQLException, IOException{
+         public static model instance() throws ClassNotFoundException, IOException, SQLException {
         if (uniqueInstance == null){
             uniqueInstance = new model();
         }
@@ -49,6 +49,8 @@ public class model {
        
          dao = new Dao();
     }
+    
+    
     
     
     
@@ -96,8 +98,8 @@ public class model {
            dao.OferenteAdd(p);
        }
 
-          public Oferente getOferente(String id1) throws Exception{
-           return dao.OferenteGet(id1);
+          public Oferente getOferente(Oferente p) throws Exception{
+           return dao.OferenteGet(p);
        }
 
            public Collection<Oferente> getAllOferente() throws Exception{

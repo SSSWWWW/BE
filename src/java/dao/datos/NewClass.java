@@ -7,6 +7,7 @@ package dao.datos;
 
 import entidades.Oferente;
 import java.sql.SQLException;
+import logica.model;
 
 /**
  *
@@ -21,16 +22,26 @@ public class NewClass {
           
           d = new Dao();
           
+          model m;
+          
+          
+          
         // Oferente of = new Oferente("juan" ,"23333333", "Juan" , "Perez" , "Zeledon" , "83737373" , "CR" , "jpz@hmail.com" , "HER" );
           
       // Oferente of = new Oferente("343426666", "Jon" , "Paz" , "Zel" , "45323455" , "CR" , "ccc@hmail.com" , "CAR" );
          
       Oferente of = new Oferente("mar" ,"554533243", "Mar" , "Martines" , "Zeca" , "65435643" , "CR" , "mar55@hmail.com" , "HER" );
       
-        d.OferenteAdd(of);
+      Oferente of1 = new Oferente();
+      
+      of1.setCedulaOferente("5545332432");
+      
+        //d.OferenteAdd(of);
         //d.OferenteDelete(of);
           
-          
+       of1 = model.instance().getOferente(of1);
+        //m.getOferente(of);
+          //d.OferenteGet(of);
           
         System.out.println("Hello World!"); // Display the string.
     }
