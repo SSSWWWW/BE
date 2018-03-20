@@ -10,5 +10,5 @@ package logica;
  * @author pc
  */
 public class model {
-    
+    ///
 }
