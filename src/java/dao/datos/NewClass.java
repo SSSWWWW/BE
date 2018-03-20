@@ -21,12 +21,14 @@ public class NewClass {
           
           d = new Dao();
           
-       //   Oferente of = new Oferente("23333333", "Juan" , "Perez" , "Zeledon" , "83737373" , "CR" , "jpz@hmail.com" , "HER" );
+        // Oferente of = new Oferente("juan" ,"23333333", "Juan" , "Perez" , "Zeledon" , "83737373" , "CR" , "jpz@hmail.com" , "HER" );
           
-       Oferente of = new Oferente("343426666", "Jon" , "Paz" , "Zel" , "45323455" , "CR" , "ccc@hmail.com" , "CAR" );
-          
-        //d.OferenteAdd(of);
-        d.OferenteDelete(of);
+      // Oferente of = new Oferente("343426666", "Jon" , "Paz" , "Zel" , "45323455" , "CR" , "ccc@hmail.com" , "CAR" );
+         
+      Oferente of = new Oferente("mar" ,"554533243", "Mar" , "Martines" , "Zeca" , "65435643" , "CR" , "mar55@hmail.com" , "HER" );
+      
+        d.OferenteAdd(of);
+        //d.OferenteDelete(of);
           
           
           

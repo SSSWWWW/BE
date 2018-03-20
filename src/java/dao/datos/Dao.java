@@ -675,6 +675,7 @@ public class Dao {
                 ec.setIdEmp(rs.getInt("idEmpresa"));
                 ec.setNombreEmp(rs.getString("nombreEmpresa"));
                 ec.setUbicacionEmp(rs.getString("ubicacionEmpresa"));
+                ec.setClave(rs.getString("clave"));
         
             return ec;
         } catch (SQLException ex) {
@@ -683,9 +684,9 @@ public class Dao {
     }
      
               public void EmpresaUpdate(Empresa p) throws Exception{
-        String sql="update bolsaempleo.empresa set nombreEmp='%s', ubicacionEmp='%s' , latitud='%s', longitud='%s', descripcionEmp='%s', correoEmp='%s'"   +
+        String sql="update bolsaempleo.empresa set clave='%s', nombreEmp='%s', ubicacionEmp='%s' , latitud='%s', longitud='%s', descripcionEmp='%s', correoEmp='%s'"   +
                 "where idEmp='%s'";
-        sql=String.format(sql,p.getNombreEmp(),
+        sql=String.format(sql,p.getClave(), p.getNombreEmp(),
                 p.getUbicacionEmp(),p.getLatitud(),p.getLongitud(), p.getDescripcionEmp(),p.getCorreoEmp(), p.getIdEmp());
         
         int count=db.executeUpdate(sql);
@@ -709,18 +710,20 @@ public class Dao {
            
             
             System.out.println("en oferenteAdd");
-        String sql="insert into bolsaempleo.empresa (nombreEmp , ubicacionEmp , latitud , longitud, descripcionEmp, correoEmp ) "+
-                "values(? ,? ,? ,? ,? ,?)";
+        String sql="insert into bolsaempleo.empresa (clave, nombreEmp , ubicacionEmp , latitud , longitud, descripcionEmp, correoEmp ) "+
+                "values(?, ? ,? ,? ,? ,? ,?)";
         //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
         db.getConnection();
         PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
         System.out.println("despues de prepared" );
-        preparedStmt.setString(1, p.getNombreEmp());
-        preparedStmt.setString (2, p.getUbicacionEmp());
-        preparedStmt.setString (3, p.getLatitud());
-        preparedStmt.setString (4, p.getLongitud());
-        preparedStmt.setString (5, p.getDescripcionEmp());
-        preparedStmt.setString (6, p.getCorreoEmp());
+        
+        preparedStmt.setString(1, p.getClave());
+        preparedStmt.setString(2, p.getNombreEmp());
+        preparedStmt.setString (3, p.getUbicacionEmp());
+        preparedStmt.setString (4, p.getLatitud());
+        preparedStmt.setString (5, p.getLongitud());
+        preparedStmt.setString (6, p.getDescripcionEmp());
+        preparedStmt.setString (7, p.getCorreoEmp());
                 
       
        preparedStmt.execute();
@@ -873,20 +876,21 @@ public class Dao {
            
             
             System.out.println("en oferenteAdd");
-        String sql="insert into bolsaempleo.oferente (cedulaOferente , nombreOferente , primerApellido , segundoApellido , celular, nacionalidad, correoOferente, ubicacion  ) "+
-                "values(? ,? ,? ,? ,?, ?, ?, ?)";
+        String sql="insert into bolsaempleo.oferente (clave, cedulaOferente , nombreOferente , primerApellido , segundoApellido , celular, nacionalidad, correoOferente, ubicacion  ) "+
+                "values(?, ? ,? ,? ,? ,?, ?, ?, ?)";
         //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
         db.getConnection();
         PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
         System.out.println("despues de prepared" );
-        preparedStmt.setString (1, p.getCedulaOferente());
-        preparedStmt.setString (2, p.getNombreOferente());
-        preparedStmt.setString (3, p.getPrimerApellido());
-        preparedStmt.setString (4, p.getSegundoApellido());
-        preparedStmt.setString (5, p.getCelular());
-        preparedStmt.setString (6, p.getNacionalidad());
-        preparedStmt.setString (7, p.getCorreoOferente());
-        preparedStmt.setString (8, p.getUbicacion());
+        preparedStmt.setString (1, p.getClave());
+        preparedStmt.setString (2, p.getCedulaOferente());
+        preparedStmt.setString (3, p.getNombreOferente());
+        preparedStmt.setString (4, p.getPrimerApellido());
+        preparedStmt.setString (5, p.getSegundoApellido());
+        preparedStmt.setString (6, p.getCelular());
+        preparedStmt.setString (7, p.getNacionalidad());
+        preparedStmt.setString (8, p.getCorreoOferente());
+        preparedStmt.setString (9, p.getUbicacion());
         
       
       
@@ -905,9 +909,9 @@ public class Dao {
     }
          
           public void OferenteUpdate(Oferente p) throws Exception{
-        String sql="update bolsaempleo.oferente set  nombreOferente='%s', primerApellido='%s' , segundoApellido='%s' , celular='%s', nacionalidad='%s' , correoOferente='%s' , ubicacion='%s'"   +
+        String sql="update bolsaempleo.oferente set clave='%s', nombreOferente='%s', primerApellido='%s' , segundoApellido='%s' , celular='%s', nacionalidad='%s' , correoOferente='%s' , ubicacion='%s'"   +
                 "where cedulaOferente='%s'";
-        sql=String.format(sql,p.getNombreOferente(),
+        sql=String.format(sql, p.getClave(), p.getNombreOferente(),
                 p.getPrimerApellido(),p.getSegundoApellido(),p.getCelular() , p.getNacionalidad(), p.getCorreoOferente(), p.getUbicacion(), p.getCedulaOferente());
         
         int count=db.executeUpdate(sql);
@@ -929,6 +933,7 @@ public class Dao {
                 ec.setNacionalidad(rs.getString("nacionalidad"));
                 ec.setCorreoOferente(rs.getString("correoOferente"));
                 ec.setUbicacion(rs.getString("ubicacion"));
+                ec.setClave(rs.getString("clave"));
                    
             
             return ec;
