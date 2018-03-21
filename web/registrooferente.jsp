@@ -22,18 +22,25 @@
        <h1>REGISTRO OFERENTES</h1>
   
  <div class = "divform">
-  <form class = "formoferente">
+  <form action="agregarOferente" method="get" class = "formoferente">
   
-  <input type="text" placeholder = "Nombre" name="primernombre"><br>
+  <input type="text" placeholder = "Nombre" name="nombre"><br>
    <br>
-  <input type="text" placeholder = "Apellido" name="apellidos"><br>
+  <input type="text" placeholder = "Primer apellido" name="primerapellido"><br>
+   <br>
+   <input type="text" placeholder = "Segundo apellido" name="segundopellido"><br>
    <br>
   <input type="email" placeholder = "e-mail" name="email"><br>
+  <br>
+  <input type="text" placeholder = "cedula" name="cedula"><br>
  <br>
+ <input type="tel" placeholder = "numero celular" name="celular"><br>
+   <br>
+   <input type="text" placeholder = "Nacionalidad" name="nacionalidad"><br>
+   <br>
   <input type="password" placeholder = "contrasena" name="contrasena"><br>
   <br>
-  <input type="text" placeholder = "Puesto" name="puesto"><br>
- <br>
+  
   <select name="provincia">
   <option value="heredia">Heredia</option>
   <option value="alajuela">Alajuela</option>

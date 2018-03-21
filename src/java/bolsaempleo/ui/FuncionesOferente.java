@@ -23,8 +23,8 @@ import logica.model;
  *
  * @author Escinf
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login", "/Logout"})
-public class Login extends HttpServlet {
+@WebServlet(name = "Login", urlPatterns = {"/Login", "/Logout" , "/agregarOferente"})
+public class FuncionesOferente extends HttpServlet {
   protected void processRequest(HttpServletRequest request, 
                                 HttpServletResponse response)
          throws ServletException, IOException {
@@ -35,6 +35,9 @@ public class Login extends HttpServlet {
         case "/Logout":
             this.doLogout(request,response);
             break;
+        case "/agregarOferente":
+            this.doregistroOferenteAgregar(request,response);
+            break;    
     }
   }
 
@@ -96,19 +99,66 @@ oferente.setClave(clave);
 //oferente.setClave("sss");
 //</editor-fold>
        oferente = model.instance().getOferente(oferente);
-	//s.setAttribute("oferente",oferente);
-	request.getRequestDispatcher("inicioEmpresa.jsp").
+	s.setAttribute("oferente",oferente);
+	request.getRequestDispatcher("datosOferente.jsp").
                 forward( request, response);
       }
       catch(Exception e){	
 	request.setAttribute("error","Credenciales incorrectas..");
-	request.getRequestDispatcher("principal.jsp").
+	request.getRequestDispatcher("Error.jsp").
                 forward( request, response);
       }		
     }
+    
+    
+    protected void doregistroOferenteAgregar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+         try{
+                 System.out.println("en do Login");
+        HttpSession s =  request.getSession( true);
+//<editor-fold defaultstate="collapsed" desc="...">
+        String nombre   = request.getParameter("nombre");
+        String primerapellido   = request.getParameter("primerapellido");
+        String segundoapellido   = request.getParameter("segundoapellido");
+        String email   = request.getParameter("email");
+        String celular   = request.getParameter("celular");
+        String nacionalidad   = request.getParameter("nacionalidad");
+        String contrasena   = request.getParameter("contrasena");
+        String provincia   = request.getParameter("provincia");
+        String cedula = request.getParameter("cedula");
+        
+
+        Oferente oferente = new Oferente();
+         oferente.setCedulaOferente(cedula);
+         oferente.setCelular(celular);
+         oferente.setClave(contrasena);
+         oferente.setCorreoOferente(email);
+         oferente.setNacionalidad(nacionalidad);
+         oferente.setNombreOferente(nombre);
+         oferente.setPrimerApellido(primerapellido);
+         oferente.setSegundoApellido(segundoapellido);
+         oferente.setUbicacion(provincia);
+//oferente.setCedulaOferente("554533243");
+//oferente.setClave("sss");
+//</editor-fold>
+        model.instance().addOferente(oferente);
+	s.setAttribute("oferente",oferente);
+	request.getRequestDispatcher("datosOferente.jsp").
+                forward( request, response);
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("Error.jsp").forward( request, response);
+          }
+        
+        
+        }
+    
+    
     protected void doLogout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             request.getSession().invalidate();
-            request.getRequestDispatcher("Login.jsp").forward( request, response);          
+            request.getRequestDispatcher("principal.jsp").forward( request, response);          
     }    
 }
