@@ -23,6 +23,7 @@
         <tr><td><%=oferente.getNombreOferente()%> <%=oferente.getPrimerApellido() %></td></tr><br><br>
         <tr><td><%=oferente.getCedulaOferente()%></td></tr>
         <tr><td><%=oferente.getCorreoOferente() %></td></tr>
+        <tr><td><%=oferente.getCelular() %></td></tr>
         <tr><td><%=oferente.getNacionalidad() %></td></tr>
         <tr><td><%=oferente.getUbicacion() %></td></tr>
             

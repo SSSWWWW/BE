@@ -34,7 +34,7 @@
   <br>
   <input type="text" placeholder = "cedula" name="cedula"><br>
  <br>
- <input type="tel" placeholder = "numero celular" name="celular"><br>
+ <input type="text" placeholder = "numero celular" name="celular"><br>
    <br>
    <input type="text" placeholder = "Nacionalidad" name="nacionalidad"><br>
    <br>

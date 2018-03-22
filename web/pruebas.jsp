@@ -9,53 +9,29 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    
-   
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="initial-scale=1.0">
-
-
-<link rel = "stylesheet" href = "css/registroempresa.css">
-   
-
-   <head >
-    <title>Registro Empresa</title>
-  </head>
-
-  
-       <body> 
-      <h1>REGISTRO EMPRESA</h1>
-  
-   <form class = "formempresa">
- <div class = "divempresa">
- 
-
-  <input type="text" placeholder = "Nombre" name="nombreempresa"><br><br>
-  
-  <input type="email" placeholder = "e-mail" name="email"><br><br>
- 
-  <input type="password" placeholder = "password" name="contrasena"><br><br>
-  
-  <input type="tel" placeholder = "telefono" name="telefono"><br><br>
-   
-  <input type="text" placeholder = "descripcion" name="descripcion"><br><br>
-
-  </form><br><br>
-
-<head>
-
-<h1>Localizacion</h1>
-
- <style>          
+    <head>
+        <title>Google Map</title>
+        <meta name="viewport" content="initial-scale=1.0">
+        <meta charset="utf-8">
+        <style>          
           #map { 
             height: 300px;    
             width: 600px;            
           }          
-        </style> 
+        </style>        
+    </head>    
+    <body>
+        <div id="latclicked"></div>
+        <div id="longclicked"></div>
         
-
-<script type="text/javascript">
+        <div id="latmoved"></div>
+        <div id="longmoved"></div>
+        
+        <div style="padding:10px">
+            <div id="map"></div>
+        </div>
+        
+        <script type="text/javascript">
         var map;
         
         function initMap() {                            
@@ -126,23 +102,5 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA&callback=initMap"
         async defer></script>
-<div id="latclicked"></div>
-        <div id="longclicked"></div>
-        
-        <div id="latmoved"></div>
-        <div id="longmoved"></div>
-        
-        <div class = "map" style="padding:10px">
-            <div id = "map" ></div>
-        </div>
-
- 
-<input type="submit" value="Continuar" ></div>
-
-	  
-	  <center>
-      <a href = "principal.jsp" target = "_self">Regresar</a></center>
-  
-     
-  </body>
+    </body>    
 </html>
