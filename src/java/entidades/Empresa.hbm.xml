@@ -10,7 +10,7 @@
     <property name="nombreEmp" type="string">
       <column length="20" name="nombreEmp"/>
     </property>
-    <property name="ubicacionEmp" type="string">
+    <property name="telefono" type="string">
       <column length="20" name="ubicacionEmp"/>
     </property>
     <property name="descripcionEmp" type="string">

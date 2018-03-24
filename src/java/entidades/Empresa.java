@@ -14,7 +14,7 @@ public class Empresa  implements java.io.Serializable {
 
      private Integer idEmp;
      private String nombreEmp;
-     private String ubicacionEmp;
+     private String telefono;
      private String latitud;
      private String longitud;
      private String descripcionEmp;
@@ -30,7 +30,7 @@ public class Empresa  implements java.io.Serializable {
         this.clave = clave;
         this.idEmp = idEmp;
         this.nombreEmp = nombreEmp;
-        this.ubicacionEmp = ubicacionEmp;
+        this.telefono = ubicacionEmp;
         this.latitud = latitud;
         this.longitud = longitud;
         this.descripcionEmp = descripcionEmp;
@@ -80,12 +80,12 @@ public class Empresa  implements java.io.Serializable {
     public void setNombreEmp(String nombreEmp) {
         this.nombreEmp = nombreEmp;
     }
-    public String getUbicacionEmp() {
-        return this.ubicacionEmp;
+    public String getTelefono() {
+        return this.telefono;
     }
     
-    public void setUbicacionEmp(String ubicacionEmp) {
-        this.ubicacionEmp = ubicacionEmp;
+    public void setTelefono(String ubicacionEmp) {
+        this.telefono = ubicacionEmp;
     }
     public String getDescripcionEmp() {
         return this.descripcionEmp;

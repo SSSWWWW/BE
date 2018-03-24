@@ -1,58 +1,34 @@
 <%-- 
-    Document   : registroempresa
-    Created on : Mar 17, 2018, 1:30:57 PM
+    Document   : datosEmpresa
+    Created on : Mar 24, 2018, 10:07:24 AM
     Author     : pc
-
-AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="entidades.Empresa" %>
 <!DOCTYPE html>
 <html>
-    
-   
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="initial-scale=1.0">
-
-
-<link rel = "stylesheet" href = "css/registroempresa.css">
-   
-
-   <head >
-    <title>Registro Empresa</title>
-  </head>
-
-  
-       <body> 
-      <h1>REGISTRO EMPRESA</h1>
-  
-   <form class = "formempresa"  action="agregarEmpresa" method="get">
- <div class = "divempresa">
- 
-
-  <input type="text" placeholder = "Nombre" name="nombreempresa"><br><br>
-  
-  <input type="email" placeholder = "e-mail" name="email"><br><br>
- 
-  <input type="password" placeholder = "password" name="contrasena"><br><br>
-  
-  <input type="tel" placeholder = "telefono" name="telefono"><br><br>
-   
-  <input type="text" placeholder = "descripcion" name="descripcion"><br><br>
-  
-  <input type="text" id="latclicked" placeholder = "longitud" name="longitud"><br><br>
-  
-  <input type="text" id="longclicked" placeholder = "latitud" name="latitud"><br><br>
-  
-  
-
-  </form><br><br>
-
 <head>
-
-<h1>Localizacion</h1>
-
+ <title>Oferente</title>
+ <link href="css/registrooferente.css" rel="stylesheet" type="text/css"/>  
+</head>
+<body>
+<jsp:useBean id="empresa" scope="session" type="Empresa" />
+<div class = "datOf" >
+    
+    <div class="area" >   
+    <table class="grid">
+        <caption>Empresa</caption>
+        
+        <tr><td><%=empresa.getNombreEmp() %></td></tr><br><br>
+        <tr><td><%=empresa.getDescripcionEmp() %></td></tr><br><br>
+        <tr><td><%=empresa.getCorreoEmp() %></td></tr>
+        <tr><td><%=empresa.getTelefono() %></td></tr>
+       
+            
+    </table>
+    <br>
+    
  <style>          
           #map { 
             height: 300px;    
@@ -65,14 +41,14 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
         var map;
         
         function initMap() {                            
-            var latitude = 10; // YOUR LATITUDE VALUE
-            var longitude = -84; // YOUR LONGITUDE VALUE
+            var latitude = <%=empresa.getLongitud() %>; // YOUR LATITUDE VALUE
+            var longitude = <%=empresa.getLatitud() %>; // YOUR LONGITUDE VALUE
             
             var myLatLng = {lat: latitude, lng: longitude};
             
             map = new google.maps.Map(document.getElementById('map'), {
               center: myLatLng,
-              zoom: 8.2,
+              zoom: 16,
               disableDoubleClickZoom: true, // disable the default map zoom on double click
             });
             
@@ -142,13 +118,17 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
             <div id = "map" ></div>
         </div>
 
- 
-<input type="submit" value="Continuar" ></div>
-
-	  
-	  <center>
-      <a href = "principal.jsp" target = "_self">Regresar</a></center>
+    
+    
   
-     
-  </body>
+ </div>
+</div>
+<div class = "salir" >
+    <ul class="menu">
+        <li><a href="#"><%=empresa.getIdEmp() %>-<%=empresa.getNombreEmp() %><img class="inline" src="images/down.png" alt=""></a>
+            <ul class="menuitem" > <li> <a href="Logout">Salir</a></li> </ul>
+        </li>
+    </ul>
+</div>
+</body>
 </html>

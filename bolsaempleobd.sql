@@ -92,13 +92,13 @@ CREATE TABLE HABILIDADES_INCLUIDAS
 CREATE TABLE EMPRESA
 
  (nombreEmp varchar(20),
-ubicacionEmp varchar(60),
+telefonoEmp varchar(15),
 latitud varchar (60),
 longitud varchar (60),
-descripcionEmp varchar(20), 
+descripcionEmp varchar(150), 
 correoEmp varchar(20), 
 idEmp  int AUTO_INCREMENT,
-fechaRegistro date,
+fechaRegistro DATETIME DEFAULT CURRENT_TIMESTAMP,
 clave varchar(15),
 
 CONSTRAINT PK_EMP PRIMARY KEY (idEmp)

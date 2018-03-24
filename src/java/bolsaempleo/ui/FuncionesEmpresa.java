@@ -5,11 +5,7 @@
  */
 package bolsaempleo.ui;
 
-/**
- *
- * @author pc
- */
-import entidades.Oferente;
+import entidades.Empresa;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,20 +19,20 @@ import logica.model;
  *
  * @author Escinf
  */
-@WebServlet(name = "Login", urlPatterns = {"/LoginOf", "/Logout" , "/agregarOferente"})
-public class FuncionesOferente extends HttpServlet {
+@WebServlet(name = "LoginEm", urlPatterns = {"/LoginEm", "/LogoutEm" , "/agregarEmpresa"})
+public class FuncionesEmpresa extends HttpServlet {
   protected void processRequest(HttpServletRequest request, 
                                 HttpServletResponse response)
          throws ServletException, IOException {
     switch(request.getServletPath()){
-        case "/LoginOf":
+        case "/LoginEm":
             this.doLogin(request,response);
             break;
-        case "/Logout":
+        case "/LogoutEm":
             this.doLogout(request,response);
             break;
-        case "/agregarOferente":
-            this.doregistroOferenteAgregar(request,response);
+        case "/agregarEmpresa":
+            this.doregistroagregarEmpresa(request,response);
             break;    
     }
   }
@@ -89,18 +85,18 @@ public class FuncionesOferente extends HttpServlet {
           System.out.println("en do Login");
         HttpSession s =  request.getSession( true);
 //<editor-fold defaultstate="collapsed" desc="...">
-String identificacion   = request.getParameter("correoOferente");
+String identificacion   = request.getParameter("correoEmpresa");
 String clave   = request.getParameter("clave");
 
-Oferente oferente = new Oferente();
-oferente.setCorreoOferente(identificacion);
-oferente.setClave(clave);
+Empresa empresa = new Empresa();
+empresa.setCorreoEmp(identificacion);
+empresa.setClave(clave);
 //oferente.setCedulaOferente("554533243");
 //oferente.setClave("sss");
 //</editor-fold>
-       oferente = model.instance().getOferente(oferente);
-	s.setAttribute("oferente",oferente);
-	request.getRequestDispatcher("datosOferente.jsp").
+       empresa = model.instance().getEmpresa(empresa);
+	s.setAttribute("empresa",empresa);
+	request.getRequestDispatcher("datosEmpresa.jsp").
                 forward( request, response);
       }
       catch(Exception e){	
@@ -111,39 +107,36 @@ oferente.setClave(clave);
     }
     
     
-    protected void doregistroOferenteAgregar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doregistroagregarEmpresa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
          try{
                  System.out.println("en do Login");
         HttpSession s =  request.getSession( true);
 //<editor-fold defaultstate="collapsed" desc="...">
-        String nombre   = request.getParameter("nombre");
-        String primerapellido   = request.getParameter("primerapellido");
-        String segundoapellido   = request.getParameter("segundoapellido");
+        String nombre   = request.getParameter("nombreempresa");
+        
         String email   = request.getParameter("email");
-        String celular   = request.getParameter("celular");
-        String nacionalidad   = request.getParameter("nacionalidad");
+        String telefono   = request.getParameter("telefono");
+        String descripcion   = request.getParameter("descripcion");
         String contrasena   = request.getParameter("contrasena");
-        String provincia   = request.getParameter("provincia");
-        String cedula = request.getParameter("cedula");
+        String latitud   = request.getParameter("latitud");
+        String longitud = request.getParameter("longitud");
         
 
-        Oferente oferente = new Oferente();
-         oferente.setCedulaOferente(cedula);
-         oferente.setCelular(celular);
-         oferente.setClave(contrasena);
-         oferente.setCorreoOferente(email);
-         oferente.setNacionalidad(nacionalidad);
-         oferente.setNombreOferente(nombre);
-         oferente.setPrimerApellido(primerapellido);
-         oferente.setSegundoApellido(segundoapellido);
-         oferente.setUbicacion(provincia);
+         Empresa empresa = new Empresa();
+         empresa.setNombreEmp(nombre);
+         empresa.setClave(contrasena);
+         empresa.setCorreoEmp(email);
+         empresa.setDescripcionEmp(descripcion);
+         empresa.setTelefono(telefono);
+         empresa.setLatitud(latitud);
+         empresa.setLongitud(longitud);
 //oferente.setCedulaOferente("554533243");
 //oferente.setClave("sss");
 //</editor-fold>
-        model.instance().addOferente(oferente);
-	s.setAttribute("oferente",oferente);
-	request.getRequestDispatcher("datosOferente.jsp").
+        model.instance().addEmpresa(empresa);
+	s.setAttribute("empresa",empresa);
+	request.getRequestDispatcher("datosEmpresa.jsp").
                 forward( request, response);
           }
           catch(Exception e){

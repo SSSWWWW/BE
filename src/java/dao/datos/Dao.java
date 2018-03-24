@@ -669,13 +669,15 @@ public class Dao {
         try {
             Empresa ec= new Empresa();
           
-                ec.setCorreoEmp(rs.getString("correoEmpresa"));
-                ec.setDescripcionEmp(rs.getString("descripcionEmpresa"));
+                ec.setCorreoEmp(rs.getString("correoEmp"));
+                ec.setDescripcionEmp(rs.getString("descripcionEmp"));
                 ec.setFechaRegistro(rs.getDate("fechaRegistro"));
-                ec.setIdEmp(rs.getInt("idEmpresa"));
-                ec.setNombreEmp(rs.getString("nombreEmpresa"));
-                ec.setUbicacionEmp(rs.getString("ubicacionEmpresa"));
+                ec.setNombreEmp(rs.getString("nombreEmp"));
+                ec.setTelefono(rs.getString("telefonoEmp"));
                 ec.setClave(rs.getString("clave"));
+                ec.setLatitud(rs.getString("latitud"));
+                ec.setLongitud(rs.getString("longitud"));
+                ec.setIdEmp(rs.getInt("idEmp"));
         
             return ec;
         } catch (SQLException ex) {
@@ -684,10 +686,10 @@ public class Dao {
     }
      
               public void EmpresaUpdate(Empresa p) throws Exception{
-        String sql="update bolsaempleo.empresa set clave='%s', nombreEmp='%s', ubicacionEmp='%s' , latitud='%s', longitud='%s', descripcionEmp='%s', correoEmp='%s'"   +
+        String sql="update bolsaempleo.empresa set clave='%s', nombreEmp='%s', telefonoEmp='%s' , latitud='%s', longitud='%s', descripcionEmp='%s', correoEmp='%s'"   +
                 "where idEmp='%s'";
         sql=String.format(sql,p.getClave(), p.getNombreEmp(),
-                p.getUbicacionEmp(),p.getLatitud(),p.getLongitud(), p.getDescripcionEmp(),p.getCorreoEmp(), p.getIdEmp());
+                p.getTelefono(),p.getLatitud(),p.getLongitud(), p.getDescripcionEmp(),p.getCorreoEmp(), p.getIdEmp());
         
         int count=db.executeUpdate(sql);
         if (count==0){
@@ -710,7 +712,7 @@ public class Dao {
            
             
             System.out.println("en oferenteAdd");
-        String sql="insert into bolsaempleo.empresa (clave, nombreEmp , ubicacionEmp , latitud , longitud, descripcionEmp, correoEmp ) "+
+        String sql="insert into bolsaempleo.empresa (clave, nombreEmp , latitud , longitud, descripcionEmp, correoEmp, telefonoEmp ) "+
                 "values(?, ? ,? ,? ,? ,? ,?)";
         //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
         db.getConnection();
@@ -719,11 +721,12 @@ public class Dao {
         
         preparedStmt.setString(1, p.getClave());
         preparedStmt.setString(2, p.getNombreEmp());
-        preparedStmt.setString (3, p.getUbicacionEmp());
-        preparedStmt.setString (4, p.getLatitud());
-        preparedStmt.setString (5, p.getLongitud());
-        preparedStmt.setString (6, p.getDescripcionEmp());
-        preparedStmt.setString (7, p.getCorreoEmp());
+        
+        preparedStmt.setString (3, p.getLatitud());
+        preparedStmt.setString (4, p.getLongitud());
+        preparedStmt.setString (5, p.getDescripcionEmp());
+        preparedStmt.setString (6, p.getCorreoEmp());
+        preparedStmt.setString (7, p.getTelefono());
                 
       
        preparedStmt.execute();
@@ -731,15 +734,31 @@ public class Dao {
     }
       
       
-        public Empresa EmpresaGet(String codigo) throws Exception{
-        String sql="select * from empresa where idEmp='%s'";
-        sql = String.format(sql,codigo);
+        public Empresa EmpresaGet(Empresa emp) throws Exception{
+            
+            
+            /*    db.getConnection();
+          String sql="select * from oferente where correoOferente='%s'";
+        sql = String.format(sql, of.getCorreoOferente());
+        ResultSet rs =  db.executeQuery(sql);
+        if (rs.next()) {
+            System.out.println("retorna oferente");
+            return oferente(rs);
+        }
+        else{
+            throw new Exception ("Oferente no Existe");
+            
+        }*/
+            
+        db.getConnection();    
+        String sql="select * from empresa where correoEmp='%s'";
+        sql = String.format(sql, emp.getCorreoEmp());
         ResultSet rs =  db.executeQuery(sql);
         if (rs.next()) {
             return empresa(rs);
         }
         else{
-            throw new Exception ("Habilidad no Existe");
+            throw new Exception ("Empresa no Existe");
             
         }
     }
@@ -853,8 +872,8 @@ public class Dao {
         
           
           db.getConnection();
-          String sql="select * from oferente where cedulaOferente='%s'";
-        sql = String.format(sql, of.getCedulaOferente());
+          String sql="select * from oferente where correoOferente='%s'";
+        sql = String.format(sql, of.getCorreoOferente());
         ResultSet rs =  db.executeQuery(sql);
         if (rs.next()) {
             System.out.println("retorna oferente");

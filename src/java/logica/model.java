@@ -154,8 +154,8 @@ public class model {
            dao.EmpresaAdd(p);
        }
 
-          public Empresa getEmpresa(String id1) throws Exception{
-           return dao.EmpresaGet(id1);
+          public Empresa getEmpresa(Empresa emp) throws Exception{
+           return dao.EmpresaGet(emp);
        }
 
            public Collection<Empresa> getAllEmpresa() throws Exception{

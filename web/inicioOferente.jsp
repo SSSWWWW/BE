@@ -17,15 +17,15 @@
    
 
    <head >
-    <title>Registro Oferente</title>
+    <title>Inicio Oferente</title>
   </head>
 
   
        <body> 
-      <h1>Registro Oferente</h1>
+      <h1>Inicio Oferente</h1>
   
-    <form action="Login" method="post">
-           <input class="formfield" type="text" name="cedulaOferente" placeholder="Usuario" required><br>
+    <form action="LoginOf" method="post">
+           <input class="formfield" type="text" name="correoOferente" placeholder="Usuario" required><br>
            <input class="formfield" type="password" name="clave" placeholder="Clave" required><br>
            <input class="formfield"  type="submit" value="Ingresar">
        </form>

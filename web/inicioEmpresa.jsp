@@ -18,15 +18,15 @@
    
 
    <head >
-    <title>Registro Empresa</title>
+    <title>Inicio Empresa</title>
   </head>
 
   
        <body> 
-      <h1>REGISTRO EMPRESA</h1>
+      <h1>INICIO EMPRESA</h1>
   
-    <form action="Login" method="post">
-           <input class="formfield" type="text" name="identificacion" placeholder="Usuario" required><br>
+    <form action="LoginEm" method="post">
+           <input class="formfield" type="text" name="correoEmpresa" placeholder="Usuario" required><br>
            <input class="formfield" type="password" name="clave" placeholder="Clave" required><br>
            <input class="formfield"  type="submit" value="Ingresar">
        </form>
