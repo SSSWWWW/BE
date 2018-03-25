@@ -1,6 +1,7 @@
  
 body {
     background-color: #F7F2E0;
+    margin:0px;
 }
 
 h1 {
@@ -15,7 +16,7 @@ div{
 
     height:50px;
     width:1300px;
-    text-align: center;
+   
     background-color: #e0e0d1;
     padding: 6px;
     color: #8A2048;
@@ -71,6 +72,8 @@ ul li ul li a {display:block !important;}
 ul li ul li:hover {background: #666;}
 
 
+
+
  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
            text-align: center;
 	   color : #8A2048;
@@ -92,3 +95,16 @@ form {
 
 }
 
+div.salir {
+    
+    display: inline-block; 
+    vertical-align: top;
+    
+}
+
+ ul.menu{list-style: circle; padding:0; }
+ul.menu li a {text-decoration: none;}
+ul.menuitem{display: none; list-style: none; padding:0; padding-left:10px;}
+ul.menuitem li a {text-decoration: none;}
+ul.menu:hover li ul.menuitem{display: block} 
+  

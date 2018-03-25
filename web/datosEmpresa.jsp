@@ -13,6 +13,8 @@
  <link href="css/registrooferente.css" rel="stylesheet" type="text/css"/>  
 </head>
 <body>
+    
+    
 <jsp:useBean id="empresa" scope="session" type="Empresa" />
 <div class = "datOf" >
     
@@ -109,14 +111,11 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA&callback=initMap"
         async defer></script>
         
-        
-       
-        
-        
-        
         <div class = "map" style="padding:10px">
             <div id = "map" ></div>
         </div>
+        
+   
 
     
     
@@ -129,6 +128,17 @@
             <ul class="menuitem" > <li> <a href="Logout">Salir</a></li> </ul>
         </li>
     </ul>
+            
+            <form action="AgregarPuesto" method="post">
+           <input class="formfield" type="text" name="nombrePuesto" placeholder="Nombre " required><br>
+           <input class="formfield" type="text" name="descripcionPuesto" placeholder="Descripcion" required><br>
+           <input class="formfield" type="text" name="salarioPuesto" placeholder="Salario" required><br>
+           <input class="formfield"  type="submit" value="Agregar Puesto">
+       </form>
+            
 </div>
+            
+             <a href = "principal.jsp" target = "_self">Regresar</a></center>
+            
 </body>
 </html>

@@ -39,5 +39,8 @@
         </li>
     </ul>
 </div>
+            
+             <a href = "principal.jsp" target = "_self">Regresar</a></center>
+            
 </body>
 </html>

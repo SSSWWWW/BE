@@ -4,7 +4,7 @@
   body {
   
      background-color : F7F2E0;
-	 text-align: center;
+
   
   
   }
@@ -45,6 +45,8 @@
 	   text-align : center;
 	   font-weight: normal;
 }
+
+
   
 div.datOf {
     
@@ -58,6 +60,15 @@ div.salir {
     
     display: inline-block; 
     vertical-align: top;
+    
+}
+
+div.agregar {
+    
+    width:40%; 
+    display: inline-block;
+    
+    
     
 }
   

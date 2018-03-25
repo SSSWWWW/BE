@@ -112,7 +112,7 @@ CREATE TABLE PUESTOS(
 nombrePuesto varchar(10),
 salario float,
  descripcionPuesto varchar(10) , 
-ubicacion varchar(10), 
+boolean estado;
 
 idPuesto int AUTO_INCREMENT,
 

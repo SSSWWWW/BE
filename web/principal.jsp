@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -12,9 +15,13 @@
 
 <link rel = "stylesheet" href = "css/principal.css">
    
+<%@ include file="Header.jsp" %>
   <head>
     <title>Bolsa Empleo</title>
+    
+    
   </head>
+  
   
   <body>
       
@@ -26,9 +33,12 @@
       
       <div class="reg">
           
+          
+          
             <ul>
               <li>
                 <a href="#">Registro</a>
+                
                 <ul>
                  <li><a href="registroempresa.jsp">Registro empresa</a></li>
                   <li><a href="registrooferente.jsp">Registro oferente</a></li>
@@ -64,9 +74,8 @@
 		   <a href="registroempresa.html" target="frame" >Registro Empresa</a>
 		   <iframe name="frame"> </iframe-->
          
-		 
-		
-  
+	 
+
      
   </body>
 </html>
