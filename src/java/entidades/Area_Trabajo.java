@@ -9,16 +9,17 @@ package entidades;
  *
  * @author pc
  */
-public class Caracteristicas {
-    
+public class Area_Trabajo {
     
     String nombreCaracteristica;
+    String nombreAreaTrabajo;
 
-    public Caracteristicas(String nombreCaracteristica) {
+    public Area_Trabajo(String nombreCaracteristica, String nombreAreaTrabajo) {
         this.nombreCaracteristica = nombreCaracteristica;
+        this.nombreAreaTrabajo = nombreAreaTrabajo;
     }
 
-    public Caracteristicas() {
+    public Area_Trabajo() {
     }
 
     public String getNombreCaracteristica() {
@@ -27,6 +28,14 @@ public class Caracteristicas {
 
     public void setNombreCaracteristica(String nombreCaracteristica) {
         this.nombreCaracteristica = nombreCaracteristica;
+    }
+
+    public String getNombreAreaTrabajo() {
+        return nombreAreaTrabajo;
+    }
+
+    public void setNombreAreaTrabajo(String nombreAreaTrabajo) {
+        this.nombreAreaTrabajo = nombreAreaTrabajo;
     }
     
     

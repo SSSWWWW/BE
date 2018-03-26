@@ -5,10 +5,13 @@
  */
 package dao.datos;
 
+import entidades.Administrador;
 import entidades.Aplicado;
+import entidades.Area_Trabajo;
 import entidades.Caracteristicas;
 import entidades.CaracteristicasIncluidos;
 import entidades.Empresa;
+import entidades.Especializacion;
 import entidades.Habilidades;
 import entidades.HabilidadesIncluidas;
 import entidades.Oferente;
@@ -482,9 +485,8 @@ public class Dao {
         try {
             Caracteristicas ec= new Caracteristicas();
           
-                ec.setIdCaracteristica(rs.getString("idCaracteristica"));
-                ec.setAreaTrabajo(rs.getString("areaTrabajo"));
-                ec.setEspecializacion(rs.getString("especializacion"));
+                ec.setNombreCaracteristica(rs.getString("nombreCaracteristica"));
+                
                
         
             return ec;
@@ -494,10 +496,9 @@ public class Dao {
     }
      
               public void CaracteristicasUpdate(Caracteristicas p) throws Exception{
-        String sql="update bolsaempleo.caracteristicas set areaTrabajo='%s', especializacion='%s'"   +
-                "where idCaracteristica='%s'";
-        sql=String.format(sql,p.getAreaTrabajo(),
-                p.getEspecializacion(),p.getIdCaracteristica());
+        String sql="update bolsaempleo.caracteristicas set nombreCaracteristica='%s'"   +
+                "where nombreCaracteristica='%s'";
+        sql=String.format(sql,p.getNombreCaracteristica());
         
         int count=db.executeUpdate(sql);
         if (count==0){
@@ -507,11 +508,11 @@ public class Dao {
               
               
                  public void CaracteristicasDelete(Caracteristicas p) throws Exception{
-        String sql="delete from bolsaempleo.caracteristicas where idCaracteristica='%s'";
-        sql = String.format(sql,p.getIdCaracteristica());
+        String sql="delete from bolsaempleo.caracteristicas where nombreCaracteristica='%s'";
+        sql = String.format(sql,p.getNombreCaracteristica());
         int count=db.executeUpdate(sql);
         if (count==0){
-            throw new Exception("puesto no existe");
+            throw new Exception("caracteristica no existe");
         }
     }
     
@@ -520,15 +521,14 @@ public class Dao {
            
             
             System.out.println("en oferenteAdd");
-        String sql="insert into bolsaempleo.caracteristicas (idCaracteristica , areaTrabajo , especializacion ) "+
-                "values(? ,? ,? )";
+        String sql="insert into bolsaempleo.caracteristicas (nombreCaracteristica) "+
+                "values(?)";
         //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
         db.getConnection();
         PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
         System.out.println("despues de prepared" );
-        preparedStmt.setString(1, p.getIdCaracteristica());
-        preparedStmt.setString (2, p.getAreaTrabajo());
-        preparedStmt.setString (3, p.getEspecializacion());
+        preparedStmt.setString(1, p.getNombreCaracteristica());
+      
         
       
        preparedStmt.execute();
@@ -536,15 +536,15 @@ public class Dao {
     }
       
       
-        public Caracteristicas CaracteristicasGet(String codigo) throws Exception{
-        String sql="select * from caracteristicas where idCaracteristica='%s'";
-        sql = String.format(sql,codigo);
+        public Caracteristicas CaracteristicasGet(Caracteristicas p) throws Exception{
+        String sql="select * from caracteristicas where nombreCaracteristica='%s'";
+        sql = String.format(sql,p.getNombreCaracteristica());
         ResultSet rs =  db.executeQuery(sql);
         if (rs.next()) {
             return caracteristicas(rs);
         }
         else{
-            throw new Exception ("puesto no Existe");
+            throw new Exception ("caracteristica no Existe");
             
         }
     }
@@ -563,18 +563,187 @@ public class Dao {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
     /**********************************************************************/
     
     
+            
+            
     
+    
+    
+     private Area_Trabajo areatrabajo(ResultSet rs){
+        try {
+            Area_Trabajo ec= new Area_Trabajo();
+          
+                ec.setNombreCaracteristica(rs.getString("nombreCaracteristica"));
+                ec.setNombreAreaTrabajo(rs.getString("nombreAreaTrabajo"));
+                
+               
+        
+            return ec;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+     
+              public void Area_TrabajoUpdate(Area_Trabajo p) throws Exception{
+        String sql="update bolsaempleo.Area_Trabajo set nombreCaracteristica='%s' , nombreAreaTrabajo='%s'"  +
+                "where nombreAreaTrabajo='%s'";
+        sql=String.format(sql,p.getNombreCaracteristica(), p.getNombreAreaTrabajo());
+        
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("area trabajo no existe");
+        }
+    }
+              
+              
+                 public void Area_TrabajoDelete(Area_Trabajo p) throws Exception{
+        String sql="delete from bolsaempleo.Area_Trabajo where nombreAreaTrabajo='%s'";
+        sql = String.format(sql,p.getNombreAreaTrabajo());
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("area trabajo no existe");
+        }
+    }
+    
+        
+      public void Area_TrabajoAdd(Area_Trabajo p) throws Exception{
+           
+            
+            System.out.println("en oferenteAdd");
+        String sql="insert into bolsaempleo.Area_Trabajo (nombreCaracteristica, nombreAreaTrabajo) "+
+                "values(?, ?)";
+        //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
+        db.getConnection();
+        PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
+        System.out.println("despues de prepared" );
+        preparedStmt.setString(1, p.getNombreCaracteristica());
+        preparedStmt.setString(2, p.getNombreAreaTrabajo());
+      
+        
+      
+       preparedStmt.execute();
+       
+    }
+      
+      
+        public Area_Trabajo Area_TrabajoGet(Area_Trabajo p) throws Exception{
+        String sql="select * from Area_Trabajo where nombreAreaTrabajo='%s'";
+        sql = String.format(sql,p.getNombreAreaTrabajo());
+        ResultSet rs =  db.executeQuery(sql);
+        if (rs.next()) {
+            return areatrabajo(rs);
+        }
+        else{
+            throw new Exception ("area de trabajo no Existe");
+            
+        }
+    }
+        
+            public Collection<Area_Trabajo> Area_TrabajoGetAll(){
+        Vector<Area_Trabajo> estados=new Vector<Area_Trabajo>();
+        try {
+            String sql="select * from Area_Trabajo";
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(areatrabajo(rs));
+            }
+        } catch (SQLException ex) { }
+        return estados;        
+    }
+    
+       /****************************************************************/     
+            
+              private Especializacion especializacion(ResultSet rs){
+        try {
+            Especializacion ec= new Especializacion();
+          
+                ec.setNombreEspecializacion(rs.getString("nombreEspecializacion"));
+                ec.setNombresAreaTrabajo(rs.getString("nombreAreaTrabajo"));
+                ec.setProcentajeEspecializacion(rs.getInt("porcentajeEspecializacion"));
+                
+               
+        
+            return ec;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+     
+              public void EspecializacionUpdate(Especializacion p) throws Exception{
+        String sql="update bolsaempleo.Especializacion set  nombreEspecializacion='%s' , porcentajeEspecializacion='%s'"  +
+                "where nombreEspecializacion='%s'";
+        sql=String.format(sql,p.getNombreEspecializacion(), p.getProcentajeEspecializacion(), p.getNombreEspecializacion());
+        
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("especializacion no existe");
+        }
+    }
+              
+              
+                 public void EspecializacionDelete(Especializacion p) throws Exception{
+        String sql="delete from bolsaempleo.Especializacion where nombreEspecializacion='%s'";
+        sql = String.format(sql,p.getNombreEspecializacion());
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("especializacion no existe");
+        }
+    }
+    
+        
+      public void EspecializacionAdd(Especializacion p) throws Exception{
+           
+            
+            System.out.println("en oferenteAdd");
+        String sql="insert into bolsaempleo.Especializacion (nombreAreaTrabajo, nombreEspecializacion, porcentajeEspecializacion) "+
+                "values(?, ?, ?)";
+        //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
+        db.getConnection();
+        PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
+        System.out.println("despues de prepared" );
+        preparedStmt.setString(1, p.getNombresAreaTrabajo());
+        preparedStmt.setString(2, p.getNombreEspecializacion());
+        preparedStmt.setInt(3, p.getProcentajeEspecializacion());
+      
+        
+      
+       preparedStmt.execute();
+       
+    }
+      
+      
+        public Especializacion EspecializacionGet(Especializacion p) throws Exception{
+        String sql="select * from Especializacion where nombreEspecializacion='%s'";
+        sql = String.format(sql,p.getNombreEspecializacion());
+        ResultSet rs =  db.executeQuery(sql);
+        if (rs.next()) {
+            return especializacion(rs);
+        }
+        else{
+            throw new Exception ("area de trabajo no Existe");
+            
+        }
+    }
+        
+            public Collection<Especializacion> EspecializacionGetAll(){
+        Vector<Especializacion> estados=new Vector<Especializacion>();
+        try {
+            String sql="select * from Especializacion";
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(especializacion(rs));
+            }
+        } catch (SQLException ex) { }
+        return estados;        
+    }
+            
+            
+            
+            
+            
+   /*********************************************************************/ 
     private Puestos puestos(ResultSet rs){
         try {
             Puestos ec= new Puestos();
@@ -979,6 +1148,108 @@ public class Dao {
             return null;
         }
     }
+        
+        
+     /**********************************************************************/
+        
+            public Administrador AdministradorGet(Administrador of) throws Exception{
+        
+          
+          db.getConnection();
+          String sql="select * from administrador where nombreAdmin='%s'";
+        sql = String.format(sql, of.getNombreAdmin());
+        ResultSet rs =  db.executeQuery(sql);
+        if (rs.next()) {
+            System.out.println("retorna oferente");
+            return administrador(rs);
+        }
+        else{
+            throw new Exception ("Administrador no Existe");
+            
+        }
+        
+            }
+      
+       public Collection<Administrador> AdministradorGetAll(){
+        Vector<Administrador> estados=new Vector<Administrador>();
+        try {
+            String sql="select * from administrador";
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(administrador(rs));
+            }
+        } catch (SQLException ex) { }
+        return estados;        
+    }
+       
+       
+        public void AdministradorAdd(Administrador p) throws Exception{
+           
+            
+            System.out.println("en oferenteAdd");
+        String sql="insert into bolsaempleo.administrador (claveAdministrador, nombreAdmin ) "+
+                "values(?, ? )";
+        //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
+        db.getConnection();
+        PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
+        System.out.println("despues de prepared" );
+        preparedStmt.setString (1, p.getClave());
+        preparedStmt.setString (2, p.getNombreAdmin());
+        
+        
+      
+      
+       preparedStmt.execute();
+       
+    }
+        
+         public void AdministradorDelete(Administrador p) throws Exception{
+        String sql="delete from bolsaempleo.administrador where nombreAdministrador='%s'";
+        sql = String.format(sql,p.getNombreAdmin());
+        db.getConnection();
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("Administrador no existe");
+        }
+    }
+         
+          public void AdministradorUpdate(Administrador p) throws Exception{
+        String sql="update bolsaempleo.administrador set clave='%s'"   +
+                "where nombreAdministrador='%s'";
+        sql=String.format(sql, p.getClave());
+        
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("Administrador no existe");
+        }
+    }
+      
+    
+      
+        private Administrador administrador(ResultSet rs){
+        try {
+            Administrador ec= new Administrador();
+          
+                ec.setClave(rs.getString("claveAdministrador"));
+                ec.setNombreAdmin(rs.getString("nombreAdmin"));
+              
+                   
+            
+            return ec;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
   /*************************************************************************************************************************/      
         

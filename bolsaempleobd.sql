@@ -36,6 +36,25 @@ CREATE TABLE OFERENTE
  
   CONSTRAINT PK_OFERENTE PRIMARY KEY (cedulaOferente)
   );
+  
+  -- 
+  
+  
+  CREATE TABLE ADMINISTRADOR (
+  
+  nombreAdmin varchar (30),
+  claveAdministrador varchar (15),
+  
+   CONSTRAINT PK_ADMIN PRIMARY KEY (nombreAdmin)
+  
+  );
+  
+  nombreAdmin varchar (30);
+  claveAdministrador varchar (15);
+  
+   CONSTRAINT PK_ADMIN PRIMARY KEY (nombreAdmin)
+  
+  );
 
   
   --en dao
@@ -123,16 +142,30 @@ CONSTRAINT PK_PUESTO PRIMARY KEY(idPuesto)
 --en dao
 CREATE TABLE CARACTERISTICAS (
 
-   idCaracteristica varchar(5) ,
-   areaTrabajo varchar(20),
-   especializacion varchar (10),
-   
-   CONSTRAINT PK_Caracteriticas PRIMARY KEY (idCAracteristica)
+   nombreCaracteristica varchar(15),
  
-  
-
-
+   CONSTRAINT PK_Caracteriticas PRIMARY KEY (nombreCaracteristica);
+ 
 );
+
+CREATE TABLE AREA_TRABAJO (
+
+   nombreCaracteristica varchar(15),
+   nombreAreaTrabajo varchar (20),
+   
+   constraint pk_at primary key (nombreAreaTrabajo, nombreCaracteristica),
+   constraint fk_at foreign key (nombreCaracteristica) references caracteristicas (nombreCaracteristica)
+)
+
+CREATE TABLE ESPECIALIZACION (
+
+   nombreAreaTrabajo varchar (20),
+   nombreEspecializacion varchar (20),
+   porcentajeEspecializacion int,
+   
+   constraint pk_at primary key (nombreEspecializacion, nombreAreaTrabajo),
+   constraint fk_es foreign key (nombreAreaTrabajo) references area_trabajo (nombreAreaTrabajo)
+)
 
 
 --en dao
@@ -142,15 +175,15 @@ CREATE TABLE CARACTERISTICAS_INCLUIDOS (
    
    
    idPuesto int,
-   idCaracteristica varchar(5),
+   nombreCaracteristica varchar(15),
 
    fecha_Inclusion date,
 
-   CONSTRAINT PK_PI PRIMARY KEY (idPuesto, idCaracteristica ),
+   CONSTRAINT PK_PI PRIMARY KEY (idPuesto, nombreCaracteristica),
    CONSTRAINT FK_PI1 FOREIGN KEY (idPuesto) REFERENCES 
    PUESTOS (idPuesto),
-   CONSTRAINT FK_PI2 FOREIGN KEY (idCaracteristica) REFERENCES 
-   CARACTERISTICA (idCaracteristica)
+   CONSTRAINT FK_PI2 FOREIGN KEY (nombreCaracteristica) REFERENCES 
+   CARACTERISTICAS (nombreCaracteristica)
    
 
 );

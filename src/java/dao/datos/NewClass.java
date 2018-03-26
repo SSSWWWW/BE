@@ -5,6 +5,7 @@
  */
 package dao.datos;
 
+import entidades.Administrador;
 import entidades.Empresa;
 import entidades.Oferente;
 import java.sql.SQLException;
@@ -25,6 +26,24 @@ public class NewClass {
           
           model m;
           
+       //   Administrador admin = new Administrador();
+          
+         // admin.setNombreAdmin("admin");
+          //admin.setClave("admin");
+          
+         //model.instance().addAdministrador(admin);
+          
+         
+         Administrador admin = new Administrador();
+admin.setNombreAdmin("admin");
+admin.setClave("admin");
+
+admin = model.instance().getAdministrador(admin);
+
+System.out.println(admin.getNombreAdmin());
+
+
+         
          /* Oferente of = new Oferente();
           
           of.setCorreoOferente("sjwg14@gmail.com");
@@ -34,15 +53,15 @@ public class NewClass {
           
           System.out.println(of.getNombreOferente());*/
           
-         Empresa empresa = new Empresa();
-empresa.setCorreoEmp("rh@walmart.com");
-empresa.setClave("walmart");
+      //   Empresa empresa = new Empresa();
+//empresa.setCorreoEmp("rh@walmart.com");
+//empresa.setClave("walmart");
 //oferente.setCedulaOferente("554533243");
 //oferente.setClave("sss");
 //</editor-fold>
-      empresa = model.instance().getEmpresa(empresa); 
+  //    empresa = model.instance().getEmpresa(empresa); 
        
-      System.out.println(empresa.getCorreoEmp());
+    //  System.out.println(empresa.getCorreoEmp());
           
         // Oferente of = new Oferente("juan" ,"23333333", "Juan" , "Perez" , "Zeledon" , "83737373" , "CR" , "jpz@hmail.com" , "HER" );
           

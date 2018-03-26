@@ -1,6 +1,7 @@
  
 body {
     background-color: #F7F2E0;
+    text-align: center;
     margin:0px;
 }
 
@@ -10,15 +11,17 @@ h1 {
 	   text-align: right;
 	   font-weight: normal;
            display: inline-block;
+               text-align: center;
+
 }
 
 div{
 
     height:50px;
     width:1300px;
-   
+   text-align: center;
     background-color: #e0e0d1;
-    padding: 6px;
+   /* padding: 6px; */
     color: #8A2048;
 	
 

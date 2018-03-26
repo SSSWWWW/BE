@@ -12,10 +12,13 @@
 package logica;
  
 import dao.datos.Dao;
+import entidades.Administrador;
 import entidades.Aplicado;
+import entidades.Area_Trabajo;
 import entidades.Caracteristicas;
 import entidades.CaracteristicasIncluidos;
 import entidades.Empresa;
+import entidades.Especializacion;
 import entidades.Habilidades;
 import entidades.HabilidadesIncluidas;
 import entidades.Oferente;
@@ -79,7 +82,32 @@ public class model {
            }
     
     
-    
+    /**************************************************************/
+           
+           
+                 public void updateAdministrador(Administrador p) throws Exception{
+
+                    dao.AdministradorUpdate(p);
+       }
+
+        public void deleteAdministrador(Administrador p) throws Exception{
+
+            dao.AdministradorDelete(p);
+       }
+
+         public void addAdministrador(Administrador p) throws Exception{
+           dao.AdministradorAdd(p);
+       }
+
+          public Administrador getAdministrador(Administrador p) throws Exception{
+           return dao.AdministradorGet(p);
+       }
+
+           public Collection<Administrador> getAllAdministrador() throws Exception{
+            return  dao.AdministradorGetAll();
+   
+           }
+           
     
     
     /*********************Oferente********************************/
@@ -215,8 +243,8 @@ public class model {
            dao.CaracteristicasAdd(p);
        }
 
-          public Caracteristicas getCaracteristicas(String id1) throws Exception{
-           return dao.CaracteristicasGet(id1);
+          public Caracteristicas getCaracteristicas(Caracteristicas p) throws Exception{
+           return dao.CaracteristicasGet(p);
        }
 
            public Collection<Caracteristicas> getAllCaracteristicas() throws Exception{
@@ -224,6 +252,56 @@ public class model {
        }
     
     
+       /****************** AREA TRABAJO ****************************************/    
+           
+              public void updateArea_Trabajo(Area_Trabajo p) throws Exception{
+
+                    dao.Area_TrabajoUpdate(p);
+       }
+
+        public void deleteArea_Trabajo(Area_Trabajo p) throws Exception{
+
+            dao.Area_TrabajoDelete(p);
+       }
+
+         public void addArea_Trabajo(Area_Trabajo p) throws Exception{
+           dao.Area_TrabajoAdd(p);
+       }
+
+          public Area_Trabajo getArea_Trabajo(Area_Trabajo p) throws Exception{
+           return dao.Area_TrabajoGet(p);
+       }
+
+           public Collection<Area_Trabajo> getAllArea_Trabajo() throws Exception{
+            return  dao.Area_TrabajoGetAll();
+       }
+           
+           
+           
+       /****************** ESPECIALIZACION
+     * @param p ****************************************/    
+           
+              public void updateEspecializacion(Especializacion p) throws Exception{
+
+                    dao.EspecializacionUpdate(p);
+       }
+
+        public void deleteEspecializacion(Especializacion p) throws Exception{
+
+            dao.EspecializacionDelete(p);
+       }
+
+         public void addEspecializacion(Especializacion p) throws Exception{
+           dao.EspecializacionAdd(p);
+       }
+
+          public Especializacion getEspecializacion(Especializacion p) throws Exception{
+           return dao.EspecializacionGet(p);
+       }
+
+           public Collection<Especializacion> getAllEspecializacion() throws Exception{
+            return  dao.EspecializacionGetAll();
+       }
     
     
     
