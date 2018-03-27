@@ -6,6 +6,8 @@
 package bolsaempleo.ui;
 
 import entidades.Administrador;
+import entidades.Area_Trabajo;
+import entidades.Caracteristicas;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +21,7 @@ import logica.model;
  *
  * @author Escinf
  */
-@WebServlet(name = "LoginAd", urlPatterns = {"/LoginAd", "/LogoutAd" , "/agregarAdministrador"})
+@WebServlet(name = "LoginAd", urlPatterns = {"/LoginAd", "/LogoutAd" , "/agregarAdministrador" , "/agregarCaracteristica" , "/agregarAreaTrabajo"})
 public class FuncionesAdministrador extends HttpServlet {
   protected void processRequest(HttpServletRequest request, 
                                 HttpServletResponse response)
@@ -34,6 +36,16 @@ public class FuncionesAdministrador extends HttpServlet {
         case "/agregarAdministrador":
             this.doregistroAdministradorAgregar(request,response);
             break;    
+            
+        case "/agregarCaracteristica":
+            this.doAgregarCaracteristica(request,response);
+            break;    
+            
+        case "/agregarAreaTrabajo":
+            this.doAgregarAreaTrabajo(request,response);
+            break;    
+            
+            
     }
   }
 
@@ -127,6 +139,67 @@ admin.setClave(clave);
 //</editor-fold>
         model.instance().addAdministrador(admin);
 	s.setAttribute("administrador",admin);
+	request.getRequestDispatcher("datosAdministrador.jsp").
+                forward( request, response);
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("Error.jsp").forward( request, response);
+          }
+        
+        
+        }
+    
+    
+     protected void doAgregarCaracteristica(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+         try{
+                 System.out.println("en do Login");
+        HttpSession s =  request.getSession( true);
+//<editor-fold defaultstate="collapsed" desc="...">
+        String nombre   = request.getParameter("caracteristica");
+        
+
+         Caracteristicas car = new Caracteristicas();
+         car.setNombreCaracteristica(nombre);
+//oferente.setCedulaOferente("554533243");
+//oferente.setClave("sss");
+//</editor-fold>
+        model.instance().addCaracteristicas(car);
+	s.setAttribute("caracteristicas",car);
+	request.getRequestDispatcher("datosAdministrador.jsp").
+                forward( request, response);
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("Error.jsp").forward( request, response);
+          }
+        
+        
+        }
+    
+     
+     
+      protected void doAgregarAreaTrabajo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+         try{
+                 System.out.println("en do Login");
+        HttpSession s =  request.getSession( true);
+//<editor-fold defaultstate="collapsed" desc="...">
+        String areatrabajo   = request.getParameter("areatrabajo");
+        String caracteristica2   = request.getParameter("caracteristicaenarea");
+        
+
+         Area_Trabajo ar = new Area_Trabajo();
+         ar.setNombreAreaTrabajo(areatrabajo);
+         ar.setNombreCaracteristica(caracteristica2);
+//oferente.setCedulaOferente("554533243");
+//oferente.setClave("sss");
+//</editor-fold>
+        model.instance().addArea_Trabajo(ar);
+	s.setAttribute("areatrabajo",ar);
 	request.getRequestDispatcher("datosAdministrador.jsp").
                 forward( request, response);
           }

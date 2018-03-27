@@ -25,10 +25,10 @@
   
   <body>
       
-       <div >
+       
       
        <h1> Bolsa Empleo </h1>
-        </div>
+        
       
       
       <div class="reg">

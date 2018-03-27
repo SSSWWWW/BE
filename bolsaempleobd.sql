@@ -148,6 +148,8 @@ CREATE TABLE CARACTERISTICAS (
  
 );
 
+
+-- en dao
 CREATE TABLE AREA_TRABAJO (
 
    nombreCaracteristica varchar(15),
@@ -156,6 +158,7 @@ CREATE TABLE AREA_TRABAJO (
    constraint pk_at primary key (nombreAreaTrabajo, nombreCaracteristica),
    constraint fk_at foreign key (nombreCaracteristica) references caracteristicas (nombreCaracteristica)
 )
+
 
 CREATE TABLE ESPECIALIZACION (
 

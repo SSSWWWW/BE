@@ -2,7 +2,7 @@
 body {
     background-color: #F7F2E0;
     text-align: center;
-    margin:0px;
+   
 }
 
 h1 {
@@ -21,7 +21,7 @@ div{
     width:1300px;
    text-align: center;
     background-color: #e0e0d1;
-   /* padding: 6px; */
+    padding: 6px; 
     color: #8A2048;
 	
 
