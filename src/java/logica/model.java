@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
  /**
   *
@@ -247,7 +248,7 @@ public class model {
            return dao.CaracteristicasGet(p);
        }
 
-           public Collection<Caracteristicas> getAllCaracteristicas() throws Exception{
+           public List<Caracteristicas> getAllCaracteristicas() throws Exception{
             return  dao.CaracteristicasGetAll();
        }
     

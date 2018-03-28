@@ -52,7 +52,7 @@ function addInput1(divName){
           var newdiv1 = document.createElement('div');
           var nn = document.getElementById('areatrabajo').value;
           newdiv1.innerHTML = " <input type='text'placeholder='3 - especialidad' name='especilidad'> \n\
-<input type='number' placeholder='%' name='porcentaje'> <input type='text' placeholder='3' name='porcentaje' value="+nn+">";
+<input type='hidden' placeholder='%' name='porcentaje'> <input type='hidden' placeholder='3' name='porcentaje' value="+nn+">";
           document.getElementById(divName).appendChild(newdiv1);
           
 
@@ -179,7 +179,29 @@ function addInput1(divName){
         </script>
         
    
-        
+         <script type="text/javascript"> 
+                     function addEs(formName){
+                     
+                     
+                    var form = document.querySelector(formName),
+                   elements = form.elements,
+                     i;
+    
+                   for (i = 0; i < elements.length; i += 1) {
+                      
+                       elements[i].submit();
+                     }
+                     
+                /*    var elements = document.getElementById(formName).submit();
+                     for (var i = 0; i < elements.length; i++) {
+                      
+                        elements[i].submit();
+                      
+                       } */
+                   }
+                       
+                
+                </script>
        
              
              
@@ -206,14 +228,19 @@ function addInput1(divName){
             </form>
              
              
-            <form action="AgregarEspecialidad" method="post" style="margin-left: 40px;" >
+            <form action="agregarEspecialidad"  name="espef" id="espef" method="post" style="margin-left: 40px;" >
 
                 <div id="especilidadInput">
                 <input type="text" placeholder="3 - Especialidad" name="especialidad">
-                <input type="number" placeholder="%" name="porcentaje">
-                 <input class="formfield" type="text" id="areaenespecialidad" name="areaenespecialidad"  placeholder="3 - area "><br> 
+                <input type="hidden" placeholder="%" name="porcentaje">
+                 <input class="formfield" type="hidden" id="areaenespecialidad" name="areaenespecialidad"  placeholder="3 - area "><br> 
                 </div>
                 <input type="button" value="+" onClick="addInput1('especilidadInput');">
+                
+                
+                
+                <!--input type="button" value="Agregar" onClick="addEs('espef');"-->
+                
                  <input class="formfield"  type="submit" value="Agregar">
              </form>
             

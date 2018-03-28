@@ -5,8 +5,10 @@
  */
 package bolsaempleo.ui;
 
+import entidades.Caracteristicas;
 import entidades.Empresa;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +21,7 @@ import logica.model;
  *
  * @author Escinf
  */
-@WebServlet(name = "LoginEm", urlPatterns = {"/LoginEm", "/LogoutEm" , "/agregarEmpresa"})
+@WebServlet(name = "LoginEm", urlPatterns = {"/LoginEm", "/LogoutEm" , "/agregarEmpresa" , "/listarCaracteristicas"})
 public class FuncionesEmpresa extends HttpServlet {
   protected void processRequest(HttpServletRequest request, 
                                 HttpServletResponse response)
@@ -34,6 +36,10 @@ public class FuncionesEmpresa extends HttpServlet {
         case "/agregarEmpresa":
             this.doregistroagregarEmpresa(request,response);
             break;    
+            
+            case "/listarCaracteristicas":
+            this.dolistarCaracteristicas(request,response);
+            break;   
     }
   }
 
@@ -147,6 +153,26 @@ empresa.setClave(clave);
         
         
         }
+    
+    
+       protected void dolistarCaracteristicas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+           try{
+               
+                
+                List<Caracteristicas> caracteristicas = model.instance().getAllCaracteristicas();
+		request.setAttribute("caracteristicasLista",caracteristicas);
+                request.getRequestDispatcher("Principal.jsp").forward( request, response);
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("Error.jsp").forward( request, response);
+          }		
+	}  
+        
+        
+        
     
     
     protected void doLogout(HttpServletRequest request, HttpServletResponse response)

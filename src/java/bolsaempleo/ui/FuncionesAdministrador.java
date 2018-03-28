@@ -8,6 +8,7 @@ package bolsaempleo.ui;
 import entidades.Administrador;
 import entidades.Area_Trabajo;
 import entidades.Caracteristicas;
+import entidades.Especializacion;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +22,7 @@ import logica.model;
  *
  * @author Escinf
  */
-@WebServlet(name = "LoginAd", urlPatterns = {"/LoginAd", "/LogoutAd" , "/agregarAdministrador" , "/agregarCaracteristica" , "/agregarAreaTrabajo"})
+@WebServlet(name = "LoginAd", urlPatterns = {"/LoginAd", "/LogoutAd" , "/agregarAdministrador" , "/agregarCaracteristica" , "/agregarAreaTrabajo", "/agregarEspecialidad"})
 public class FuncionesAdministrador extends HttpServlet {
   protected void processRequest(HttpServletRequest request, 
                                 HttpServletResponse response)
@@ -44,6 +45,10 @@ public class FuncionesAdministrador extends HttpServlet {
         case "/agregarAreaTrabajo":
             this.doAgregarAreaTrabajo(request,response);
             break;    
+            
+        case "/agregarEspecialidad":
+            this.doAgregarEspecialidad(request,response);
+            break;       
             
             
     }
@@ -200,6 +205,43 @@ admin.setClave(clave);
 //</editor-fold>
         model.instance().addArea_Trabajo(ar);
 	s.setAttribute("areatrabajo",ar);
+	request.getRequestDispatcher("datosAdministrador.jsp").
+                forward( request, response);
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("Error.jsp").forward( request, response);
+          }
+        
+        
+        }
+      
+      
+      
+         protected void doAgregarEspecialidad(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+         try{
+                 System.out.println("en do Login");
+        HttpSession s =  request.getSession( true);
+//<editor-fold defaultstate="collapsed" desc="..."> 
+        String especialidad   = request.getParameter("especialidad");
+        String porcentaje   = request.getParameter("porcentaje");
+        String areaEspecialidad   = request.getParameter("areaenespecialidad");
+        
+       // int porcen = Integer.parseInt(porcentaje);
+
+       int porcen = 0;
+       
+         Especializacion es = new Especializacion();
+         es.setNombreEspecializacion(especialidad);
+         es.setNombresAreaTrabajo(areaEspecialidad);
+         es.setProcentajeEspecializacion(porcen);
+//oferente.setCedulaOferente("554533243");
+//oferente.setClave("sss");
+//</editor-fold>
+        model.instance().addEspecializacion(es);
+	s.setAttribute("especializacion",es);
 	request.getRequestDispatcher("datosAdministrador.jsp").
                 forward( request, response);
           }

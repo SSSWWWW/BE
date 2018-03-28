@@ -4,8 +4,12 @@
     Author     : pc
 --%>
 
+<%@page import="logica.model"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Collection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="entidades.Empresa" %>
+<%@ page import="entidades.Caracteristicas" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,9 +20,13 @@
     
     
 <jsp:useBean id="empresa" scope="session" type="Empresa" />
+
+
+
+
 <div class = "datOf" >
     
-    <div class="area" >   
+   
     <table class="grid">
         <caption>Empresa</caption>
         
@@ -27,14 +35,22 @@
         <tr><td><%=empresa.getCorreoEmp() %></td></tr>
         <tr><td><%=empresa.getTelefono() %></td></tr>
        
-            
+       
     </table>
+        
+        
+        </div>
+        
+       
+        
     <br>
+    
+    
     
  <style>          
           #map { 
-            height: 300px;    
-            width: 600px;            
+            height: 150px;    
+            width: 180px;            
           }          
         </style> 
         
@@ -69,7 +85,7 @@
             var marker = new google.maps.Marker({
               position: myLatLng,
               map: map,
-              draggable: true,
+              draggable: false,
               //title: 'Hello World'
               
               // setting latitude & longitude as title of the marker
@@ -77,64 +93,42 @@
               title: latitude + ', ' + longitude 
             });    
             
-            // Update lat/long value of div when the marker is clicked
-            marker.addListener('dragend', function(event) {              
-               document.getElementById('latclicked').value = event.latLng.lat();
-                  document.getElementById('longclicked').value =  event.latLng.lng();
-            });
-            
-            // Create new marker on double click event on the map
-            google.maps.event.addListener(map,'dragend',function(event) {
-                var marker = new google.maps.Marker({
-                  position: event.latLng, 
-                  map: map, 
-                  title: event.latLng.lat()+', '+event.latLng.lng()
-                });
-                
-                // Update lat/long value of div when the marker is clicked
-                marker.addListener('dragend', function() {
-                  document.getElementById('latclicked').value = event.latLng.lat();
-                  document.getElementById('longclicked').value =  event.latLng.lng();
-                });            
-            });
-            
-            // Create new marker on single click event on the map
-            /*google.maps.event.addListener(map,'click',function(event) {
-                var marker = new google.maps.Marker({
-                  position: event.latLng, 
-                  map: map, 
-                  title: event.latLng.lat()+', '+event.latLng.lng()
-                });                
-            });*/
+         
         }
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA&callback=initMap"
         async defer></script>
         
-        <div class = "map" style="padding:10px">
+        <div class = "map" >
             <div id = "map" ></div>
-        </div>
+        </div><br>
         
-   
+         <%  List<Caracteristicas> c = model.instance().getAllCaracteristicas(); %>
+             
+                  <form action="AgregarPuesto" method="post" class="fem">
+                      <legend>Agregar nuevo puesto</legend>
+           <input class="formfield" type="text" name="nombrePuesto" placeholder="Nombre " required><br>
+           <input class="formfield" type="text" name="descripcionPuesto" placeholder="Descripcion" required><br>
+           <input class="formfield" type="text" name="salarioPuesto" placeholder="Salario" required><br>
+            <select name = "caracteristica">
+               <% for(Caracteristicas sc : c){ %>
+               <option> <%= sc.getNombreCaracteristica() %> </option>
+           <% } %>
+           </select><br>
+           <input class="formfield"  type="submit" value="Agregar Puesto">
+           </form>
+       
 
-    
-    
-  
- </div>
-</div>
+             
+            
 <div class = "salir" >
     <ul class="menu">
         <li><a href="#"><%=empresa.getIdEmp() %>-<%=empresa.getNombreEmp() %><img class="inline" src="images/down.png" alt=""></a>
             <ul class="menuitem" > <li> <a href="Logout">Salir</a></li> </ul>
         </li>
     </ul>
-            
-            <form action="AgregarPuesto" method="post">
-           <input class="formfield" type="text" name="nombrePuesto" placeholder="Nombre " required><br>
-           <input class="formfield" type="text" name="descripcionPuesto" placeholder="Descripcion" required><br>
-           <input class="formfield" type="text" name="salarioPuesto" placeholder="Salario" required><br>
-           <input class="formfield"  type="submit" value="Agregar Puesto">
-       </form>
+           
+         
             
 </div>
             

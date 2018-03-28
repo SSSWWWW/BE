@@ -6,37 +6,54 @@
 AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
 --%>
 
+
+<%@page import="java.util.Iterator"%>
+<%@page import="logica.model"%>
+<%@page import="java.util.List"%>
+<%@page import="entidades.Caracteristicas"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
         <title>Google Map</title>
+        
        
     <body>
-              <script type="text/javascript"> 
+      
+     
+         
+          
+    <table>
+          <caption>SUGERENCIAS</caption>
+          <thead><tr><td>No.</td><td>Titulo</td><td>Texto</td><td>Puntaje</td></tr></thead>
+           <%  List<Caracteristicas> c = model.instance().getAllCaracteristicas(); %>
+          <tbody style="height: 250px;">
+            <% for(Caracteristicas s: c){ %>
+                 <tr><td><%=s.getNombreCaracteristica() %></td><td>
+           <% } %>
+        </tbody>
+        </table>
         
-        var counter = 1;
-var limit = 3;
-function addInput(divName){
-     if (counter == limit)  {
-          alert("You have reached the limit of adding " + counter + " inputs");
-     }
-     else {
-          var newdiv = document.createElement('div');
-          newdiv.innerHTML = "Entry " + (counter + 1) + " <br><input type='text' name='myInputs[]'>";
-          document.getElementById(divName).appendChild(newdiv);
-          counter++;
-     }
-}
-            </script>
-            
-  <script src="/wp-includes/js/addInput.js" language="Javascript" type="text/javascript"></script>
-<form method="POST">
-     <div id="dynamicInput">
-          Entry 1<br><input type="text" name="myInputs[]">
-     </div>
-     <input type="button" value="Add another text input" onClick="addInput('dynamicInput');">
-</form>
-            
+        
+        <select name = "caracteristica">
+               <% for(Caracteristicas sc : c){ %>
+               <option> <%= sc.getNombreCaracteristica() %> </option>
+           <% } %>
+           </select>
+        
+      
+ <select name = "caracteristica">
+             <jsp:useBean id="caracteristicasLista" scope="request" type="List<Caracteristicas>" class="java.util.ArrayList"/>
+               <% for(Caracteristicas cc : caracteristicasLista){ %>
+               <option> <%= cc.getNombreCaracteristica() %> </option>
+           <% } %>
+           </select>
+        
+        
+        
+
+           
     </body>    
 </html>

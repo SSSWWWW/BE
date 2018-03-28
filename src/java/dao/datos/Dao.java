@@ -24,7 +24,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Vector;
 
 
@@ -549,8 +551,10 @@ public class Dao {
         }
     }
         
-            public Collection<Caracteristicas> CaracteristicasGetAll(){
-        Vector<Caracteristicas> estados=new Vector<Caracteristicas>();
+            public List<Caracteristicas> CaracteristicasGetAll(){
+                
+                db.getConnection();
+        List<Caracteristicas> estados=new ArrayList<>();
         try {
             String sql="select * from caracteristicas";
             ResultSet rs =  db.executeQuery(sql);

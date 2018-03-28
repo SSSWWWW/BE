@@ -6,9 +6,11 @@
 package dao.datos;
 
 import entidades.Administrador;
+import entidades.Caracteristicas;
 import entidades.Empresa;
 import entidades.Oferente;
 import java.sql.SQLException;
+import java.util.List;
 import logica.model;
 
 /**
@@ -26,6 +28,16 @@ public class NewClass {
           
           model m;
           
+          model.instance().getAllCaracteristicas();
+          
+          List<Caracteristicas> c = model.instance().getAllCaracteristicas();
+          
+          for(Caracteristicas car : c){
+          
+                System.out.println(car.getNombreCaracteristica());
+          
+          }
+          
        //   Administrador admin = new Administrador();
           
          // admin.setNombreAdmin("admin");
@@ -34,13 +46,13 @@ public class NewClass {
          //model.instance().addAdministrador(admin);
           
          
-         Administrador admin = new Administrador();
-admin.setNombreAdmin("admin");
-admin.setClave("admin");
+ //        Administrador admin = new Administrador();
+//admin.setNombreAdmin("admin");
+//admin.setClave("admin");
 
-admin = model.instance().getAdministrador(admin);
+//admin = model.instance().getAdministrador(admin);
 
-System.out.println(admin.getNombreAdmin());
+//System.out.println(admin.getNombreAdmin());
 
 
          

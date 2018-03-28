@@ -53,7 +53,8 @@
 div.datOf {
     
     display: inline-block;
-    width:85%;
+      
+    
     
     
 }
@@ -61,8 +62,12 @@ div.datOf {
 div.salir {
     
     display: inline-block; 
-    vertical-align: top;
     
+    float: right;
+    vertical-align: top;
+    position:fixed;
+   right:10px;
+   top:5px;
 }
 
 div.agregar {
@@ -77,7 +82,7 @@ div.agregar {
   
   div.divform{
   
-  width:500px;
+ 
     margin: margin-left;
     border: 3px solid #ffe6f9;
 	color : #8A2048;
@@ -88,17 +93,18 @@ div.agregar {
   
   }
   
- /* form.formoferente {
+ form.fem {
   
   
           color : #8A2048;
-	   font-family :  sans-serif;
-         text-align : center;
-		 font-family : "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+         
+	  
+          font-family : "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+           
+          
   
   
-  
-  }*/
+  }
 
  
   
@@ -133,7 +139,7 @@ option{
   
   }
   
-  #dynamicInput {margin-right:10px;}
+ 
   
   ul.menu{list-style: none; padding:0; }
 ul.menu li a {text-decoration: none;}
