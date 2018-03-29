@@ -6,8 +6,10 @@
 package dao.datos;
 
 import entidades.Administrador;
+import entidades.Area_Trabajo;
 import entidades.Caracteristicas;
 import entidades.Empresa;
+import entidades.Especializacion;
 import entidades.Oferente;
 import java.sql.SQLException;
 import java.util.List;
@@ -28,15 +30,28 @@ public class NewClass {
           
           model m;
           
-          model.instance().getAllCaracteristicas();
+          Caracteristicas c = new Caracteristicas();
           
-          List<Caracteristicas> c = model.instance().getAllCaracteristicas();
+          c.setNombreCaracteristica("Programacion");
           
-          for(Caracteristicas car : c){
           
-                System.out.println(car.getNombreCaracteristica());
+          List<Especializacion> at = model.instance().getEspecializacion("backend");
           
-          }
+          for(Especializacion car : at){
+          
+               System.out.println(car.getNombreEspecializacion());
+               
+               }
+          
+         // model.instance().getAllCaracteristicas();
+          
+         // List<Caracteristicas> c = model.instance().getAllCaracteristicas();
+          
+          //for(Caracteristicas car : c){
+          
+            //    System.out.println(car.getNombreCaracteristica());
+          
+          //}
           
        //   Administrador admin = new Administrador();
           

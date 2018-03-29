@@ -162,7 +162,7 @@ empresa.setClave(clave);
                 
                 List<Caracteristicas> caracteristicas = model.instance().getAllCaracteristicas();
 		request.setAttribute("caracteristicasLista",caracteristicas);
-                request.getRequestDispatcher("Principal.jsp").forward( request, response);
+                request.getRequestDispatcher("pruebas.jsp").forward( request, response);
           }
           catch(Exception e){
                 String error = e.getMessage(); 	

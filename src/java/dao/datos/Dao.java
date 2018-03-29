@@ -632,21 +632,31 @@ public class Dao {
     }
       
       
-        public Area_Trabajo Area_TrabajoGet(Area_Trabajo p) throws Exception{
-        String sql="select * from Area_Trabajo where nombreAreaTrabajo='%s'";
-        sql = String.format(sql,p.getNombreAreaTrabajo());
-        ResultSet rs =  db.executeQuery(sql);
-        if (rs.next()) {
-            return areatrabajo(rs);
-        }
-        else{
-            throw new Exception ("area de trabajo no Existe");
-            
-        }
+        public List<Area_Trabajo> Area_TrabajoGet(String p) throws Exception{
+        
+        
+        
+           db.getConnection();
+        List<Area_Trabajo> estados=new ArrayList<>();
+        try {
+           
+            String sql="select distinct area_trabajo.nombreCaracteristica, area_trabajo.nombreAreaTrabajo from "+
+                    "caracteristicas, area_trabajo "+
+                    "where area_trabajo.nombreCaracteristica ='%s'";
+            sql = String.format(sql,p);
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(areatrabajo(rs));
+            }
+        } catch (SQLException ex) { }
+        return estados;    
+        
+        
     }
         
-            public Collection<Area_Trabajo> Area_TrabajoGetAll(){
-        Vector<Area_Trabajo> estados=new Vector<Area_Trabajo>();
+            public List<Area_Trabajo> Area_TrabajoGetAll(){
+                db.getConnection();
+        List<Area_Trabajo> estados=new ArrayList<>();
         try {
             String sql="select * from Area_Trabajo";
             ResultSet rs =  db.executeQuery(sql);
@@ -718,21 +728,32 @@ public class Dao {
     }
       
       
-        public Especializacion EspecializacionGet(Especializacion p) throws Exception{
-        String sql="select * from Especializacion where nombreEspecializacion='%s'";
-        sql = String.format(sql,p.getNombreEspecializacion());
-        ResultSet rs =  db.executeQuery(sql);
-        if (rs.next()) {
-            return especializacion(rs);
-        }
-        else{
-            throw new Exception ("area de trabajo no Existe");
-            
-        }
+         public List<Especializacion> EspecializacionGet(String p) throws Exception{
+        
+        
+        
+           db.getConnection();
+        List<Especializacion> estados=new ArrayList<>();
+        try {
+           
+            String sql="select distinct  especializacion.nombreAreaTrabajo, especializacion.nombreEspecializacion, especializacion.porcentajeespecializacion from "+
+                    " area_trabajo, especializacion "+
+                    "where especializacion.nombreareatrabajo ='%s'";
+            sql = String.format(sql,p);
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(especializacion(rs));
+            }
+        } catch (SQLException ex) { }
+        return estados;    
+        
+        
     }
         
-            public Collection<Especializacion> EspecializacionGetAll(){
-        Vector<Especializacion> estados=new Vector<Especializacion>();
+            public List<Especializacion> EspecializacionGetAll(){
+                
+                  db.getConnection();
+       List<Especializacion> estados=new ArrayList<>();
         try {
             String sql="select * from Especializacion";
             ResultSet rs =  db.executeQuery(sql);

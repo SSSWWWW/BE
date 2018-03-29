@@ -269,11 +269,11 @@ public class model {
            dao.Area_TrabajoAdd(p);
        }
 
-          public Area_Trabajo getArea_Trabajo(Area_Trabajo p) throws Exception{
+          public List<Area_Trabajo> getArea_Trabajo(String p) throws Exception{
            return dao.Area_TrabajoGet(p);
        }
 
-           public Collection<Area_Trabajo> getAllArea_Trabajo() throws Exception{
+           public List<Area_Trabajo> getAllArea_Trabajo() throws Exception{
             return  dao.Area_TrabajoGetAll();
        }
            
@@ -296,11 +296,11 @@ public class model {
            dao.EspecializacionAdd(p);
        }
 
-          public Especializacion getEspecializacion(Especializacion p) throws Exception{
+          public List<Especializacion> getEspecializacion(String p) throws Exception{
            return dao.EspecializacionGet(p);
        }
 
-           public Collection<Especializacion> getAllEspecializacion() throws Exception{
+           public List<Especializacion> getAllEspecializacion() throws Exception{
             return  dao.EspecializacionGetAll();
        }
     

@@ -4,6 +4,8 @@
     Author     : pc
 --%>
 
+<%@page import="entidades.Especializacion"%>
+<%@page import="entidades.Area_Trabajo"%>
 <%@page import="logica.model"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Collection"%>
@@ -103,20 +105,46 @@
             <div id = "map" ></div>
         </div><br>
         
-         <%  List<Caracteristicas> c = model.instance().getAllCaracteristicas(); %>
-             
-                  <form action="AgregarPuesto" method="post" class="fem">
+        
+        <%  List<Caracteristicas> c = model.instance().getAllCaracteristicas(); %>
+        
+         <form action="AgregarPuesto" method="post" class="fem">
                       <legend>Agregar nuevo puesto</legend>
            <input class="formfield" type="text" name="nombrePuesto" placeholder="Nombre " required><br>
            <input class="formfield" type="text" name="descripcionPuesto" placeholder="Descripcion" required><br>
            <input class="formfield" type="text" name="salarioPuesto" placeholder="Salario" required><br>
-            <select name = "caracteristica">
-               <% for(Caracteristicas sc : c){ %>
-               <option> <%= sc.getNombreCaracteristica() %> </option>
+          
+            <table class="grid" id="example">
+              
+              
+              <tbody style="height: 250px;">
+                <% for(Caracteristicas sc : c){ %>
+              <input type="radio"> <%= sc.getNombreCaracteristica()%><br>
+                        
+                        <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
+                        <% for(Area_Trabajo artr : at){ %>
+                <input type="radio" style="margin-left: 12px;"> <%= artr.getNombreAreaTrabajo()  %><br>
+                      <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
+                       <% for(Especializacion esp : es){ %>
+                        
+                        <input type="radio" style="margin-left: 24px;"> <%= esp.getNombreEspecializacion()  %><br>
+                 <% } %>
+                                
+               <% } %>
+               
            <% } %>
-           </select><br>
+               
+            </tbody>
+            </table>
+
+           
+           
+           
+           
            <input class="formfield"  type="submit" value="Agregar Puesto">
            </form>
+           
+           
        
 
              
