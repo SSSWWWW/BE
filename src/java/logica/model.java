@@ -14,11 +14,13 @@ package logica;
 import dao.datos.Dao;
 import entidades.Administrador;
 import entidades.Aplicado;
+import entidades.AreaTrabajoIncluidas;
 import entidades.Area_Trabajo;
 import entidades.Caracteristicas;
 import entidades.CaracteristicasIncluidos;
 import entidades.Empresa;
 import entidades.Especializacion;
+import entidades.EspecializacionIncluida;
 import entidades.Habilidades;
 import entidades.HabilidadesIncluidas;
 import entidades.Oferente;
@@ -213,8 +215,8 @@ public class model {
            dao.PuestosAdd(p);
        }
 
-          public Puestos getPuestos(String id1) throws Exception{
-           return dao.PuestosGet(id1);
+          public Puestos getPuestos(Puestos p) throws Exception{
+           return dao.PuestosGet(p);
        }
 
            public Collection<Puestos> getAllPuestos() throws Exception{
@@ -251,6 +253,26 @@ public class model {
            public List<Caracteristicas> getAllCaracteristicas() throws Exception{
             return  dao.CaracteristicasGetAll();
        }
+           
+            /*********************CARACTERISTICAS INCLUIDOS********************************/
+           
+           
+        public void deleteCaracteristicasIncluidos(CaracteristicasIncluidos p) throws Exception{
+
+            dao.CaracteristicasIncluidosDelete(p);
+       }
+
+         public void addCaracteristicasIncluidos(CaracteristicasIncluidos p) throws Exception{
+           dao.CaracteristicasIncluidosAdd(p);
+       }
+
+          public Caracteristicas getCaracteristicasIncluidos(String p) throws Exception{
+           return dao.CaracteristicasIncluidosGet(p);
+       }
+
+           public List<CaracteristicasIncluidos> getAllCaracteristicasIncluidos() throws Exception{
+            return  dao.CaracteristicasIncluidosGetAll();
+       }
     
     
        /****************** AREA TRABAJO ****************************************/    
@@ -278,6 +300,29 @@ public class model {
        }
            
            
+     /**************AREA TRABAJO INCLUIDAS*******************/
+           
+            
+
+        public void deleteAreaTrabajoIncluidas(AreaTrabajoIncluidas p) throws Exception{
+
+            dao.AreaTrabajoIncluidasDelete(p);
+       }
+
+         public void addAreaTrabajoIncluidas(AreaTrabajoIncluidas p) throws Exception{
+           dao.AreaTrabajoIncluidasAdd(p);
+       }
+
+          public List<AreaTrabajoIncluidas> getAreaTrabajoIncluidas(AreaTrabajoIncluidas p) throws Exception{
+           return dao.AreaTrabajoIncluidasGet(p);
+       }
+
+           public List<AreaTrabajoIncluidas> getAllAreaTrabajoIncluidas() throws Exception{
+            return  dao.AreaTrabajoIncluidasGetAll();
+       }
+           
+           
+           
            
        /****************** ESPECIALIZACION
      * @param p ****************************************/    
@@ -299,12 +344,42 @@ public class model {
           public List<Especializacion> getEspecializacion(String p) throws Exception{
            return dao.EspecializacionGet(p);
        }
+          
+          public Especializacion getEspecializacionId(String p) throws Exception{
+           return dao.EspecializacionGetId(p);
+       }
 
            public List<Especializacion> getAllEspecializacion() throws Exception{
             return  dao.EspecializacionGetAll();
        }
     
+           
+       /******************* ESPECIALIZACION INCLUIDA*****************************/    
     
+              
+
+        public void deleteEspecializacionIncluida(EspecializacionIncluida p) throws Exception{
+
+            dao.EspecializacionIncluidaDelete(p);
+       }
+
+         public void addEspecializacionIncluida(EspecializacionIncluida p) throws Exception{
+           dao.EspecializacionIncluidaAdd(p);
+       }
+
+          public List<EspecializacionIncluida> getEspecializacionIncluida(EspecializacionIncluida p) throws Exception{
+           return dao.EspecializacionIncluidaGet(p);
+       }
+
+           public List<EspecializacionIncluida> getAllEspecializacionIncluida() throws Exception{
+            return  dao.EspecializacionIncluidaGetAll();
+       }
+           
+           
+           
+           
+           
+           
     
       /*********************SERVICIOS PUBLICADOS********************************/
     
@@ -353,27 +428,7 @@ public class model {
     
     
     
-     /*********************CARACTERISTICAS INCLUIDOS********************************/
-    
-    
-         public void deleteCaracteristicasIncluidos(CaracteristicasIncluidos p) throws Exception{
-        dao.CaracteristicasIncluidosDelete(p);
-   }
-
-      public void addCaracteristicasIncluidos(CaracteristicasIncluidos p) throws Exception{
-        dao.CaracteristicasIncluidosAdd(p);
-    }
-      
-       public CaracteristicasIncluidos getPuestosPublicados(int id1, String id2) throws Exception{
-        return dao.CaracteristicasIncluidosGet(id1, id2);
-    }
-       
-        public Collection<CaracteristicasIncluidos> getAllCaracteristicasIncluidos() throws Exception{
-         return  dao.CaracteristicasIncluidosGetAll();
-    }
-    
-    
-    
+   
     
    
     /************************PUESTOS PUBLICADOS********************************/

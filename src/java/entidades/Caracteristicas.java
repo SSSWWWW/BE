@@ -13,9 +13,11 @@ public class Caracteristicas {
     
     
     String nombreCaracteristica;
+    int idCaracteristicas;
 
-    public Caracteristicas(String nombreCaracteristica) {
+    public Caracteristicas(String nombreCaracteristica, int idCaracteristicas) {
         this.nombreCaracteristica = nombreCaracteristica;
+        this.idCaracteristicas = idCaracteristicas;
     }
 
     public Caracteristicas() {
@@ -28,7 +30,16 @@ public class Caracteristicas {
     public void setNombreCaracteristica(String nombreCaracteristica) {
         this.nombreCaracteristica = nombreCaracteristica;
     }
-    
+
+    public int getIdCaracteristicas() {
+        return idCaracteristicas;
+    }
+
+    public void setIdCaracteristicas(int idCaracteristicas) {
+        this.idCaracteristicas = idCaracteristicas;
+    }
+
+ 
     
     
 }

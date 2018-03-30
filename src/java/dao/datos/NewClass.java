@@ -8,9 +8,12 @@ package dao.datos;
 import entidades.Administrador;
 import entidades.Area_Trabajo;
 import entidades.Caracteristicas;
+import entidades.CaracteristicasIncluidos;
 import entidades.Empresa;
 import entidades.Especializacion;
+import entidades.EspecializacionIncluida;
 import entidades.Oferente;
+import entidades.Puestos;
 import java.sql.SQLException;
 import java.util.List;
 import logica.model;
@@ -30,7 +33,37 @@ public class NewClass {
           
           model m;
           
-          Caracteristicas c = new Caracteristicas();
+           String  caracteristica = "SQL";
+      
+     
+        
+        Especializacion ei = new Especializacion();
+        
+        
+        ei = model.instance().getEspecializacionId(caracteristica);
+        int carac = ei.getIdespecializacion();
+        
+        System.out.println(carac);
+        
+        EspecializacionIncluida esi = new EspecializacionIncluida();
+        
+        esi.setIdPuesto(19);
+        esi.setIdespecializacion(carac);
+        esi.setPorcentajeEspecializacion(55);
+        
+        model.instance().addEspecializacionIncluida(esi);
+        
+          
+      /*    Puestos p = new Puestos();
+          
+          p.setNombrePuesto("Administrador de BD");
+          
+          
+          p = model.instance().getPuestos(p);
+          
+          System.out.println(p.getIdPuesto());
+          
+  /*        Caracteristicas c = new Caracteristicas();
           
           c.setNombreCaracteristica("Programacion");
           

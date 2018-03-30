@@ -5,12 +5,8 @@
  */
 package bolsaempleo.ui;
 
-/**
- *
- * @author pc
- */
-import entidades.Oferente;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,11 +17,22 @@ import logica.model;
 
 /**
  *
- * @author Escinf
+ * @author pc
  */
-@WebServlet(name = "Login", urlPatterns = {"/LoginOf", "/Logout" , "/agregarOferente"})
-public class FuncionesOferente extends HttpServlet {
-  protected void processRequest(HttpServletRequest request, 
+
+@WebServlet(name = "Oferente", urlPatterns = {"/LoginOf", "/Logout" , "/agregarOferente"})
+public class Oferente extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, 
                                 HttpServletResponse response)
          throws ServletException, IOException {
     switch(request.getServletPath()){
@@ -92,7 +99,7 @@ public class FuncionesOferente extends HttpServlet {
 String identificacion   = request.getParameter("correoOferente");
 String clave   = request.getParameter("clave");
 
-Oferente oferente = new Oferente();
+entidades.Oferente oferente = new entidades.Oferente();
 oferente.setCorreoOferente(identificacion);
 oferente.setClave(clave);
 //oferente.setCedulaOferente("554533243");
@@ -128,7 +135,7 @@ oferente.setClave(clave);
         String cedula = request.getParameter("cedula");
         
 
-        Oferente oferente = new Oferente();
+        entidades.Oferente oferente = new entidades.Oferente();
          oferente.setCedulaOferente(cedula);
          oferente.setCelular(celular);
          oferente.setClave(contrasena);

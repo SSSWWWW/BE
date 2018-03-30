@@ -13,41 +13,38 @@ import java.sql.Date;
 public class CaracteristicasIncluidos  implements java.io.Serializable {
 
 
-     private String idCaracteristicaIn;
+     private int idCaracteristicas;
      private int idPuestos;
-     private Date fechaInclusion;
 
     public CaracteristicasIncluidos() {
     }
 
-    public CaracteristicasIncluidos(int puestos, String idCaracteristicaIn, Date fechaInclusion) {
-       this.idPuestos = puestos;
-       this.fechaInclusion = fechaInclusion;
-       this.idCaracteristicaIn = idCaracteristicaIn;
-    }
-   
-    public String getIdCaracteristicaIn() {
-        return this.idCaracteristicaIn;
-    }
-    
-    public void setIdCaracteristicaIn(String idCaracteristicaIn) {
-        this.idCaracteristicaIn = idCaracteristicaIn;
-    }
-    public int getidPuestos() {
-        return this.idPuestos;
-    }
-    
-    public void setidPuestos(int puestos) {
-        this.idPuestos = puestos;
-    }
-    public Date getFechaInclusion() {
-        return this.fechaInclusion;
-    }
-    
-    public void setFechaInclusion(Date fechaInclusion) {
-        this.fechaInclusion = fechaInclusion;
+    public CaracteristicasIncluidos(int idCaracteristicas, int idPuestos) {
+        this.idCaracteristicas = idCaracteristicas;
+        this.idPuestos = idPuestos;
     }
 
+    public int getIdCaracteristicas() {
+        return idCaracteristicas;
+    }
+
+    public void setIdCaracteristicas(int idCaracteristicas) {
+        this.idCaracteristicas = idCaracteristicas;
+    }
+
+    public int getIdPuestos() {
+        return idPuestos;
+    }
+
+    public void setIdPuestos(int idPuestos) {
+        this.idPuestos = idPuestos;
+    }
+    
+     
+
+     
+   
+ 
 
 
 

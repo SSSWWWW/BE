@@ -5,11 +5,11 @@
  */
 package bolsaempleo.ui;
 
-import entidades.Administrador;
 import entidades.Area_Trabajo;
 import entidades.Caracteristicas;
 import entidades.Especializacion;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,10 +20,20 @@ import logica.model;
 
 /**
  *
- * @author Escinf
+ * @author pc
  */
-@WebServlet(name = "LoginAd", urlPatterns = {"/LoginAd", "/LogoutAd" , "/agregarAdministrador" , "/agregarCaracteristica" , "/agregarAreaTrabajo", "/agregarEspecialidad"})
-public class FuncionesAdministrador extends HttpServlet {
+@WebServlet(name = "Administrador", urlPatterns = { "/LoginAd", "/LogoutAd" , "/agregarAdministrador" , "/agregarCaracteristica" , "/agregarAreaTrabajo", "/agregarEspecialidad" })
+public class Administrador extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
   protected void processRequest(HttpServletRequest request, 
                                 HttpServletResponse response)
          throws ServletException, IOException {
@@ -105,7 +115,7 @@ public class FuncionesAdministrador extends HttpServlet {
 String identificacion   = request.getParameter("correoAdmin");
 String clave   = request.getParameter("clave");
 
-Administrador admin = new Administrador();
+entidades.Administrador admin = new entidades.Administrador();
 admin.setNombreAdmin(identificacion);
 admin.setClave(clave);
 //oferente.setCedulaOferente("554533243");
@@ -136,7 +146,7 @@ admin.setClave(clave);
         
         
 
-         Administrador admin = new Administrador();
+         entidades.Administrador admin = new entidades.Administrador();
          admin.setClave(contrasena);
          admin.setNombreAdmin(nombre);
 //oferente.setCedulaOferente("554533243");

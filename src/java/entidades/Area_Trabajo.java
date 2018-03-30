@@ -13,12 +13,24 @@ public class Area_Trabajo {
     
     String nombreCaracteristica;
     String nombreAreaTrabajo;
+    int idareatrabajo;
 
-    public Area_Trabajo(String nombreCaracteristica, String nombreAreaTrabajo) {
+    public Area_Trabajo(String nombreCaracteristica, String nombreAreaTrabajo, int idareatrabajo) {
         this.nombreCaracteristica = nombreCaracteristica;
         this.nombreAreaTrabajo = nombreAreaTrabajo;
+        this.idareatrabajo = idareatrabajo;
     }
 
+    public int getIdareatrabajo() {
+        return idareatrabajo;
+    }
+
+    public void setIdareatrabajo(int idareatrabajo) {
+        this.idareatrabajo = idareatrabajo;
+    }
+
+    
+   
     public Area_Trabajo() {
     }
 

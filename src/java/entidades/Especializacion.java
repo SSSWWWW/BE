@@ -14,14 +14,16 @@ public class Especializacion {
     String nombresAreaTrabajo;
     String nombreEspecializacion;
     int procentajeEspecializacion;
+    int idespecializacion;
 
-    public Especializacion(String nombresAreaTrabajo, String nombreEspecializacion, int procentajeEspecializacion) {
+    public Especializacion() {
+    }
+
+    public Especializacion(String nombresAreaTrabajo, String nombreEspecializacion, int procentajeEspecializacion, int idespecializacion) {
         this.nombresAreaTrabajo = nombresAreaTrabajo;
         this.nombreEspecializacion = nombreEspecializacion;
         this.procentajeEspecializacion = procentajeEspecializacion;
-    }
-
-    public Especializacion() {
+        this.idespecializacion = idespecializacion;
     }
 
     public String getNombresAreaTrabajo() {
@@ -47,6 +49,16 @@ public class Especializacion {
     public void setProcentajeEspecializacion(int procentajeEspecializacion) {
         this.procentajeEspecializacion = procentajeEspecializacion;
     }
+
+    public int getIdespecializacion() {
+        return idespecializacion;
+    }
+
+    public void setIdespecializacion(int idespecializacion) {
+        this.idespecializacion = idespecializacion;
+    }
+
+    
     
     
     

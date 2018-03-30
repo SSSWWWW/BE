@@ -15,81 +15,60 @@ public class Puestos  implements java.io.Serializable {
      private String nombrePuesto;
      private Float salario;
      private String descripcionPuesto;
-     private String ubicacion;
-     private Set<PuestosPublicados> puestosPublicadoses = new HashSet<PuestosPublicados>(0);
-     private Set<Aplicado> aplicados = new HashSet<Aplicado>(0);
-     private Set<CaracteristicasIncluidos> caracteristicasIncluidoses = new HashSet<CaracteristicasIncluidos>(0);
+     private boolean estado;
 
     public Puestos() {
     }
 
-    public Puestos(String nombrePuesto, Float salario, String descripcionPuesto, String ubicacion, Set<PuestosPublicados> puestosPublicadoses, Set<Aplicado> aplicados, Set<CaracteristicasIncluidos> caracteristicasIncluidoses) {
-       this.nombrePuesto = nombrePuesto;
-       this.salario = salario;
-       this.descripcionPuesto = descripcionPuesto;
-       this.ubicacion = ubicacion;
-       this.puestosPublicadoses = puestosPublicadoses;
-       this.aplicados = aplicados;
-       this.caracteristicasIncluidoses = caracteristicasIncluidoses;
+    public Puestos(Integer idPuesto, String nombrePuesto, Float salario, String descripcionPuesto, boolean estado) {
+        this.idPuesto = idPuesto;
+        this.nombrePuesto = nombrePuesto;
+        this.salario = salario;
+        this.descripcionPuesto = descripcionPuesto;
+        this.estado = estado;
     }
-   
+
     public Integer getIdPuesto() {
-        return this.idPuesto;
+        return idPuesto;
     }
-    
+
     public void setIdPuesto(Integer idPuesto) {
         this.idPuesto = idPuesto;
     }
+
     public String getNombrePuesto() {
-        return this.nombrePuesto;
+        return nombrePuesto;
     }
-    
+
     public void setNombrePuesto(String nombrePuesto) {
         this.nombrePuesto = nombrePuesto;
     }
+
     public Float getSalario() {
-        return this.salario;
+        return salario;
     }
-    
+
     public void setSalario(Float salario) {
         this.salario = salario;
     }
+
     public String getDescripcionPuesto() {
-        return this.descripcionPuesto;
+        return descripcionPuesto;
     }
-    
+
     public void setDescripcionPuesto(String descripcionPuesto) {
         this.descripcionPuesto = descripcionPuesto;
     }
-    public String getUbicacion() {
-        return this.ubicacion;
-    }
-    
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
-    }
-    public Set<PuestosPublicados> getPuestosPublicadoses() {
-        return this.puestosPublicadoses;
-    }
-    
-    public void setPuestosPublicadoses(Set<PuestosPublicados> puestosPublicadoses) {
-        this.puestosPublicadoses = puestosPublicadoses;
-    }
-    public Set<Aplicado> getAplicados() {
-        return this.aplicados;
-    }
-    
-    public void setAplicados(Set<Aplicado> aplicados) {
-        this.aplicados = aplicados;
-    }
-    public Set<CaracteristicasIncluidos> getCaracteristicasIncluidoses() {
-        return this.caracteristicasIncluidoses;
-    }
-    
-    public void setCaracteristicasIncluidoses(Set<CaracteristicasIncluidos> caracteristicasIncluidoses) {
-        this.caracteristicasIncluidoses = caracteristicasIncluidoses;
+
+    public boolean isEstado() {
+        return estado;
     }
 
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
+     
 
 
 

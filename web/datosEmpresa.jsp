@@ -106,36 +106,67 @@
         </div><br>
         
         
+               <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js" type="text/javascript"></script>
+        <script type="text/javascript"> 
+       
+       $(function(){
+    var $caracteristica = $('#caracteristicas');
+    var $caracteristicaenarea = $('#aux');
+    function onChange() {
+        $caracteristicaenarea.val($caracteristica.val());
+    };
+    $('#caracteristicas')
+        .change(onChange)
+        .keyup(onChange);
+});
+      
+            
+        </script>
+        
+        
+        
         <%  List<Caracteristicas> c = model.instance().getAllCaracteristicas(); %>
         
-         <form action="AgregarPuesto" method="post" class="fem">
+         <form action="agregarPuesto" method="post" class="fem">
                       <legend>Agregar nuevo puesto</legend>
-           <input class="formfield" type="text" name="nombrePuesto" placeholder="Nombre " required><br>
+           <input class="formfield" type="text" name="nombrePuesto" id="nombrePuesto" placeholder="Nombre " required><br>
            <input class="formfield" type="text" name="descripcionPuesto" placeholder="Descripcion" required><br>
-           <input class="formfield" type="text" name="salarioPuesto" placeholder="Salario" required><br>
+           <input class="formfield" type="number" name="salarioPuesto" placeholder="Salario" required><br>
           
-            <table class="grid" id="example">
+            
               
               
-              <tbody style="height: 250px;">
+             <select name="caracteristicas" id="caracteristicas">
+                 
+              <option value="" selected>Caracteristicas</option>
+                 
                 <% for(Caracteristicas sc : c){ %>
-              <input type="radio"> <%= sc.getNombreCaracteristica()%><br>
+                
+                <option > <%= sc.getNombreCaracteristica()%></option>
                         
                         <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
                         <% for(Area_Trabajo artr : at){ %>
-                <input type="radio" style="margin-left: 12px;"> <%= artr.getNombreAreaTrabajo()  %><br>
+                        <option >&#160; <%= artr.getNombreAreaTrabajo()  %></option>
                       <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
                        <% for(Especializacion esp : es){ %>
+                       <option value="<%= esp.getNombreEspecializacion() %>">&#160;&#160;&#160; <%= esp.getNombreEspecializacion() %></option>
                         
-                        <input type="radio" style="margin-left: 24px;"> <%= esp.getNombreEspecializacion()  %><br>
                  <% } %>
                                 
                <% } %>
                
            <% } %>
+               </select><br>
                
-            </tbody>
-            </table>
+           <input class="formfield" type="hidden" id="aux" name="aux" placeholder="Porcentaje caracteristica" required>   
+   
+               
+              <input class="formfield" type="number" name="porcentaje" placeholder="Porcentaje caracteristica" required><br>    
+               
+               
+               
+        
+            
 
            
            
