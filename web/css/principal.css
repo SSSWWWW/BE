@@ -10,7 +10,7 @@ h1 {
 	   font-family : Impact, Charcoal, sans-serif;
 	   text-align: right;
 	   font-weight: normal;
-           display: inline-block;
+      
                text-align: center;
 
 }
@@ -28,6 +28,9 @@ div{
 
 } 
 
+
+
+
 p {
     font-family: verdana;
     font-size: 20px;
@@ -39,11 +42,7 @@ div.reg {
 
     
    
-    font-size: 20px;
-    padding: 2px;
-    display:inline-block;
-  
-    text-align: left;
+
      
      font-family : Impact, Charcoal, sans-serif;
      
@@ -105,9 +104,24 @@ div.salir {
     
 }
 
+div.container {
+    
+     height:1300px;
+    width:1300px;
+    text-align: center;
+    
+    
+}
+
  ul.menu{list-style: circle; padding:0; }
 ul.menu li a {text-decoration: none;}
 ul.menuitem{display: none; list-style: none; padding:0; padding-left:10px;}
 ul.menuitem li a {text-decoration: none;}
 ul.menu:hover li ul.menuitem{display: block} 
   
+
+.blocktext {
+    margin-left: auto;
+    margin-right: auto;
+    width: 8em
+}

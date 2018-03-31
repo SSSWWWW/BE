@@ -17,41 +17,37 @@ public class PuestosPublicados  implements java.io.Serializable {
     public PuestosPublicados() {
     }
 
+    public PuestosPublicados(int idEmpresa, int idPuestos, Boolean estadoPuesto) {
+        this.idEmpresa = idEmpresa;
+        this.idPuestos = idPuestos;
+        this.estadoPuesto = estadoPuesto;
+    }
 
-    public PuestosPublicados( int idEmpresa, int idPuestos, Boolean estadoPuesto) {
-       
-       this.idEmpresa = idEmpresa;
-       this.idPuestos = idPuestos;
-       this.estadoPuesto = estadoPuesto;
+    public int getIdEmpresa() {
+        return idEmpresa;
     }
-   
-    public int getidPuestos() {
-        return this.idPuestos;
+
+    public void setIdEmpresa(int idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
-    
-    public void setidPuestos(int idPuestos) {
+
+    public int getIdPuestos() {
+        return idPuestos;
+    }
+
+    public void setIdPuestos(int idPuestos) {
         this.idPuestos = idPuestos;
     }
-    public int getidEmpresa() {
-        return this.getidEmpresa();
-    }
-    
-    public void setEmpresa(int empresa) {
-        this.idEmpresa = empresa;
-    }
-    public int getPuestos() {
-        return this.idPuestos;
-    }
-    
-   
+
     public Boolean getEstadoPuesto() {
-        return this.estadoPuesto;
+        return estadoPuesto;
     }
-    
+
     public void setEstadoPuesto(Boolean estadoPuesto) {
         this.estadoPuesto = estadoPuesto;
     }
 
+    
 
 
 

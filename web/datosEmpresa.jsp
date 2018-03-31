@@ -36,6 +36,7 @@
         <tr><td><%=empresa.getDescripcionEmp() %></td></tr><br><br>
         <tr><td><%=empresa.getCorreoEmp() %></td></tr>
         <tr><td><%=empresa.getTelefono() %></td></tr>
+        
        
        
     </table>
@@ -119,8 +120,30 @@
         .change(onChange)
         .keyup(onChange);
 });
-      
-            
+  </script>
+
+        
+        
+        <script src="js/jquery.js"></script>
+        <script>
+            $(document).ready(function(){
+                document.getElementById("nombrePuesto").value = localStorage.getItem("item1");
+                document.getElementById("descripcionPuesto").value = localStorage.getItem("item2");
+                document.getElementById("salarioPuesto").value = localStorage.getItem("item3");
+               
+               
+            });
+        </script>
+        <script>
+            $(window).on('beforeunload', function() {
+                localStorage.setItem("item1",document.getElementById("nombrePuesto").value);
+                 localStorage.setItem("item2",document.getElementById("descripcionPuesto").value);
+                 localStorage.setItem("item3",document.getElementById("salarioPuesto").value);
+                
+                
+               
+            });
+
         </script>
         
         
@@ -130,8 +153,8 @@
          <form action="agregarPuesto" method="post" class="fem">
                       <legend>Agregar nuevo puesto</legend>
            <input class="formfield" type="text" name="nombrePuesto" id="nombrePuesto" placeholder="Nombre " required><br>
-           <input class="formfield" type="text" name="descripcionPuesto" placeholder="Descripcion" required><br>
-           <input class="formfield" type="number" name="salarioPuesto" placeholder="Salario" required><br>
+           <input class="formfield" type="text" id="descripcionPuesto" name="descripcionPuesto" placeholder="Descripcion" required><br>
+           <input class="formfield" type="number" id="salarioPuesto" name="salarioPuesto" placeholder="Salario" required><br>
           
             
               
@@ -160,6 +183,11 @@
                
            <input class="formfield" type="hidden" id="aux" name="aux" placeholder="Porcentaje caracteristica" required>   
    
+              <select style="display: none;" name="id" id="id">
+             <option value="<%= empresa.getIdEmp() %>"><%= empresa.getIdEmp() %></option>
+
+                  </select>
+
                
               <input class="formfield" type="number" name="porcentaje" placeholder="Porcentaje caracteristica" required><br>    
                

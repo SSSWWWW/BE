@@ -130,66 +130,107 @@ CONSTRAINT PK_EMP PRIMARY KEY (idEmp)
 CREATE TABLE PUESTOS(
 nombrePuesto varchar(10),
 salario float,
- descripcionPuesto varchar(10) , 
-boolean estado;
+ descripcionPuesto varchar(10) unique, 
+
+boolean estado,
 
 idPuesto int AUTO_INCREMENT,
 
-CONSTRAINT PK_PUESTO PRIMARY KEY(idPuesto)
+CONSTRAINT PK_PUESTO PRIMARY KEY(idPuesto , nombrePuesto, descripcionPuesto)
 );
+
+
+
+
+
 
 
 --en dao
 CREATE TABLE CARACTERISTICAS (
 
-   nombreCaracteristica varchar(15),
+   nombreCaracteristica varchar(15) unique,
+   idCaracteriticas int AUTO_INCREMENT,
  
-   CONSTRAINT PK_Caracteriticas PRIMARY KEY (nombreCaracteristica);
+   CONSTRAINT PK_Caracteriticas PRIMARY KEY (idCaracteriticas)
  
 );
 
+CREATE TABLE CARACTERISTICAS_INCLUIDAS (
+   
+   
+   idPuesto int,
+   idCaracteriticas int,
+
+
+   CONSTRAINT PK_PI PRIMARY KEY (idPuesto, idCaracteriticas),
+   CONSTRAINT FK_PI1 FOREIGN KEY (idPuesto) REFERENCES 
+   PUESTOS (idPuesto),
+   CONSTRAINT FK_PI2 FOREIGN KEY (idCaracteriticas) REFERENCES 
+   CARACTERISTICAS (idCaracteriticas)
+   
+
+);
 
 -- en dao
 CREATE TABLE AREA_TRABAJO (
 
    nombreCaracteristica varchar(15),
-   nombreAreaTrabajo varchar (20),
+   nombreAreaTrabajo varchar (20) unique,
+   idareatrabajo int AUTO_INCREMENT,
    
-   constraint pk_at primary key (nombreAreaTrabajo, nombreCaracteristica),
+   constraint pk_at primary key (idareatrabajo, nombreCaracteristica),
    constraint fk_at foreign key (nombreCaracteristica) references caracteristicas (nombreCaracteristica)
 )
+
+
+
+
+CREATE TABLE AREATRABAJO_INCLUIDAS (
+   
+   
+   idPuesto int,
+   idareatrabajo int,
+
+
+
+   CONSTRAINT PK_AT PRIMARY KEY (idPuesto, idareatrabajo),
+   CONSTRAINT FK_AT1 FOREIGN KEY (idPuesto) REFERENCES 
+   PUESTOS (idPuesto),
+   CONSTRAINT FK_AT2 FOREIGN KEY (idareatrabajo) REFERENCES 
+   AREA_TRABAJO (idareatrabajo)
+   
+
+);
+
 
 
 CREATE TABLE ESPECIALIZACION (
 
    nombreAreaTrabajo varchar (20),
-   nombreEspecializacion varchar (20),
+   nombreEspecializacion varchar (20) unique,
    porcentajeEspecializacion int,
+   idespecializacion int AUTO_INCREMENT,
    
-   constraint pk_at primary key (nombreEspecializacion, nombreAreaTrabajo),
+   constraint pk_at primary key (idespecializacion, nombreAreaTrabajo),
    constraint fk_es foreign key (nombreAreaTrabajo) references area_trabajo (nombreAreaTrabajo)
 )
 
 
 --en dao
 
-
-CREATE TABLE CARACTERISTICAS_INCLUIDOS (
-   
-   
-   idPuesto int,
-   nombreCaracteristica varchar(15),
-
-   fecha_Inclusion date,
-
-   CONSTRAINT PK_PI PRIMARY KEY (idPuesto, nombreCaracteristica),
-   CONSTRAINT FK_PI1 FOREIGN KEY (idPuesto) REFERENCES 
+CREATE TABLE ESPECIALIZACION_INCLUIDAS (
+    idPuesto int,
+	idespecializacion int,
+	porcentajeEspecializacion int,
+	
+   CONSTRAINT PK_Esp PRIMARY KEY ( idPuesto, idespecializacion),
+   CONSTRAINT FK_Esp1 FOREIGN KEY (idPuesto) REFERENCES 
    PUESTOS (idPuesto),
-   CONSTRAINT FK_PI2 FOREIGN KEY (nombreCaracteristica) REFERENCES 
-   CARACTERISTICAS (nombreCaracteristica)
-   
+   CONSTRAINT FK_Esp2 FOREIGN KEY (idespecializacion) REFERENCES 
+   ESPECIALIZACION (idespecializacion)
+	)
 
-);
+
 
 -- en dao
 

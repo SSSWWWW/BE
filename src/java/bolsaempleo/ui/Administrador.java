@@ -8,8 +8,10 @@ package bolsaempleo.ui;
 import entidades.Area_Trabajo;
 import entidades.Caracteristicas;
 import entidades.Especializacion;
+import entidades.Puestos;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +24,7 @@ import logica.model;
  *
  * @author pc
  */
-@WebServlet(name = "Administrador", urlPatterns = { "/LoginAd", "/LogoutAd" , "/agregarAdministrador" , "/agregarCaracteristica" , "/agregarAreaTrabajo", "/agregarEspecialidad" })
+@WebServlet(name = "Administrador", urlPatterns = { "/LoginAd", "/LogoutAd" , "/agregarAdministrador" , "/agregarCaracteristica" , "/agregarAreaTrabajo", "/agregarEspecialidad", "/listarPuestos" })
 public class Administrador extends HttpServlet {
 
     /**
@@ -58,7 +60,11 @@ public class Administrador extends HttpServlet {
             
         case "/agregarEspecialidad":
             this.doAgregarEspecialidad(request,response);
-            break;       
+            break;    
+            
+        case "/listarPuestos":
+            this.dolistarPuestos(request,response);
+            break;     
             
             
     }
@@ -263,6 +269,20 @@ admin.setClave(clave);
         
         
         }
+         
+         protected void dolistarPuestos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try{
+                List<Puestos> puestos = model.instance().getAllPuestos();
+		request.setAttribute("listarP", puestos);
+                request.getRequestDispatcher("pruebas.jsp").forward( request, response);
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("Error.jsp").forward( request, response);
+          }		
+	}  
+         
     
     
     protected void doLogout(HttpServletRequest request, HttpServletResponse response)

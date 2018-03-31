@@ -219,7 +219,7 @@ public class model {
            return dao.PuestosGet(p);
        }
 
-           public Collection<Puestos> getAllPuestos() throws Exception{
+           public List<Puestos> getAllPuestos() throws Exception{
             return  dao.PuestosGetAll();
        }
     
@@ -449,7 +449,7 @@ public class model {
         return dao.PuestosPublicadosGet(id1, id2);
     }
        
-        public Collection<PuestosPublicados> getAllPuestosPublicados() throws Exception{
+        public List<PuestosPublicados> getAllPuestosPublicados() throws Exception{
          return  dao.PuestosPublicadosGetAll();
     }
      

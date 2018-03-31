@@ -132,9 +132,9 @@ public class Dao {
         try {
             PuestosPublicados ec= new PuestosPublicados();
           
-                ec.setEmpresa(rs.getInt("idEmpresa"));
-                ec.setEstadoPuesto(rs.getBoolean("estadoPuestos"));
-                ec.setidPuestos(rs.getInt("idPuestos"));
+                ec.setIdEmpresa(rs.getInt("idEmp"));
+                ec.setEstadoPuesto(rs.getBoolean("estadoPuesto"));
+                ec.setIdPuestos(rs.getInt("idPuesto"));
                
         
             return ec;
@@ -147,7 +147,7 @@ public class Dao {
         String sql="update bolsaempleo.puestos_publicados set estadoPuesto='%s'"   +
                 "where idEmp='%s' and idPuesto='%s'";
         sql=String.format(sql,p.getEstadoPuesto(),
-                p.getidEmpresa(),p.getidPuestos());
+                p.getIdEmpresa(),p.getIdPuestos());
         
         int count=db.executeUpdate(sql);
         if (count==0){
@@ -158,7 +158,7 @@ public class Dao {
               
                  public void PuestosPublicadosDelete(PuestosPublicados p) throws Exception{
         String sql="delete from bolsaempleo.puestos_publicados where idEmp='%s' and idPuesto='%s' ";
-        sql = String.format(sql,p.getidEmpresa(), p.getidPuestos());
+        sql = String.format(sql,p.getIdEmpresa(), p.getIdPuestos());
         int count=db.executeUpdate(sql);
         if (count==0){
             throw new Exception("puesto buscado inexistente");
@@ -170,14 +170,14 @@ public class Dao {
            
             
             System.out.println("en oferenteAdd");
-        String sql="insert into bolsaempleo.puestos_publicados (idEmp , idPuesto , estadoPuesto ) "+
+        String sql="insert ignore into bolsaempleo.puestos_publicados (idEmp , idPuesto , estadoPuesto ) "+
                 "values(? ,? ,? )";
         //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
         db.getConnection();
         PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
         System.out.println("despues de prepared" );
-        preparedStmt.setInt(1, p.getidEmpresa());
-        preparedStmt.setInt (2, p.getidPuestos());
+        preparedStmt.setInt(1, p.getIdEmpresa());
+        preparedStmt.setInt (2, p.getIdPuestos());
         preparedStmt.setBoolean(3, p.getEstadoPuesto());
         
       
@@ -199,8 +199,8 @@ public class Dao {
         }
     }
         
-            public Collection<PuestosPublicados> PuestosPublicadosGetAll(){
-        Vector<PuestosPublicados> estados=new Vector<PuestosPublicados>();
+            public List<PuestosPublicados> PuestosPublicadosGetAll(){
+        List<PuestosPublicados> estados=new ArrayList();
         try {
             String sql="select * from puestos_publicados";
             ResultSet rs =  db.executeQuery(sql);
@@ -1038,7 +1038,7 @@ public class Dao {
            
             
             System.out.println("en oferenteAdd");
-        String sql="insert into bolsaempleo.puestos (nombrePuesto , salario , descripcionPuesto , estado ) "+
+        String sql="insert ignore into bolsaempleo.puestos (nombrePuesto , salario , descripcionPuesto , estado ) "+
                 "values(? ,? ,? ,?)";
         //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
         db.getConnection();
@@ -1057,22 +1057,31 @@ public class Dao {
         public Puestos PuestosGet(Puestos p) throws Exception{
             
              db.getConnection();
-        String sql="select * from puestos where nombrePuesto='%s'";
-        sql = String.format(sql, p.getNombrePuesto());
+        String sql="select * from puestos where nombrePuesto='%s' and descripcionPuesto='%s'";
+        sql = String.format(sql, p.getNombrePuesto(),p.getDescripcionPuesto());
         ResultSet rs =  db.executeQuery(sql);
         if (rs.next()) {
             return puestos(rs);
         }
         else{
-            throw new Exception ("puesto no Existe");
+           float a = (float) 0.000;
+                        Puestos pe = new Puestos();
+                        pe.setNombrePuesto("v");
+                        pe.setDescripcionPuesto("");
+                        pe.setEstado(false);
+                        pe.setIdPuesto(0);
+                        pe.setSalario(a);
+            return pe;
             
         }
     }
         
-            public Collection<Puestos> PuestosGetAll(){
-        Vector<Puestos> estados=new Vector<Puestos>();
+            public List<Puestos> PuestosGetAll(){
+                
+              db.getConnection();    
+        List<Puestos> estados=new ArrayList<>();
         try {
-            String sql="select * from puestos";
+            String sql="select * from puestos order by idpuesto desc limit 5";
             ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
                 estados.add(puestos(rs));

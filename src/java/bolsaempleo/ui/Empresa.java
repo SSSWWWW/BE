@@ -11,6 +11,7 @@ import entidades.CaracteristicasIncluidos;
 import entidades.Especializacion;
 import entidades.EspecializacionIncluida;
 import entidades.Puestos;
+import entidades.PuestosPublicados;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
@@ -142,7 +143,7 @@ empresa.setClave(clave);
     
     
     
-       protected void doagregarPuesto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+   protected void doagregarPuesto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
          try{
                  System.out.println("en do Login");
@@ -155,6 +156,9 @@ empresa.setClave(clave);
         
         String  caracteristica = request.getParameter("aux");
         String  porcentaje = request.getParameter("porcentaje");
+        String ide = request.getParameter("id");
+        
+        int idem = Integer.parseInt(ide);
         
         
         
@@ -211,6 +215,12 @@ empresa.setClave(clave);
         //model.instance().addAreaTrabajoIncluidas(ati);
         //model.instance().addEspecializacionIncluida(ei);
         
+        PuestosPublicados pp = new PuestosPublicados();
+        pp.setIdEmpresa(idem);
+        pp.setEstadoPuesto(true);
+        pp.setIdPuestos(idpues);
+        
+        model.instance().addPuestosPublicados(pp);
         
         
 	s.setAttribute("puesto",puesto);

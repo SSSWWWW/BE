@@ -7,113 +7,93 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
 --%>
 
 
+<%@page import="entidades.Puestos"%>
 <%@page import="entidades.Especializacion"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="logica.model"%>
 <%@page import="java.util.List"%>
+
 <%@page import="entidades.Area_Trabajo"%>
 <%@page import="entidades.Caracteristicas"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Google Map</title>
-        
-       
-    <body>
-        
-        
-         <script src="js/jquery.js"></script>
-        <script>
-           
-           $(document).ready(function() {
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+  }
+  </style>
+</head>
+<body>
 
-    $('#example tr').click(function() {
-        var href = $(this).find("a").attr("href");
-        if(href) {
-            window.location = href;
-        }
-    });
+<div class="container">
+  <br>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
 
-});
-           
-        </script>
+     <%  List<Puestos> c = model.instance().getAllPuestos(); %>    
         
       
-   <%  List<Caracteristicas> c = model.instance().getAllCaracteristicas(); %>
-    
-   
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
 
-   <table class="grid" id="example">
-              <caption>Caracteristicas requeridas para puesto</caption>
-              
-              <tbody style="height: 250px;">
-                <% for(Caracteristicas sc : c){ %>
-              <input type="radio"> <%= sc.getNombreCaracteristica()%><br>
-                        
-                        <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
-                        <% for(Area_Trabajo artr : at){ %>
-                <input type="radio" style="margin-left: 9px;"> <%= artr.getNombreAreaTrabajo()  %><br>
-                      <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
-                       <% for(Especializacion esp : es){ %>
-                        
-                        <input type="radio" style="margin-left: 18px;"> <%= esp.getNombreEspecializacion()  %><br>
-                 <% } %>
-                                
-               <% } %>
-               
-           <% } %>
-               
-            </tbody>
-            </table>
-
-               
-                  
-           
-                   <script type="text/javascript">
-
-   function changeFunc() {
-       
         
-    var selectBox = document.getElementById("selectcarac");
-    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    window.location.replace("datosEmpresa.jsp?selectedValue="+selectedValue);
+         <% for(Puestos s: c){ %>
+      <div class="item active">
+          
+          <h1><%= s.getNombrePuesto() %></h1>
+          <p> <%= s.getDescripcionPuesto() %></p>
+          <p> <%= s.getSalario() %> </p>
+        
+          
+      </div>
+      <% } %>
+        
      
-  
-   }
+    
 
-  </script>
-           
+      <div class="item">
+         
+        <div class="carousel-caption">
+          
+        </div>
+      </div>
   
-      <% String carac   = request.getParameter("selectedValue");
-         
-            List<Area_Trabajo> at = model.instance().getArea_Trabajo(carac); 
-         
-         %>
-           
-              <form action="AgregarPuesto" method="post" class="fem">
-                      <legend>Agregar nuevo puesto</legend>
-           <input class="formfield" type="text" name="nombrePuesto" placeholder="Nombre " required><br>
-           <input class="formfield" type="text" name="descripcionPuesto" placeholder="Descripcion" required><br>
-           <input class="formfield" type="text" name="salarioPuesto" placeholder="Salario" required><br>
-         
-           <select name = "selectcarac" id="selectcarac" onchange="changeFunc();">
-               <option> </option>
-               <% for(Caracteristicas sc : c){ %>
-               <option  id="caracf" name="caracf" value="<%= sc.getNombreCaracteristica()%>"> <%= sc.getNombreCaracteristica()%> </option>
-           <% } %>
-           </select><br>
-           
-           <select name = "areatrabajo">
-             <option disabled selected value> Area </option>
-               <% for(Area_Trabajo artr : at){ %>
-               <option> <%= artr.getNombreAreaTrabajo() %> </option>
-           <% } %>
-           </select><br>
-           
-               
-               
-    </body>    
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+    
+
+    
+    
+
+</body>
 </html>
