@@ -8,6 +8,7 @@ package bolsaempleo.ui;
 import entidades.Area_Trabajo;
 import entidades.Caracteristicas;
 import entidades.Especializacion;
+import entidades.EspecializacionIncluida;
 import entidades.Puestos;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,7 +25,7 @@ import logica.model;
  *
  * @author pc
  */
-@WebServlet(name = "Administrador", urlPatterns = { "/LoginAd", "/LogoutAd" , "/agregarAdministrador" , "/agregarCaracteristica" , "/agregarAreaTrabajo", "/agregarEspecialidad", "/listarPuestos" })
+@WebServlet(name = "Administrador", urlPatterns = { "/LoginAd", "/LogoutAd" , "/agregarAdministrador" , "/agregarCaracteristica" , "/agregarAreaTrabajo", "/agregarEspecialidad", "/listarPuestos" , "/buscarPuestos"})
 public class Administrador extends HttpServlet {
 
     /**
@@ -64,6 +65,10 @@ public class Administrador extends HttpServlet {
             
         case "/listarPuestos":
             this.dolistarPuestos(request,response);
+            break;  
+            
+        case "/buscarPuestos":
+            this.buscarPuestos(request,response);
             break;     
             
             
@@ -275,6 +280,26 @@ admin.setClave(clave);
                 List<Puestos> puestos = model.instance().getAllPuestos();
 		request.setAttribute("listarP", puestos);
                 request.getRequestDispatcher("pruebas.jsp").forward( request, response);
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("Error.jsp").forward( request, response);
+          }		
+	}  
+         
+           protected void buscarPuestos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try{
+            
+            String clrs[] = request.getParameterValues("names");
+            
+            List<EspecializacionIncluida> ei = model.instance().getEspecializacionIncluidaID(clrs);
+            
+            List<Puestos> puestos = model.instance().getPuestosPorID(ei);
+            
+            
+		request.setAttribute("buscarPuestos", puestos);
+                request.getRequestDispatcher("principal.jsp").forward( request, response);
           }
           catch(Exception e){
                 String error = e.getMessage(); 	

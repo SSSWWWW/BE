@@ -19,81 +19,66 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-  .carousel-inner > .item > img,
-  .carousel-inner > .item > a > img {
-      width: 70%;
-      margin: auto;
-  }
-  </style>
+
+<title>JSP Multiple Select Option</title>
 </head>
 <body>
+<h4>Select the color/s you like from the drop down list</h4>
 
-<div class="container">
-  <br>
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-      <li data-target="#myCarousel" data-slide-to="3"></li>
-      <li data-target="#myCarousel" data-slide-to="4"></li>
-    </ol>
+        <%  List<Caracteristicas> c = model.instance().getAllCaracteristicas(); %>
 
-     <%  List<Puestos> c = model.instance().getAllPuestos(); %>    
-        
-      
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-
-        
-         <% for(Puestos s: c){ %>
-      <div class="item active">
-          
-          <h1><%= s.getNombrePuesto() %></h1>
-          <p> <%= s.getDescripcionPuesto() %></p>
-          <p> <%= s.getSalario() %> </p>
-        
-          
-      </div>
-      <% } %>
-        
+<form>
+    
      
     
-
-      <div class="item">
-         
-        <div class="carousel-caption">
-          
-        </div>
-      </div>
+ <table>
+     <% for(Caracteristicas sc : c){ %>
+     
+     <tr>
+   <td><input type="checkbox" name="names" value="<%= sc.getNombreCaracteristica()  %>"/><%= sc.getNombreCaracteristica()  %></td>
+  </tr>
+  <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
   
-    </div>
+   <% for(Area_Trabajo artr : at){ %>
+   <tr>
+    <td>&#160;&#160;<input type="checkbox" name="names" value="<%= artr.getNombreAreaTrabajo()  %>"/>&#160;<%= artr.getNombreAreaTrabajo()  %></td>
+   </tr>
+   
+       <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
+        <% for(Especializacion esp : es){ %>
+        <tr>
+    <td>&#160; &#160; &#160;<input type="checkbox" name="names" value="<%= esp.getNombreEspecializacion()  %>"/>&#160; <%= esp.getNombreEspecializacion() %></td>
+   </tr>
+  
+         <% } %>
+      <% } %>
+    <% } %>
+     
+ 
+ </table>
+<p><input type="submit" value="submit"></p>
+</form>
 
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
-</div>
-    
-
-    
-    
-
+<% 
+String clrs[] = request.getParameterValues("names");
+if(clrs != null)
+{
+%>
+<p><b>You have selected the following colors</b></p>
+<ul>
+<%
+for(int i=0; i<clrs.length; i++)
+{
+%>
+<li><%=clrs[i]%></li>
+<%
+}
+%>
+</ul>
+<%
+}
+%>
 </body>
 </html>

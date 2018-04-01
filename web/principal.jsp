@@ -40,9 +40,9 @@
       
        
       
-       <h1> Bolsa Empleo </h1>
+      <h1><a href="principal.jsp"> Bolsa Empleo </a></h1>
         
-        <div class="reg">
+        <div class="reg" style="text-align: left">
           
           
           
@@ -68,13 +68,13 @@
             </ul>
           
           
-             </div><br>
+             </div><br><br>
       
     
           
-             <div class="container" style="height: 200px; right:27px;"><br><br>
+             <div class="container" style="height: 100px; right:40px;">
   
-  <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 200px; right:27px;">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 100px; right:40px; text-align: center;">
     <!-- Indicators -->
    
 
@@ -82,24 +82,17 @@
         
       
     <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox" style="height: 200px; right:27px;">
+    <div class="carousel-inner" role="listbox" style="height: 100px; right:40px;">
 
         
          <% for(Puestos s: c){ %>
-      <div class="item active" style="height: 200px; right:27px;" >
+      <div class="item active" style="height: 100px; right:40px;" >
           
-           <table style="margin:5px;">
-        <tr>
-            <td>
-                <h1><%= s.getNombrePuesto() %></h1>
-                <p style="margin-left: auto; margin-right: auto; text-align: center" class="blocktext"> <%= s.getDescripcionPuesto() %></p>
-                 <p>₡ <%= s.getSalario() %></p>
-            </td>
-           
-           
-            
-        </tr>
-    </table>
+           <div class="box">
+               <h1 style="font-size: 90%;"><%= s.getNombrePuesto()%></h1>
+               <p style="font-size: 70%;"> <%=s.getDescripcionPuesto() %> </p>
+               <p style="font-size: 70%;"> ₡ <%=s.getSalario() %> </p>
+</div>
          
       
         
@@ -132,12 +125,60 @@
 </div><br><br><br>
     
           
-       
-   <form class = "formbusvac" name="busqueda vacantes" action="22-html5-search-input.php" method="POST">
-	<input type="search" placeholder = "Buscar vacantes" name="busquedavacante">
-	<input type="submit" value="Buscar">
-                </form>
-          
+<%  List<Caracteristicas> cc = model.instance().getAllCaracteristicas(); %>
+
+<h1 style="text-align: left; font-size: 150%;">Buscar Empleo </h1>
+
+<form style="float: left;" class = "formempresa"  action="buscarPuestos" method="get">
+    
+     
+    
+ <table>
+     <% for(Caracteristicas sc : cc){ %>
+     
+     <tr>
+   <td><%= sc.getNombreCaracteristica()  %></td>
+  </tr>
+  <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
+  
+   <% for(Area_Trabajo artr : at){ %>
+   <tr>
+    <td>&#160;&#160;&#160;<%= artr.getNombreAreaTrabajo()  %></td>
+   </tr>
+   
+       <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
+        <% for(Especializacion esp : es){ %>
+        <tr>
+    <td>&#160; &#160; &#160;<input type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/>&#160; <%= esp.getNombreEspecializacion() %></td>
+   </tr>
+  
+         <% } %>
+      <% } %>
+    <% } %>
+     
+ 
+ </table>
+<input type="submit" value="Buscar puesto">
+</form>
+
+  <div id="body" style="margin: 0 auto; width:85%; display: inline-block; margin-left:20px;">   
+        <div id="listar" class="area" style="width:50%;">   
+            <br>
+            <jsp:useBean id="buscarPuestos" scope="request" type="List<Puestos>" class="java.util.ArrayList"/>
+            <table class="grid">
+              
+              <thead><tr><td>Nombre</td><td>Descripcion</td><td>Salario</td></tr></thead>
+              <tbody style="height: 250px;">
+                <% for(Puestos s: buscarPuestos){ %>
+                     <tr><td><%= s.getNombrePuesto() %></td><td><%= s.getDescripcionPuesto() %></td>
+                     <td><%= s.getSalario() %></td></tr><br>
+               <% } %>
+            </tbody>
+            </table>
+      </div>
+    </div>
+    
+
               
               <!--a href = "registroempresa.html" target = "_self">Registro empresa</a><br><br>
               <a href = "registrooferente.html" target = "_self">Registro oferente</a><br><br></div><br>
@@ -146,8 +187,10 @@
 		   <a href="registroempresa.html" target="frame" >Registro Empresa</a>
 		   <iframe name="frame"> </iframe-->
          
-	 
+	
 
      
   </body>
+  
+          
 </html>

@@ -218,6 +218,13 @@ public class model {
           public Puestos getPuestos(Puestos p) throws Exception{
            return dao.PuestosGet(p);
        }
+          
+           public List<Puestos> getPuestosPorID(List<EspecializacionIncluida> p) throws Exception{
+           return dao.EspecializacionToGetPuesto(p);
+       }
+           
+         
+          
 
            public List<Puestos> getAllPuestos() throws Exception{
             return  dao.PuestosGetAll();
@@ -375,6 +382,10 @@ public class model {
             return  dao.EspecializacionIncluidaGetAll();
        }
            
+           
+            public List<EspecializacionIncluida> getEspecializacionIncluidaID(String[] cl) throws Exception{
+            return  dao.EspecializacionIdPuesto(cl);
+       }
            
            
            

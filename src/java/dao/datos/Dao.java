@@ -853,6 +853,12 @@ public class Dao {
         
     }
          
+     
+         
+         
+         
+         
+         
          
              public Especializacion EspecializacionGetId(String p) throws Exception{
         
@@ -969,6 +975,56 @@ public class Dao {
         
     }
          
+              public List<EspecializacionIncluida> EspecializacionIdPuesto(String cl[]) throws Exception{
+        
+        
+        
+           db.getConnection();
+        List<EspecializacionIncluida> estados = new ArrayList<>();
+        try {
+           
+            for(int i=0; i<cl.length; i++){
+            String sql="select distinct ESPECIALIZACION_INCLUIDAS.idPuesto, ESPECIALIZACION_INCLUIDAS.idespecializacion, ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion from"+
+                    "  ESPECIALIZACION_INCLUIDAS "+
+                    "where ESPECIALIZACION_INCLUIDAS.idespecializacion ='%s'";
+            sql = String.format(sql,cl[i]);
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(EspecializacionIncluida(rs));
+            }}
+        } catch (SQLException ex) { }
+        return estados;    
+        
+        
+    }
+              
+       public List<Puestos> EspecializacionToGetPuesto(List<EspecializacionIncluida> ei) throws Exception{
+        
+        
+        
+           db.getConnection();
+        List<Puestos> estados = new ArrayList<>();
+        
+        try {
+           
+            
+            for(int i=0; i<ei.size(); i++){
+            String sql="select puestos.nombrePuesto, puestos.salario, puestos.descripcionPuesto, puestos.estado, puestos.idPuesto from"+
+                    "  puestos "+
+                    "where puestos.idPuesto  ='%s'";
+            sql = String.format(sql,ei.get(i).getIdPuesto());
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(puestos(rs));
+            }}
+        } catch (SQLException ex) { }
+        return estados;    
+        
+        
+    }
+              
+         
+         
         
          
         
@@ -1075,6 +1131,32 @@ public class Dao {
             
         }
     }
+        
+        
+        
+         public Puestos PuestosGetByID(EspecializacionIncluida p) throws Exception{
+            
+             db.getConnection();
+        String sql="select * from puestos where idPuesto='%s'";
+        sql = String.format(sql, p.getIdPuesto());
+        ResultSet rs =  db.executeQuery(sql);
+        if (rs.next()) {
+            return puestos(rs);
+        }
+        else{
+           float a = (float) 0.000;
+                        Puestos pe = new Puestos();
+                        pe.setNombrePuesto("v");
+                        pe.setDescripcionPuesto("");
+                        pe.setEstado(false);
+                        pe.setIdPuesto(0);
+                        pe.setSalario(a);
+            return pe;
+            
+        }
+    }
+        
+        
         
             public List<Puestos> PuestosGetAll(){
                 
@@ -1252,6 +1334,9 @@ public class Dao {
     }
     
     public Habilidades HabilidadesGet(String codigo) throws Exception{
+        
+        
+        
         String sql="select * from habilidades where idHabilidad='%s'";
         sql = String.format(sql,codigo);
         ResultSet rs =  db.executeQuery(sql);

@@ -33,7 +33,27 @@ public class NewClass {
           
           model m;
           
-           String  caracteristica = "SQL";
+          
+          String clrs[] = {"22" , "23","20"};
+          
+          List<EspecializacionIncluida> ei = model.instance().getEspecializacionIncluidaID(clrs);
+          
+          for(EspecializacionIncluida car : ei){
+          
+               System.out.println(car.getIdPuesto());
+               
+               }
+          
+          List<Puestos> p = model.instance().getPuestosPorID(ei);
+          
+          for(Puestos ca : p){
+          
+               System.out.println(ca.getNombrePuesto());
+               
+               }
+          
+          
+   /*        String  caracteristica = "SQL";
       
      
         
