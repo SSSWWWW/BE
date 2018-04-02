@@ -10,9 +10,9 @@ USE BOLSAEMPLEO;
 CREATE TABLE HABILIDADES(
 
    idHabilidad int AUTO_INCREMENT ,
-   nombreHabilidad varchar(10) ,
-   areaTrabajo varchar(20),
-   especializacion varchar (10),
+   nombreHabilidad varchar(50) ,
+   areaTrabajo varchar(50),
+   especializacion varchar (50),
    
    CONSTRAINT PK_Caracteriticas PRIMARY KEY ( idHabilidad , nombreHabilidad)
  
@@ -25,14 +25,14 @@ CREATE TABLE HABILIDADES(
 CREATE TABLE OFERENTE
 
 ( cedulaOferente varchar (15),
-  nombreOferente varchar(10),
-  primerApellido varchar(10),
-  segundoApellido varchar(10),
+  nombreOferente varchar(50),
+  primerApellido varchar(50),
+  segundoApellido varchar(50),
   celular varchar(12),
-  nacionalidad varchar (10),
-  correoOferente varchar(30),
+  nacionalidad varchar (50),
+  correoOferente varchar(50),
   ubicacion varchar(60),
-  clave varchar(15),
+  clave varchar(55),
  
   CONSTRAINT PK_OFERENTE PRIMARY KEY (cedulaOferente)
   );
@@ -49,12 +49,7 @@ CREATE TABLE OFERENTE
   
   );
   
-  nombreAdmin varchar (30);
-  claveAdministrador varchar (15);
-  
-   CONSTRAINT PK_ADMIN PRIMARY KEY (nombreAdmin)
-  
-  );
+ 
 
   
   --en dao
@@ -62,9 +57,9 @@ CREATE TABLE SERVICIOS
 
 (
    idServicio int AUTO_INCREMENT,
-   nombreServicio varchar(10),
+   nombreServicio varchar(50),
 salarioEsperado float,
- descripcionDescripcion varchar(10) , 
+ descripcionDescripcion varchar(50) , 
 
 CONSTRAINT PK_SERVICIO PRIMARY KEY(idServicio)
 
@@ -110,15 +105,15 @@ CREATE TABLE HABILIDADES_INCLUIDAS
 -- en dao
 CREATE TABLE EMPRESA
 
- (nombreEmp varchar(20),
+ (nombreEmp varchar(50),
 telefonoEmp varchar(15),
 latitud varchar (60),
 longitud varchar (60),
 descripcionEmp varchar(150), 
-correoEmp varchar(20), 
+correoEmp varchar(50), 
 idEmp  int AUTO_INCREMENT,
 fechaRegistro DATETIME DEFAULT CURRENT_TIMESTAMP,
-clave varchar(15),
+clave varchar(55),
 
 CONSTRAINT PK_EMP PRIMARY KEY (idEmp)
 
@@ -128,9 +123,9 @@ CONSTRAINT PK_EMP PRIMARY KEY (idEmp)
 -- en dao
 
 CREATE TABLE PUESTOS(
-nombrePuesto varchar(10),
+nombrePuesto varchar(50),
 salario float,
- descripcionPuesto varchar(10) unique, 
+ descripcionPuesto varchar(50) unique, 
 
 boolean estado,
 
@@ -148,7 +143,7 @@ CONSTRAINT PK_PUESTO PRIMARY KEY(idPuesto , nombrePuesto, descripcionPuesto)
 --en dao
 CREATE TABLE CARACTERISTICAS (
 
-   nombreCaracteristica varchar(15) unique,
+   nombreCaracteristica varchar(55) unique,
    idCaracteriticas int AUTO_INCREMENT,
  
    CONSTRAINT PK_Caracteriticas PRIMARY KEY (idCaracteriticas)
@@ -174,8 +169,8 @@ CREATE TABLE CARACTERISTICAS_INCLUIDAS (
 -- en dao
 CREATE TABLE AREA_TRABAJO (
 
-   nombreCaracteristica varchar(15),
-   nombreAreaTrabajo varchar (20) unique,
+   nombreCaracteristica varchar(55),
+   nombreAreaTrabajo varchar (50) unique,
    idareatrabajo int AUTO_INCREMENT,
    
    constraint pk_at primary key (idareatrabajo, nombreCaracteristica),
@@ -206,8 +201,8 @@ CREATE TABLE AREATRABAJO_INCLUIDAS (
 
 CREATE TABLE ESPECIALIZACION (
 
-   nombreAreaTrabajo varchar (20),
-   nombreEspecializacion varchar (20) unique,
+   nombreAreaTrabajo varchar (50),
+   nombreEspecializacion varchar (50) unique,
    porcentajeEspecializacion int,
    idespecializacion int AUTO_INCREMENT,
    

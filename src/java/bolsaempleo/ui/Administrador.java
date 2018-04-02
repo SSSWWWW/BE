@@ -304,7 +304,7 @@ admin.setClave(clave);
           catch(Exception e){
                 String error = e.getMessage(); 	
                 request.setAttribute("error",error);
-                request.getRequestDispatcher("Error.jsp").forward( request, response);
+                request.getRequestDispatcher("principal.jsp").forward( request, response);
           }		
 	}  
          

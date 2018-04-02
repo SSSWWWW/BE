@@ -41,9 +41,9 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
    
   <input type="text" placeholder = "descripcion" name="descripcion"><br><br>
   
-  <input type="text" id="latclicked" placeholder = "longitud" name="longitud"><br><br>
+  <input type="hidden" id="latclicked"  name="longitud"><br><br>
   
-  <input type="text" id="longclicked" placeholder = "latitud" name="latitud"><br><br>
+  <input type="hidden" id="longclicked"  name="latitud"><br><br>
   
   
 
