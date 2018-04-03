@@ -101,6 +101,9 @@ public class Administrador extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String nombre   = request.getParameter("caracteristica");
+        
         processRequest(request, response);
     }
 

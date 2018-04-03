@@ -1,12 +1,10 @@
-
-
 CREATE DATABASE BOLSAEMPLEO;
 
 USE BOLSAEMPLEO;
 
 
 
---en dao
+-- en dao
 CREATE TABLE HABILIDADES(
 
    idHabilidad int AUTO_INCREMENT ,
@@ -49,10 +47,10 @@ CREATE TABLE OFERENTE
   
   );
   
- 
+
 
   
-  --en dao
+  -- en dao
 CREATE TABLE SERVICIOS
 
 (
@@ -83,7 +81,7 @@ CREATE TABLE SERVICIOS_PUBLICADOS
 );
 
 
---en dao
+-- en dao
 CREATE TABLE HABILIDADES_INCLUIDAS
 
  (
@@ -97,7 +95,7 @@ CREATE TABLE HABILIDADES_INCLUIDAS
    CONSTRAINT FK_HI1 FOREIGN KEY (idServicio ) REFERENCES 
    SERVICIOS (idServicio),
    CONSTRAINT FK_HI2 FOREIGN KEY (idHabilidad ) REFERENCES 
-   HABILIDADES (idHabilidad),
+   HABILIDADES (idHabilidad)
    
 
 );
@@ -105,12 +103,12 @@ CREATE TABLE HABILIDADES_INCLUIDAS
 -- en dao
 CREATE TABLE EMPRESA
 
- (nombreEmp varchar(50),
-telefonoEmp varchar(15),
+ (nombreEmp varchar(50) unique,
+telefonoEmp varchar(15) ,
 latitud varchar (60),
 longitud varchar (60),
 descripcionEmp varchar(150), 
-correoEmp varchar(50), 
+correoEmp varchar(50) unique, 
 idEmp  int AUTO_INCREMENT,
 fechaRegistro DATETIME DEFAULT CURRENT_TIMESTAMP,
 clave varchar(55),
@@ -127,7 +125,7 @@ nombrePuesto varchar(50),
 salario float,
  descripcionPuesto varchar(50) unique, 
 
-boolean estado,
+estado boolean,
 
 idPuesto int AUTO_INCREMENT,
 
@@ -140,7 +138,7 @@ CONSTRAINT PK_PUESTO PRIMARY KEY(idPuesto , nombrePuesto, descripcionPuesto)
 
 
 
---en dao
+-- en dao
 CREATE TABLE CARACTERISTICAS (
 
    nombreCaracteristica varchar(55) unique,
@@ -175,7 +173,7 @@ CREATE TABLE AREA_TRABAJO (
    
    constraint pk_at primary key (idareatrabajo, nombreCaracteristica),
    constraint fk_at foreign key (nombreCaracteristica) references caracteristicas (nombreCaracteristica)
-)
+);
 
 
 
@@ -208,10 +206,10 @@ CREATE TABLE ESPECIALIZACION (
    
    constraint pk_at primary key (idespecializacion, nombreAreaTrabajo),
    constraint fk_es foreign key (nombreAreaTrabajo) references area_trabajo (nombreAreaTrabajo)
-)
+);
 
 
---en dao
+-- en dao
 
 CREATE TABLE ESPECIALIZACION_INCLUIDAS (
     idPuesto int,
@@ -223,7 +221,7 @@ CREATE TABLE ESPECIALIZACION_INCLUIDAS (
    PUESTOS (idPuesto),
    CONSTRAINT FK_Esp2 FOREIGN KEY (idespecializacion) REFERENCES 
    ESPECIALIZACION (idespecializacion)
-	)
+	);
 
 
 
@@ -259,8 +257,7 @@ CREATE TABLE APLICADO (
 
 
 
-)
+);
 
 
-
-
+ insert into administrador (nombreAdmin, claveAdministrador) values ('admin' , 'admin');

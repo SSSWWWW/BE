@@ -7,6 +7,7 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     
@@ -26,24 +27,36 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
   
        <body> 
       <h1>REGISTRO EMPRESA</h1>
+      
+  
+           <%
+    if(null!=request.getAttribute("error"))
+    {
+       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
+    }
+%>
   
    <form class = "formempresa"  action="agregarEmpresa" method="get">
  <div class = "divempresa">
+     
+   
  
 
-  <input type="text" placeholder = "Nombre" name="nombreempresa"><br><br>
+  <input type="text" placeholder = "Nombre" name="nombreempresa" value="${param.nombreempresa}"><br><br>
   
-  <input type="email" placeholder = "e-mail" name="email"><br><br>
+  <input type="email" placeholder = "e-mail" name="email" value="${param.email}"><br><br>
  
-  <input type="password" placeholder = "password" name="contrasena"><br><br>
+  <input type="password" placeholder = "password" name="contrasena" value="${param.contrasena}"><br><br>
   
-  <input type="tel" placeholder = "telefono" name="telefono"><br><br>
+  <input type="tel" placeholder = "telefono" name="telefono" value="${param.telefono}"><br><br>
    
-  <input type="text" placeholder = "descripcion" name="descripcion"><br><br>
+  <input type="text" placeholder = "descripcion" name="descripcion" value="${param.descripcion}"><br><br>
   
-  <input type="hidden" id="latclicked"  name="longitud"><br><br>
+  <input type="hidden" id="latclicked"  name="longitud" value="${param.longitud}"><br><br>
   
-  <input type="hidden" id="longclicked"  name="latitud"><br><br>
+  <input type="hidden" id="longclicked"  name="latitud" value="${param.latitud}"><br><br>
+  
+    
   
   
 

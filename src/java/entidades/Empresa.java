@@ -2,6 +2,8 @@ package entidades;
 // Generated Mar 5, 2018 4:14:29 PM by Hibernate Tools 4.3.1
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,9 +23,11 @@ public class Empresa  implements java.io.Serializable {
      private String correoEmp;
      private Date fechaRegistro;
      private String clave;
-     private Set<PuestosPublicados> puestosPublicadoses = new HashSet<PuestosPublicados>(0);
+
 
     public Empresa() {
+        
+        
     }
 
     public Empresa(String clave, Integer idEmp, String nombreEmp, String ubicacionEmp, String latitud, String longitud, String descripcionEmp, String correoEmp, Date fechaRegistro) {
@@ -108,13 +112,7 @@ public class Empresa  implements java.io.Serializable {
     public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
-    public Set<PuestosPublicados> getPuestosPublicadoses() {
-        return this.puestosPublicadoses;
-    }
-    
-    public void setPuestosPublicadoses(Set<PuestosPublicados> puestosPublicadoses) {
-        this.puestosPublicadoses = puestosPublicadoses;
-    }
+
 
 
 

@@ -906,6 +906,7 @@ public class Dao {
             EspecializacionIncluida ec= new EspecializacionIncluida();
           
                 ec.setIdPuesto(rs.getInt("idPuesto"));
+                 ec.setIdEmp(rs.getInt("idEmp"));
                 ec.setIdespecializacion(rs.getInt("idespecializacion"));
                 ec.setPorcentajeEspecializacion(rs.getInt("porcentajeEspecializacion"));
                 
@@ -936,8 +937,8 @@ public class Dao {
          
           System.out.println("en oferenteAdd");
         
-          String sql="insert into bolsaempleo.ESPECIALIZACION_INCLUIDAS (idPuesto, idespecializacion, porcentajeEspecializacion) "+
-                "values(?, ?, ?)";
+          String sql="insert into bolsaempleo.ESPECIALIZACION_INCLUIDAS (idPuesto, idespecializacion, porcentajeEspecializacion, idEmp) "+
+                "values(?, ?, ?, ?)";
         //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
         db.getConnection();
         PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
@@ -945,6 +946,7 @@ public class Dao {
         preparedStmt.setInt(1, p.getIdPuesto());
         preparedStmt.setInt(2, p.getIdespecializacion());
         preparedStmt.setInt(3, p.getPorcentajeEspecializacion());
+        preparedStmt.setInt(4, p.getIdEmp());
       
       preparedStmt.execute();
       
@@ -984,7 +986,7 @@ public class Dao {
         try {
            
             for(int i=0; i<cl.length; i++){
-            String sql="select distinct ESPECIALIZACION_INCLUIDAS.idPuesto, ESPECIALIZACION_INCLUIDAS.idespecializacion, ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion from"+
+            String sql="select distinct ESPECIALIZACION_INCLUIDAS.idPuesto, ESPECIALIZACION_INCLUIDAS.idespecializacion, ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion, ESPECIALIZACION_INCLUIDAS.idEmp  from"+
                     "  ESPECIALIZACION_INCLUIDAS "+
                     "where ESPECIALIZACION_INCLUIDAS.idespecializacion ='%s'";
             sql = String.format(sql,cl[i]);

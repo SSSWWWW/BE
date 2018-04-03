@@ -34,13 +34,14 @@ public class NewClass {
           model m;
           
           
-          String clrs[] = {"22" , "23","20"};
+          String clrs[] = {"30" , "31","28"};
           
           List<EspecializacionIncluida> ei = model.instance().getEspecializacionIncluidaID(clrs);
           
           for(EspecializacionIncluida car : ei){
           
-               System.out.println(car.getIdPuesto());
+               System.out.println("id puesto " + car.getIdPuesto());
+                System.out.println("id empresa " + car.getIdEmp());
                
                }
           

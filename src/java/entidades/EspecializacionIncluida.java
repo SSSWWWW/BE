@@ -15,14 +15,16 @@ public class EspecializacionIncluida {
     int idPuesto;
     int idespecializacion;
     int porcentajeEspecializacion;
+    int idEmp;
 
     public EspecializacionIncluida() {
     }
 
-    public EspecializacionIncluida(int idPuesto, int idespecializacion, int porcentajeEspecializacion) {
+    public EspecializacionIncluida(int idPuesto, int idespecializacion, int porcentajeEspecializacion, int idEmp) {
         this.idPuesto = idPuesto;
         this.idespecializacion = idespecializacion;
         this.porcentajeEspecializacion = porcentajeEspecializacion;
+        this.idEmp = idEmp;
     }
 
     public int getIdPuesto() {
@@ -49,6 +51,15 @@ public class EspecializacionIncluida {
         this.porcentajeEspecializacion = porcentajeEspecializacion;
     }
 
+    public int getIdEmp() {
+        return idEmp;
+    }
+
+    public void setIdEmp(int idEmp) {
+        this.idEmp = idEmp;
+    }
+
+    
   
     
     

@@ -92,6 +92,7 @@
                <h1 style="font-size: 90%;"><%= s.getNombrePuesto()%></h1>
                <p style="font-size: 70%;"> <%=s.getDescripcionPuesto() %> </p>
                <p style="font-size: 70%;"> ₡ <%=s.getSalario() %> </p>
+              
 </div>
          
       

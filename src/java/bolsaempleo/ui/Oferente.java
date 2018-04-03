@@ -74,6 +74,20 @@ public class Oferente extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
+        String nombre   = request.getParameter("nombre");
+        String primerapellido   = request.getParameter("primerapellido");
+        String segundoapellido   = request.getParameter("segundoapellido");
+        String email   = request.getParameter("email");
+        String celular   = request.getParameter("celular");
+        String nacionalidad   = request.getParameter("nacionalidad");
+        String contrasena   = request.getParameter("contrasena");
+        String provincia   = request.getParameter("provincia");
+        String cedula = request.getParameter("cedula");
+        
+        
+        
         processRequest(request, response);
     }
 
@@ -156,7 +170,7 @@ oferente.setClave(clave);
           catch(Exception e){
                 String error = e.getMessage(); 	
                 request.setAttribute("error",error);
-                request.getRequestDispatcher("Error.jsp").forward( request, response);
+                request.getRequestDispatcher("registrooferente.jsp").forward( request, response);
           }
         
         

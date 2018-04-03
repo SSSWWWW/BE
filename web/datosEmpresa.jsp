@@ -123,38 +123,22 @@
   </script>
 
         
-        
-        <script src="js/jquery.js"></script>
-        <script>
-            $(document).ready(function(){
-                document.getElementById("nombrePuesto").value = localStorage.getItem("item1");
-                document.getElementById("descripcionPuesto").value = localStorage.getItem("item2");
-                document.getElementById("salarioPuesto").value = localStorage.getItem("item3");
-               
-               
-            });
-        </script>
-        <script>
-            $(window).on('beforeunload', function() {
-                localStorage.setItem("item1",document.getElementById("nombrePuesto").value);
-                 localStorage.setItem("item2",document.getElementById("descripcionPuesto").value);
-                 localStorage.setItem("item3",document.getElementById("salarioPuesto").value);
-                
-                
-               
-            });
-
-        </script>
+        <%
+    if(null!=request.getAttribute("error"))
+    {
+       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
+    }
+%>
         
         
         
         <%  List<Caracteristicas> c = model.instance().getAllCaracteristicas(); %>
         
-         <form action="agregarPuesto" method="post" class="fem">
+       <br>  <form action="agregarPuesto" method="post" class="fem">
                       <legend>Agregar nuevo puesto</legend>
-           <input class="formfield" type="text" name="nombrePuesto" id="nombrePuesto" placeholder="Nombre " required><br>
-           <input class="formfield" type="text" id="descripcionPuesto" name="descripcionPuesto" placeholder="Descripcion" required><br>
-           <input class="formfield" type="number" id="salarioPuesto" name="salarioPuesto" placeholder="Salario" required><br>
+           <input class="formfield" type="text" name="nombrePuesto" id="nombrePuesto" value="${param.nombrePuesto}" placeholder="Nombre " required><br>
+           <input class="formfield" type="text" id="descripcionPuesto" name="descripcionPuesto" value="${param.descripcionPuesto}" placeholder="Descripcion" required><br>
+           <input class="formfield" type="number" id="salarioPuesto" name="salarioPuesto" value="${param.salarioPuesto}" placeholder="Salario" required><br>
           
             
               
@@ -189,7 +173,7 @@
                   </select>
 
                
-              <input class="formfield" type="number" name="porcentaje" placeholder="Porcentaje caracteristica" required><br>    
+              <input class="formfield" type="number" name="porcentaje" value="${param.porcentaje}" placeholder="Porcentaje caracteristica" required><br>    
                
                
                

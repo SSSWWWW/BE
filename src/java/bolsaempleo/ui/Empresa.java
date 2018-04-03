@@ -135,7 +135,7 @@ empresa.setClave(clave);
           catch(Exception e){
                 String error = e.getMessage(); 	
                 request.setAttribute("error",error);
-                request.getRequestDispatcher("Error.jsp").forward( request, response);
+                request.getRequestDispatcher("registroempresa.jsp").forward( request, response);
           }
         
         
@@ -209,6 +209,7 @@ empresa.setClave(clave);
          esi.setIdespecializacion(carac);
         esi.setPorcentajeEspecializacion(porcen);
         esi.setIdPuesto(idpues);
+        esi.setIdEmp(idem);
         //ati.setIdPuesto(idpues);
        // ei.setIdPuesto(idpues);
         model.instance().addEspecializacionIncluida(esi);
@@ -230,7 +231,7 @@ empresa.setClave(clave);
           catch(Exception e){
                 String error = e.getMessage(); 	
                 request.setAttribute("error",error);
-                request.getRequestDispatcher("Error.jsp").forward( request, response);
+                request.getRequestDispatcher("datosEmpresa.jsp").forward( request, response);
           }
         
         
@@ -287,6 +288,24 @@ empresa.setClave(clave);
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
+        
+        String nombrePuesto   = request.getParameter("nombrePuesto");
+        
+        String descripcionPuesto   = request.getParameter("descripcionPuesto");
+        String salarioPuesto   = request.getParameter("salarioPuesto");
+        
+        String  porcentaje = request.getParameter("porcentaje");
+        
+        String nombre   = request.getParameter("nombreempresa");
+        
+        String email   = request.getParameter("email");
+        String telefono   = request.getParameter("telefono");
+        String descripcion   = request.getParameter("descripcion");
+        String contrasena   = request.getParameter("contrasena");
+        String latitud   = request.getParameter("latitud");
+        String longitud = request.getParameter("longitud");
         processRequest(request, response);
     }
 
