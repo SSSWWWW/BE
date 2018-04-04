@@ -4,6 +4,7 @@
     Author     : pc
 --%>
 
+<%@page import="entidades.EspecializacionIncluida"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@page import="entidades.Puestos"%>
@@ -72,21 +73,22 @@
       
     
           
-             <div class="container" style="height: 100px; right:40px;">
+             <div class="container" style="height: 120px; right:40px;">
   
-  <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 100px; right:40px; text-align: center;">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 120px; right:40px; text-align: center;">
     <!-- Indicators -->
    
 
      <%  List<Puestos> c = model.instance().getAllPuestos(); %>    
-        
+     
+   
       
     <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox" style="height: 100px; right:40px;">
+    <div class="carousel-inner" role="listbox" style="height: 120px; right:40px;">
 
         
          <% for(Puestos s: c){ %>
-      <div class="item active" style="height: 100px; right:40px;" >
+      <div class="item active" style="height: 120px; right:40px;" >
           
            <div class="box">
                <h1 style="font-size: 90%;"><%= s.getNombrePuesto()%></h1>
@@ -172,7 +174,7 @@
               <tbody style="height: 250px;">
                 <% for(Puestos s: buscarPuestos){ %>
                      <tr><td><%= s.getNombrePuesto() %></td><td><%= s.getDescripcionPuesto() %></td>
-                     <td><%= s.getSalario() %></td></tr><br>
+                     <td><%= s.getSalario()  %></td></tr><br>
                <% } %>
             </tbody>
             </table>

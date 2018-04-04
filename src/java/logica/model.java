@@ -188,6 +188,10 @@ public class model {
           public Empresa getEmpresa(Empresa emp) throws Exception{
            return dao.EmpresaGet(emp);
        }
+          
+           public Empresa getEmpresa1(String a) throws Exception{
+           return dao.EmpresaGet1(a);
+       }
 
            public Collection<Empresa> getAllEmpresa() throws Exception{
             return  dao.EmpresaGetAll();
@@ -387,7 +391,9 @@ public class model {
             return  dao.EspecializacionIdPuesto(cl);
        }
            
-           
+           public EspecializacionIncluida getEspecializacionIncluida1(String p) throws Exception{
+           return dao.EspecializacionIncluidaGet1(p);
+       }
            
            
            

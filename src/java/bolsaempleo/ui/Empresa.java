@@ -153,14 +153,14 @@ empresa.setClave(clave);
         
         String descripcionPuesto   = request.getParameter("descripcionPuesto");
         String salarioPuesto   = request.getParameter("salarioPuesto");
-        
+        String nombreempresa =  request.getParameter("nombreempresa");
         String  caracteristica = request.getParameter("aux");
         String  porcentaje = request.getParameter("porcentaje");
         String ide = request.getParameter("id");
         
         int idem = Integer.parseInt(ide);
         
-        
+        String com = nombreempresa + " - " +descripcionPuesto;
         
      
         
@@ -181,7 +181,7 @@ empresa.setClave(clave);
         
         Puestos puesto = new Puestos(); 
         
-        puesto.setDescripcionPuesto(descripcionPuesto);
+        puesto.setDescripcionPuesto(com);
         puesto.setEstado(true);
         puesto.setNombrePuesto(nombrePuesto);
         puesto.setSalario(salpu);

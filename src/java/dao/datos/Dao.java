@@ -977,6 +977,27 @@ public class Dao {
         
     }
          
+         
+             public EspecializacionIncluida EspecializacionIncluidaGet1(String a) throws Exception{
+            
+            
+         
+            
+        db.getConnection();    
+        String sql="select * from especializacion_incluidas where idPuesto='%s'";
+        sql = String.format(sql, a);
+        ResultSet rs =  db.executeQuery(sql);
+        if (rs.next()) {
+            return EspecializacionIncluida(rs);
+        }
+        else{
+            throw new Exception ("Empresa no Existe");
+            
+        }
+    }
+         
+         
+         
               public List<EspecializacionIncluida> EspecializacionIdPuesto(String cl[]) throws Exception{
         
         
@@ -1276,6 +1297,27 @@ public class Dao {
             
         }
     }
+        
+        
+        
+        public Empresa EmpresaGet1(String a) throws Exception{
+            
+            
+         
+            
+        db.getConnection();    
+        String sql="select ignore * from empresa where idEmp='%s'";
+        sql = String.format(sql, a);
+        ResultSet rs =  db.executeQuery(sql);
+        if (rs.next()) {
+            return empresa(rs);
+        }
+        else{
+            throw new Exception ("Empresa no Existe");
+            
+        }
+    }
+        
         
             public Collection<Empresa> EmpresaGetAll(){
         Vector<Empresa> estados=new Vector<Empresa>();

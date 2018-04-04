@@ -123,7 +123,7 @@ CONSTRAINT PK_EMP PRIMARY KEY (idEmp)
 CREATE TABLE PUESTOS(
 nombrePuesto varchar(50),
 salario float,
- descripcionPuesto varchar(50) unique, 
+ descripcionPuesto varchar(50), 
 
 estado boolean,
 
@@ -215,12 +215,15 @@ CREATE TABLE ESPECIALIZACION_INCLUIDAS (
     idPuesto int,
 	idespecializacion int,
 	porcentajeEspecializacion int,
+	idEmp  int,
 	
-   CONSTRAINT PK_Esp PRIMARY KEY ( idPuesto, idespecializacion),
+   CONSTRAINT PK_Esp PRIMARY KEY ( idPuesto, idespecializacion, idEmp),
    CONSTRAINT FK_Esp1 FOREIGN KEY (idPuesto) REFERENCES 
    PUESTOS (idPuesto),
    CONSTRAINT FK_Esp2 FOREIGN KEY (idespecializacion) REFERENCES 
-   ESPECIALIZACION (idespecializacion)
+   ESPECIALIZACION (idespecializacion),
+   CONSTRAINT FK_Esp3 FOREIGN KEY (idEmp) REFERENCES 
+   EMPRESA (idEmp)
 	);
 
 

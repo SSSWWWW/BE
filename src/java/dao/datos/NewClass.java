@@ -33,8 +33,15 @@ public class NewClass {
           
           model m;
           
+   
+          String q = String.valueOf(120);
+          EspecializacionIncluida a = model.instance().getEspecializacionIncluida1(q); 
           
-          String clrs[] = {"30" , "31","28"};
+              String w = String.valueOf(a.getIdEmp()); Empresa emp = model.instance().getEmpresa1(w); 
+              
+              System.out.println(emp.getNombreEmp());
+          
+ /*         String clrs[] = {"30" , "31","28"};
           
           List<EspecializacionIncluida> ei = model.instance().getEspecializacionIncluidaID(clrs);
           

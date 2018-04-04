@@ -87,6 +87,8 @@ public class Administrador extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
         processRequest(request, response);
     }
 
@@ -281,7 +283,7 @@ admin.setClave(clave);
          protected void dolistarPuestos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try{
                 List<Puestos> puestos = model.instance().getAllPuestos();
-		request.setAttribute("listarP", puestos);
+		request.setAttribute("listarPuestos", puestos);
                 request.getRequestDispatcher("pruebas.jsp").forward( request, response);
           }
           catch(Exception e){
@@ -299,6 +301,8 @@ admin.setClave(clave);
             List<EspecializacionIncluida> ei = model.instance().getEspecializacionIncluidaID(clrs);
             
             List<Puestos> puestos = model.instance().getPuestosPorID(ei);
+            
+            
             
             
 		request.setAttribute("buscarPuestos", puestos);

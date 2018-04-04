@@ -80,5 +80,19 @@ for(int i=0; i<clrs.length; i++)
 <%
 }
 %>
+
+
+ <jsp:useBean id="listarPuestos" scope="request" type="List<Puestos>" class="java.util.ArrayList" />
+        <table class="grid">
+          <caption>SUGERENCIAS</caption>
+          <thead><tr><td>No.</td><td>Titulo</td><td>Texto</td><td>Puntaje</td></tr></thead>
+          <tbody style="height: 250px;">
+            <% for(Puestos s: listarPuestos){ %>
+                 <tr><td><%=s.getDescripcionPuesto().toString() %></td><td><%=s.getNombrePuesto() %></td>
+             </tr>
+           <% } %>
+        </tbody>
+        </table>
+
 </body>
 </html>
