@@ -1,69 +1,5 @@
  
-body {
-    background-color: #F7F2E0;
-    text-align: center;
-   
-}
 
-h1 {
-    color : #8A2048;
-	   font-family : Impact, Charcoal, sans-serif;
-	   text-align: right;
-	   font-weight: normal;
-      
-               text-align: center;
-
-}
-
-td {
-    
-    
-    font-family : Impact, Charcoal, sans-serif;
-    
-}
-
-div{
-
-    height:50px;
-    width:1300px;
-   text-align: center;
-    background-color: #e0e0d1;
-    padding: 6px; 
-    color: #8A2048;
-	
-
-
-} 
-
-
-
-
-p {
-    font-family: verdana;
-    font-size: 20px;
-}
-
-
-
-div.reg {
-
-    
-   
-      display: inline-block; 
-    vertical-align: top;
-     
-     font-family : Impact, Charcoal, sans-serif;
-     
-}
-
-div.grid {
-    
-    font-family : Impact, Charcoal, sans-serif;
-    
-    
-    
-    
-}
 
 #Login {
   display: table;
@@ -88,7 +24,7 @@ ul li ul li {
   display: block; 
 }
 ul li ul li a {display:block !important;} 
-ul li ul li:hover {background: #666;}
+ul li ul li:hover {}
 
 
 
@@ -96,39 +32,13 @@ ul li ul li:hover {background: #666;}
  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
            text-align: center;
 	   color : #8A2048;
-	   font-family : "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	   text-align : center;
 	   font-weight: normal;
 }
 
 
 
-form {
 
-      color : #8A2048;
-	   font-family : Impact, Charcoal, sans-serif;
-	   text-align : left;
-	   font-weight: normal;
-           
-
-
-}
-
-div.salir {
-    
-    display: inline-block; 
-    vertical-align: top;
-    
-}
-
-div.container {
-    
-     height:1300px;
-    width:1300px;
-  
-    
-    
-}
 
  ul.menu{list-style: circle; padding:0; }
 ul.menu li a {text-decoration: none;}
@@ -136,4 +46,3 @@ ul.menuitem{display: none; list-style: none; padding:0; padding-left:10px;}
 ul.menuitem li a {text-decoration: none;}
 ul.menu:hover li ul.menuitem{display: block} 
   
-

@@ -29,11 +29,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
    
 <%@ include file="Header.jsp" %>
-  <head>
+
     <title>Bolsa Empleo</title>
     
    
-  </head>
+
   
   
   
@@ -41,15 +41,16 @@
       
        
       
-      <h1><a href="principal.jsp"> Bolsa Empleo </a></h1>
-        
-        <div class="reg" style="text-align: left">
           
+             <div class="container" style="width:auto; height: auto; right:40px; border-style: dotted;   ">
+                 
+                    <div class="reg" style="text-align: left; border-style: dotted; background: slateblue;">
           
+         
           
             <ul>
               <li>
-                <a href="#">Registro</a>
+                <a href="#" style="color:white;">Registro</a>
                 
                 <ul>
                  <li><a href="registroempresa.jsp">Registro empresa</a></li>
@@ -60,7 +61,7 @@
           
            <ul>
               <li>
-                <a href="#">Inicio</a>
+                <a href="#" style="color:white;">Inicio</a>
                 <ul>
                  <li><a href="inicioEmpresa.jsp">Inicio empresa</a></li>
                   <li><a href="inicioOferente.jsp">Inicio oferente</a></li>
@@ -69,26 +70,28 @@
             </ul>
           
           
-             </div><br><br>
-      
-    
-          
-             <div class="container" style="height: 120px; right:40px;">
+             </div><br><br><br>
+                 
+                 
+                 
+                                   <h1 style="text-align: center; font-size:5vw; "><a href="principal.jsp" > Bolsa Empleo </a></h1>
+
   
-  <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 120px; right:40px; text-align: center;">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 120px; width:1400px; right:80px; text-align: center;">
     <!-- Indicators -->
-   
+    
+    
 
      <%  List<Puestos> c = model.instance().getAllPuestos(); %>    
      
    
       
     <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox" style="height: 120px; right:40px;">
+    <div class="carousel-inner" role="listbox" style="height: 120px; width:1400px; right:40px;">
 
         
          <% for(Puestos s: c){ %>
-      <div class="item active" style="height: 120px; right:40px;" >
+      <div class="item active" style="height: 120px; right:40px; " >
           
            <div class="box">
                <h1 style="font-size: 90%;"><%= s.getNombrePuesto()%></h1>
