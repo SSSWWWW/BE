@@ -96,10 +96,10 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
             });
             
             // Update lat/long value of div when you move the mouse over the map
-            /*google.maps.event.addListener(map,'mousemove',function(event) {
+            google.maps.event.addListener(map,'mousemove',function(event) {
                 document.getElementById('latmoved').innerHTML = event.latLng.lat();
                 document.getElementById('longmoved').innerHTML = event.latLng.lng();
-            });*/
+            });
                     
             var marker = new google.maps.Marker({
               position: myLatLng,

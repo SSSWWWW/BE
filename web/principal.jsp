@@ -42,9 +42,9 @@
        
       
           
-             <div class="container" style="width:auto; height: auto; right:40px; border-style: dotted;   ">
+             <div class="container" style=" width: 100%; height:100%; margin:0; display: flex; flex-direction: column;  ">
                  
-                    <div class="reg" style="text-align: left; border-style: dotted; background: slateblue;">
+                    <div class="reg" style="  text-align: left; background: slateblue; flex-grow: 1; display: flex;">
           
          
           
@@ -61,7 +61,7 @@
           
            <ul>
               <li>
-                <a href="#" style="color:white;">Inicio</a>
+                <a href="#" style="color:white;">  Inicio</a>
                 <ul>
                  <li><a href="inicioEmpresa.jsp">Inicio empresa</a></li>
                   <li><a href="inicioOferente.jsp">Inicio oferente</a></li>
@@ -70,14 +70,14 @@
             </ul>
           
           
-             </div><br><br><br>
+             </div>
                  
                  
                  
-                                   <h1 style="text-align: center; font-size:5vw; "><a href="principal.jsp" > Bolsa Empleo </a></h1>
+                                   <h1 style="text-align: center; font-size:5vw; "><a href="principal.jsp" style="font-weight: bold;" > Bolsa Empleo </a></h1>
 
-  
-  <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 120px; width:1400px; right:80px; text-align: center;">
+   
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" style=" text-align: center; flex-grow: 1;">
     <!-- Indicators -->
     
     
@@ -87,7 +87,7 @@
    
       
     <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox" style="height: 120px; width:1400px; right:40px;">
+    <div class="carousel-inner" role="listbox" style="height: 120px; right:40px; ">
 
         
          <% for(Puestos s: c){ %>

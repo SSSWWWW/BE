@@ -12,7 +12,7 @@ ul {
   padding: 0;
 }
 ul li {display: inline-block;}
-ul li:hover {background: #e0e0d1;}
+ul li:hover {background: slateblue;}
 ul li:hover ul {display: block;}
 ul li ul {
   position: absolute;
@@ -20,7 +20,7 @@ ul li ul {
   display: none;
 }
 ul li ul li { 
-  background: #e0e0d1; 
+  background: white; 
   display: block; 
 }
 ul li ul li a {display:block !important;} 
@@ -31,7 +31,7 @@ ul li ul li:hover {}
 
  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
            text-align: center;
-	   color : #8A2048;
+	   color : activeborder;
 	   text-align : center;
 	   font-weight: normal;
 }
@@ -45,4 +45,4 @@ ul.menu li a {text-decoration: none;}
 ul.menuitem{display: none; list-style: none; padding:0; padding-left:10px;}
 ul.menuitem li a {text-decoration: none;}
 ul.menu:hover li ul.menuitem{display: block} 
-  
+
