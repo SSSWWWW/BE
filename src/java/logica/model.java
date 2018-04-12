@@ -224,7 +224,7 @@ public class model {
        }
           
            public List<Puestos> getPuestosPorID(List<EspecializacionIncluida> p) throws Exception{
-           return dao.EspecializacionToGetPuesto(p);
+           return dao.EspecializacionToGetPuesto1(p);
        }
            
          

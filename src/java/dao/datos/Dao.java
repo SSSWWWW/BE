@@ -1047,8 +1047,99 @@ public class Dao {
     }
               
          
-         
+       public List<Puestos> EspecializacionToGetPuesto1(List<EspecializacionIncluida> ei) throws Exception{
         
+        
+        
+           db.getConnection();
+        List<Puestos> estados = new ArrayList<>();
+        
+        List<String> ls = new ArrayList<>();
+        
+        List<String> pues = new ArrayList<>();
+        
+        
+        for(int i = 0 ; i < ei.size(); i++){
+        
+            ls.add(String.valueOf(ei.get(i).getIdespecializacion()));
+        
+            
+        }
+        
+        long cantidadEspecializaciones = ls.stream().distinct().count();
+        
+        if(cantidadEspecializaciones > 1){ 
+        
+        int idpues = ei.get(0).getIdPuesto();
+        
+        
+        int cont = 0;
+        
+        for(int i = 0 ; i < ei.size(); i++){
+        
+            if(idpues != ei.get(i).getIdPuesto()){
+  
+                cont++;
+         
+               if(cont == cantidadEspecializaciones){
+                
+                   pues.add(String.valueOf(ei.get(i).getIdPuesto()));
+               
+               }
+                
+            }else {
+            
+               
+                idpues = ei.get(i).getIdPuesto();
+                cont = 0;
+            
+            }
+        
+        }
+        
+        
+         try {
+           
+            
+            
+            for(int i=0; i<pues.size(); i++){
+            String sql="select puestos.nombrePuesto, puestos.salario, puestos.descripcionPuesto, puestos.estado, puestos.idPuesto from"+
+                    "  puestos "+
+                    "where puestos.idPuesto  ='%s'";
+            sql = String.format(sql,pues.get(i));
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                
+                estados.add(puestos(rs));
+            }}
+        }catch (SQLException ex) { }
+        return estados;    
+        
+        } else {
+        
+        
+           try {
+           
+            
+            for(int i=0; i<ei.size(); i++){
+            String sql="select puestos.nombrePuesto, puestos.salario, puestos.descripcionPuesto, puestos.estado, puestos.idPuesto from"+
+                    "  puestos "+
+                    "where puestos.idPuesto  ='%s'";
+            sql = String.format(sql,ei.get(i).getIdPuesto());
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(puestos(rs));
+            }}
+        } catch (SQLException ex) { }
+        return estados;    
+        
+        
+        }
+        
+        
+        
+    }    
+       
          
         
             public List<EspecializacionIncluida> EspecializacionIncluidaGetAll(){
