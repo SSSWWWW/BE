@@ -28,6 +28,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
@@ -1009,7 +1010,7 @@ public class Dao {
             for(int i=0; i<cl.length; i++){
             String sql="select distinct ESPECIALIZACION_INCLUIDAS.idPuesto, ESPECIALIZACION_INCLUIDAS.idespecializacion, ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion, ESPECIALIZACION_INCLUIDAS.idEmp  from"+
                     "  ESPECIALIZACION_INCLUIDAS "+
-                    "where ESPECIALIZACION_INCLUIDAS.idespecializacion ='%s'";
+                    "where ESPECIALIZACION_INCLUIDAS.idespecializacion ='%s' order by ESPECIALIZACION_INCLUIDAS.idPuesto";
             sql = String.format(sql,cl[i]);
             ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
@@ -1052,6 +1053,9 @@ public class Dao {
         
         
            db.getConnection();
+           
+      
+           
         List<Puestos> estados = new ArrayList<>();
         
         List<String> ls = new ArrayList<>();
@@ -1068,35 +1072,43 @@ public class Dao {
         
         long cantidadEspecializaciones = ls.stream().distinct().count();
         
+        System.out.println("cantidad especializaciones  " + cantidadEspecializaciones );
+        
         if(cantidadEspecializaciones > 1){ 
         
         int idpues = ei.get(0).getIdPuesto();
+        
+         System.out.println("idpues " + idpues );
         
         
         int cont = 0;
         
         for(int i = 0 ; i < ei.size(); i++){
-        
-            if(idpues != ei.get(i).getIdPuesto()){
-  
-                cont++;
-         
-               if(cont == cantidadEspecializaciones){
-                
-                   pues.add(String.valueOf(ei.get(i).getIdPuesto()));
-               
-               }
-                
-            }else {
+       
+            for(int j = i ; j < ei.size() ; j++){
             
-               
-                idpues = ei.get(i).getIdPuesto();
-                cont = 0;
-            
+                
+                System.out.println("idpues == ei.get(j).getIdPuesto() " + idpues + " " + ei.get(j).getIdPuesto());
+                if(idpues == ei.get(j).getIdPuesto()){
+                
+                    cont++;
+                    
+                }
+                 
             }
-        
+            
+            System.out.println(" cont == cantidadEspecializaciones " + cont + " == " + cantidadEspecializaciones);
+             if(cont == cantidadEspecializaciones){
+                    
+                    pues.add(String.valueOf(ei.get(i).getIdPuesto()));
+               
+                } else {
+                    
+                    idpues = ei.get(i).getIdPuesto();
+               
+                }
+           
         }
-        
         
          try {
            
