@@ -1084,6 +1084,8 @@ public class Dao {
         int cont = 0;
         
         for(int i = 0 ; i < ei.size(); i++){
+            
+            idpues = ei.get(i).getIdPuesto();
        
             for(int j = i ; j < ei.size() ; j++){
             
@@ -1105,6 +1107,7 @@ public class Dao {
                 } else {
                     
                     idpues = ei.get(i).getIdPuesto();
+                    cont = 0;
                
                 }
            

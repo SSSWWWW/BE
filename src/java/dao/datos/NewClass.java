@@ -41,7 +41,7 @@ public class NewClass {
               
               System.out.println(emp.getNombreEmp()); */
           
-      String clrs[] = {"3" , "4"};
+      String clrs[] = {"28" , "32"};
           
           List<EspecializacionIncluida> ei = model.instance().getEspecializacionIncluidaID(clrs);
           

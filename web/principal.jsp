@@ -140,30 +140,47 @@
      
     
  <table>
-     <% for(Caracteristicas sc : cc){ %>
-     
-     <tr>
-   <td><%= sc.getNombreCaracteristica()  %></td>
-  </tr>
-  <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
-  
-   <% for(Area_Trabajo artr : at){ %>
-   <tr>
-    <td>&#160;&#160;&#160;<%= artr.getNombreAreaTrabajo()  %></td>
-   </tr>
-   
-       <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
-        <% for(Especializacion esp : es){ %>
-        <tr>
-    <td>&#160; &#160; &#160;<input type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/>&#160; <%= esp.getNombreEspecializacion() %></td>
-   </tr>
-  
-         <% } %>
-      <% } %>
-    <% } %>
-     
+    
+       <% for(Caracteristicas sc : cc){ %>
+     <ul>
+              <li>
+                  
+                <a> <%= sc.getNombreCaracteristica()  %> </a>
  
- </table>
+                <ul>
+                     
+                     <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
+                    <% for(Area_Trabajo artr : at){ %>
+                 <li>
+ 
+                     <a> &#160;&#160;<%= artr.getNombreAreaTrabajo()  %> </a>
+         
+                     <ul>
+                          <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
+                      <% for(Especializacion esp : es){ %>
+                     
+                       <li>
+ 
+                           <a> &#160; &#160; <input type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %> &#160;&#160;&#160</a>
+
+                       </li>
+
+                       <% } %>
+                     </ul><br><br>
+ 
+                 </li>
+                 
+                    <% } %>
+
+                </ul>
+
+              </li>
+ 
+            </ul><br>
+     
+              <% } %>
+     
+     
 <input type="submit" value="Buscar puesto">
 </form>
 
