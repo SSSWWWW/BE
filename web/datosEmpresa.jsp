@@ -4,6 +4,7 @@
     Author     : pc
 --%>
 
+<%@page import="entidades.Puestos"%>
 <%@page import="entidades.Especializacion"%>
 <%@page import="entidades.Area_Trabajo"%>
 <%@page import="logica.model"%>
@@ -15,8 +16,14 @@
 <!DOCTYPE html>
 <html>
 <head>
- <title>Oferente</title>
- <link href="css/registrooferente.css" rel="stylesheet" type="text/css"/>  
+ <title>Empresa</title>
+ <link href="css/datosEmpresa.css" rel="stylesheet" type="text/css"/>  
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <body>
     
@@ -26,23 +33,31 @@
 
 
 
-<div class = "datOf" >
+<div class = "datOf" style=" float:left; display:inline-block; vertical-align:top; ">
     
-   
-    <table class="grid">
-        <caption>Empresa</caption>
+   <div style="left: 0px; width: 270px; top: 40px; " >
+       <table style="  vertical-align:top;    left: 0px;
+    position: absolute;
+    top: 40px;
+    width: 270px;" class="table table-sm table-dark">
+
         
+        <tr><td>Empresa</td></tr><br><br>
         <tr><td><%=empresa.getNombreEmp() %></td></tr><br><br>
         <tr><td><%=empresa.getDescripcionEmp() %></td></tr><br><br>
         <tr><td><%=empresa.getCorreoEmp() %></td></tr>
         <tr><td><%=empresa.getTelefono() %></td></tr>
-        
-       
-       
+        <div class = "map" style="  width: 270px; height: 100px;top: 80px; "  >
+            <div id = "map" style="  width: 270px; height: 100px; top: 80px; "></div>
+        </div><br>
     </table>
+    
+      
+    
+   </div>
         
         
-        </div>
+       
         
        
         
@@ -52,8 +67,8 @@
     
  <style>          
           #map { 
-            height: 150px;    
-            width: 180px;            
+            height: 100px;    
+            width: 270px;            
           }          
         </style> 
         
@@ -102,9 +117,7 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA&callback=initMap"
         async defer></script>
         
-        <div class = "map" >
-            <div id = "map" ></div>
-        </div><br>
+      
         
         
                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js" type="text/javascript"></script>
@@ -167,6 +180,8 @@
                
            <input class="formfield" type="hidden" id="aux" name="aux" placeholder="Porcentaje caracteristica" required>   
    
+
+           
               <select style="display: none;" name="id" id="id">
              <option value="<%= empresa.getIdEmp() %>"><%= empresa.getIdEmp() %></option>
 
@@ -174,25 +189,55 @@
 
                
               <input class="formfield" type="number" name="porcentaje" value="${param.porcentaje}" placeholder="Porcentaje caracteristica" required><br>    
-               
-               
-               
-        
-            
-
-           
-           
-           
+              
            
            <input class="formfield"  type="submit" value="Agregar Puesto">
            </form>
-           
+            </div>
+              
+              
+              <div class="container" style="display:inline-block; width:200px; height: 540px; ">
+  <form action="listarPuestosEmp" method="get" class = "formoferente">
+  
+  <input type="hidden"  name="idEmp" value="<%=empresa.getIdEmp() %>"><br>
+   
+ 
+<input type="submit" value="Ver Puestos Publicados" >
+  </form>
+              
+              
+               <div id="body" >   
+        <div id="listar" class="area" style="width:50%;">   
+            
+            <jsp:useBean id="puestosListaEmp" scope="request" type="List<Puestos>" class="java.util.ArrayList"/>
+            
+              <div style="overflow-x: auto; width:550px; height: 389px;">
+
+            <table style="overflow-x: auto; width:550px; height: 389px;" class="table table-sm table-dark">
+              
+              <thead><tr><td>Nombre</td><td>Descripcion</td><td>Salario</td></tr></thead>
+              <tbody style="height: 250px;">
+                <% for(Puestos s: puestosListaEmp){ %>
+                     <tr><td><%= s.getNombrePuesto() %></td><td><%= s.getDescripcionPuesto() %></td>
+                     <td><%= s.getSalario()  %></td></tr>
+               <% } %>
+            </tbody>
+            </table>
+              </div>>
+      </div>
+    </div>
+              
+              
+              </div><br>
+  
+  
+ 
            
        
 
              
             
-<div class = "salir" >
+<div class = "salir" style="position:fixed ; top:0%; right:0%;">
     <ul class="menu">
         <li><a href="#"><%=empresa.getIdEmp() %>-<%=empresa.getNombreEmp() %><img class="inline" src="images/down.png" alt=""></a>
             <ul class="menuitem" > <li> <a href="Logout">Salir</a></li> </ul>
@@ -203,7 +248,7 @@
             
 </div>
             
-             <a href = "principal.jsp" target = "_self">Regresar</a></center>
+             <a href = "principal.jsp" target = "_self" style="position: fixed;top: 0%;left: 0%;">Regresar</a></center>
             
 </body>
 </html>

@@ -30,7 +30,7 @@ import logica.model;
  */
 
     @WebServlet(name = "Empresa", urlPatterns = {"/LoginEm", "/LogoutEm" , "/agregarEmpresa" , 
-    "/listarCaracteristicas", "/agregarPuesto"})
+    "/listarCaracteristicas", "/agregarPuesto" , "/listarPuestosEmp"})
 public class Empresa extends HttpServlet {
 
     /**
@@ -64,6 +64,10 @@ public class Empresa extends HttpServlet {
             
         case "/agregarPuesto":
             this.doagregarPuesto(request,response);
+            break; 
+            
+            case "/listarPuestosEmp":
+            this.dolistarPuestosEmp(request,response);
             break; 
             
     }
@@ -256,6 +260,24 @@ empresa.setClave(clave);
           }		
 	}  
         
+       
+        protected void dolistarPuestosEmp(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+           try{
+               
+               String idEmp   = request.getParameter("idEmp");
+                
+                List<Puestos> puestos = model.instance().getAllPuestos1(idEmp);
+		request.setAttribute("puestosListaEmp", puestos);
+                request.getRequestDispatcher("datosEmpresa.jsp").forward( request, response);
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("Error.jsp").forward( request, response);
+          }		
+	}  
+       
           protected void doLogout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             request.getSession().invalidate();

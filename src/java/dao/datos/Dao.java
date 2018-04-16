@@ -1239,6 +1239,8 @@ public class Dao {
     }
       
       
+   
+      
         public Puestos PuestosGet(Puestos p) throws Exception{
             
              db.getConnection();
@@ -1253,7 +1255,8 @@ public class Dao {
                         Puestos pe = new Puestos();
                         pe.setNombrePuesto("v");
                         pe.setDescripcionPuesto("");
-                        pe.setEstado(false);
+       
+                         pe.setEstado(false);
                         pe.setIdPuesto(0);
                         pe.setSalario(a);
             return pe;
@@ -1293,6 +1296,22 @@ public class Dao {
         List<Puestos> estados=new ArrayList<>();
         try {
             String sql="select * from puestos order by idpuesto desc limit 5";
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(puestos(rs));
+            }
+        } catch (SQLException ex) { }
+        return estados;        
+    }
+    
+             public List<Puestos> PuestosGetAll1(String a){
+                
+              db.getConnection();    
+        List<Puestos> estados=new ArrayList<>();
+        try {
+            String sql="select distinct * from puestos inner join puestos_publicados where puestos.idpuesto "
+                    + " = puestos_publicados.idpuesto and puestos_publicados.idemp = '%s'";
+             sql = String.format(sql, a);
             ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
                 estados.add(puestos(rs));
