@@ -226,7 +226,19 @@ CREATE TABLE ESPECIALIZACION_INCLUIDAS (
    EMPRESA (idEmp)
 	);
 
+	CREATE TABLE ESPECIALIZACION_INCLUIDASOFERENTE(
+	
+	  cedulaOferente varchar (15),
+	  idespecializacion int,
+	  porcentajeEspecializacion int,
+	  
+	  CONSTRAINT PK_EIO PRIMARY KEY (cedulaOferente, idespecializacion),
+	  CONSTRAINT FK_EIO FOREIGN KEY (cedulaOferente) REFERENCES OFERENTE (cedulaOferente),
+	  CONSTRAINT FK_EIO1 FOREIGN KEY (idespecializacion) REFERENCES ESPECIALIZACION (idespecializacion)
+	 
+	);
 
+	
 
 -- en dao
 
