@@ -14,6 +14,7 @@ import entidades.CaracteristicasIncluidos;
 import entidades.Empresa;
 import entidades.Especializacion;
 import entidades.EspecializacionIncluida;
+import entidades.EspecializacionIncluidaOferente;
 import entidades.Habilidades;
 import entidades.HabilidadesIncluidas;
 import entidades.Oferente;
@@ -897,6 +898,50 @@ public class Dao {
         } catch (SQLException ex) { }
         return estados;        
     }
+            
+            
+      /*****************************************************************/
+            
+            
+                 private EspecializacionIncluidaOferente EspecializacionIncluidaOferente(ResultSet rs){
+        try {
+            EspecializacionIncluidaOferente ec= new EspecializacionIncluidaOferente();
+          
+                ec.setCedulaOferente(rs.getString("cedulaOferente"));
+                ec.setIdespecializacion(rs.getInt("idespecializacion"));
+                ec.setPorcentajeEspecializacion(rs.getInt("porcentajeEspecializacion"));
+                
+               
+        
+            return ec;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+                 
+                  public void EspecializacionIncluidaOferenteAdd(EspecializacionIncluidaOferente p) throws Exception{
+           
+            
+         
+          System.out.println("en oferenteAdd");
+        
+          String sql="insert into bolsaempleo.ESPECIALIZACION_INCLUIDASOFERENTE (cedulaOferente, idespecializacion, porcentajeEspecializacion) "+
+                "values(?, ?, ?)";
+        //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
+        db.getConnection();
+        PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
+        System.out.println("despues de prepared" );
+        preparedStmt.setString(1, p.getCedulaOferente());
+        preparedStmt.setInt(2, p.getIdespecializacion());
+        preparedStmt.setInt(3, p.getPorcentajeEspecializacion());
+        
+      
+      preparedStmt.execute();
+      
+      }
+                 
+            
+            
             
     
      /*******************************************************************/

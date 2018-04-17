@@ -21,6 +21,7 @@ import entidades.CaracteristicasIncluidos;
 import entidades.Empresa;
 import entidades.Especializacion;
 import entidades.EspecializacionIncluida;
+import entidades.EspecializacionIncluidaOferente;
 import entidades.Habilidades;
 import entidades.HabilidadesIncluidas;
 import entidades.Oferente;
@@ -368,6 +369,12 @@ public class model {
             return  dao.EspecializacionGetAll();
        }
     
+       /******************* ESPECIALIZACION INCLUIDA*****************************/    
+           
+            public void addEspecializacionIncluidaOferente(EspecializacionIncluidaOferente p) throws Exception{
+           dao.EspecializacionIncluidaOferenteAdd(p);
+       }
+           
            
        /******************* ESPECIALIZACION INCLUIDA*****************************/    
     

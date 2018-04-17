@@ -5,6 +5,7 @@
  */
 package bolsaempleo.ui;
 
+import entidades.EspecializacionIncluidaOferente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -20,7 +21,7 @@ import logica.model;
  * @author pc
  */
 
-@WebServlet(name = "Oferente", urlPatterns = {"/LoginOf", "/Logout" , "/agregarOferente"})
+@WebServlet(name = "Oferente", urlPatterns = {"/LoginOf", "/Logout" , "/agregarOferente" , "/agregarCaracteristicaOferente"})
 public class Oferente extends HttpServlet {
 
     /**
@@ -44,7 +45,12 @@ public class Oferente extends HttpServlet {
             break;
         case "/agregarOferente":
             this.doregistroOferenteAgregar(request,response);
-            break;    
+            break; 
+            
+        case "/agregarCaracteristicaOferente":
+            this.doagregarCaracteristicaOferente(request,response);
+            break;     
+            
     }
   }
 
@@ -132,6 +138,46 @@ oferente.setClave(clave);
     }
     
     
+    
+     protected void doagregarCaracteristicaOferente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+         try{
+                 System.out.println("en do Login");
+        HttpSession s =  request.getSession( true);
+//<editor-fold defaultstate="collapsed" desc="...">
+        String caracteristicas   = request.getParameter("caracteristicas");
+        String porcentaje   = request.getParameter("porcentaje");
+        String cedulaOferente   = request.getParameter("cedulaOferente");
+        
+        int porcen = Integer.valueOf(porcentaje);
+        int carac = Integer.valueOf(caracteristicas);
+        
+        entidades.EspecializacionIncluidaOferente oferenteCarac = new EspecializacionIncluidaOferente();
+        
+        oferenteCarac.setCedulaOferente(cedulaOferente);
+        oferenteCarac.setIdespecializacion(carac);
+        oferenteCarac.setPorcentajeEspecializacion(porcen);
+        
+        oferenteCarac.setCedulaOferente(cedulaOferente);
+
+      
+//oferente.setCedulaOferente("554533243");
+//oferente.setClave("sss");
+//</editor-fold>
+        model.instance().addEspecializacionIncluidaOferente(oferenteCarac);
+	s.setAttribute("oferenteCarac",oferenteCarac);
+	request.getRequestDispatcher("datosOferente.jsp").
+                forward( request, response);
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("datosOferente.jsp").forward( request, response);
+          }
+        
+        
+        }
+    
     protected void doregistroOferenteAgregar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
          try{
@@ -175,6 +221,8 @@ oferente.setClave(clave);
         
         
         }
+    
+    
     
     
     protected void doLogout(HttpServletRequest request, HttpServletResponse response)
