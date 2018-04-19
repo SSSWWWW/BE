@@ -8,6 +8,7 @@ package bolsaempleo.ui;
 import entidades.EspecializacionIncluidaOferente;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +22,7 @@ import logica.model;
  * @author pc
  */
 
-@WebServlet(name = "Oferente", urlPatterns = {"/LoginOf", "/Logout" , "/agregarOferente" , "/agregarCaracteristicaOferente"})
+@WebServlet(name = "Oferente", urlPatterns = {"/LoginOf", "/Logout" , "/agregarOferente" , "/agregarCaracteristicaOferente" , "/listarCaracteristicasOferente"})
 public class Oferente extends HttpServlet {
 
     /**
@@ -49,7 +50,12 @@ public class Oferente extends HttpServlet {
             
         case "/agregarCaracteristicaOferente":
             this.doagregarCaracteristicaOferente(request,response);
-            break;     
+            break;    
+            
+        case "/listarCaracteristicasOferente":
+            this.dolistarCaracteristicasOferente(request,response);
+            break;      
+            
             
     }
   }
@@ -222,6 +228,24 @@ oferente.setClave(clave);
         
         }
     
+    
+    
+      protected void dolistarCaracteristicasOferente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+           try{
+               
+               String idEmp   = request.getParameter("cedula");
+                
+                List<EspecializacionIncluidaOferente> puestos = model.instance().getespecializacionyPorcentaje(idEmp);
+		request.setAttribute("listarCaracteristicasOferente", puestos);
+                request.getRequestDispatcher("datosOferente.jsp").forward( request, response);
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("Error.jsp").forward( request, response);
+          }		
+	}  
     
     
     

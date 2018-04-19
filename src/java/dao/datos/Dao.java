@@ -919,6 +919,22 @@ public class Dao {
         }
     }
                  
+                            private EspecializacionIncluidaOferente EspecializacionIncluidaOferente1(ResultSet rs){
+        try {
+            EspecializacionIncluidaOferente ec= new EspecializacionIncluidaOferente();
+          
+                ec.setNombreEspecializacion(rs.getString("nombreEspecializacion"));
+                ec.setPorcentajeEspecializacion(rs.getInt("porcentajeEspecializacion"));
+                
+               
+        
+            return ec;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+                 
+                 
                   public void EspecializacionIncluidaOferenteAdd(EspecializacionIncluidaOferente p) throws Exception{
            
             
@@ -941,6 +957,24 @@ public class Dao {
       }
                  
             
+                     public List<EspecializacionIncluidaOferente> caracteristicasPorcentaje(String a){
+                System.out.println("DESDE DAO a: " + a);
+              db.getConnection();    
+        List<EspecializacionIncluidaOferente> estados=new ArrayList<>();
+        try {
+            String sql="select especializacion.nombreEspecializacion, especializacion_incluidasoferente.porcentajeespecializacion"
+                    + " from especializacion, especializacion_incluidasoferente "
+                    + " where especializacion.idespecializacion = especializacion_incluidasoferente.idespecializacion and especializacion_incluidasoferente.cedulaoferente = '%s'";
+             sql = String.format(sql, a);
+             System.out.println("SQL " + sql);
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(EspecializacionIncluidaOferente1(rs));
+            }
+        } catch (SQLException ex) { }
+        return estados;        
+    }
+                  
             
             
     

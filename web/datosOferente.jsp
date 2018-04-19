@@ -4,6 +4,7 @@
     Author     : pc
 --%>
 
+<%@page import="entidades.EspecializacionIncluidaOferente"%>
 <%@page import="entidades.Especializacion"%>
 <%@page import="entidades.Area_Trabajo"%>
 <%@page import="logica.model"%>
@@ -15,14 +16,24 @@
 <html>
 <head>
  <title>Oferente</title>
- <link href="css/registrooferente.css" rel="stylesheet" type="text/css"/>  
+  <link href="css/datosEmpresa.css" rel="stylesheet" type="text/css"/>  
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> 
 </head>
 <body>
 <jsp:useBean id="oferente" scope="session" type="Oferente" />
+
+
+<div class = "datOf" style=" float:left; display:inline-block; vertical-align:top; ">
+
 <div class = "datOf" >
     
-    <div class="area" >   
-    <table class="grid">
+    <div style="left: 0px; width: 270px; top: 40px; " >  
+    <table class="table table-sm table-dark">
         <caption>Oferente</caption>
         
         <tr><td><%=oferente.getNombreOferente()%> <%=oferente.getPrimerApellido() %></td></tr><br><br>
@@ -93,7 +104,47 @@
     }
 %>
          
-<div class = "salir" >
+
+</div>
+
+ <div class="container" style="display:inline-block; width:200px; height: 540px; ">
+
+<form action="listarCaracteristicasOferente" method="get" class = "formoferente">
+  
+  <input type="hidden"  name="cedula" value="<%= oferente.getCedulaOferente() %>"><br>
+   
+ 
+<input type="submit" value="Ver caracteristicas registradas" >
+  </form>
+  
+  
+   
+  
+      <div id="body" >   
+        <div id="listar" class="area" style="width:50%;">   
+            
+            <jsp:useBean id="listarCaracteristicasOferente" scope="request" type="List<EspecializacionIncluidaOferente>" class="java.util.ArrayList"/>
+            
+              <div style="overflow-x: auto; width:250px; height: 189px;">
+
+            <table style="overflow-x: auto; width:250px; height: 189px;" class="table table-sm table-dark">
+              
+              <thead><tr><td>Caracteristica</td><td>Porcentaje</td></tr></thead>
+              <tbody style="height: 100px;">
+                <% for(EspecializacionIncluidaOferente s: listarCaracteristicasOferente){ %>
+                     <tr><td><%= s.getNombreEspecializacion() %></td><td><%= s.getPorcentajeEspecializacion() %></td>
+                     </tr>
+               <% } %>
+            </tbody>
+            </table>
+              </div>
+      </div>
+    </div>  
+  
+    </div>
+
+
+<div class = "salir" style="position:fixed ; top:0%; right:0%;" >
     <ul class="menu">
         <li><a href="#"><%=oferente.getCedulaOferente() %>-<%=oferente.getNombreOferente() %><img class="inline" src="images/down.png" alt=""></a>
             <ul class="menuitem" > <li> <a href="Logout">Salir</a></li> </ul>
@@ -101,7 +152,7 @@
     </ul>
 </div>
             
-             <a href = "principal.jsp" target = "_self">Regresar</a></center>
+             <a href = "principal.jsp" target = "_self" style="position: fixed;top: 0%;left: 0%;">Regresar</a></center>
             
 </body>
 </html>

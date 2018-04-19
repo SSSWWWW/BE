@@ -12,6 +12,7 @@ import entidades.CaracteristicasIncluidos;
 import entidades.Empresa;
 import entidades.Especializacion;
 import entidades.EspecializacionIncluida;
+import entidades.EspecializacionIncluidaOferente;
 import entidades.Oferente;
 import entidades.Puestos;
 import java.sql.SQLException;
@@ -33,13 +34,13 @@ public class NewClass {
           
           model m;
           
-          String a = "1";
+          String a = "402130856";
           
-          List<Puestos> pues = model.instance().getAllPuestos1(a);
+          List<EspecializacionIncluidaOferente> pues = model.instance().getespecializacionyPorcentaje(a);
           
-          for(Puestos p : pues){
+          for(EspecializacionIncluidaOferente p : pues){
           
-              System.out.println(p.getNombrePuesto());
+              System.out.println(p.getNombreEspecializacion() + p.getPorcentajeEspecializacion());
           
           }
           

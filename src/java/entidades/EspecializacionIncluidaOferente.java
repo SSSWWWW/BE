@@ -20,6 +20,8 @@ public class EspecializacionIncluidaOferente {
     String cedulaOferente;
     int idespecializacion;
     int porcentajeEspecializacion;
+    
+    String nombreEspecializacion;
 
     public EspecializacionIncluidaOferente() {
     }
@@ -29,6 +31,21 @@ public class EspecializacionIncluidaOferente {
         this.idespecializacion = idespecializacion;
         this.porcentajeEspecializacion = porcentajeEspecializacion;
     }
+
+    public EspecializacionIncluidaOferente(int porcentajeEspecializacion, String nombreEspecializacion) {
+        this.porcentajeEspecializacion = porcentajeEspecializacion;
+        this.nombreEspecializacion = nombreEspecializacion;
+    }
+
+    public String getNombreEspecializacion() {
+        return nombreEspecializacion;
+    }
+
+    public void setNombreEspecializacion(String nombreEspecializacion) {
+        this.nombreEspecializacion = nombreEspecializacion;
+    }
+    
+    
 
     public String getCedulaOferente() {
         return cedulaOferente;
