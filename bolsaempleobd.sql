@@ -123,7 +123,7 @@ CONSTRAINT PK_EMP PRIMARY KEY (idEmp)
 CREATE TABLE PUESTOS(
 nombrePuesto varchar(50),
 salario float,
- descripcionPuesto varchar(50), 
+ descripcionPuesto varchar(50) unique, 
 
 estado boolean,
 
