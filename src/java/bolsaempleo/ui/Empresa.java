@@ -161,8 +161,23 @@ empresa.setClave(clave);
         String  caracteristica = request.getParameter("aux");
         String  porcentaje = request.getParameter("porcentaje");
         String ide = request.getParameter("id");
+        String estado = request.getParameter("estado");
         
         int idem = Integer.parseInt(ide);
+        
+       boolean est = true;
+       
+       if(estado.equals("true")){
+       
+           est = true;
+       }
+       
+       if(estado.equals("false")){
+       
+           est = false;
+       }
+               
+            
         
         String com = nombreempresa + " - " +descripcionPuesto;
         
@@ -186,9 +201,10 @@ empresa.setClave(clave);
         Puestos puesto = new Puestos(); 
         
         puesto.setDescripcionPuesto(com);
-        puesto.setEstado(true);
+        puesto.setEstado(est);
         puesto.setNombrePuesto(nombrePuesto);
         puesto.setSalario(salpu);
+  
         
         EspecializacionIncluida esi = new EspecializacionIncluida();
         
@@ -222,7 +238,7 @@ empresa.setClave(clave);
         
         PuestosPublicados pp = new PuestosPublicados();
         pp.setIdEmpresa(idem);
-        pp.setEstadoPuesto(true);
+        pp.setEstadoPuesto(est);
         pp.setIdPuestos(idpues);
         
         model.instance().addPuestosPublicados(pp);
