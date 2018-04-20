@@ -17,7 +17,7 @@
 <html>
 <head>
  <title>Empresa</title>
- <link href="css/datosEmpresa.css" rel="stylesheet" type="text/css"/>  
+ <link href="css/principal.css" rel="stylesheet" type="text/css"/>  
  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -136,12 +136,7 @@
   </script>
 
         
-        <%
-    if(null!=request.getAttribute("error"))
-    {
-       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
-    }
-%>
+ 
         
         
         
@@ -154,6 +149,12 @@
            <input class="formfield" type="number" id="salarioPuesto" name="salarioPuesto" value="${param.salarioPuesto}" placeholder="Salario" required><br>
           <input class="formfield" type="hidden" id="nombreempresa" name="nombreempresa" value="<%=empresa.getNombreEmp() %>" placeholder="Salario" required>
             
+             <select name="estado" id="estado">
+                 
+               <option value="">Estado</option>   
+              <option value="true">Publico</option>
+              <option value="false">Privado</option>
+               </select><br>
               
               
              <select name="caracteristicas" id="caracteristicas">
@@ -178,6 +179,7 @@
            <% } %>
                </select><br>
                
+                 
            <input class="formfield" type="hidden" id="aux" name="aux" placeholder="Porcentaje caracteristica" required>   
    
 
@@ -191,8 +193,18 @@
               <input class="formfield" type="number" name="porcentaje" value="${param.porcentaje}" placeholder="Porcentaje caracteristica" required><br>    
               
            
+              
+              
            <input class="formfield"  type="submit" value="Agregar Puesto">
            </form>
+              
+                     <%
+    if(null!=request.getAttribute("error"))
+    {
+       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
+    }
+%>
+              
             </div>
               
               
@@ -223,14 +235,73 @@
                <% } %>
             </tbody>
             </table>
-              </div>>
+              </div>
       </div>
     </div>
               
               
-              </div><br>
+              </div>
   
   
+              <div class="container" style=" float:right; display:inline-block; width:600px; height: 540px; ">
+                  <%  List<Caracteristicas> cc = model.instance().getAllCaracteristicas(); %>
+                  
+                  <h1 style="text-align: left; font-size: 150%;">Buscar Oferente </h1>
+
+<form style="float: left;" class = "formempresa"  action="buscarPuestos" method="get">
+    
+     
+    <div style="overflow-x: auto; width:550px; height: 389px;">
+ <table>
+    
+       <% for(Caracteristicas sc : cc){ %>
+     <ul>
+              <li>
+                  
+                <a> <%= sc.getNombreCaracteristica()  %> </a>
+ 
+                <ul>
+                     
+                     <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
+                    <% for(Area_Trabajo artr : at){ %>
+                 <li>
+ 
+                     <a> &#160;&#160;<%= artr.getNombreAreaTrabajo()  %> </a>
+         
+                     <ul>
+                          <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
+                      <% for(Especializacion esp : es){ %>
+                     
+                       <li>
+ 
+                           <a> &#160; &#160; <input type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %> &#160;&#160;&#160</a>
+
+                       </li>
+
+                       <% } %>
+                     </ul><br><br>
+ 
+                 </li>
+                 
+                    <% } %>
+
+                </ul>
+
+              </li>
+ 
+            </ul><br>
+     
+              <% } %>
+ </table>
+    </div>
+              
+              
+     
+<input type="submit" value="Buscar puesto">
+</form>
+                  
+                  
+              </div>   
  
            
        

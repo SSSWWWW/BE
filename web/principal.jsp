@@ -179,7 +179,7 @@
             </ul><br>
      
               <% } %>
-     
+ </table>
      
 <input type="submit" value="Buscar puesto">
 </form>
