@@ -1199,7 +1199,7 @@ public class Dao {
             for(int i=0; i<pues.size(); i++){
             String sql="select puestos.nombrePuesto, puestos.salario, puestos.descripcionPuesto, puestos.estado, puestos.idPuesto from"+
                     "  puestos "+
-                    "where puestos.idPuesto  ='%s'";
+                    "where puestos.idPuesto  ='%s' and puestos.estado = '1'";
             sql = String.format(sql,pues.get(i));
             ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
@@ -1218,7 +1218,7 @@ public class Dao {
             for(int i=0; i<ei.size(); i++){
             String sql="select puestos.nombrePuesto, puestos.salario, puestos.descripcionPuesto, puestos.estado, puestos.idPuesto from"+
                     "  puestos "+
-                    "where puestos.idPuesto  ='%s'";
+                    "where puestos.idPuesto  ='%s' and puestos.estado = '1'";
             sql = String.format(sql,ei.get(i).getIdPuesto());
             ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
@@ -1374,7 +1374,7 @@ public class Dao {
               db.getConnection();    
         List<Puestos> estados=new ArrayList<>();
         try {
-            String sql="select * from puestos order by idpuesto desc limit 5";
+            String sql="select * from puestos where estado = 1 order by idpuesto desc limit 5";
             ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
                 estados.add(puestos(rs));
