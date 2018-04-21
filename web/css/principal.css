@@ -27,20 +27,7 @@ ul li ul li a {display:block !important;}
 ul li ul li:hover {}
 
 
-
-
- ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-           text-align: center;
-	   color : activeborder;
-	   text-align : center;
-	   font-weight: normal;
-}
-
-
-
-
-
- ul.menu{list-style: circle; padding:0; }
+ul.menu{list-style: circle; padding:0; }
 ul.menu li a {text-decoration: none;}
 ul.menuitem{display: none; list-style: none; padding:0; padding-left:10px;}
 ul.menuitem li a {text-decoration: none;}
@@ -88,3 +75,4 @@ ul.menu:hover li ul.menuitem{display: block}
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
 }
+

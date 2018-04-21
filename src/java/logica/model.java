@@ -139,6 +139,10 @@ public class model {
    
            }
     
+           
+            public List<Oferente> getOferentePorID(List<EspecializacionIncluidaOferente> p) throws Exception{
+           return dao.EspecializacionToGetOferente(p);
+       }
    
     
     
@@ -378,7 +382,12 @@ public class model {
             public List<EspecializacionIncluidaOferente> getespecializacionyPorcentaje(String p) throws Exception{
            return dao.caracteristicasPorcentaje(p);
        }
+            
+         public List<EspecializacionIncluidaOferente> getEspecializacionIDOferente(String[] cl) throws Exception{
+            return  dao.EspecializacionIdOferente(cl);
+       }    
            
+         
            
            
        /******************* ESPECIALIZACION INCLUIDA*****************************/    

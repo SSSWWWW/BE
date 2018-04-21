@@ -1101,6 +1101,61 @@ public class Dao {
         
     }
               
+              
+                    public List<EspecializacionIncluidaOferente> EspecializacionIdOferente(String cl[]) throws Exception{
+        
+        EspecializacionIncluidaOferente eio = new EspecializacionIncluidaOferente();
+        
+           db.getConnection();
+        List<EspecializacionIncluidaOferente> estados = new ArrayList<>();
+        try {
+           
+            for(int i=0; i<cl.length; i++){
+            String sql="select distinct ESPECIALIZACION_INCLUIDASOFERENTE.CEDULAOFERENTE, ESPECIALIZACION_INCLUIDASOFERENTE.idespecializacion, ESPECIALIZACION_INCLUIDASOFERENTE.porcentajeEspecializacion  from"+
+                    "  ESPECIALIZACION_INCLUIDASOFERENTE "+
+                    "where ESPECIALIZACION_INCLUIDASOFERENTE.idespecializacion ='%s' ";
+            sql = String.format(sql,cl[i]);
+            ResultSet rs =  db.executeQuery(sql);
+            
+         /*   if(rs.next() == false){
+            
+            eio.setCedulaOferente("00");
+            eio.setIdespecializacion(00);
+            eio.setPorcentajeEspecializacion(00);
+                
+            estados.add(eio);
+            
+            }
+            
+            while (rs.next()) {
+                estados.add(EspecializacionIncluidaOferente(rs));
+            }*/
+            
+            if (rs.next() == false) {
+            eio.setCedulaOferente("00");
+            eio.setIdespecializacion(00);
+            eio.setPorcentajeEspecializacion(00);
+                
+            estados.add(eio);
+            } else {
+                
+                do{
+                
+                    estados.add(EspecializacionIncluidaOferente(rs));
+                
+                }while(rs.next());
+                
+            }}
+        } catch (SQLException ex) { }
+        return estados;    
+        
+        
+    } 
+              
+              
+              
+              
+              
        public List<Puestos> EspecializacionToGetPuesto(List<EspecializacionIncluida> ei) throws Exception{
         
         
@@ -1233,6 +1288,123 @@ public class Dao {
         
         
     }    
+       
+       
+       
+       
+       public List<Oferente> EspecializacionToGetOferente(List<EspecializacionIncluidaOferente> ei) throws Exception{
+        
+        
+        
+           db.getConnection();
+           
+      
+           
+        List<Oferente> estados = new ArrayList<>();
+        
+        List<String> ls = new ArrayList<>();
+        
+        List<String> pues = new ArrayList<>();
+        
+        
+        for(int i = 0 ; i < ei.size(); i++){
+        
+            ls.add(String.valueOf(ei.get(i).getIdespecializacion()));
+        
+            
+        }
+        
+        long cantidadEspecializaciones = ls.stream().distinct().count();
+        
+        System.out.println("cantidad especializaciones  " + cantidadEspecializaciones );
+        
+        if(cantidadEspecializaciones > 1){ 
+        
+        String cedOf = ei.get(0).getCedulaOferente();
+        
+         System.out.println("cedula oferente " + cedOf );
+        
+        
+        int cont = 0;
+        
+        for(int i = 0 ; i < ei.size(); i++){
+            
+            cedOf = ei.get(i).getCedulaOferente();
+       
+            for(int j = i ; j < ei.size() ; j++){
+            
+                
+                System.out.println("cedOf.equals(ei.get(j).getCedulaOferente) " + cedOf + " " + ei.get(j).getCedulaOferente());
+                if(cedOf.equals(ei.get(j).getCedulaOferente())){
+                
+                    cont++;
+                    
+                }
+                 
+            }
+            
+            System.out.println(" cont == cantidadEspecializaciones " + cont + " == " + cantidadEspecializaciones);
+             if(cont == cantidadEspecializaciones){
+                    
+                    pues.add(ei.get(i).getCedulaOferente());
+               
+                } else {
+                    
+                    cedOf = ei.get(i).getCedulaOferente();
+                    cont = 0;
+               
+                }
+           
+        }
+        
+         try {
+           
+             System.out.println("PUESTOS");
+             
+             for(int i =0 ; i < pues.size() ; i++){
+             
+                 System.out.println("puesto " + pues.get(i));
+             
+             }
+            
+            
+            for(int i=0; i<pues.size(); i++){
+           String sql="select *from oferente"+
+                   " where oferente.cedulaOferente = '%s'";
+            sql = String.format(sql,pues.get(i));
+            System.out.println("query " + sql);
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                
+                estados.add(oferente(rs));
+            }}
+        }catch (SQLException ex) { }
+        return estados;    
+        
+        } else {
+        
+        
+           try {
+           
+            
+            for(int i=0; i<ei.size(); i++){
+            String sql="select *from oferente "+
+                    " where oferente.cedulaoferente  ='%s'";
+            sql = String.format(sql,ei.get(i).getCedulaOferente());
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(oferente(rs));
+            }}
+        } catch (SQLException ex) { }
+        return estados;    
+        
+        
+        }
+        
+        
+        
+    }    
+       
        
          
         
@@ -1726,6 +1898,8 @@ public class Dao {
         private Oferente oferente(ResultSet rs){
         try {
             Oferente ec= new Oferente();
+            
+         
           
                 ec.setCedulaOferente(rs.getString("cedulaOferente"));
                 ec.setPrimerApellido(rs.getString("primerApellido"));
@@ -1735,6 +1909,7 @@ public class Dao {
                 ec.setCorreoOferente(rs.getString("correoOferente"));
                 ec.setUbicacion(rs.getString("ubicacion"));
                 ec.setClave(rs.getString("clave"));
+                ec.setCelular(rs.getString("celular"));
                    
             
             return ec;

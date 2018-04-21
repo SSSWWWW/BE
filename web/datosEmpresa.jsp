@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="entidades.Puestos"%>
+<%@page import="entidades.Oferente"%>
 <%@page import="entidades.Especializacion"%>
 <%@page import="entidades.Area_Trabajo"%>
 <%@page import="logica.model"%>
@@ -25,7 +26,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="background-color: silver;">
     
     
 <jsp:useBean id="empresa" scope="session" type="Empresa" />
@@ -136,7 +137,10 @@
   </script>
 
         
- 
+ <style>::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: grey;
+    opacity: 1; /* Firefox */
+} </style>
         
         
         
@@ -144,7 +148,7 @@
         
        <br>  <form action="agregarPuesto" method="post" class="fem">
                       <legend>Agregar nuevo puesto</legend>
-           <input class="formfield" type="text" name="nombrePuesto" id="nombrePuesto" value="${param.nombrePuesto}" placeholder="Nombre Puesto" required><br>
+           <input class="formfield" type="text" name="nombrePuesto" id="nombrePuesto" value="${param.nombrePuesto}" placeholder="Nombre Puesto" required ><br>
            <input class="formfield" type="text" id="descripcionPuesto" name="descripcionPuesto" value="${param.descripcionPuesto}" placeholder="Descripcion" required><br>
            <input class="formfield" type="number" id="salarioPuesto" name="salarioPuesto" value="${param.salarioPuesto}" placeholder="Salario" required><br>
           <input class="formfield" type="hidden" id="nombreempresa" name="nombreempresa" value="<%=empresa.getNombreEmp() %>" placeholder="Salario" required>
@@ -223,15 +227,15 @@
             
             <jsp:useBean id="puestosListaEmp" scope="request" type="List<Puestos>" class="java.util.ArrayList"/>
             
-              <div style="overflow-x: auto; width:550px; height: 389px;">
+              <div style="overflow-x: auto; width:250px; height: 389px;">
 
-            <table style="overflow-x: auto; width:550px; height: 389px;" class="table table-sm table-dark">
+            <table style="overflow-x: auto; width:250px; height: 389px;" class="table table-sm table-dark">
               
-              <thead><tr><td>Nombre</td><td>Descripcion</td><td>Salario</td></tr></thead>
+              <thead><tr><td>Nombre</td></tr></thead>
               <tbody style="height: 250px;">
                 <% for(Puestos s: puestosListaEmp){ %>
-                     <tr><td><%= s.getNombrePuesto() %></td><td><%= s.getDescripcionPuesto() %></td>
-                     <td><%= s.getSalario()  %></td></tr>
+                     <tr><td><%= s.getNombrePuesto() %></td>
+                     </tr>
                <% } %>
             </tbody>
             </table>
@@ -243,15 +247,15 @@
               </div>
   
   
-              <div class="container" style=" float:right; display:inline-block; width:600px; height: 540px; ">
+              <div class="container" style=" float:right; display:inline-block; width:700px; height: 540px;">
                   <%  List<Caracteristicas> cc = model.instance().getAllCaracteristicas(); %>
                   
                   <h1 style="text-align: left; font-size: 150%;">Buscar Oferente </h1>
 
-<form style="float: left;" class = "formempresa"  action="buscarPuestos" method="get">
+<form style="float: left;" class = "formempresa"  action="buscarOferente" method="get">
     
      
-    <div style="overflow-x: auto; width:550px; height: 389px;">
+    <div style="overflow-x: auto; width:250px; height: 89px;">
  <table>
     
        <% for(Caracteristicas sc : cc){ %>
@@ -294,15 +298,30 @@
               <% } %>
  </table>
     </div>
-              
-              
-     
-<input type="submit" value="Buscar puesto">
+        <input class="formfield"  type="submit" value="Buscar Puesto">
 </form>
                   
+  <div id="body" style="margin: 0 auto; width:85%; display: inline-block; margin-left:20px;">   
+        <div id="listar" class="area" style="width:50%;">   
+            <br>
+            <jsp:useBean id="buscarOferente" scope="request" type="List<Oferente>" class="java.util.ArrayList"/>
+            <table class="table table-sm table-dark">
+              
+              <thead><tr><td>Nombre</td><td>Apellido</td><td>Correo</td><td>Ubicacion</td></tr></thead>
+              <tbody style="height: 250px;">
+                <% for(Oferente s: buscarOferente){ %>
+                     <tr><td><%= s.getNombreOferente() %></td><td><%= s.getPrimerApellido() %></td>
+                     <td><%= s.getCorreoOferente()  %></td><td><%= s.getUbicacion()  %></td></tr><br>
+               <% } %>
+            </tbody>
+            </table>
+      </div>
+    </div>
                   
               </div>   
  
+ 
+  
            
        
 

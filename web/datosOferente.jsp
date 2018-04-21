@@ -24,7 +24,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> 
 </head>
-<body>
+<body style="background-color: silver;">
 <jsp:useBean id="oferente" scope="session" type="Oferente" />
 
 
@@ -34,7 +34,7 @@
     
     <div style="left: 0px; width: 270px; top: 40px; " >  
     <table class="table table-sm table-dark">
-        <caption>Oferente</caption>
+       
         
         <tr><td><%=oferente.getNombreOferente()%> <%=oferente.getPrimerApellido() %></td></tr><br><br>
         <tr><td><%=oferente.getCedulaOferente()%></td></tr>

@@ -34,7 +34,30 @@ public class NewClass {
           
           model m;
           
-          String a = "402130856";
+          
+          String clrs[] = {"24" , "27"};
+          
+          List<EspecializacionIncluidaOferente> ei = model.instance().getEspecializacionIDOferente(clrs);
+          
+          for(EspecializacionIncluidaOferente car : ei){
+          
+               System.out.println("id puesto " + car.getCedulaOferente());
+                System.out.println("id empresa " + car.getIdespecializacion());
+               
+               }
+          
+          
+           List<Oferente> p = model.instance().getOferentePorID(ei);
+          
+          for(Oferente ca : p){
+          
+               System.out.println(ca.getNombreOferente());
+               
+               }
+          
+          
+          
+    /*      String a = "402130856";
           
           List<EspecializacionIncluidaOferente> pues = model.instance().getespecializacionyPorcentaje(a);
           

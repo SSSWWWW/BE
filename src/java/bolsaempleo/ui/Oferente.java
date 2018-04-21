@@ -5,7 +5,9 @@
  */
 package bolsaempleo.ui;
 
+import entidades.EspecializacionIncluida;
 import entidades.EspecializacionIncluidaOferente;
+import entidades.Puestos;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -22,7 +24,7 @@ import logica.model;
  * @author pc
  */
 
-@WebServlet(name = "Oferente", urlPatterns = {"/LoginOf", "/Logout" , "/agregarOferente" , "/agregarCaracteristicaOferente" , "/listarCaracteristicasOferente"})
+@WebServlet(name = "Oferente", urlPatterns = {"/LoginOf", "/Logout" , "/agregarOferente" , "/agregarCaracteristicaOferente" , "/listarCaracteristicasOferente" , "/buscarOferente"})
 public class Oferente extends HttpServlet {
 
     /**
@@ -54,7 +56,11 @@ public class Oferente extends HttpServlet {
             
         case "/listarCaracteristicasOferente":
             this.dolistarCaracteristicasOferente(request,response);
-            break;      
+            break;   
+            
+        case "/buscarOferente":
+            this.dobuscarOferente(request,response);
+            break;     
             
             
     }
@@ -247,6 +253,29 @@ oferente.setClave(clave);
           }		
 	}  
     
+      
+          protected void dobuscarOferente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+           try{
+               
+               String clrs[] = request.getParameterValues("names");
+            
+            List<EspecializacionIncluidaOferente> ei = model.instance().getEspecializacionIDOferente(clrs);
+            
+            List<entidades.Oferente> oferente = model.instance().getOferentePorID(ei);
+            
+            
+            
+            
+		request.setAttribute("buscarOferente", oferente);
+                request.getRequestDispatcher("datosEmpresa.jsp").forward( request, response);
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("datosEmpresa.jsp").forward( request, response);
+          }		
+	}  
     
     
     protected void doLogout(HttpServletRequest request, HttpServletResponse response)
