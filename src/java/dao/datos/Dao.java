@@ -1080,20 +1080,33 @@ public class Dao {
          
               public List<EspecializacionIncluida> EspecializacionIdPuesto(String cl[]) throws Exception{
         
-        
+        EspecializacionIncluida esin = new EspecializacionIncluida();
         
            db.getConnection();
         List<EspecializacionIncluida> estados = new ArrayList<>();
         try {
            
             for(int i=0; i<cl.length; i++){
-            String sql="select distinct ESPECIALIZACION_INCLUIDAS.idPuesto, ESPECIALIZACION_INCLUIDAS.idespecializacion, ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion, ESPECIALIZACION_INCLUIDAS.idEmp  from"+
+            String sql="select ESPECIALIZACION_INCLUIDAS.idPuesto, ESPECIALIZACION_INCLUIDAS.idespecializacion, ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion, ESPECIALIZACION_INCLUIDAS.idEmp  from"+
                     "  ESPECIALIZACION_INCLUIDAS "+
-                    "where ESPECIALIZACION_INCLUIDAS.idespecializacion ='%s' order by ESPECIALIZACION_INCLUIDAS.idPuesto";
+                    "where ESPECIALIZACION_INCLUIDAS.idespecializacion ='%s'";
             sql = String.format(sql,cl[i]);
             ResultSet rs =  db.executeQuery(sql);
-            while (rs.next()) {
-                estados.add(EspecializacionIncluida(rs));
+              if (rs.next() == false) {
+            esin.setIdEmp(0);
+            esin.setIdPuesto(0);
+            esin.setIdespecializacion(0);
+            esin.setPorcentajeEspecializacion(0);
+                
+            estados.add(esin);
+            } else {
+                
+                do{
+                
+                    estados.add(EspecializacionIncluida(rs));
+                
+                }while(rs.next());
+                
             }}
         } catch (SQLException ex) { }
         return estados;    
@@ -1220,36 +1233,46 @@ public class Dao {
         for(int i = 0 ; i < ei.size(); i++){
             
             idpues = ei.get(i).getIdPuesto();
+            cont = 0;
        
             for(int j = i ; j < ei.size() ; j++){
             
-                
                 System.out.println("idpues == ei.get(j).getIdPuesto() " + idpues + " " + ei.get(j).getIdPuesto());
+
                 if(idpues == ei.get(j).getIdPuesto()){
-                
+              
                     cont++;
+                 
+                    System.out.println("aumenta contador " + cont);
+                    
+                    
+                      if(cont == cantidadEspecializaciones){
+                 
+                System.out.println("cont == cantidadEspecializaciones " + cont + " == " + cantidadEspecializaciones);
+                System.out.println("AGREGA " + ei.get(j).getIdPuesto());
+                    
+                   
+                    pues.add(String.valueOf(ei.get(i).getIdPuesto()));
+                  
+               
+                } 
+                    
                     
                 }
+                
+                
+                
+                
                  
             }
             
-            System.out.println(" cont == cantidadEspecializaciones " + cont + " == " + cantidadEspecializaciones);
-             if(cont == cantidadEspecializaciones){
-                    
-                    pues.add(String.valueOf(ei.get(i).getIdPuesto()));
-               
-                } else {
-                    
-                    idpues = ei.get(i).getIdPuesto();
-                    cont = 0;
-               
-                }
+           
            
         }
         
          try {
            
-            
+          
             
             for(int i=0; i<pues.size(); i++){
             String sql="select puestos.nombrePuesto, puestos.salario, puestos.descripcionPuesto, puestos.estado, puestos.idPuesto from"+
@@ -1257,8 +1280,7 @@ public class Dao {
                     "where puestos.idPuesto  ='%s' and puestos.estado = '1'";
             sql = String.format(sql,pues.get(i));
             ResultSet rs =  db.executeQuery(sql);
-            while (rs.next()) {
-                
+             while (rs.next()) {
                 estados.add(puestos(rs));
             }}
         }catch (SQLException ex) { }
@@ -1494,15 +1516,20 @@ public class Dao {
       
         public Puestos PuestosGet(Puestos p) throws Exception{
             
+            System.out.println("DESDE PUESTOS GET");
+            System.out.println("PUESTO id " + p.getIdPuesto() );
+           System.out.println("PUESTO nombre " + p.getNombrePuesto() );
+         System.out.println("PUESTO descripcion " + p.getDescripcionPuesto() );
+
+
+            
              db.getConnection();
         String sql="select * from puestos where nombrePuesto='%s' and descripcionPuesto='%s'";
         sql = String.format(sql, p.getNombrePuesto(),p.getDescripcionPuesto());
         ResultSet rs =  db.executeQuery(sql);
-        if (rs.next()) {
-            return puestos(rs);
-        }
-        else{
-           float a = (float) 0.000;
+          if (rs.next() == false) {
+              
+                     float a = (float) 0.000;
                         Puestos pe = new Puestos();
                         pe.setNombrePuesto("v");
                         pe.setDescripcionPuesto("");
@@ -1512,7 +1539,18 @@ public class Dao {
                         pe.setSalario(a);
             return pe;
             
-        }
+            } else {
+                
+                do{
+                    
+                    return puestos(rs);
+                
+                
+                }while(rs.next());
+                
+            }
+        
+     
     }
         
         

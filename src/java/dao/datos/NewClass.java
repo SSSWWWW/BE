@@ -34,24 +34,39 @@ public class NewClass {
           
           model m;
           
+          float sal = 700000;
+        
+          Puestos p1 = new Puestos();
+          Puestos p2 = new Puestos();
+        p1.setDescripcionPuesto("Implementar, dar soporte y gestionar a las bases de datos corporativas, garantizando la seguridad de estas, planeando e implementando planes de contingencia.");
+        p1.setEstado(true);
+        p1.setIdPuesto(6);
+        p1.setNombrePuesto("Administrador de BD");
+        p1.setSalario(sal);
+        p2 = model.instance().getPuestos(p1);
           
-          String clrs[] = {"24" , "27"};
+        System.out.println("nombre " + p2.getNombrePuesto());
           
-          List<EspecializacionIncluidaOferente> ei = model.instance().getEspecializacionIDOferente(clrs);
+      /*    
+          String clrs[] = {"29" , "30"};
           
-          for(EspecializacionIncluidaOferente car : ei){
+         List<EspecializacionIncluida> ei = model.instance().getEspecializacionIncluidaID(clrs);
           
-               System.out.println("id puesto " + car.getCedulaOferente());
-                System.out.println("id empresa " + car.getIdespecializacion());
+          for(EspecializacionIncluida car : ei){
+          
+               
+                System.out.println("id empresa " + car.getIdEmp());
                
                }
           
           
-           List<Oferente> p = model.instance().getOferentePorID(ei);
+           List<Puestos> puestos = model.instance().getPuestosPorID(ei);
           
-          for(Oferente ca : p){
+          for(Puestos ca : puestos){
           
-               System.out.println(ca.getNombreOferente());
+               System.out.println(ca.getNombrePuesto());
+               System.out.println(ca.getIdPuesto());
+               
                
                }
           

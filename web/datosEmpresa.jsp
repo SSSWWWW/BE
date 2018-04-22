@@ -155,7 +155,7 @@
             
              <select name="estado" id="estado">
                  
-               <option value="">Estado</option>   
+               <option value="true">Estado</option>   
               <option value="true">Publico</option>
               <option value="false">Privado</option>
                </select><br>
