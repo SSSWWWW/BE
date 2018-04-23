@@ -307,7 +307,7 @@
             <jsp:useBean id="buscarOferente" scope="request" type="List<Oferente>" class="java.util.ArrayList"/>
             <table class="table table-sm table-dark">
               
-              <thead><tr><td>Nombre</td><td>Apellido</td><td>Correo</td><td>Ubicacion</td></tr></thead>
+              <thead><tr><td>Nombre</td><td>Apellido</td><td>Correo</td><td>Ubicacion</td><td>Curriculum</td></tr></thead>
               <tbody style="height: 250px;">
                 <% for(Oferente s: buscarOferente){ %>
                      <tr><td><%= s.getNombreOferente() %></td><td><%= s.getPrimerApellido() %></td>

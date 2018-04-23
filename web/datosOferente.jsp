@@ -94,7 +94,9 @@
               
            
            <input class="formfield"  type="submit" value="Agregar Caracteristica">
-           </form>
+           </form><br><br>
+              
+              
          
                    
         <%
@@ -103,13 +105,24 @@
        out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
     }
 %>
-         
+       
+
+ <form method="POST" action="upload" enctype="multipart/form-data" onsubmit="alert('Curriculum agregado!')">
+             <legend>Subir curriculum (formato .pdf)</legend>
+           <input type="file" value="<%= oferente.getCedulaOferente() %>" name="file" id="file" /> <br/>
+            Buscar:
+            
+            <input type="hidden"  name="cedula" value="<%= oferente.getCedulaOferente() %>">
+            <input type="hidden" value="C:\Users\pc\GlassFish_Server\glassfish\domains\domain1\applications\__internal\BolsaEmpleo" name="destination"/>
+            <input type="submit" value="Subir" name="upload" id="upload" />
+        </form>
+
 
 </div>
 
  <div class="container" style="display:inline-block; width:200px; height: 540px; ">
 
-<form action="listarCaracteristicasOferente" method="get" class = "formoferente">
+<form action="listarCaracteristicasOferente" method="get" class = "formoferente" >
   
   <input type="hidden"  name="cedula" value="<%= oferente.getCedulaOferente() %>"><br>
    
@@ -137,11 +150,15 @@
                <% } %>
             </tbody>
             </table>
+          
+            
               </div>
       </div>
     </div>  
   
     </div>
+            
+
 
 
 <div class = "salir" style="position:fixed ; top:0%; right:0%;" >

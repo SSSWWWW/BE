@@ -10,6 +10,16 @@ import entidades.EspecializacionIncluidaOferente;
 import entidades.Puestos;
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,9 +34,11 @@ import logica.model;
  * @author pc
  */
 
-@WebServlet(name = "Oferente", urlPatterns = {"/LoginOf", "/Logout" , "/agregarOferente" , "/agregarCaracteristicaOferente" , "/listarCaracteristicasOferente" , "/buscarOferente"})
+@WebServlet(name = "Oferente", urlPatterns = {"/LoginOf", "/Logout" , "/agregarOferente" , "/agregarCaracteristicaOferente" , "/listarCaracteristicasOferente" , "/buscarOferente" })
 public class Oferente extends HttpServlet {
 
+
+      
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -60,8 +72,8 @@ public class Oferente extends HttpServlet {
             
         case "/buscarOferente":
             this.dobuscarOferente(request,response);
-            break;     
-            
+            break;   
+       
             
     }
   }
@@ -277,6 +289,9 @@ oferente.setClave(clave);
           }		
 	}  
     
+          
+             
+  
     
     protected void doLogout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
