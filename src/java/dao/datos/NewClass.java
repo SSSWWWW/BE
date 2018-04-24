@@ -40,12 +40,12 @@ public class NewClass {
           Puestos p2 = new Puestos();
         p1.setDescripcionPuesto("Implementar, dar soporte y gestionar a las bases de datos corporativas, garantizando la seguridad de estas, planeando e implementando planes de contingencia.");
         p1.setEstado(true);
-        p1.setIdPuesto(6);
+        p1.setIdPuesto(3);
         p1.setNombrePuesto("Administrador de BD");
         p1.setSalario(sal);
-        p2 = model.instance().getPuestos(p1);
+         model.instance().updatePuestos(p1);
           
-        System.out.println("nombre " + p2.getNombrePuesto());
+      //  System.out.println("nombre " + p2.getNombrePuesto());
           
       /*    
           String clrs[] = {"29" , "30"};

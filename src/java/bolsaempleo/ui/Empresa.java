@@ -30,7 +30,7 @@ import logica.model;
  */
 
     @WebServlet(name = "Empresa", urlPatterns = {"/LoginEm", "/LogoutEm" , "/agregarEmpresa" , 
-    "/listarCaracteristicas", "/agregarPuesto" , "/listarPuestosEmp"})
+    "/listarCaracteristicas", "/agregarPuesto" , "/listarPuestosEmp" , "/editarpuesto"})
 public class Empresa extends HttpServlet {
 
     /**
@@ -68,6 +68,10 @@ public class Empresa extends HttpServlet {
             
             case "/listarPuestosEmp":
             this.dolistarPuestosEmp(request,response);
+            break; 
+            
+             case "/editarpuesto":
+            this.doeditarpuesto(request,response);
             break; 
             
     }
@@ -293,6 +297,60 @@ empresa.setClave(clave);
                 request.getRequestDispatcher("Error.jsp").forward( request, response);
           }		
 	}  
+        
+        
+        
+           protected void doeditarpuesto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+           try{
+               
+                
+//<editor-fold defaultstate="collapsed" desc="...">
+        String nombrePuesto   = request.getParameter("nombrePuesto");
+        String idPuesto = request.getParameter("idpu");
+        String descripcionPuesto   = request.getParameter("descripcionPuesto");
+        String salarioPuesto   = request.getParameter("salarioPuesto");
+       
+      
+        String estado = request.getParameter("estado");
+        
+       int idpu = Integer.parseInt(idPuesto);
+       float salarioPu = Float.parseFloat(salarioPuesto);
+       
+        
+       boolean est = true;
+       
+       if(estado.equals("true")){
+       
+           est = true;
+       }
+       
+       if(estado.equals("false")){
+       
+           est = false;
+       }
+       
+       Puestos puestos = new Puestos();
+       
+       puestos.setDescripcionPuesto(descripcionPuesto);
+       puestos.setEstado(est);
+       puestos.setIdPuesto(idpu);
+       puestos.setNombrePuesto(nombrePuesto);
+       puestos.setSalario(salarioPu);
+               
+        model.instance().updatePuestos(puestos);
+               
+               
+		request.setAttribute("puestos", puestos);
+                request.getRequestDispatcher("datosEmpresa.jsp").forward( request, response);
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("datosEmpresa.jsp").forward( request, response);
+          }		
+	}
+        
        
           protected void doLogout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

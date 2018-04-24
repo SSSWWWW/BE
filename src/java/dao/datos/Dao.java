@@ -1470,15 +1470,33 @@ public class Dao {
     }
      
               public void PuestosUpdate(Puestos p) throws Exception{
-        String sql="update bolsaempleo.puestos set nombrePuesto='%s', salario='%s' , descripcionPuesto='%s', estado='%s'"   +
-                "where idPuesto='%s'";
-        sql=String.format(sql,p.getNombrePuesto(),
-                p.getSalario(),p.getDescripcionPuesto(),p.isEstado(), p.getIdPuesto());
         
-        int count=db.executeUpdate(sql);
-        if (count==0){
-            throw new Exception("puestos no existe");
-        }
+                  try
+  {
+                  db.getConnection();
+                  
+                   String sql="update puestos set  salario= ? , estado=? "   +
+                " where idPuesto=?";
+        PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
+        System.out.println("despues de prepared" );
+        preparedStmt.setFloat(1, p.getSalario());
+        preparedStmt.setBoolean (2, p.isEstado());
+        preparedStmt.setInt (3, p.getIdPuesto());
+       
+        preparedStmt.execute();
+    
+        System.out.println("salario " + p.getSalario());
+        System.out.println("estado " + p.isEstado());
+        System.out.println("id " + p.getIdPuesto());
+        
+        sql=String.format(sql,p.getSalario(),p.isEstado(), p.getIdPuesto());
+  }   
+        catch (SQLException se)
+  {
+    // log the exception
+    throw new Exception("puestos no existe" );
+  }
+        
     }
               
               

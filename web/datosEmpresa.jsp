@@ -58,11 +58,7 @@
    </div>
         
         
-       
-        
-       
-        
-    <br>
+  <br>
     
     
     
@@ -146,13 +142,16 @@
         
         <%  List<Caracteristicas> c = model.instance().getAllCaracteristicas(); %>
         
-       <br>  <form action="agregarPuesto" method="post" class="fem">
-                      <legend>Agregar nuevo puesto</legend>
+       <br>  <form id="formpuesto" action="agregarPuesto" method="post" class="fem">
+                      <legend id="leg" >Agregar nuevo puesto</legend>
            <input class="formfield" type="text" name="nombrePuesto" id="nombrePuesto" value="${param.nombrePuesto}" placeholder="Nombre Puesto" required ><br>
            <input class="formfield" type="text" id="descripcionPuesto" name="descripcionPuesto" value="${param.descripcionPuesto}" placeholder="Descripcion" required><br>
            <input class="formfield" type="number" id="salarioPuesto" name="salarioPuesto" value="${param.salarioPuesto}" placeholder="Salario" required><br>
           <input class="formfield" type="hidden" id="nombreempresa" name="nombreempresa" value="<%=empresa.getNombreEmp() %>" placeholder="Salario" required>
             
+          <input class="formfield" type="hidden" id="idpu" name="idpu">
+
+          
              <select name="estado" id="estado">
                  
                <option value="true">Estado</option>   
@@ -161,7 +160,7 @@
                </select><br>
               
               
-             <select name="caracteristicas" id="caracteristicas">
+             <select  name="caracteristicas" id="caracteristicas">
                  
               <option value="" selected>Caracteristicas</option>
                  
@@ -184,7 +183,7 @@
                </select><br>
                
                  
-           <input class="formfield" type="hidden" id="aux" name="aux" placeholder="Porcentaje caracteristica" required>   
+           <input class="formfield" type="hidden" id="aux" name="aux" placeholder="Porcentaje caracteristica" >   
    
 
            
@@ -194,12 +193,12 @@
                   </select>
 
                
-              <input class="formfield" type="number" name="porcentaje" value="${param.porcentaje}" placeholder="Porcentaje caracteristica" required><br>    
+              <input class="formfield" type="number" name="porcentaje" value="${param.porcentaje}" placeholder="Porcentaje caracteristica" ><br>    
               
            
               
               
-           <input class="formfield"  type="submit" value="Agregar Puesto">
+           <input id="ag" class="formfield"  type="submit" value="Agregar Puesto">
            </form>
               
                      <%
@@ -219,6 +218,32 @@
    
  
 <input type="submit" value="Ver Puestos Publicados" >
+
+<script> 
+    
+    function editar(idpuesto , nombre , descripcion , salario , estado){
+    
+         // alert("You have reached the limit of adding  inputs " + idpuesto);
+          document.getElementById("leg").innerHTML = "Editar puesto";
+          document.getElementById("ag").value = "Editar";
+           document.getElementById("nombrePuesto").value = nombre;
+           document.getElementById("descripcionPuesto").value = descripcion;
+            document.getElementById("salarioPuesto").value = salario;
+            document.getElementById("estado").value = estado;
+            
+          document.getElementById("formpuesto").action = 'editarpuesto';
+       
+         
+          
+          
+          document.getElementById("idpu").value = idpuesto;
+   
+}
+    
+    
+</script>    
+
+
   </form>
               
               
@@ -234,7 +259,8 @@
               <thead><tr><td>Nombre</td></tr></thead>
               <tbody style="height: 250px;">
                 <% for(Puestos s: puestosListaEmp){ %>
-                     <tr><td><%= s.getNombrePuesto() %></td>
+                <tr><td id="idpues" value="<%= s.getIdPuesto()%>" onClick="editar('<%= s.getIdPuesto()%>' , '<%= s.getNombrePuesto() %>' , '<%=s.getDescripcionPuesto() %>' , '<%=s.getSalario() %>', '<%=s.isEstado() %>');" ><%= s.getNombrePuesto() %></td>
+
                      </tr>
                <% } %>
             </tbody>
