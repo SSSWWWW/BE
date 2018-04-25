@@ -56,8 +56,8 @@
          
 </div>
          
-         <form action="agregarCaracteristicaOferente" method="post" class="fem">
-                      <legend>Agregar caracteristicas</legend>
+         <form id="formoferente" action="agregarCaracteristicaOferente" method="post" class="fem">
+                      <legend id="leg" >Agregar caracteristicas</legend>
            
                       <input class="formfield" type="hidden" id="cedulaOferente" name="cedulaOferente" value="<%= oferente.getCedulaOferente() %>">
             
@@ -76,8 +76,9 @@
                         <option >&#160; <%= artr.getNombreAreaTrabajo()  %></option>
                       <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
                        <% for(Especializacion esp : es){ %>
-                       <option value="<%= esp.getIdespecializacion() %>">&#160;&#160;&#160; <%= esp.getNombreEspecializacion() %></option>
+                       <option id="nombreesp" value="<%= esp.getIdespecializacion() %>">&#160;&#160;&#160; <%= esp.getNombreEspecializacion() %></option>
                         
+                       
                  <% } %>
                                 
                <% } %>
@@ -90,10 +91,10 @@
            
 
                
-              <input class="formfield" type="number" name="porcentaje" value="${param.porcentaje}" placeholder="Porcentaje caracteristica" required><br>    
+              <input id="porcentaj" class="formfield" type="number" name="porcentaje" value="${param.porcentaje}" placeholder="Porcentaje caracteristica" required><br>    
               
            
-           <input class="formfield"  type="submit" value="Agregar Caracteristica">
+           <input id="ag" class="formfield"  type="submit" value="Agregar Caracteristica">
            </form><br><br>
               
               
@@ -128,6 +129,38 @@
    
  
 <input type="submit" value="Ver caracteristicas registradas" >
+
+
+<script> 
+    
+    function editar(nombreesp , idesp , porcentaje){
+    
+       
+    
+         // alert("You have reached the limit of adding  inputs " + idpuesto);
+          document.getElementById("leg").innerHTML = "Editar caracteristica";
+          document.getElementById("ag").value = "Editar";
+         //  document.getElementById("nombreesp").value = nombreesp;
+           document.getElementById("porcentaj").value = porcentaje;
+           document.getElementById("caracteristicas").value = idesp;
+          //  document.getElementById("salarioPuesto").value = salario;
+          //  document.getElementById("estado").value = estado;
+            
+          document.getElementById("formoferente").action = 'editarespecializacionOf';
+       
+         
+          
+          
+      //    document.getElementById("idpu").value = idpuesto;
+   
+}
+    
+    
+</script> 
+
+
+
+
   </form>
   
   
@@ -145,7 +178,7 @@
               <thead><tr><td>Caracteristica</td><td>Porcentaje</td></tr></thead>
               <tbody style="height: 100px;">
                 <% for(EspecializacionIncluidaOferente s: listarCaracteristicasOferente){ %>
-                     <tr><td><%= s.getNombreEspecializacion() %></td><td><%= s.getPorcentajeEspecializacion() %></td>
+                     <tr><td id="idcarac" value="<%= s.getCedulaOferente() %>" onClick="editar('<%= s.getNombreEspecializacion() %>' , '<%= s.getIdespecializacion() %>' , '<%= s.getPorcentajeEspecializacion() %>');"  ><%= s.getNombreEspecializacion() %></td><td><%= s.getPorcentajeEspecializacion() %></td>
                      </tr>
                <% } %>
             </tbody>

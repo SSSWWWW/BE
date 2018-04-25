@@ -379,6 +379,10 @@ public class model {
            dao.EspecializacionIncluidaOferenteAdd(p);
        }
             
+             public void EspecializacionOferenteUpdate(EspecializacionIncluidaOferente p) throws Exception{
+           dao.EspecializacionOferenteUpdate(p);
+       }
+            
             public List<EspecializacionIncluidaOferente> getespecializacionyPorcentaje(String p) throws Exception{
            return dao.caracteristicasPorcentaje(p);
        }

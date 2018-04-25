@@ -34,7 +34,7 @@ import logica.model;
  * @author pc
  */
 
-@WebServlet(name = "Oferente", urlPatterns = {"/LoginOf", "/Logout" , "/agregarOferente" , "/agregarCaracteristicaOferente" , "/listarCaracteristicasOferente" , "/buscarOferente" })
+@WebServlet(name = "Oferente", urlPatterns = {"/LoginOf", "/Logout" , "/agregarOferente" , "/agregarCaracteristicaOferente" , "/listarCaracteristicasOferente" , "/buscarOferente", "/editarespecializacionOf" })
 public class Oferente extends HttpServlet {
 
 
@@ -72,7 +72,11 @@ public class Oferente extends HttpServlet {
             
         case "/buscarOferente":
             this.dobuscarOferente(request,response);
-            break;   
+            break; 
+            
+         case "/editarespecializacionOf":
+            this.doeditarespecializacionOf(request,response);
+            break;    
        
             
     }
@@ -201,6 +205,48 @@ oferente.setClave(clave);
         
         
         }
+     
+     
+     
+     protected void doeditarespecializacionOf(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+         try{
+                 
+//<editor-fold defaultstate="collapsed" desc="...">
+        String caracteristicas   = request.getParameter("caracteristicas");
+        String porcentaje   = request.getParameter("porcentaje");
+        String cedulaOferente   = request.getParameter("cedulaOferente");
+        
+        int porcen = Integer.valueOf(porcentaje);
+        int carac = Integer.valueOf(caracteristicas);
+        
+        entidades.EspecializacionIncluidaOferente oferenteCarac = new EspecializacionIncluidaOferente();
+        
+        oferenteCarac.setCedulaOferente(cedulaOferente);
+        oferenteCarac.setIdespecializacion(carac);
+        oferenteCarac.setPorcentajeEspecializacion(porcen);
+        
+        oferenteCarac.setCedulaOferente(cedulaOferente);
+
+      
+//oferente.setCedulaOferente("554533243");
+//oferente.setClave("sss");
+//</editor-fold>
+        model.instance().EspecializacionOferenteUpdate(oferenteCarac);
+               
+               
+		request.setAttribute("oferenteCarac", oferenteCarac);
+                request.getRequestDispatcher("datosOferente.jsp").forward( request, response);
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("datosOferente.jsp").forward( request, response);
+          }
+        
+        
+        }
+     
     
     protected void doregistroOferenteAgregar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         

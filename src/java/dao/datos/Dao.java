@@ -1500,6 +1500,41 @@ public class Dao {
     }
               
               
+         public void EspecializacionOferenteUpdate(EspecializacionIncluidaOferente p) throws Exception{
+        
+                  try
+  {
+                  db.getConnection();
+                  
+                   String sql="update especializacion_incluidasoferente set porcentajeEspecializacion= ? "   +
+                " where cedulaOferente=? and idEspecializacion=?";
+        PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
+        System.out.println("despues de prepared" );
+        preparedStmt.setFloat(1, p.getPorcentajeEspecializacion());
+        preparedStmt.setString (2, p.getCedulaOferente());
+        preparedStmt.setInt (3, p.getIdespecializacion());
+        
+       
+        preparedStmt.execute();
+    
+     //   System.out.println("salario " + p.getSalario());
+       // System.out.println("estado " + p.isEstado());
+       // System.out.println("id " + p.getIdPuesto());
+        
+       // sql=String.format(sql,p.getSalario(),p.isEstado(), p.getIdPuesto());
+  }   
+        catch (SQLException se)
+  {
+    // log the exception
+    throw new Exception("puestos no existe" );
+  }
+        
+    }          
+              
+              
+              
+              
+              
                  public void PuestosDelete(Puestos p) throws Exception{
         String sql="delete from bolsaempleo.puestos where idPuesto='%s'";
         sql = String.format(sql,p.getIdPuesto());

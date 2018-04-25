@@ -223,6 +223,8 @@
     
     function editar(idpuesto , nombre , descripcion , salario , estado){
     
+       
+    
          // alert("You have reached the limit of adding  inputs " + idpuesto);
           document.getElementById("leg").innerHTML = "Editar puesto";
           document.getElementById("ag").value = "Editar";
