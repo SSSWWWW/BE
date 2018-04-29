@@ -54,9 +54,16 @@
   
  </div>
          
+      
+         
+         
 </div>
          
-         <form id="formoferente" action="agregarCaracteristicaOferente" method="post" class="fem">
+         
+         
+         
+         
+         <form   method="POST" id="formoferente" class="fem" action="javascript:add();">
                       <legend id="leg" >Agregar caracteristicas</legend>
            
                       <input class="formfield" type="hidden" id="cedulaOferente" name="cedulaOferente" value="<%= oferente.getCedulaOferente() %>">
@@ -94,7 +101,7 @@
               <input id="porcentaj" class="formfield" type="number" name="porcentaje" value="${param.porcentaje}" placeholder="Porcentaje caracteristica" required><br>    
               
            
-           <input id="ag" class="formfield"  type="submit" value="Agregar Caracteristica">
+           <input id="ag" class="boton"  type="submit" value="Agregar Caracteristica">
            </form><br><br>
               
               
@@ -130,8 +137,37 @@
  
 <input type="submit" value="Ver caracteristicas registradas" >
 
-
+    <script type="text/javascript" src="js/ajax.js"></script> 
 <script> 
+    
+         function add(){
+          
+       //   var car = document.getElementById("nombreesp").value;
+          
+     //    window.alert("car " + car);
+   
+       espOf = {idespecializacion: document.getElementById("caracteristicas").value,
+			porcentajeEspecializacion: document.getElementById("porcentaj").value,
+			//sexo: document.querySelector("input[name='sexo']:checked").value
+                        cedulaOferente: document.getElementById("cedulaOferente").value
+      };
+          //     window.alert("car " + espOf.cedulaOferente + " " + espOf.idespecializacion + " " + espOf.porcentajeEspecializacion);
+                 
+            ajax({"method": "POST", 
+                  "url":"agregarCaracteristicaOferente", 
+                  "data": espOf, 
+                  "success": 
+                    function(obj){
+                      //  updateList(obj); 
+                       // document.getElementById("formulario").reset();
+                        window.alert("Caracteristica agregada");
+                    },
+                  "error": function(status){
+                         window.alert("Error aqui");
+                    }                    
+                });         
+  }  
+    
     
     function editar(nombreesp , idesp , porcentaje){
     
@@ -148,12 +184,11 @@
             
           document.getElementById("formoferente").action = 'editarespecializacionOf';
        
-         
-          
-          
       //    document.getElementById("idpu").value = idpuesto;
    
 }
+
+
     
     
 </script> 
