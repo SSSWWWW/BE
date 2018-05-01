@@ -27,6 +27,15 @@ public class Puestos  implements java.io.Serializable {
         this.descripcionPuesto = descripcionPuesto;
         this.estado = estado;
     }
+    
+    
+     public Puestos( String nombrePuesto, Float salario, String descripcionPuesto, boolean estado) {
+        
+        this.nombrePuesto = nombrePuesto;
+        this.salario = salario;
+        this.descripcionPuesto = descripcionPuesto;
+        this.estado = estado;
+    }
 
     public Integer getIdPuesto() {
         return idPuesto;

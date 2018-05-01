@@ -14,6 +14,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="entidades.Empresa" %>
 <%@ page import="entidades.Caracteristicas" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -130,6 +131,9 @@
         .change(onChange)
         .keyup(onChange);
 });
+
+
+
   </script>
 
         
@@ -142,7 +146,7 @@
         
         <%  List<Caracteristicas> c = model.instance().getAllCaracteristicas(); %>
         
-       <br>  <form id="formpuesto" action="agregarPuesto" method="post" class="fem">
+       <br>  <form action="agregarPuesto"  id="formpuesto"  method="POST" class="fem">
                       <legend id="leg" >Agregar nuevo puesto</legend>
            <input class="formfield" type="text" name="nombrePuesto" id="nombrePuesto" value="${param.nombrePuesto}" placeholder="Nombre Puesto" required ><br>
            <input class="formfield" type="text" id="descripcionPuesto" name="descripcionPuesto" value="${param.descripcionPuesto}" placeholder="Descripcion" required><br>
@@ -198,7 +202,7 @@
            
               
               
-           <input id="ag" class="formfield"  type="submit" value="Agregar Puesto">
+           <input id="ag" class="formfield" type="submit" value="Agregar Puesto">
            </form>
               
                      <%
@@ -217,7 +221,11 @@
   <input type="hidden"  name="idEmp" value="<%=empresa.getIdEmp() %>"><br>
    
  
-<input type="submit" value="Ver Puestos Publicados" >
+<input type="submit"  value="Ver Puestos Publicados" >
+
+
+
+
 
 <script> 
     
@@ -241,6 +249,42 @@
           document.getElementById("idpu").value = idpuesto;
    
 }
+
+ 
+
+
+
+   function actualizarpuesto(){
+       
+     
+        
+         puesto = {
+	           nombrePuesto: document.getElementById("nombrePuesto").value,
+			//sexo: document.querySelector("input[name='sexo']:checked").value
+                    salario: document.getElementById("salarioPuesto").value,
+                    descripcionPuesto: document.getElementById("descripcionPuesto").value,
+                    estado: document.getElementById("estado").value
+      };
+          ajax({"method": "POST", 
+                  "url":"listarPuestosEmp", 
+                  "data": puesto,
+                  "success": 
+                    function(obj){
+                      //  updateList(obj); 
+                       // document.getElementById("formulario").reset();
+                        window.alert("Actualizada");
+                       
+                        
+                    },
+                 
+                 "error": function(status){
+                         window.alert("Error actualizar");
+                    }  
+                                   
+                });  
+        
+        
+    }
     
     
 </script>    
