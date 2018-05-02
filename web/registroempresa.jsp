@@ -10,68 +10,56 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
 
 <!DOCTYPE html>
 <html>
-    
-   
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="initial-scale=1.0">
-
-
-<link rel = "stylesheet" href = "css/registroempresa.css">
-   
-
-   <head >
-    <title>Registro Empresa</title>
-  </head>
-
-  
-       <body> 
-      <h1>REGISTRO EMPRESA</h1>
-      
-  
-           <%
-    if(null!=request.getAttribute("error"))
-    {
-       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
-    }
-%>
-  
-   <form class = "formempresa"  action="agregarEmpresa" method="get">
- <div class = "divempresa">
-     
-   
- 
-
-  <input type="text" placeholder = "Nombre" name="nombreempresa" value="${param.nombreempresa}"><br><br>
-  
-  <input type="email" placeholder = "e-mail" name="email" value="${param.email}"><br><br>
- 
-  <input type="password" placeholder = "password" name="contrasena" value="${param.contrasena}"><br><br>
-  
-  <input type="tel" placeholder = "telefono" name="telefono" value="${param.telefono}"><br><br>
-   
-  <input type="text" placeholder = "descripcion" name="descripcion" value="${param.descripcion}"><br><br>
-  
-  <input type="hidden" id="latclicked"  name="longitud" value="${param.longitud}"><br><br>
-  
-  <input type="hidden" id="longclicked"  name="latitud" value="${param.latitud}"><br><br>
-  
-    
-  
-  
-
-  </form><br><br>
-
 <head>
-
-<h1>Localizacion</h1>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel = "stylesheet" href = "css/forms.css">
+   <title>Registro Empresa</title>
  <style>          
           #map { 
             height: 300px;    
             width: 600px;            
           }          
-        </style> 
+        </style>
+</head>
+<body>
+    
+    
+     
+       
+    
+
+
+<div id="id01" class="modal">
+  
+  <form class="modal-content animate" action="agregarEmpresa" method="get">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <img src='images/empresa.png' alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+    
+  <input type="text" placeholder = "Nombre" name="nombreempresa" value="${param.nombreempresa}">
+  
+  <input type="email" placeholder = "e-mail" name="email" value="${param.email}">
+ 
+  <input type="password" placeholder = "password" name="contrasena" value="${param.contrasena}">
+  
+  <input type="tel" placeholder = "telefono" name="telefono" value="${param.telefono}">
+   
+  <input type="text" placeholder = "descripcion" name="descripcion" value="${param.descripcion}">
+  
+  <input type="hidden" id="latclicked"  name="longitud" value="${param.longitud}">
+  
+  <input type="hidden" id="longclicked"  name="latitud" value="${param.latitud}">
+        
+    
+    </div>
+
+      
+      <h1>Localizacion</h1>
+
+
         
 
 <script type="text/javascript">
@@ -154,14 +142,29 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
         <div class = "map" style="padding:10px">
             <div id = "map" ></div>
         </div>
+      
+        <button type="submit">Registrar</button>
 
- 
-<input type="submit" value="Continuar" ></div>
-
-	  
-	  <center>
+  </form>
+    
+    
+    
+    <center>
       <a href = "principal.jsp" target = "_self">Regresar</a></center>
-  
-     
-  </body>
+    
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+</body>
 </html>

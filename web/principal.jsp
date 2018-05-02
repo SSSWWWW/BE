@@ -50,7 +50,7 @@
           
             <ul>
               <li>
-                <a href="#" style="color:white;">Registro</a>
+                <a href="#" style="color:white;">Registro &nbsp; </a>
                 
                 <ul>
                  <li><a href="registroempresa.jsp">Registro empresa</a></li>
@@ -61,7 +61,7 @@
           
            <ul>
               <li>
-                <a href="#" style="color:white;">  Inicio</a>
+                <a href="#" style="color:white;">Inicio</a>
                 <ul>
                  <li><a href="inicioEmpresa.jsp">Inicio empresa</a></li>
                   <li><a href="inicioOferente.jsp">Inicio oferente</a></li>

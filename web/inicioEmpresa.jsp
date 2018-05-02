@@ -14,7 +14,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
-<link rel = "stylesheet" href = "css/registroempresa.css">
+<link rel = "stylesheet" href = "css/forms.css">
    
 
    <head >
@@ -23,12 +23,22 @@
 
   
        <body> 
-      <h1>INICIO EMPRESA</h1>
+    
   
     <form action="LoginEm" method="post">
+        
+          <div class="imgcontainer">
+      <img src='images/empresa.png' alt="Avatar" class="avatar">
+    </div>
+        
+       <div class="container">
+            <label for="uname"><b>Empresa</b></label><br>
            <input class="formfield" type="text" name="correoEmpresa" placeholder="Usuario" required><br>
            <input class="formfield" type="password" name="clave" placeholder="Clave" required><br>
-           <input class="formfield"  type="submit" value="Ingresar">
+           
+           <button type="submit">Ingresar</button>
+           
+       </div>
        </form>
   
        <center>

@@ -22,107 +22,14 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {font-family: Arial, Helvetica, sans-serif;}
+<link rel = "stylesheet" href = "css/forms.css">
 
-/* Full-width input fields */
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-/* Set a style for all buttons */
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
-
-button:hover {
-    opacity: 0.8;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #f44336;
-}
-
-/* Center the image and position the close button */
-.imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-    position: relative;
-}
-
-img.avatar {
-    width: 40%;
-    border-radius: 50%;
-}
-
-.container {
-    padding: 16px;
-}
-
-span.psw {
-    float: right;
-    padding-top: 16px;
-}
-
-/* The Modal (background) */
-
-/* The Close Button (x) */
-.close {
-    position: absolute;
-    right: 25px;
-    top: 0;
-    color: #000;
-    font-size: 35px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: red;
-    cursor: pointer;
-}
-
-/* Add Zoom Animation */
-.animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
-}
-
-@-webkit-keyframes animatezoom {
-    from {-webkit-transform: scale(0)} 
-    to {-webkit-transform: scale(1)}
-}
-    
-@keyframes animatezoom {
-    from {transform: scale(0)} 
-    to {transform: scale(1)}
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-    span.psw {
-       display: block;
-       float: none;
-    }
-    .cancelbtn {
-       width: 100%;
-    }
-}
-</style>
+ <style>          
+          #map { 
+            height: 300px;    
+            width: 600px;            
+          }          
+        </style>
 </head>
 <body>
     
@@ -134,27 +41,122 @@ span.psw {
 
 <div id="id01" class="modal">
   
-  <form class="modal-content animate" action="LoginOf" method="post">
+  <form class="modal-content animate" action="agregarEmpresa" method="get">
     <div class="imgcontainer">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="img_avatar2.png" alt="Avatar" class="avatar">
+      <img src='images/empresa.png' alt="Avatar" class="avatar">
     </div>
 
     <div class="container">
-      <label for="uname"><b>Usuario</b></label>
-      <input class="formfield" type="text" name="correoOferente" placeholder="Usuario" required><br>
-
-      <label for="psw"><b>Clave</b></label>
-      <input class="formfield" type="password" name="clave" placeholder="Clave" required><br>
+    
+  <input type="text" placeholder = "Nombre" name="nombreempresa" value="${param.nombreempresa}">
+  
+  <input type="email" placeholder = "e-mail" name="email" value="${param.email}">
+ 
+  <input type="password" placeholder = "password" name="contrasena" value="${param.contrasena}">
+  
+  <input type="tel" placeholder = "telefono" name="telefono" value="${param.telefono}">
+   
+  <input type="text" placeholder = "descripcion" name="descripcion" value="${param.descripcion}">
+  
+  <input type="hidden" id="latclicked"  name="longitud" value="${param.longitud}">
+  
+  <input type="hidden" id="longclicked"  name="latitud" value="${param.latitud}">
         
-      <button type="submit">Ingresar</button>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Recordar
-      </label>
+    
     </div>
 
+      
+      <h1>Localizacion</h1>
+
+
+        
+
+<script type="text/javascript">
+        var map;
+        
+        function initMap() {                            
+            var latitude = 10; // YOUR LATITUDE VALUE
+            var longitude = -84; // YOUR LONGITUDE VALUE
+            
+            var myLatLng = {lat: latitude, lng: longitude};
+            
+            map = new google.maps.Map(document.getElementById('map'), {
+              center: myLatLng,
+              zoom: 8.2,
+              disableDoubleClickZoom: true, // disable the default map zoom on double click
+            });
+            
+            // Update lat/long value of div when anywhere in the map is clicked    
+            google.maps.event.addListener(map,'dragend',function(event) {                
+                 document.getElementById('latclicked').value = event.latLng.lat();
+                  document.getElementById('longclicked').value =  event.latLng.lng();
+            });
+            
+            // Update lat/long value of div when you move the mouse over the map
+            google.maps.event.addListener(map,'mousemove',function(event) {
+                document.getElementById('latmoved').innerHTML = event.latLng.lat();
+                document.getElementById('longmoved').innerHTML = event.latLng.lng();
+            });
+                    
+            var marker = new google.maps.Marker({
+              position: myLatLng,
+              map: map,
+              draggable: true,
+              //title: 'Hello World'
+              
+              // setting latitude & longitude as title of the marker
+              // title is shown when you hover over the marker
+              title: latitude + ', ' + longitude 
+            });    
+            
+            // Update lat/long value of div when the marker is clicked
+            marker.addListener('dragend', function(event) {              
+               document.getElementById('latclicked').value = event.latLng.lat();
+                  document.getElementById('longclicked').value =  event.latLng.lng();
+            });
+            
+            // Create new marker on double click event on the map
+            google.maps.event.addListener(map,'dragend',function(event) {
+                var marker = new google.maps.Marker({
+                  position: event.latLng, 
+                  map: map, 
+                  title: event.latLng.lat()+', '+event.latLng.lng()
+                });
+                
+                // Update lat/long value of div when the marker is clicked
+                marker.addListener('dragend', function() {
+                  document.getElementById('latclicked').value = event.latLng.lat();
+                  document.getElementById('longclicked').value =  event.latLng.lng();
+                });            
+            });
+            
+            // Create new marker on single click event on the map
+            /*google.maps.event.addListener(map,'click',function(event) {
+                var marker = new google.maps.Marker({
+                  position: event.latLng, 
+                  map: map, 
+                  title: event.latLng.lat()+', '+event.latLng.lng()
+                });                
+            });*/
+        }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA&callback=initMap"
+        async defer></script>
+        
+        
+       
+        
+        
+        
+        <div class = "map" style="padding:10px">
+            <div id = "map" ></div>
+        </div>
+      
+        <button type="submit">Registrar</button>
 
   </form>
+    
     
     
     <center>

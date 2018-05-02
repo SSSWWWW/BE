@@ -1,23 +1,21 @@
-<%-- 
-    Document   : inicioOferente
-    Created on : Mar 20, 2018, 4:09:36 PM
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 2, 2018, 1:58:48 PM
     Author     : pc
---%>
+*/
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
 body {font-family: Arial, Helvetica, sans-serif;}
 
 /* Full-width input fields */
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
+input[type=text], input[type=password], input[type=tel], input[type=email] {
+    width: 30%;
+    padding: 8px 16px;
+    margin: 4px 0;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
@@ -110,59 +108,3 @@ span.psw {
        width: 100%;
     }
 }
-</style>
-</head>
-
-
-<body>
-    
-    
-    
-      
-    
-
-
-<div id="id01" class="modal">
-  
-  <form class="modal-content animate" action="LoginOf" method="post">
-    <div class="imgcontainer">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src='images/login.jpg' alt="Avatar" class="avatar">
-    </div>
-
-    <div class="container">
-      <label for="uname"><b>Usuario</b></label>
-      <input class="formfield" type="text" name="correoOferente" placeholder="Usuario" required><br>
-
-      <label for="psw"><b>Clave</b></label>
-      <input class="formfield" type="password" name="clave" placeholder="Clave" required><br>
-        
-      <button type="submit">Ingresar</button>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Recordar
-      </label>
-    </div>
-
-
-  </form>
-    
-    
-    <center>
-      <a href = "principal.jsp" target = "_self">Regresar</a></center>
-    
-</div>
-
-<script>
-// Get the modal
-var modal = document.getElementById('id01');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
-
-</body>
-</html>

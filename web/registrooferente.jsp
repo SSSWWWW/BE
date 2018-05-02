@@ -10,12 +10,13 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link rel = "stylesheet" href = "css/registrooferente.css">
-   
-  <head >
+<link rel = "stylesheet" href = "css/forms.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
-    <title>Registro oferente</title>
-  </head>
+     <title>Registro Oferente</title>
+
   
   <body>
   
@@ -27,29 +28,33 @@
     }
 %>
       
-       <h1>REGISTRO OFERENTES</h1>
+     
   
  <div class = "divform">
   <form action="agregarOferente" method="get" class = "formoferente">
+      
+         <div class="imgcontainer">
+      <img src='images/login.jpg' alt="Avatar" class="avatar">
+    </div>
   
-  <input type="text" placeholder = "Nombre" name="nombre" value="${param.nombre}"><br>
+  <input type="text" placeholder = "Nombre" name="nombre" value="${param.nombre}">
    <br>
-  <input type="text" placeholder = "Primer apellido" name="primerapellido" value="${param.primerapellido}"><br>
+  <input type="text" placeholder = "Primer apellido" name="primerapellido" value="${param.primerapellido}">
    <br>
-   <input type="text" placeholder = "Segundo apellido" name="segundopellido" value="${param.segundopellido}"><br>
+   <input type="text" placeholder = "Segundo apellido" name="segundopellido" value="${param.segundopellido}">
    <br>
-  <input type="email" placeholder = "e-mail" name="email" value="${param.email}"><br>
+  <input type="email" placeholder = "e-mail" name="email" value="${param.email}">
   <br>
-  <input type="text" placeholder = "cedula" name="cedula" value="${param.cedula}"><br>
+  <input type="text" placeholder = "cedula" name="cedula" value="${param.cedula}">
  <br>
- <input type="text" placeholder = "numero celular" name="celular" value="${param.celular}"><br>
+ <input type="text" placeholder = "numero celular" name="celular" value="${param.celular}">
    <br>
-   <input type="text" placeholder = "Nacionalidad" name="nacionalidad" value="${param.nacionalidad}"><br>
+   <input type="text" placeholder = "Nacionalidad" name="nacionalidad" value="${param.nacionalidad}">
    <br>
-  <input type="password" placeholder = "contrasena" name="contrasena" value="${param.contrasena}"><br>
+  <input type="password" placeholder = "contrasena" name="contrasena" value="${param.contrasena}">
   <br>
   
-  <select name="provincia">
+  <select class="form-control" name="provincia">
   <option value="heredia">Heredia</option>
   <option value="alajuela">Alajuela</option>
   <option value="sanjose">San Jose</option>
@@ -57,8 +62,8 @@
   <option value="limon">Limon</option>
   <option value="puntarenas">Puntarenas</option>
   <option value="guanacaste">Guanacaste</option>
-</select>
-<input type="submit" value="Continuar" >
+</select><br><br>
+<button type="submit">Registrar</button>
 </form><br><br></div>
 	  
 

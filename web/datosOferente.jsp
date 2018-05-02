@@ -24,7 +24,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> 
 </head>
-<body style="background-color: silver;">
+
 <jsp:useBean id="oferente" scope="session" type="Oferente" />
 
 
@@ -33,7 +33,8 @@
 <div class = "datOf" >
     
     <div style="left: 0px; width: 270px; top: 40px; " >  
-    <table class="table table-sm table-dark">
+    <table class="table">
+    <thead class="thead-dark">
        
         
         <tr><td><%=oferente.getNombreOferente()%> <%=oferente.getPrimerApellido() %></td></tr><br><br>
@@ -128,14 +129,14 @@
 
 </div>
 
- <div class="container" style="display:inline-block; width:200px; height: 540px; ">
+ <div class="container" style="display:inline-block; width:350px; height: 540px; ">
 
 <form action="listarCaracteristicasOferente" method="get" class = "formoferente" >
   
   <input type="hidden"  name="cedula" value="<%= oferente.getCedulaOferente() %>"><br>
    
  
-<input type="submit" value="Ver caracteristicas registradas" >
+ <button style="background-color: slateblue; font-weight: bold"type="submit">Ver caracteristicas</button>
 
   </form>
 
@@ -239,14 +240,15 @@
             
             <jsp:useBean id="listarCaracteristicasOferente" scope="request" type="List<EspecializacionIncluidaOferente>" class="java.util.ArrayList"/>
             
-              <div style="overflow-x: auto; width:250px; height: 189px;">
+              <div  style="overflow-x: auto; width:350px; height: 189px;">
 
-            <table style="overflow-x: auto; width:250px; height: 189px;" class="table table-sm table-dark">
+             <table style="overflow-x: auto; width:350px; height: 189px;" class="tablecarac table-bordered table-sm"> 
               
-              <thead><tr><td>Caracteristica</td><td>Porcentaje</td></tr></thead>
+              <thead style="background-color: slateblue"><tr><th>Caracteristica</th><th>Porcentaje</th></tr></thead>
               <tbody style="height: 100px;">
                 <% for(EspecializacionIncluidaOferente s: listarCaracteristicasOferente){ %>
-                     <tr><td id="idcarac" value="<%= s.getCedulaOferente() %>" onClick="editar('<%= s.getNombreEspecializacion() %>' , '<%= s.getIdespecializacion() %>' , '<%= s.getPorcentajeEspecializacion() %>');"  ><%= s.getNombreEspecializacion() %></td><td><%= s.getPorcentajeEspecializacion() %></td>
+                     <tr><td id="idcarac" value="<%= s.getCedulaOferente() %>"   ><%= s.getNombreEspecializacion() %></td><td><%= s.getPorcentajeEspecializacion() %></td>
+                     <td><img  src='images/edit.png'onClick="editar('<%= s.getNombreEspecializacion() %>' , '<%= s.getIdespecializacion() %>' , '<%= s.getPorcentajeEspecializacion() %>');" class='icon'></td>
                      </tr>
                <% } %>
             </tbody>
