@@ -198,7 +198,7 @@ public class model {
            return dao.EmpresaGet1(a);
        }
 
-           public Collection<Empresa> getAllEmpresa() throws Exception{
+           public List<Empresa> getAllEmpresa() throws Exception{
             return  dao.EmpresaGetAll();
        }
     

@@ -1668,6 +1668,11 @@ public class Dao {
     /***********************************************************************/
      
      private Empresa empresa(ResultSet rs){
+         
+         
+      
+         
+         
         try {
             Empresa ec= new Empresa();
           
@@ -1786,10 +1791,12 @@ public class Dao {
     }
         
         
-            public Collection<Empresa> EmpresaGetAll(){
-        Vector<Empresa> estados=new Vector<Empresa>();
+                public List<Empresa> EmpresaGetAll(){
+                    
+           db.getConnection();          
+        List<Empresa> estados=new ArrayList();
         try {
-            String sql="select * from empresa";
+            String sql="select *from empresa";
             ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
                 estados.add(empresa(rs));
@@ -1798,7 +1805,7 @@ public class Dao {
         return estados;        
     }
     
-    
+     
     
     
     

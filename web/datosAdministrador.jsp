@@ -4,31 +4,31 @@
     Author     : pc
 --%>
 
+<%@page import="entidades.Empresa"%>
+<%@page import="entidades.Especializacion"%>
+<%@page import="entidades.Area_Trabajo"%>
+<%@page import="logica.model"%>
+<%@page import="entidades.Caracteristicas"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="entidades.Administrador" %>
 <!DOCTYPE html>
 <html>
 <head>
  <title>Administrador</title>
- <link href="css/registrooferente.css" rel="stylesheet" type="text/css"/>  
+ <link href="css/principal.css" rel="stylesheet" type="text/css"/> 
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 <jsp:useBean id="administrador" scope="session" type="Administrador" />
 <div class = "datOf" >
     
-    <div class="area" >   
-    <table class="grid">
-        <caption>Administrador</caption>
-        
-        <tr><td><%=administrador.getNombreAdmin()%></td></tr><br><br>
-        
-            
-    </table>
-    <br>
   
- </div>
 </div>
-<div class = "salir" >
+<div class = "salir" style="position:fixed ; top:0%; right:0%;">
     <ul class="menu">
         <li><a href="#"><%=administrador.getNombreAdmin()%><img class="inline" src="images/down.png" alt=""></a>
             <ul class="menuitem" > <li> <a href="Logout">Salir</a></li> </ul>
@@ -205,9 +205,12 @@ function addInput1(divName){
        
              
              
-             <h1 class="ac"> Agregar caracteristicas </h1>
+           
          
-      
+      <div class = "datOf" style=" float:left; display:inline-block; vertical-align:top; ">
+          
+         
+           <h1 style="text-align: left; font-size: 150%;">Agregar caracteristicas </h1>
               <!--button id="copy">copy</button-->
             <form id="form1" action="agregarCaracteristica" method="post"  onsubmit="alert('Caracteristica agregada!')">
                 <input class="formfield" type="text"  name="caracteristica" id="caracteristica"  placeholder="1 - caracteristica "   required><br>
@@ -243,6 +246,103 @@ function addInput1(divName){
                 
                  <input class="formfield"  type="submit" value="Agregar">
              </form>
+              
+              
+              <%  List<Caracteristicas> cc = model.instance().getAllCaracteristicas(); %>
+                  
+                  <h1 style="text-align: left; font-size: 150%;">Caracteristicas registradas </h1>
+
+
+    
+     
+                  <div style="overflow-x: auto; width:250px; height: 389px;">
+
+ <table>
+    
+       <% for(Caracteristicas sc : cc){ %>
+     <ul>
+              <li>
+                  
+                <a> <%= sc.getNombreCaracteristica()  %> </a>
+ 
+                <ul>
+                     
+                     <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
+                    <% for(Area_Trabajo artr : at){ %>
+                 <li>
+ 
+                     <a> &#160;&#160;<%= artr.getNombreAreaTrabajo()  %> </a>
+         
+                     <ul>
+                          <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
+                      <% for(Especializacion esp : es){ %>
+                     
+                       <li>
+ 
+                           <a> &#160; &#160; <input type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %> &#160;&#160;&#160</a>
+
+                       </li>
+
+                       <% } %>
+                     </ul><br><br>
+ 
+                 </li>
+                 
+                    <% } %>
+
+                </ul>
+
+              </li>
+ 
+            </ul><br>
+     
+              <% } %>
+ </table>
+              
+              
+      </div>
+ 
+      </div>
+ 
+          <div class="container" style="display:inline-block; width:300px; height: 540px; ">
+  <form action="listarEmpresas" method="get" class = "formoferente">
+  
+ 
+   
+ 
+<input type="submit"  value="Ver Empresas" >
+
+ </form>
+  
+  
+         <div id="body" >   
+        <div id="listar" class="area" style="width:50%;">   
+            
+            <jsp:useBean id="empresasLista" scope="request" type="List<Empresa>" class="java.util.ArrayList"/>
+            
+              <div style="overflow-x: auto; width:250px; height: 389px;">
+
+            <table style="overflow-x: auto; width:250px; height: 389px;" class="tablecarac table-bordered table-sm">
+              
+              <thead  style="background-color: slateblue"><tr><td>Nombre Empresa</td></tr></thead>
+              <tbody style="height: 250px;">
+                <% for(Empresa s: empresasLista){ %>
+                <tr><td id="idpues" value="<%= s.getIdEmp() %>"  ><%= s.getNombreEmp() %></td>
+
+                     </tr>
+               <% } %> 
+            </tbody>
+            </table>
+              </div>
+      </div>
+    </div>
+  
+  
+          </div>
+  
+              
+              
+       
             
                
             

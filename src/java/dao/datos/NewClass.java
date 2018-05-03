@@ -33,8 +33,20 @@ public class NewClass {
           d = new Dao();
           
           model m;
+      
+   
           
-          float sal = 700000;
+          
+          List<Empresa> emp = model.instance().getAllEmpresa();
+          
+          for(Empresa e : emp){
+          
+          System.out.println(e.getNombreEmp());
+          
+          
+          }
+          
+    /*      float sal = 700000;
         
           Puestos p1 = new Puestos();
           Puestos p2 = new Puestos();

@@ -10,6 +10,7 @@ import entidades.Caracteristicas;
 import entidades.Especializacion;
 import entidades.EspecializacionIncluida;
 import entidades.Puestos;
+import entidades.Empresa;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -25,7 +26,7 @@ import logica.model;
  *
  * @author pc
  */
-@WebServlet(name = "Administrador", urlPatterns = { "/LoginAd", "/LogoutAd" , "/agregarAdministrador" , "/agregarCaracteristica" , "/agregarAreaTrabajo", "/agregarEspecialidad", "/listarPuestos" , "/buscarPuestos"})
+@WebServlet(name = "Administrador", urlPatterns = { "/LoginAd", "/LogoutAd" , "/agregarAdministrador" , "/agregarCaracteristica" , "/agregarAreaTrabajo", "/agregarEspecialidad", "/listarPuestos" , "/buscarPuestos" , "/listarEmpresas"})
 public class Administrador extends HttpServlet {
 
     /**
@@ -69,7 +70,12 @@ public class Administrador extends HttpServlet {
             
         case "/buscarPuestos":
             this.buscarPuestos(request,response);
-            break;     
+            break; 
+            
+            
+         case "/listarEmpresas":
+            this.listarEmpresas(request,response);
+            break;      
             
             
     }
@@ -148,6 +154,30 @@ admin.setClave(clave);
                 forward( request, response);
       }		
     }
+    
+    
+      protected void listarEmpresas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+         try{
+             
+     List<Empresa> listEmp = model.instance().getAllEmpresa();
+   
+//oferente.setCedulaOferente("554533243");
+//oferente.setClave("sss");
+//</editor-fold>
+ 
+	request.setAttribute("empresasLista",listEmp);
+	request.getRequestDispatcher("datosAdministrador.jsp").
+                forward( request, response);
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("datosAdministrador.jsp").forward( request, response);
+          }
+        
+        
+        }
     
     
     protected void doregistroAdministradorAgregar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

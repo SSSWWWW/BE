@@ -74,6 +74,8 @@ public class Empresa extends HttpServlet {
             this.doeditarpuesto(request,response);
             break; 
             
+            
+            
     }
   }
 

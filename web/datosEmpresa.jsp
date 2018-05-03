@@ -223,7 +223,7 @@
  
 <input type="submit"  value="Ver Puestos Publicados" >
 
-
+ </form>
 
 
 
@@ -290,7 +290,7 @@
 </script>    
 
 
-  </form>
+ 
               
               
                <div id="body" >   
