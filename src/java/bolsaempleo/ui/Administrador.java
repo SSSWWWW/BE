@@ -11,6 +11,7 @@ import entidades.Especializacion;
 import entidades.EspecializacionIncluida;
 import entidades.Puestos;
 import entidades.Empresa;
+import entidades.Oferente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -26,7 +27,7 @@ import logica.model;
  *
  * @author pc
  */
-@WebServlet(name = "Administrador", urlPatterns = { "/LoginAd", "/LogoutAd" , "/agregarAdministrador" , "/agregarCaracteristica" , "/agregarAreaTrabajo", "/agregarEspecialidad", "/listarPuestos" , "/buscarPuestos" , "/listarEmpresas"})
+@WebServlet(name = "Administrador", urlPatterns = { "/LoginAd", "/LogoutAd" , "/agregarAdministrador" , "/agregarCaracteristica" , "/agregarAreaTrabajo", "/agregarEspecialidad", "/listarPuestos" , "/buscarPuestos" , "/listarEmpresas" , "/listarOferentes"})
 public class Administrador extends HttpServlet {
 
     /**
@@ -75,7 +76,12 @@ public class Administrador extends HttpServlet {
             
          case "/listarEmpresas":
             this.listarEmpresas(request,response);
-            break;      
+            break;     
+            
+            
+          case "/listarOferentes":
+            this.listarOferentes(request,response);
+            break;       
             
             
     }
@@ -154,6 +160,31 @@ admin.setClave(clave);
                 forward( request, response);
       }		
     }
+    
+    
+    
+      protected void listarOferentes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+         try{
+             
+     List<Oferente> listEmp = model.instance().getAllOferente();
+   
+//oferente.setCedulaOferente("554533243");
+//oferente.setClave("sss");
+//</editor-fold>
+ 
+	request.setAttribute("oferentesLista",listEmp);
+	request.getRequestDispatcher("datosAdministrador.jsp").
+                forward( request, response);
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("datosAdministrador.jsp").forward( request, response);
+          }
+        
+        
+        }
     
     
       protected void listarEmpresas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

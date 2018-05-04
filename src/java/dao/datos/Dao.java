@@ -1930,8 +1930,10 @@ public class Dao {
         
     }
       
-       public Collection<Oferente> OferenteGetAll(){
-        Vector<Oferente> estados=new Vector<Oferente>();
+       public List<Oferente> OferenteGetAll(){
+           
+           db.getConnection();
+        List<Oferente> estados=new ArrayList<>();
         try {
             String sql="select * from oferente";
             ResultSet rs =  db.executeQuery(sql);

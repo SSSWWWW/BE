@@ -4,6 +4,7 @@
     Author     : pc
 --%>
 
+<%@page import="entidades.Oferente"%>
 <%@page import="entidades.Empresa"%>
 <%@page import="entidades.Especializacion"%>
 <%@page import="entidades.Area_Trabajo"%>
@@ -340,7 +341,41 @@ function addInput1(divName){
   
           </div>
   
+                <div class="container" style="display:inline-block; width:300px; height: 540px; ">
+  <form action="listarOferentes" method="get" class = "formoferente">
+  
+ 
+   
+ 
+<input type="submit"  value="Ver Oferentes" >
+
+ </form>
+  
+  
+         <div id="body" >   
+        <div id="listar" class="area" style="width:50%;">   
+            
+            <jsp:useBean id="oferentesLista" scope="request" type="List<Oferente>" class="java.util.ArrayList"/>
+            
+              <div style="overflow-x: auto; width:250px; height: 389px;">
+
+            <table style="overflow-x: auto; width:250px; height: 389px;" class="tablecarac table-bordered table-sm">
               
+              <thead  style="background-color: slateblue"><tr><td>Nombre Empresa</td></tr></thead>
+              <tbody style="height: 250px;">
+                <% for(Oferente s: oferentesLista){ %>
+                <tr><td id="idpues" value="<%= s.getCedulaOferente() %>"  ><%= s.getNombreOferente() %></td>
+
+                     </tr>
+               <% } %> 
+            </tbody>
+            </table>
+              </div>
+      </div>
+    </div>
+  
+  
+          </div>   
               
        
             

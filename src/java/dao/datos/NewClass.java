@@ -37,11 +37,11 @@ public class NewClass {
    
           
           
-          List<Empresa> emp = model.instance().getAllEmpresa();
+          List<Oferente> emp = model.instance().getAllOferente();
           
-          for(Empresa e : emp){
+          for(Oferente e : emp){
           
-          System.out.println(e.getNombreEmp());
+          System.out.println(e.getNombreOferente());
           
           
           }

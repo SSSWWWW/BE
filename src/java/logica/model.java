@@ -134,7 +134,7 @@ public class model {
            return dao.OferenteGet(p);
        }
 
-           public Collection<Oferente> getAllOferente() throws Exception{
+           public List<Oferente> getAllOferente() throws Exception{
             return  dao.OferenteGetAll();
    
            }
