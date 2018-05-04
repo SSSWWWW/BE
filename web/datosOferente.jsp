@@ -14,6 +14,7 @@
 <%@ page import="entidades.Oferente" %>
 <!DOCTYPE html>
 <html>
+    
 <head>
  <title>Oferente</title>
   <link href="css/datosEmpresa.css" rel="stylesheet" type="text/css"/>  
@@ -27,6 +28,11 @@
 
 <jsp:useBean id="oferente" scope="session" type="Oferente" />
 
+<div style= 'background-image:  url("images/wallpaper.jpg"); height: 100px; width: 2300px; border: 1px solid black;' > 
+    
+    
+    
+</div>
 
 <div class = "datOf" style=" float:left; display:inline-block; vertical-align:top; ">
 

@@ -43,3 +43,7 @@ ul.menu:hover li ul.menuitem{display: block}
 .tablecarac thead th:last-of-type{
     border-top-right-radius: 10px; 
 }
+
+body {
+    background-image: url("images/wallpaper.jpg");
+}
