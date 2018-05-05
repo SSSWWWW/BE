@@ -359,7 +359,11 @@ admin.setClave(clave);
             
             String clrs[] = request.getParameterValues("names");
             
-            List<EspecializacionIncluida> ei = model.instance().getEspecializacionIncluidaID(clrs);
+            String porcen[] = request.getParameterValues("porcentaje");  
+            
+            
+            
+            List<EspecializacionIncluida> ei = model.instance().getEspecializacionIncluidaID(clrs , porcen);
             
             List<Puestos> puestos = model.instance().getPuestosPorID(ei);
             

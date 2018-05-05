@@ -35,8 +35,28 @@ public class NewClass {
           model m;
       
    
+          String clrs[] = {"1" };
+          String por[] = { };
           
+         List<EspecializacionIncluida> ei = model.instance().getEspecializacionIncluidaID(clrs,por);
           
+          for(EspecializacionIncluida car : ei){
+          
+               
+                System.out.println("id empresa " + car.getIdespecializacion());
+               
+               }
+          
+           List<Puestos> puestos = model.instance().getPuestosPorID(ei);
+           
+              for(Puestos car : puestos){
+          
+               
+                System.out.println("puesto " + car.getNombrePuesto());
+               
+               }
+          
+       /*   
           List<Oferente> emp = model.instance().getAllOferente();
           
           for(Oferente e : emp){

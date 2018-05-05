@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
    
 <%@ include file="Header.jsp" %>
 
@@ -161,8 +162,15 @@
                      
                        <li>
  
-                           <a> &#160; &#160; <input type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %> &#160;&#160;&#160</a>
-
+                           <a> &#160; &#160; <input  type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %>&#160;&#160;&#160</a>
+                          
+                           
+                       <a> &#160; &#160;    <span style="position:relative;">
+                       <input onclick="enable()" disabled="disabled" type="number" min="1" max="100" id="porcentaj"  name="porcentaje"   >
+                       <div style="position:absolute; left:0; right:0; top:0; bottom:0; cursor: pointer;" ></div>
+                        </span> &#160;&#160;&#160</a>
+                           
+                           
                        </li>
 
                        <% } %>
@@ -183,6 +191,15 @@
      
 <input type="submit" value="Buscar puesto">
 </form>
+ 
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+ <script>
+     
+$("div").click(function (evt) {
+    $(this).hide().prev("input[disabled]").prop("disabled", false).focus();
+});
+     
+ </script>    
 
   <div id="body" style="margin: 0 auto; width:85%; display: inline-block; margin-left:20px;">   
         <div id="listar" class="area" style="width:50%;">   

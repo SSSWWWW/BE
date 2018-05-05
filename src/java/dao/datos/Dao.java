@@ -1078,7 +1078,7 @@ public class Dao {
          
          
          
-              public List<EspecializacionIncluida> EspecializacionIdPuesto(String cl[]) throws Exception{
+              public List<EspecializacionIncluida> EspecializacionIdPuesto(String cl[] , String por[]) throws Exception{
         
         EspecializacionIncluida esin = new EspecializacionIncluida();
         
@@ -1086,11 +1086,19 @@ public class Dao {
         List<EspecializacionIncluida> estados = new ArrayList<>();
         try {
            
-            for(int i=0; i<cl.length; i++){
+            
+            if(por.length > 0){
+            
+                System.out.println("porcentaje vacio");
+                
+                
+                 for(int i=0; i<cl.length; i++){
             String sql="select ESPECIALIZACION_INCLUIDAS.idPuesto, ESPECIALIZACION_INCLUIDAS.idespecializacion, ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion, ESPECIALIZACION_INCLUIDAS.idEmp  from"+
                     "  ESPECIALIZACION_INCLUIDAS "+
-                    "where ESPECIALIZACION_INCLUIDAS.idespecializacion ='%s'";
-            sql = String.format(sql,cl[i]);
+                    "where ESPECIALIZACION_INCLUIDAS.idespecializacion ='%s' and ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion ='%s'";
+            
+            
+            sql = String.format(sql,cl[i] , por[i]);
             ResultSet rs =  db.executeQuery(sql);
               if (rs.next() == false) {
             esin.setIdEmp(0);
@@ -1108,7 +1116,38 @@ public class Dao {
                 }while(rs.next());
                 
             }}
-        } catch (SQLException ex) { }
+     
+        return estados;    
+                
+
+            
+            } else {
+            
+            for(int i=0; i<cl.length; i++){
+            String sql="select ESPECIALIZACION_INCLUIDAS.idPuesto, ESPECIALIZACION_INCLUIDAS.idespecializacion, ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion, ESPECIALIZACION_INCLUIDAS.idEmp  from"+
+                    "  ESPECIALIZACION_INCLUIDAS "+
+                    "where ESPECIALIZACION_INCLUIDAS.idespecializacion ='%s' and ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion ='%s'";
+            
+            
+            sql = String.format(sql,cl[i] , por[i]);
+            ResultSet rs =  db.executeQuery(sql);
+              if (rs.next() == false) {
+            esin.setIdEmp(0);
+            esin.setIdPuesto(0);
+            esin.setIdespecializacion(0);
+            esin.setPorcentajeEspecializacion(0);
+                
+            estados.add(esin);
+            } else {
+                
+                do{
+                
+                    estados.add(EspecializacionIncluida(rs));
+                
+                }while(rs.next());
+                
+            }}
+        }} catch (SQLException ex) { }
         return estados;    
         
         
