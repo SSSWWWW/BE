@@ -48,8 +48,11 @@ public class FileUploadServlet extends HttpServlet {
     final PrintWriter writer = response.getWriter();
 
     try {
-        out = new FileOutputStream(new File(path + File.separator
-                + cedula+".pdf"));
+       // out = new FileOutputStream(new File(path + File.separator+ cedula+".pdf"));
+        
+        out = new FileOutputStream(new File(getServletContext().getRealPath("/")+"CV/"+cedula+".pdf"));
+        
+        
         filecontent = filePart.getInputStream();
 
         int read = 0;

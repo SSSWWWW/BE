@@ -44,10 +44,8 @@
   
   <body>
       
-       
-      
-          
-             <div class="container" style=" width: 100%; height:100%; margin:0; display: flex; flex-direction: column;  ">
+   
+             <div  class="container" style="  width: 100%; height:100%; margin:0; display: flex; flex-direction: column;  ">
                  
                     <div class="reg" style="  text-align: left; background: slateblue; flex-grow: 1; display: flex;">
           

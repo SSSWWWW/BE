@@ -28,7 +28,7 @@
 
 <jsp:useBean id="oferente" scope="session" type="Oferente" />
 
-<div style= 'background-image:  url("images/wallpaper.jpg"); height: 100px; width: 2300px; border: 1px solid black;' > 
+<div style= 'background-image:  url("images/wallpaper.jpg"); height: 100px; width: 2300px; ' > 
     
     
     
@@ -113,23 +113,27 @@
               
               
          
-                   
-        <%
-    if(null!=request.getAttribute("error"))
-    {
-       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
-    }
-%>
+                  
        
 
+ <a href="<%=oferente.getCedulaOferente()%>.pdf"><%=oferente.getCedulaOferente()%>.pdf</a>          
  <form method="POST" action="upload" enctype="multipart/form-data" onsubmit="alert('Curriculum agregado!')">
              <legend>Subir curriculum (formato .pdf)</legend>
            <input type="file" value="<%= oferente.getCedulaOferente() %>" name="file" id="file" /> <br/>
             Buscar:
             
             <input type="hidden"  name="cedula" value="<%= oferente.getCedulaOferente() %>">
-            <input type="hidden" value="C:\Users\pc\GlassFish_Server\glassfish\domains\domain1\applications\__internal\BolsaEmpleo" name="destination"/>
+            <input type="hidden" value="<%=request.getContextPath()%>\web\CV\" name="destination"/><br>
             <input type="submit" value="Subir" name="upload" id="upload" />
+            
+                   <%
+    if(null!=request.getAttribute("error"))
+    {
+       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
+    }
+%>
+            
+            
         </form>
 
 

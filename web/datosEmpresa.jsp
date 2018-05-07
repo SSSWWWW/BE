@@ -23,25 +23,28 @@
  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link href="css/datosEmpresa.css" rel="stylesheet" type="text/css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
-<body style="background-color: silver;">
+
     
     
 <jsp:useBean id="empresa" scope="session" type="Empresa" />
 
 
 
+<div style= 'background-image:  url("images/wallpaper.jpg"); height: 100px; width: 2300px;' > 
+ </div>
 
 <div class = "datOf" style=" float:left; display:inline-block; vertical-align:top; ">
     
-   <div style="left: 0px; width: 270px; top: 40px; " >
-       <table style="  vertical-align:top;    left: 0px;
+   <div  >
+       <table style="      left: 0px;
     position: absolute;
-    top: 40px;
-    width: 270px;" class="table table-sm table-dark">
+    top: 110px;
+    width: 270px;" class="tablecarac table-bordered table-sm">
 
         
         <tr><td>Empresa</td></tr><br><br>
@@ -300,9 +303,9 @@
             
               <div style="overflow-x: auto; width:250px; height: 389px;">
 
-            <table style="overflow-x: auto; width:250px; height: 389px;" class="table table-sm table-dark">
+            <table style="overflow-x: auto; width:250px; height: 389px;" class="tablecarac table-bordered table-sm">
               
-              <thead><tr><td>Nombre</td></tr></thead>
+              <thead style="background-color: slateblue"><tr><td>Nombre</td></tr></thead>
               <tbody style="height: 250px;">
                 <% for(Puestos s: puestosListaEmp){ %>
                 <tr><td id="idpues" value="<%= s.getIdPuesto()%>" onClick="editar('<%= s.getIdPuesto()%>' , '<%= s.getNombrePuesto() %>' , '<%=s.getDescripcionPuesto() %>' , '<%=s.getSalario() %>', '<%=s.isEstado() %>');" ><%= s.getNombrePuesto() %></td>
@@ -328,7 +331,7 @@
     
      
     <div style="overflow-x: auto; width:250px; height: 89px;">
- <table>
+ <table class="tablecarac table-bordered table-sm">
     
        <% for(Caracteristicas sc : cc){ %>
      <ul>
@@ -377,13 +380,14 @@
         <div id="listar" class="area" style="width:50%;">   
             <br>
             <jsp:useBean id="buscarOferente" scope="request" type="List<Oferente>" class="java.util.ArrayList"/>
-            <table class="table table-sm table-dark">
+            <table class="tablecarac table-bordered table-sm">
               
-              <thead><tr><td>Nombre</td><td>Apellido</td><td>Correo</td><td>Ubicacion</td><td>Curriculum</td></tr></thead>
+              <thead style="background-color: slateblue"><tr><td>Nombre</td><td>Apellido</td><td>Correo</td><td>Ubicacion</td><td>Curriculum</td></tr></thead>
               <tbody style="height: 250px;">
                 <% for(Oferente s: buscarOferente){ %>
                      <tr><td><%= s.getNombreOferente() %></td><td><%= s.getPrimerApellido() %></td>
-                     <td><%= s.getCorreoOferente()  %></td><td><%= s.getUbicacion()  %></td></tr><br>
+                     <td><%= s.getCorreoOferente()  %></td><td><%= s.getUbicacion()  %></td>
+                     <td><a href="<%=s.getCedulaOferente()%>.pdf"><%=s.getCedulaOferente()%>.pdf</a></tr><br>
                <% } %>
             </tbody>
             </table>
