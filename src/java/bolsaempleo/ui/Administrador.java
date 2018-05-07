@@ -361,9 +361,10 @@ admin.setClave(clave);
             
             String porcen[] = request.getParameterValues("porcentaje");  
             
+            String lat = request.getParameter("longitud");
+            String lon = request.getParameter("latitud");
             
-            
-            List<EspecializacionIncluida> ei = model.instance().getEspecializacionIncluidaID(clrs , porcen);
+            List<EspecializacionIncluida> ei = model.instance().getEspecializacionIncluidaID(clrs , porcen , lat, lon);
             
             List<Puestos> puestos = model.instance().getPuestosPorID(ei);
             

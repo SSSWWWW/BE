@@ -36,9 +36,12 @@ public class NewClass {
       
    
           String clrs[] = {"1" };
-          String por[] = { };
+          String por[] = {"90" };
           
-         List<EspecializacionIncluida> ei = model.instance().getEspecializacionIncluidaID(clrs,por);
+          String lat = "-84.12737274169922";
+          String lon = "10.001352424824772";
+          
+         List<EspecializacionIncluida> ei = model.instance().getEspecializacionIncluidaID(clrs,por,lat,lon);
           
           for(EspecializacionIncluida car : ei){
           

@@ -1078,9 +1078,21 @@ public class Dao {
          
          
          
-              public List<EspecializacionIncluida> EspecializacionIdPuesto(String cl[] , String por[]) throws Exception{
+              public List<EspecializacionIncluida> EspecializacionIdPuesto(String cl[] , String por[] , String lat, String lon) throws Exception{
         
         EspecializacionIncluida esin = new EspecializacionIncluida();
+        
+        double lonaux = Double.valueOf(lon);
+        double lo = lonaux - 0.030;
+       lonaux = lonaux + 0.030;
+       
+       double lataux = Double.valueOf(lat);
+       double la = lataux - 0.20;
+       
+       lataux = lataux + 0.20;
+        
+       System.out.println("Latitud a " + lat);
+        System.out.println("Longitud " + lon);
         
            db.getConnection();
         List<EspecializacionIncluida> estados = new ArrayList<>();
@@ -1093,12 +1105,26 @@ public class Dao {
                 
                 
                  for(int i=0; i<cl.length; i++){
-            String sql="select ESPECIALIZACION_INCLUIDAS.idPuesto, ESPECIALIZACION_INCLUIDAS.idespecializacion, ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion, ESPECIALIZACION_INCLUIDAS.idEmp  from"+
+          /*  String sql="select ESPECIALIZACION_INCLUIDAS.idPuesto, ESPECIALIZACION_INCLUIDAS.idespecializacion, ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion, ESPECIALIZACION_INCLUIDAS.idEmp  from"+
                     "  ESPECIALIZACION_INCLUIDAS "+
-                    "where ESPECIALIZACION_INCLUIDAS.idespecializacion ='%s' and ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion ='%s'";
+                   
+                     "where ESPECIALIZACION_INCLUIDAS.idespecializacion ='%s' and ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion ='%s'";
+          
+                     
+                     
+                     
+                     
+                     */
+          
+          String sql="select ESPECIALIZACION_INCLUIDAS.idPuesto, ESPECIALIZACION_INCLUIDAS.idespecializacion, ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion, ESPECIALIZACION_INCLUIDAS.idEmp  from"+
+                    "  ESPECIALIZACION_INCLUIDAS , empresa  "+
+                    " where ESPECIALIZACION_INCLUIDAS.idEmp = empresa.idEmp and ESPECIALIZACION_INCLUIDAS.idespecializacion ='%s' and ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion ='%s' " +
+                   " and empresa.longitud between %s and  %s and empresa.latitud between %s and %s";
+          
+          
+            sql = String.format(sql,cl[i] , por[i] ,  lo, lonaux, la , lataux);
             
-            
-            sql = String.format(sql,cl[i] , por[i]);
+            System.out.println(sql);  
             ResultSet rs =  db.executeQuery(sql);
               if (rs.next() == false) {
             esin.setIdEmp(0);
