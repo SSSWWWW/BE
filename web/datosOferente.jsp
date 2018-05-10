@@ -218,13 +218,18 @@
        
     
          // alert("You have reached the limit of adding  inputs " + idpuesto);
-          document.getElementById("leg").innerHTML = "Editar caracteristica";
+          document.getElementById("leg").innerHTML = "Editar caracteristica - " + nombreesp;
           document.getElementById("ag").value = "Editar";
          //  document.getElementById("nombreesp").value = nombreesp;
            document.getElementById("porcentaj").value = porcentaje;
            document.getElementById("caracteristicas").value = idesp;
           //  document.getElementById("salarioPuesto").value = salario;
           //  document.getElementById("estado").value = estado;
+          
+          document.getElementById("caracteristicas").style.display  = "none";
+          
+           
+          
             
           document.getElementById("formoferente").action = 'editarespecializacionOf';
        

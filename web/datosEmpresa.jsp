@@ -200,7 +200,7 @@
                   </select>
 
                
-              <input class="formfield" type="number" name="porcentaje" value="${param.porcentaje}" placeholder="Porcentaje caracteristica" ><br>    
+              <input class="formfield" type="number" id="porcentaje" name="porcentaje" value="${param.porcentaje}" placeholder="Porcentaje caracteristica" ><br>    
               
            
               
@@ -229,7 +229,7 @@
  </form>
 
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script> 
     
     function editar(idpuesto , nombre , descripcion , salario , estado){
@@ -243,6 +243,16 @@
            document.getElementById("descripcionPuesto").value = descripcion;
             document.getElementById("salarioPuesto").value = salario;
             document.getElementById("estado").value = estado;
+            document.getElementById("caracteristicas").style.display  = "none";
+            document.getElementById("porcentaje").style.display  = "none";
+         
+            document.getElementById("nombrePuesto").readOnly = "true";
+            document.getElementById("descripcionPuesto").readOnly = "true";
+          //   $("caracteristicas").toggle();
+           //  $("porcentaje").toggle();
+           // $("#caracteristicas").hide();
+           // $("#porcentaje").hide();
+            
             
           document.getElementById("formpuesto").action = 'editarpuesto';
        

@@ -37,21 +37,21 @@
       <img src='images/login.jpg' alt="Avatar" class="avatar">
     </div>
   
-  <input type="text" placeholder = "Nombre" name="nombre" value="${param.nombre}">
+  <input type="text" placeholder = "Nombre" name="nombre" value="${param.nombre}" required>
    <br>
-  <input type="text" placeholder = "Primer apellido" name="primerapellido" value="${param.primerapellido}">
+  <input type="text" placeholder = "Primer apellido" name="primerapellido" value="${param.primerapellido}" required>
    <br>
-   <input type="text" placeholder = "Segundo apellido" name="segundopellido" value="${param.segundopellido}">
+   <input type="text" placeholder = "Segundo apellido" name="segundopellido" value="${param.segundopellido}" required>
    <br>
-  <input type="email" placeholder = "e-mail" name="email" value="${param.email}">
+  <input type="email" placeholder = "e-mail" name="email" value="${param.email}" required>
   <br>
-  <input type="text" placeholder = "cedula" name="cedula" value="${param.cedula}">
+  <input type="text" placeholder = "cedula" name="cedula" value="${param.cedula}" required>
  <br>
- <input type="text" placeholder = "numero celular" name="celular" value="${param.celular}">
+ <input type="text" placeholder = "numero celular" name="celular" value="${param.celular}" required>
    <br>
-   <input type="text" placeholder = "Nacionalidad" name="nacionalidad" value="${param.nacionalidad}">
+   <input type="text" placeholder = "Nacionalidad" name="nacionalidad" value="${param.nacionalidad}" required>
    <br>
-  <input type="password" placeholder = "contrasena" name="contrasena" value="${param.contrasena}">
+  <input type="password" placeholder = "contrasena" name="contrasena" value="${param.contrasena}" required>
   <br>
   
   <select class="form-control" name="provincia">

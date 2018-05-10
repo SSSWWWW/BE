@@ -136,19 +136,23 @@
           
 <%  List<Caracteristicas> cc = model.instance().getAllCaracteristicas(); %>
 
+<div id="wrapper">
+
+ <div style=" float:left; display:inline-block;   width: 400px;"> 
+
 <h1 style="text-align: left; font-size: 150%;">Buscar Empleo </h1>
 
 <form style="float: left;" class = "formempresa"  action="buscarPuestos" method="get">
     
      
-    
- <table>
+ 
+ <table style="font-size: 10px;">
     
        <% for(Caracteristicas sc : cc){ %>
      <ul>
               <li>
                   
-                <a> <%= sc.getNombreCaracteristica()  %> </a>
+                <a style="font-size: 10px;"> <%= sc.getNombreCaracteristica()  %> </a>
  
                 <ul>
                      
@@ -156,7 +160,7 @@
                     <% for(Area_Trabajo artr : at){ %>
                  <li>
  
-                     <a> &#160;&#160;<%= artr.getNombreAreaTrabajo()  %> </a>
+                     <a > &#160;&#160;<%= artr.getNombreAreaTrabajo()  %> </a>
          
                      <ul>
                           <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
@@ -164,7 +168,7 @@
                      
                        <li>
  
-                           <a> &#160; &#160; <input  type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %>&#160;&#160;&#160</a>
+                           <a > &#160; &#160; <input  type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %>&#160;&#160;&#160</a>
                           
                            
                        <a> &#160; &#160;    <span style="position:relative;">
@@ -189,14 +193,15 @@
             </ul>
      
               <% } %>
- </table><br><br>
+ </table>
+ </div>
  
  
   <input type="hidden" id="longclicked"  name="longitud" value="${param.longitud}">
   
   <input type="hidden" id="latclicked"  name="latitud" value="${param.latitud}">
   
-   <h1>Localizacion</h1>
+   
 
    
 
@@ -282,10 +287,11 @@
        
         
        
-        <div class = "map" style="padding:10px">
+        <div class = "map" style="margin: 0 0 0 302px;  ">
+            <h1>Localizacion</h1>
             <div id = "map" ></div>
         </div>
- 
+</div>
  
      
 <input type="submit" value="Buscar puesto">

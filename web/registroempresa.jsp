@@ -39,15 +39,15 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
 
     <div class="container">
     
-  <input type="text" placeholder = "Nombre" name="nombreempresa" value="${param.nombreempresa}">
+  <input type="text" placeholder = "Nombre" name="nombreempresa" value="${param.nombreempresa}" required>
   
-  <input type="email" placeholder = "e-mail" name="email" value="${param.email}">
+  <input type="email" placeholder = "e-mail" name="email" value="${param.email}" required>
  
-  <input type="password" placeholder = "password" name="contrasena" value="${param.contrasena}">
+  <input type="password" placeholder = "password" name="contrasena" value="${param.contrasena}" required>
   
-  <input type="tel" placeholder = "telefono" name="telefono" value="${param.telefono}">
+  <input type="tel" placeholder = "telefono" name="telefono" value="${param.telefono}" required>
    
-  <input type="text" placeholder = "descripcion" name="descripcion" value="${param.descripcion}">
+  <input style="width:735px; " type="text" placeholder = "descripcion" name="descripcion" value="${param.descripcion}" required>
   
   <input type="hidden" id="latclicked"  name="longitud" value="${param.longitud}">
   
