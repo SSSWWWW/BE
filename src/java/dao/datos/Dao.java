@@ -923,9 +923,9 @@ public class Dao {
         try {
             EspecializacionIncluidaOferente ec= new EspecializacionIncluidaOferente();
           
-                ec.setNombreEspecializacion(rs.getString("nombreEspecializacion"));
                 ec.setPorcentajeEspecializacion(rs.getInt("porcentajeEspecializacion"));
-                
+                ec.setNombreEspecializacion(rs.getString("nombreEspecializacion"));
+                ec.setIdespecializacion(rs.getInt("idespecializacion"));
                
         
             return ec;
@@ -962,7 +962,7 @@ public class Dao {
               db.getConnection();    
         List<EspecializacionIncluidaOferente> estados=new ArrayList<>();
         try {
-            String sql="select especializacion.nombreEspecializacion, especializacion_incluidasoferente.porcentajeespecializacion"
+            String sql="select especializacion_incluidasoferente.porcentajeespecializacion, especializacion.nombreEspecializacion  , especializacion_incluidasoferente.idespecializacion "
                     + " from especializacion, especializacion_incluidasoferente "
                     + " where especializacion.idespecializacion = especializacion_incluidasoferente.idespecializacion and especializacion_incluidasoferente.cedulaoferente = '%s'";
              sql = String.format(sql, a);

@@ -311,9 +311,9 @@
             
             <jsp:useBean id="puestosListaEmp" scope="request" type="List<Puestos>" class="java.util.ArrayList"/>
             
-              <div style="overflow-x: auto; width:250px; height: 389px;">
+              <div style="overflow-x: auto; width:250px; height: 100px;">
 
-            <table style="overflow-x: auto; width:250px; height: 389px;" class="tablecarac table-bordered table-sm">
+            <table style="overflow-x: auto; width:250px; height: 100px;" class="tablecarac table-bordered table-sm">
               
               <thead style="background-color: slateblue"><tr><td>Nombre</td></tr></thead>
               <tbody style="height: 250px;">
@@ -397,7 +397,7 @@
                 <% for(Oferente s: buscarOferente){ %>
                      <tr><td><%= s.getNombreOferente() %></td><td><%= s.getPrimerApellido() %></td>
                      <td><%= s.getCorreoOferente()  %></td><td><%= s.getUbicacion()  %></td>
-                     <td><a href="<%=s.getCedulaOferente()%>.pdf"><%=s.getCedulaOferente()%>.pdf</a></tr><br>
+                     <td> <a href="<%=getServletContext().getRealPath("/").concat("CV/") %><%=s.getCedulaOferente()%>.pdf"><%=s.getCedulaOferente()%>.pdf</a></tr><br>
                <% } %>
             </tbody>
             </table>

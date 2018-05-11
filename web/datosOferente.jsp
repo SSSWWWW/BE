@@ -28,7 +28,7 @@
 
 <jsp:useBean id="oferente" scope="session" type="Oferente" />
 
-<div style= 'background-image:  url("images/wallpaper.jpg"); height: 100px; width: 2300px; ' > 
+<div style= 'background-image:  url("images/wallpaper.jpg") ; height: 100px; width: 2300px; ' > 
     
     
     
@@ -39,8 +39,8 @@
 <div class = "datOf" >
     
     <div style="left: 0px; width: 270px; top: 40px; " >  
-    <table class="table">
-    <thead class="thead-dark">
+    <table class="tablecarac table-bordered table-sm">
+        <thead style="background-color: slateblue"><th>Oferente</th></thead>
        
         
         <tr><td><%=oferente.getNombreOferente()%> <%=oferente.getPrimerApellido() %></td></tr><br><br>
@@ -103,7 +103,7 @@
    
 
            
-
+               <input id="caracteristicaaux" class="formfield" type="hidden" name="caracteristicaaux" >
                
               <input id="porcentaj" class="formfield" type="number" name="porcentaje" value="${param.porcentaje}" placeholder="Porcentaje caracteristica" required><br>    
               
@@ -115,15 +115,15 @@
          
                   
        
-
- <a href="<%=oferente.getCedulaOferente()%>.pdf"><%=oferente.getCedulaOferente()%>.pdf</a>          
+          
+           <a href="<%=getServletContext().getRealPath("/CV").concat("/") %><%=oferente.getCedulaOferente()%>.pdf" target="pdf-frame"><%=oferente.getCedulaOferente()%>.pdf</a>          
  <form method="POST" action="upload" enctype="multipart/form-data" onsubmit="alert('Curriculum agregado!')">
              <legend>Subir curriculum (formato .pdf)</legend>
            <input type="file" value="<%= oferente.getCedulaOferente() %>" name="file" id="file" /> <br/>
             Buscar:
             
             <input type="hidden"  name="cedula" value="<%= oferente.getCedulaOferente() %>">
-            <input type="hidden" value="<%=request.getContextPath()%>\web\CV\" name="destination"/><br>
+            <input type="hidden" value="<%=request.getContextPath()%>\web\CV\" name="destination" /><br>
             <input type="submit" value="Subir" name="upload" id="upload" />
             
                    <%
@@ -222,7 +222,7 @@
           document.getElementById("ag").value = "Editar";
          //  document.getElementById("nombreesp").value = nombreesp;
            document.getElementById("porcentaj").value = porcentaje;
-           document.getElementById("caracteristicas").value = idesp;
+           document.getElementById("caracteristicaaux").value = idesp;
           //  document.getElementById("salarioPuesto").value = salario;
           //  document.getElementById("estado").value = estado;
           
@@ -251,26 +251,26 @@
    
   
       <div id="body" >   
-        <div id="listar" class="area" style="width:50%;">   
+       <div id="listar" class="area" style="width:50%;">   
             
             <jsp:useBean id="listarCaracteristicasOferente" scope="request" type="List<EspecializacionIncluidaOferente>" class="java.util.ArrayList"/>
             
-              <div  style="overflow-x: auto; width:350px; height: 189px;">
+            
 
-             <table style="overflow-x: auto; width:350px; height: 189px;" class="tablecarac table-bordered table-sm"> 
+             <table style="overflow-x: auto; width:350px; height: 100px;" class="tablecarac table-bordered table-sm"> 
               
               <thead style="background-color: slateblue"><tr><th>Caracteristica</th><th>Porcentaje</th></tr></thead>
               <tbody style="height: 100px;">
                 <% for(EspecializacionIncluidaOferente s: listarCaracteristicasOferente){ %>
-                     <tr><td id="idcarac" value="<%= s.getCedulaOferente() %>"   ><%= s.getNombreEspecializacion() %></td><td><%= s.getPorcentajeEspecializacion() %></td>
-                     <td><img  src='images/edit.png'onClick="editar('<%= s.getNombreEspecializacion() %>' , '<%= s.getIdespecializacion() %>' , '<%= s.getPorcentajeEspecializacion() %>');" class='icon'></td>
+                     <tr><td id="idcarac" value="<%= s.getCedulaOferente() %>"   ><%= s.getNombreEspecializacion() %></td><td><%= s.getPorcentajeEspecializacion() %></td><td><%= s.getIdespecializacion() %></td>
+                     <td><img  src='images/edit.png'onClick="editar('<%= s.getNombreEspecializacion() %>' , '<%= s.getIdespecializacion() %>', '<%= s.getPorcentajeEspecializacion() %>');" class='icon'></td>
                      </tr>
                <% } %>
             </tbody>
             </table>
           
             
-              </div>
+          
       </div>
     </div>  
   

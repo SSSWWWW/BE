@@ -76,3 +76,12 @@ ul.menu:hover li ul.menuitem{display: block}
     background-color: #3e8e41;
 }
           
+button {
+    background-color: slateblue;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}

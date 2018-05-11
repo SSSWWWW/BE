@@ -25,7 +25,10 @@ ul.menu:hover li ul.menuitem{display: block}
     width: 300px;
     margin-bottom: 15px;
     border-spacing: 0;
+   
 }
+
+ 
 .tablecarac thead {
     border-radius: 10px;
     -moz-border-radius: 10px;

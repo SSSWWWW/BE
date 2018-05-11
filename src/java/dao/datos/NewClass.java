@@ -34,7 +34,23 @@ public class NewClass {
           
           model m;
       
-   
+           EspecializacionIncluidaOferente oferenteCarac = new EspecializacionIncluidaOferente();
+        
+        oferenteCarac.setCedulaOferente("402130856");
+        oferenteCarac.setIdespecializacion(1);
+        oferenteCarac.setPorcentajeEspecializacion(80);
+        
+         
+
+      
+//oferente.setCedulaOferente("554533243");
+//oferente.setClave("sss");
+//</editor-fold>
+        model.instance().EspecializacionOferenteUpdate(oferenteCarac);
+          
+          
+          
+   /*
           String clrs[] = {"1" };
           String por[] = {"90" };
           

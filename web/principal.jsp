@@ -293,8 +293,10 @@
         </div>
 </div>
  
-     
-<input type="submit" value="Buscar puesto">
+ 
+
+<button style = "background-color: slateblue;   width: 100%;  color: white; padding: 14px 20px;" type="submit">Buscar puesto</button>
+
 </form>
  
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -310,7 +312,7 @@ $("div").click(function (evt) {
         <div id="listar" class="area" style="width:50%;">   
             <br>
             <jsp:useBean id="buscarPuestos" scope="request" type="List<Puestos>" class="java.util.ArrayList"/>
-            <table class="grid">
+            <table class="table table-striped">
               
               <thead><tr><td>Nombre</td><td>Descripcion</td><td>Salario</td></tr></thead>
               <tbody style="height: 250px;">

@@ -239,14 +239,14 @@ oferente.setClave(clave);
          try{
                  
 //<editor-fold defaultstate="collapsed" desc="...">
-        String caracteristicas   = request.getParameter("caracteristicas");
+        String caracteristicas   = request.getParameter("caracteristicaaux");
         String porcentaje   = request.getParameter("porcentaje");
         String cedulaOferente   = request.getParameter("cedulaOferente");
         
         int porcen = Integer.valueOf(porcentaje);
         int carac = Integer.valueOf(caracteristicas);
         
-        entidades.EspecializacionIncluidaOferente oferenteCarac = new EspecializacionIncluidaOferente();
+        EspecializacionIncluidaOferente oferenteCarac = new EspecializacionIncluidaOferente();
         
         oferenteCarac.setCedulaOferente(cedulaOferente);
         oferenteCarac.setIdespecializacion(carac);

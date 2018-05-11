@@ -32,9 +32,10 @@ public class EspecializacionIncluidaOferente {
         this.porcentajeEspecializacion = porcentajeEspecializacion;
     }
 
-    public EspecializacionIncluidaOferente(int porcentajeEspecializacion, String nombreEspecializacion) {
+    public EspecializacionIncluidaOferente(int porcentajeEspecializacion, String nombreEspecializacion, int id) {
         this.porcentajeEspecializacion = porcentajeEspecializacion;
         this.nombreEspecializacion = nombreEspecializacion;
+        this.idespecializacion = id;
     }
 
     public String getNombreEspecializacion() {
