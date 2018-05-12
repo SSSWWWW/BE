@@ -66,8 +66,8 @@
               <li>
                 <a href="#" style="color:white;">Inicio</a>
                 <ul>
-                 <li><a href="inicioEmpresa.jsp">Inicio empresa</a></li>
-                  <li><a href="inicioOferente.jsp">Inicio oferente</a></li>
+                 <li><a onclick="document.getElementById('id01').style.display='block'" style="width:auto;" >Inicio empresa</a></li>
+                  <li><a onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Inicio oferente</a></li>
                 </ul>
               </li>
             </ul>
@@ -335,6 +335,80 @@ $("div").click(function (evt) {
 		   <iframe name="frame"> </iframe-->
          
 	
+    
+
+<div id="id01" class="modal">
+  
+  <form class="modal-content animate" action="LoginEm" method="post">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+       <img src='images/empresa.png' alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      
+      <input class="formfield" type="text" name="correoEmpresa" placeholder="Usuario" required><br>
+       <input class="formfield" type="password" name="clave" placeholder="Clave" required><br>
+           
+       <button type="submit">Ingresar</button>
+      
+    </div>
+
+    
+  </form>
+</div>
+                   
+  
+ 
+ <div id="id02" class="modal">
+  
+  <form class="modal-content animate" action="LoginOf" method="post">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+       <img src='images/login.jpg' alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      
+     <input class="formfield" type="text" name="correoOferente" placeholder="Usuario" required><br>
+
+     
+      <input class="formfield" type="password" name="clave" placeholder="Clave" required><br>
+        
+      <button type="submit">Ingresar</button>
+      
+    </div>
+
+    
+  </form>
+</div>                  
+                   
+                   
+                   
+                   
+
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+var modal1 = document.getElementById('id02');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal ) {
+        modal.style.display = "none";
+    }
+    
+    
+    if (event.target == modal1 ) {
+        modal1.style.display = "none";
+    }
+    
+}
+</script>         
+                   
+                   
+                   
 
      
   </body>
