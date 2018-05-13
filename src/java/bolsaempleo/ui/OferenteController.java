@@ -239,9 +239,9 @@ oferente.setClave(clave);
          try{
                  
 //<editor-fold defaultstate="collapsed" desc="...">
-        String caracteristicas   = request.getParameter("caracteristicaaux");
-        String porcentaje   = request.getParameter("porcentaje");
-        String cedulaOferente   = request.getParameter("cedulaOferente");
+        String caracteristicas   = request.getParameter("carac");
+        String porcentaje   = request.getParameter("porcen");
+        String cedulaOferente   = request.getParameter("ced");
         
         int porcen = Integer.valueOf(porcentaje);
         int carac = Integer.valueOf(caracteristicas);

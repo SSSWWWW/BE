@@ -24,11 +24,14 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> 
+  
+
+  
 </head>
 
 <jsp:useBean id="oferente" scope="session" type="Oferente" />
 
-<div style= 'background-image:  url("images/wallpaper.jpg") ; height: 100px; width: 2300px; ' > 
+<div  style= 'background-image:  url("images/wallpaper.jpg") ; height: 100px; width: 2300px; ' > 
     
     
     
@@ -213,30 +216,37 @@
   }  
     
     
+   
+    
     function editar(nombreesp , idesp , porcentaje){
     
        
     
-         // alert("You have reached the limit of adding  inputs " + idpuesto);
-          document.getElementById("leg").innerHTML = "Editar caracteristica - " + nombreesp;
+         // alert("You have reached the limit of adding  inputs " + idpesp);
+          document.getElementById("lege").innerHTML = "Editar caracteristica - " + nombreesp;
           document.getElementById("ag").value = "Editar";
          //  document.getElementById("nombreesp").value = nombreesp;
-           document.getElementById("porcentaj").value = porcentaje;
-           document.getElementById("caracteristicaaux").value = idesp;
+        //   document.getElementById("porcen").value = porcentaje;
+           document.getElementById("carac").value = idesp;
           //  document.getElementById("salarioPuesto").value = salario;
           //  document.getElementById("estado").value = estado;
           
-          document.getElementById("caracteristicas").style.display  = "none";
+     //     document.getElementById("caracteristicas").style.display  = "none";
           
            
           
             
-          document.getElementById("formoferente").action = 'editarespecializacionOf';
+        //  document.getElementById("formoferente").action = 'editarespecializacionOf';
        
       //    document.getElementById("idpu").value = idpuesto;
    
 }
 
+
+
+    
+    
+    
 
     
     
@@ -262,8 +272,10 @@
               <thead style="background-color: slateblue"><tr><th>Caracteristica</th><th>Porcentaje</th></tr></thead>
               <tbody style="height: 100px;">
                 <% for(EspecializacionIncluidaOferente s: listarCaracteristicasOferente){ %>
-                     <tr><td id="idcarac" value="<%= s.getCedulaOferente() %>"   ><%= s.getNombreEspecializacion() %></td><td><%= s.getPorcentajeEspecializacion() %></td><td><%= s.getIdespecializacion() %></td>
-                     <td><img  src='images/edit.png'onClick="editar('<%= s.getNombreEspecializacion() %>' , '<%= s.getIdespecializacion() %>', '<%= s.getPorcentajeEspecializacion() %>');" class='icon'></td>
+                     <tr><td id="idcarac" value="<%= s.getCedulaOferente() %>"   ><%= s.getNombreEspecializacion() %></td><td><%= s.getPorcentajeEspecializacion() %></td>
+                    <td><img  src='images/edit.png'onClick="editar('<%= s.getNombreEspecializacion() %>' , '<%= s.getIdespecializacion() %>', '<%= s.getPorcentajeEspecializacion() %>');" class='icon' data-toggle="modal" data-target="#myModal"></td>
+                     
+                        
                      </tr>
                <% } %>
             </tbody>
@@ -275,6 +287,56 @@
     </div>  
   
     </div>
+            
+            
+
+            
+            
+       
+ <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <legend id="lege" >Editar Caracteristica </legend>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form class="modal-content animate" action="editarespecializacionOf" method="POST">
+    
+
+    <div class="form-group">
+        
+        
+      
+     <input class="form-control" type="number" name="porcen" id="porcen" placeholder="Porcentaje" required><br>
+     <input class="form-control" type="hidden" id="carac" name="carac" >
+     <input class="form-control" type="hidden" id="ced" name="ced" value="<%= oferente.getCedulaOferente() %>" >
+     
+      
+        
+      <button type="submit" class="btn btn-primary">Editar</button>
+      
+    </div>
+
+    
+  </form>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+            
+            
             
 
 
