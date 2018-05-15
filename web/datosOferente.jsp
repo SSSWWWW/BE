@@ -37,12 +37,11 @@
     
 </div>
 
-<div class = "datOf" style=" float:left; display:inline-block; vertical-align:top; ">
+<div class = "datOf" style=" float:left; display:inline-block; vertical-align:top; width: 250px;  ">
 
-<div class = "datOf" >
     
-    <div style="left: 0px; width: 270px; top: 40px; " >  
-    <table class="tablecarac table-bordered table-sm">
+   
+    <table class="table-bordered table-sm" style="vertical-align:top;">
         <thead style="background-color: slateblue"><th>Oferente</th></thead>
        
         
@@ -62,12 +61,12 @@
     </table>
     <br>
   
- </div>
+
          
       
          
          
-</div>
+
          
          
          
@@ -118,31 +117,12 @@
          
                   
        
-          
-           <a href="<%=getServletContext().getRealPath("/CV").concat("/") %><%=oferente.getCedulaOferente()%>.pdf" target="pdf-frame"><%=oferente.getCedulaOferente()%>.pdf</a>          
- <form method="POST" action="upload" enctype="multipart/form-data" onsubmit="alert('Curriculum agregado!')">
-             <legend>Subir curriculum (formato .pdf)</legend>
-           <input type="file" value="<%= oferente.getCedulaOferente() %>" name="file" id="file" /> <br/>
-            Buscar:
-            
-            <input type="hidden"  name="cedula" value="<%= oferente.getCedulaOferente() %>">
-            <input type="hidden" value="<%=request.getContextPath()%>\web\CV\" name="destination" /><br>
-            <input type="submit" value="Subir" name="upload" id="upload" />
-            
-                   <%
-    if(null!=request.getAttribute("error"))
-    {
-       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
-    }
-%>
-            
-            
-        </form>
+     
 
 
 </div>
 
- <div class="container" style="display:inline-block; width:350px; height: 540px; ">
+ <div class="container" style=" float: left; width:450px; height: 540px;  ">
 
 <form action="listarCaracteristicasOferente" method="get" class = "formoferente" >
   
@@ -252,7 +232,7 @@
     
 </script> 
 
-
+ 
 
 
 
@@ -287,6 +267,29 @@
     </div>  
   
     </div>
+            
+               <div class="container" style="display:inline-block; width:350px; height: 540px; ">  
+           <a href="<%=getServletContext().getRealPath("/CV").concat("/") %><%=oferente.getCedulaOferente()%>.pdf" target="pdf-frame"><%=oferente.getCedulaOferente()%>.pdf</a>          
+ <form method="POST" action="upload" enctype="multipart/form-data" onsubmit="alert('Curriculum agregado!')">
+             <legend>Subir curriculum (formato .pdf)</legend>
+           <input type="file" value="<%= oferente.getCedulaOferente() %>" name="file" id="file" /> <br/>
+            Buscar:
+            
+            <input type="hidden"  name="cedula" value="<%= oferente.getCedulaOferente() %>">
+            
+            <input type="submit" value="Subir" name="upload" id="upload" />
+            
+                   <%
+    if(null!=request.getAttribute("error"))
+    {
+       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
+    }
+%>
+            
+            
+        </form>
+
+        </div>
             
             
 

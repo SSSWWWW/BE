@@ -45,19 +45,9 @@
   <body>
       
    
-             <div  class="container" style="  width: 100%; height:100%; margin:0; display: flex; flex-direction: column;  ">
+            
                  
-                    <div class="reg" style="  text-align: left; background: slateblue; flex-grow: 1; display: flex;">
-          
-         
-          
-  
-          
-             </div>
-                 
-                 
-                 
-                                   <h1 style="text-align: center; font-size:5vw; "><a href="principal.jsp" style="font-weight: bold;" > Bolsa Empleo </a></h1>
+   <h1 style=" text-align: center; font-size:5vw; "><a href="principal.jsp" style="font-weight: bold;" > Bolsa Empleo </a></h1>
 
    
   <div id="myCarousel" class="carousel slide" data-ride="carousel" style=" text-align: center; flex-grow: 1;">
@@ -76,8 +66,8 @@
          <% for(Puestos s: c){ %>
       <div class="item active" style="height: 120px; right:40px; " >
           
-           <div  class="box"  >
-               <a onclick="document.getElementById('modalpuesto').style.display='block'" style="width:auto;" ><%= s.getNombrePuesto()%></a>
+           <div  class="box" onClick="mostrarPuesto('<%= s.getNombrePuesto() %>' , '<%= s.getDescripcionPuesto() %>' , '<%= s.getSalario() %>' );"  >
+               <a id="nopu" onclick="document.getElementById('modalpuesto').style.display='block'" style="width:auto;" ><%= s.getNombrePuesto()%></a>
                
                <p style="font-size: 70%;"> <%=s.getDescripcionPuesto() %> </p>
                <p style="font-size: 70%;"> ₡ <%=s.getSalario() %> </p>
@@ -377,12 +367,14 @@ $("div").click(function (evt) {
 
     <div class="container">
       
-     <input class="formfield" type="text" name="correoOferente" placeholder="Usuario" required><br>
+     <input class="formfield" type="text" name="nombrePues" id="nombrePues"><br>
 
+     <input class="formfield" type="text" name="desPues" id="desPues"><br>
      
-      <input class="formfield" type="password" name="clave" placeholder="Clave" required><br>
+     <input class="formfield" type="text" name="sal" id="sal"><br>
+     
         
-      <button type="submit">Ingresar</button>
+     
       
     </div>
 
@@ -401,6 +393,8 @@ var modal1 = document.getElementById('id02');
 
 var modalpuesto = document.getElementById('modalpuesto');
 
+var np = document.getElementById('nopu');
+
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal ) {
@@ -416,7 +410,30 @@ window.onclick = function(event) {
         modalpuesto.style.display = "none";
     }
     
+   // $("#nombrePues").val(np);
+	
+    
 }
+
+function mostrarPuesto(nombrePuesto , descripcion, salario){
+    
+    
+    
+    document.getElementById("nombrePues").value = nombrePuesto;
+    $("#desPues").val(descripcion);
+    $("#sal").val(salario);
+    
+    
+    
+}
+        
+            
+            
+            
+            
+            
+            
+
 </script>         
                    
                    

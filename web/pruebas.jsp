@@ -166,4 +166,18 @@ circle.bindTo('center', marker, 'position');
      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA&libraries=places&callback=initAutocomplete"
          async defer></script>
   </body>
+  
+  
+   <div   class="container" style=" border: dotted; width: 100%; height:50%; margin:0; display: flex; flex-direction: column;  ">
+                 
+                    <div class="reg" style="  text-align: left; background: slateblue; flex-grow: 1; display: flex;">
+          
+         
+          
+  
+          
+             </div>
+                 
+             </div>
+  
 </html>
