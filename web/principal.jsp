@@ -51,27 +51,7 @@
           
          
           
-            <ul>
-              <li>
-                <a href="#" style="color:white;">Registro &nbsp; </a>
-                
-                <ul>
-                 <li><a href="registroempresa.jsp">Registro empresa</a></li>
-                  <li><a href="registrooferente.jsp">Registro oferente</a></li>
-                </ul>
-              </li>
-            </ul>
-          
-           <ul>
-              <li>
-                <a href="#" style="color:white;">Inicio</a>
-                <ul>
-                 <li><a onclick="document.getElementById('id01').style.display='block'" style="width:auto;" >Inicio empresa</a></li>
-                  <li><a onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Inicio oferente</a></li>
-                </ul>
-              </li>
-            </ul>
-          
+  
           
              </div>
                  
@@ -96,8 +76,9 @@
          <% for(Puestos s: c){ %>
       <div class="item active" style="height: 120px; right:40px; " >
           
-           <div class="box">
-               <h1 style="font-size: 90%;"><%= s.getNombrePuesto()%></h1>
+           <div  class="box"  >
+               <a onclick="document.getElementById('modalpuesto').style.display='block'" style="width:auto;" ><%= s.getNombrePuesto()%></a>
+               
                <p style="font-size: 70%;"> <%=s.getDescripcionPuesto() %> </p>
                <p style="font-size: 70%;"> ₡ <%=s.getSalario() %> </p>
               
@@ -382,7 +363,32 @@ $("div").click(function (evt) {
     
   </form>
 </div>                  
+           
                    
+                   
+                   
+  <div id="modalpuesto" class="modal">
+  
+  <form class="modal-content animate" action="LoginOf" method="post">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('modalpuesto').style.display='none'" class="close" title="Close Modal">&times;</span>
+       <img src='images/login.jpg' alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      
+     <input class="formfield" type="text" name="correoOferente" placeholder="Usuario" required><br>
+
+     
+      <input class="formfield" type="password" name="clave" placeholder="Clave" required><br>
+        
+      <button type="submit">Ingresar</button>
+      
+    </div>
+
+    
+  </form>
+</div>                       
                    
                    
                    
@@ -393,6 +399,8 @@ var modal = document.getElementById('id01');
 
 var modal1 = document.getElementById('id02');
 
+var modalpuesto = document.getElementById('modalpuesto');
+
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal ) {
@@ -402,6 +410,10 @@ window.onclick = function(event) {
     
     if (event.target == modal1 ) {
         modal1.style.display = "none";
+    }
+    
+    if (event.target == modalpuesto ) {
+        modalpuesto.style.display = "none";
     }
     
 }
