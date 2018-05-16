@@ -5,6 +5,7 @@
  */
 package bolsaempleo.ui;
 
+import com.google.gson.Gson;
 import entidades.AreaTrabajoIncluidas;
 import entidades.Caracteristicas;
 import entidades.CaracteristicasIncluidos;
@@ -12,7 +13,9 @@ import entidades.Especializacion;
 import entidades.EspecializacionIncluida;
 import entidades.Puestos;
 import entidades.PuestosPublicados;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.util.List;
@@ -30,7 +33,7 @@ import logica.model;
  */
 
     @WebServlet(name = "Empresa", urlPatterns = {"/LoginEm", "/LogoutEm" , "/agregarEmpresa" , 
-    "/listarCaracteristicas", "/agregarPuesto" , "/listarPuestosEmp" , "/editarpuesto"})
+    "/listarCaracteristicas", "/agregarPuesto" , "/listarPuestosEmp" , "/editarpuesto", "/listarPuestosNP"})
 public class Empresa extends HttpServlet {
 
     /**
@@ -72,6 +75,11 @@ public class Empresa extends HttpServlet {
             
              case "/editarpuesto":
             this.doeditarpuesto(request,response);
+            break; 
+            
+            
+            case "/listarPuestosNP":
+            this.dolistarPuestosNP(request,response);
             break; 
             
             
@@ -160,6 +168,8 @@ empresa.setClave(clave);
         HttpSession s =  request.getSession( true);
 //<editor-fold defaultstate="collapsed" desc="...">
         String nombrePuesto   = request.getParameter("nombrePuesto");
+        
+        
         
         String descripcionPuesto   = request.getParameter("descripcionPuesto");
         String salarioPuesto   = request.getParameter("salarioPuesto");
@@ -280,7 +290,76 @@ empresa.setClave(clave);
                 request.setAttribute("error",error);
                 request.getRequestDispatcher("Error.jsp").forward( request, response);
           }		
+	} 
+       
+       
+       
+       
+       
+         protected void dolistarPuestosNP(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+             System.out.println("AFUERA NP");
+             
+           try{
+               
+           
+               
+               System.out.println("ADENTRO NP");
+               
+               String puesto = request.getParameter("puestoA");
+               
+               System.out.println("IDPUESTO : " + puesto);
+              
+               
+               
+          
+        
+        System.out.println("---pues 1 " + puesto);
+        
+      int idp = Integer.valueOf(puesto);
+      
+      System.out.println("---pues 2 " + idp);
+        
+      String idpu = String.valueOf(idp);
+     
+ PuestosPublicados pp = model.instance().getPuestosPublicados(idpu);
+              
+              int idEmp = pp.getIdEmpresa();
+              
+              System.out.println("id emp " + idEmp);
+          
+             
+              
+              String ie = String.valueOf(idEmp);
+             List<EspecializacionIncluida> ei = model.instance().getAllEspecializacionIncluidaNP(ie , idpu );
+		 for(EspecializacionIncluida car : ei){
+          
+               
+                System.out.println("nombre especializacion " + car.getNombreEspecializacion());
+                System.out.println("porcentaje " + car.getPorcentajeEspecializacion());
+               
+               }
+            response.setContentType("application/json; charset=UTF-8");
+                OutputStream outputStream= response.getOutputStream();
+                Gson gson=new Gson();  
+                
+               outputStream.write(gson.toJson(ei).getBytes());
+              outputStream.flush();
+                 
+           //  request.setAttribute("listarPuestosNP", ei);
+             //   request.getRequestDispatcher("principal.jsp").forward( request, response);
+             
+             
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("principal.jsp").forward( request, response);
+          }		
 	}  
+       
+       
+       
         
        
         protected void dolistarPuestosEmp(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

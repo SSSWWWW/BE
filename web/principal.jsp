@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+  
 <%@ include file="Header.jsp" %>
 
     <title>Bolsa Empleo</title>
@@ -66,11 +66,12 @@
          <% for(Puestos s: c){ %>
       <div class="item active" style="height: 120px; right:40px; " >
           
-           <div  class="box" onClick="mostrarPuesto('<%= s.getNombrePuesto() %>' , '<%= s.getDescripcionPuesto() %>' , '<%= s.getSalario() %>' );"  >
-               <a id="nopu" onclick="document.getElementById('modalpuesto').style.display='block'" style="width:auto;" ><%= s.getNombrePuesto()%></a>
+           <div  class="box" onClick="mostrarPuesto('<%= s.getNombrePuesto() %>' , '<%= s.getDescripcionPuesto() %>' , '<%= s.getSalario() %>' , '<%= s.getIdPuesto() %>' );"  >
+               <a  id="nopu" onclick="document.getElementById('modalpuesto').style.display='block'" style="width:auto;" ><%= s.getNombrePuesto()%></a>
                
                <p style="font-size: 70%;"> <%=s.getDescripcionPuesto() %> </p>
                <p style="font-size: 70%;"> ₡ <%=s.getSalario() %> </p>
+               
               
 </div>
          
@@ -357,15 +358,15 @@ $("div").click(function (evt) {
                    
                    
                    
-  <div id="modalpuesto" class="modal">
+  <div id="modalpuesto" class="modal" >
   
-  <form class="modal-content animate" action="LoginOf" method="post">
+  <form class="modal-content animate" action="LoginOf" method="post" >
     <div class="imgcontainer">
       <span onclick="document.getElementById('modalpuesto').style.display='none'" class="close" title="Close Modal">&times;</span>
        <img src='images/login.jpg' alt="Avatar" class="avatar">
     </div>
 
-    <div class="container">
+    <div class="container" >
       
      <input class="formfield" type="text" name="nombrePues" id="nombrePues"><br>
 
@@ -373,6 +374,11 @@ $("div").click(function (evt) {
      
      <input class="formfield" type="text" name="sal" id="sal"><br>
      
+     <input class="formfield" type="text" name="idEmp" id="idEmp"><br>
+
+           
+           
+        
         
      
       
@@ -380,10 +386,31 @@ $("div").click(function (evt) {
 
     
   </form>
-</div>                       
+</div>           
                    
                    
                    
+                   
+                   
+                   
+            <br>
+             <jsp:useBean id="listarPuestosNP" scope="request" type="List<EspecializacionIncluida>" class="java.util.ArrayList" />
+            <table class="table table-striped">
+              
+        <thead style="background-color: slateblue"><tr><th>Caracteristica</th><th>Porcentaje</th></tr></thead>
+
+              <tbody style="height: 250px;">
+                <% for(EspecializacionIncluida p: listarPuestosNP){ %>
+                     <tr><td><%= p.getNombreEspecializacion()  %></td><td><%= p.getPorcentajeEspecializacion() %></td>
+                     </tr><br>
+               <% } %>
+            </tbody>
+            </table>       
+                   
+            
+            
+
+                      
 
 <script>
 // Get the modal
@@ -415,23 +442,44 @@ window.onclick = function(event) {
     
 }
 
-function mostrarPuesto(nombrePuesto , descripcion, salario){
+function mostrarPuesto(nombrePuesto , descripcion, salario, idpuesto ){
     
     
     
     document.getElementById("nombrePues").value = nombrePuesto;
     $("#desPues").val(descripcion);
     $("#sal").val(salario);
+    $("#idEmp").val(idpuesto);
     
+    puestos = idpuesto;
+    
+        $.ajax({type: "POST", 
+                  url:"listarPuestosNP", 
+                  data: {puestoA: puestos},
+                  dataType:"json",
+                   
+                    success: function(obj){
+                        
+                     
+                        
+                   for(var i=0;i<obj.length;i++)
+                   {           
+                     window.alert(obj[i]);
+                    }
+                   },
+                  error: function(status){
+                         window.alert("Error");
+                    }                    
+                });         
+                
+                
     
     
 }
+
+
         
-            
-            
-            
-            
-            
+         
             
 
 </script>         

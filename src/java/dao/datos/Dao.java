@@ -188,9 +188,13 @@ public class Dao {
     }
       
       
-        public PuestosPublicados PuestosPublicadosGet(int codigo, int codigo2) throws Exception{
-        String sql="select * from puestos_publicados where idEmp='%s' and idPuesto='%s'";
-        sql = String.format(sql,codigo, codigo2);
+        public PuestosPublicados PuestosPublicadosGet(String codigo2) throws Exception{
+        
+               db.getConnection();
+               
+               System.out.println("DAO PuestosPublicadosGet " + codigo2);
+            String sql="select * from puestos_publicados where  idPuesto='%s'";
+        sql = String.format(sql, codigo2);
         ResultSet rs =  db.executeQuery(sql);
         if (rs.next()) {
             return puestosPublicados(rs);
@@ -997,6 +1001,50 @@ public class Dao {
             return null;
         }
     }
+              
+              
+                  private EspecializacionIncluida EspecializacionIncluida1(ResultSet rs){
+        try {
+            EspecializacionIncluida ec= new EspecializacionIncluida();
+          
+                ec.setNombreEspecializacion(rs.getString("nombreEspecializacion"));
+                ec.setPorcentajeEspecializacion(rs.getInt("porcentajeEspecializacion"));
+                
+               
+        
+            return ec;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+                  
+                  
+            public List<EspecializacionIncluida> EspecializacionIncluidaGetNP(String p , String ip) throws Exception{
+        
+                System.out.println("DAO " + " p " + p + " ip" + ip );
+        
+        
+           db.getConnection();
+        List<EspecializacionIncluida> estados=new ArrayList<>();
+        try {
+           
+            String sql="select especializacion.nombreespecializacion, especializacion_incluidas.porcentajeespecializacion  "+
+                    "   from especializacion, especializacion_incluidas "+
+                    "where  especializacion.idespecializacion= especializacion_incluidas.idespecializacion "
+                    + " and especializacion_incluidas.idemp ='%s' and especializacion_incluidas.idPuesto ='%s' ;";
+            sql = String.format(sql,p ,ip);
+           System.out.println(sql);
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                System.out.println("AGREGA ESPECIALIZACION");
+                estados.add(EspecializacionIncluida1(rs));
+            }
+        } catch (SQLException ex) { }
+        return estados;    
+        
+        
+    }         
+                  
      
         
               

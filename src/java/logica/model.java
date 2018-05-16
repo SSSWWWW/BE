@@ -415,6 +415,11 @@ public class model {
             return  dao.EspecializacionIncluidaGetAll();
        }
            
+             public List<EspecializacionIncluida> getAllEspecializacionIncluidaNP(String p, String ip) throws Exception{
+            return  dao.EspecializacionIncluidaGetNP(p , ip);
+       }
+           
+           
            
             public List<EspecializacionIncluida> getEspecializacionIncluidaID(String[] cl , String [] por , String lat , String lon) throws Exception{
             return  dao.EspecializacionIdPuesto(cl , por , lat , lon);
@@ -491,8 +496,8 @@ public class model {
         dao.PuestosPublicadosAdd(p);
     }
       
-       public PuestosPublicados getPuestosPublicados(int id1, int id2) throws Exception{
-        return dao.PuestosPublicadosGet(id1, id2);
+       public PuestosPublicados getPuestosPublicados(String id2) throws Exception{
+        return dao.PuestosPublicadosGet( id2);
     }
        
         public List<PuestosPublicados> getAllPuestosPublicados() throws Exception{

@@ -16,10 +16,19 @@ public class Puestos  implements java.io.Serializable {
      private Float salario;
      private String descripcionPuesto;
      private boolean estado;
+     
+     private String nombreEspecializacion;
+     private String porcentajeespecializacion;
 
     public Puestos() {
     }
 
+    public Puestos(Integer idPuesto) {
+        this.idPuesto = idPuesto;
+    }
+
+    
+    
     public Puestos(Integer idPuesto, String nombrePuesto, Float salario, String descripcionPuesto, boolean estado) {
         this.idPuesto = idPuesto;
         this.nombrePuesto = nombrePuesto;
@@ -27,6 +36,18 @@ public class Puestos  implements java.io.Serializable {
         this.descripcionPuesto = descripcionPuesto;
         this.estado = estado;
     }
+
+    public Puestos(Integer idPuesto, String nombrePuesto, Float salario, String descripcionPuesto, boolean estado, String nombreEspecializacion, String porcentajeespecializacion) {
+        this.idPuesto = idPuesto;
+        this.nombrePuesto = nombrePuesto;
+        this.salario = salario;
+        this.descripcionPuesto = descripcionPuesto;
+        this.estado = estado;
+        this.nombreEspecializacion = nombreEspecializacion;
+        this.porcentajeespecializacion = porcentajeespecializacion;
+    }
+    
+    
     
     
      public Puestos( String nombrePuesto, Float salario, String descripcionPuesto, boolean estado) {
@@ -36,6 +57,25 @@ public class Puestos  implements java.io.Serializable {
         this.descripcionPuesto = descripcionPuesto;
         this.estado = estado;
     }
+
+    public String getNombreEspecializacion() {
+        return nombreEspecializacion;
+    }
+
+    public void setNombreEspecializacion(String nombreEspecializacion) {
+        this.nombreEspecializacion = nombreEspecializacion;
+    }
+
+    public String getPorcentajeespecializacion() {
+        return porcentajeespecializacion;
+    }
+
+    public void setPorcentajeespecializacion(String porcentajeespecializacion) {
+        this.porcentajeespecializacion = porcentajeespecializacion;
+    }
+     
+     
+     
 
     public Integer getIdPuesto() {
         return idPuesto;

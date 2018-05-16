@@ -15,6 +15,7 @@ import entidades.EspecializacionIncluida;
 import entidades.EspecializacionIncluidaOferente;
 import entidades.Oferente;
 import entidades.Puestos;
+import entidades.PuestosPublicados;
 import java.sql.SQLException;
 import java.util.List;
 import logica.model;
@@ -33,8 +34,32 @@ public class NewClass {
           d = new Dao();
           
           model m;
+       
+           PuestosPublicados pp = model.instance().getPuestosPublicados("3");
+           
+           System.out.println("empresa id " + pp.getIdEmpresa());
+          
+     /*     
+           List<EspecializacionIncluida> ei = model.instance().getAllEspecializacionIncluidaNP("1" , "3");
+          
+          for(EspecializacionIncluida car : ei){
+          
+               
+                System.out.println("nombre especializacion " + car.getNombreEspecializacion());
+                System.out.println("porcentaje " + car.getPorcentajeEspecializacion());
+               
+               }
+          
+          
+      /*    PuestosPublicados pp = model.instance().getPuestosPublicados("2");
+          
+          System.out.println("ID EMPRESA " + pp.getIdEmpresa());
+          
+      /*    
+         
+          
       
-           EspecializacionIncluidaOferente oferenteCarac = new EspecializacionIncluidaOferente();
+    /*       EspecializacionIncluidaOferente oferenteCarac = new EspecializacionIncluidaOferente();
         
         oferenteCarac.setCedulaOferente("402130856");
         oferenteCarac.setIdespecializacion(1);

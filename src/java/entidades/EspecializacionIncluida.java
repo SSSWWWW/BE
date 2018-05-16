@@ -16,6 +16,8 @@ public class EspecializacionIncluida {
     int idespecializacion;
     int porcentajeEspecializacion;
     int idEmp;
+    
+    String nombreEspecializacion;
 
     public EspecializacionIncluida() {
     }
@@ -27,6 +29,24 @@ public class EspecializacionIncluida {
         this.idEmp = idEmp;
     }
 
+    public EspecializacionIncluida( String nombreEspecializacion, int porcentajeEspecializacion) {
+        this.porcentajeEspecializacion = porcentajeEspecializacion;
+        this.nombreEspecializacion = nombreEspecializacion;
+    }
+    
+    
+
+    public String getNombreEspecializacion() {
+        return nombreEspecializacion;
+    }
+
+    public void setNombreEspecializacion(String nombreEspecializacion) {
+        this.nombreEspecializacion = nombreEspecializacion;
+    }
+
+    
+    
+    
     public int getIdPuesto() {
         return idPuesto;
     }
