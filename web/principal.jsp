@@ -360,25 +360,34 @@ $("div").click(function (evt) {
                    
   <div id="modalpuesto" class="modal" >
   
-  <form class="modal-content animate" action="LoginOf" method="post" >
+  <form class="modal-content animate"  method="post" >
     <div class="imgcontainer">
-      <span onclick="document.getElementById('modalpuesto').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <span onclick="cerrarModalPuesto();" class="close" title="Close Modal">&times;</span>
        <img src='images/login.jpg' alt="Avatar" class="avatar">
     </div>
 
     <div class="container" >
       
-     <input class="formfield" type="text" name="nombrePues" id="nombrePues"><br>
+     <input class="formfield" type="text" name="nombrePues" id="nombrePues">
 
-     <input class="formfield" type="text" name="desPues" id="desPues"><br>
+     <input class="formfield" type="text" name="desPues" id="desPues">
      
-     <input class="formfield" type="text" name="sal" id="sal"><br>
+     <input class="formfield" type="text" name="sal" id="sal">
      
-     <input class="formfield" type="text" name="idEmp" id="idEmp"><br>
 
-           
-           
+     <div id="caracDiv"> 
+         
         
+         <table style="border-spacing: 10px; border-collapse: separate; ">
+             <tr>
+              <div id="caracDiv">   
+             <th>Caracteristica</th>
+             <th>Porcentaje</th>
+             </tr>
+         
+         </table>
+               
+     </div>
         
      
       
@@ -393,19 +402,7 @@ $("div").click(function (evt) {
                    
                    
                    
-            <br>
-             <jsp:useBean id="listarPuestosNP" scope="request" type="List<EspecializacionIncluida>" class="java.util.ArrayList" />
-            <table class="table table-striped">
-              
-        <thead style="background-color: slateblue"><tr><th>Caracteristica</th><th>Porcentaje</th></tr></thead>
-
-              <tbody style="height: 250px;">
-                <% for(EspecializacionIncluida p: listarPuestosNP){ %>
-                     <tr><td><%= p.getNombreEspecializacion()  %></td><td><%= p.getPorcentajeEspecializacion() %></td>
-                     </tr><br>
-               <% } %>
-            </tbody>
-            </table>       
+            
                    
             
             
@@ -434,6 +431,8 @@ window.onclick = function(event) {
     }
     
     if (event.target == modalpuesto ) {
+        
+         
         modalpuesto.style.display = "none";
     }
     
@@ -459,13 +458,28 @@ function mostrarPuesto(nombrePuesto , descripcion, salario, idpuesto ){
                   dataType:"json",
                    
                     success: function(obj){
-                        
-                     
-                        
+                  
+     
+                                   
                    for(var i=0;i<obj.length;i++)
-                   {           
-                     window.alert(obj[i]);
-                    }
+                   {  
+                       
+                    var input = document.createElement('div');
+                    input.id = "nuDiv";
+                   
+                    var carac = obj[i].nombreEspecializacion;
+                   
+                    var porcen = obj[i].porcentajeEspecializacion;
+                    
+                   
+          
+          input.innerHTML = " <table> <tr> <td style=' padding-right: 80px; text-align: center;'> &#160;&#160;&#160;"  +carac+"</td> <td style=' padding-right: 80px; text-align: center;'>"+porcen+"</td> <tr> </table>";
+          document.getElementById("caracDiv").appendChild(input);   
+                    
+            
+                       
+               //      window.alert(obj[i].nombreEspecializacion + " " + obj[i].porcentajeEspecializacion);
+                   }
                    },
                   error: function(status){
                          window.alert("Error");
@@ -478,6 +492,22 @@ function mostrarPuesto(nombrePuesto , descripcion, salario, idpuesto ){
 }
 
 
+function cerrarModalPuesto(){
+    
+    
+    document.getElementById('modalpuesto').style.display='none';
+    $('#nuDiv').remove();
+     window.location.reload(false); 
+}
+
+
+ function CloseMe()
+         {
+             
+             window.location.reload(false); 
+           //  window.opener.location.reload();
+         //    window.close();
+         }
         
          
             

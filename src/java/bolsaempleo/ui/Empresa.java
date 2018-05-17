@@ -5,7 +5,10 @@
  */
 package bolsaempleo.ui;
 
+import java.lang.reflect.Type;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
+
 import entidades.AreaTrabajoIncluidas;
 import entidades.Caracteristicas;
 import entidades.CaracteristicasIncluidos;
@@ -18,6 +21,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import static java.lang.System.out;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -328,7 +332,7 @@ empresa.setClave(clave);
               
               System.out.println("id emp " + idEmp);
           
-             
+            
               
               String ie = String.valueOf(idEmp);
              List<EspecializacionIncluida> ei = model.instance().getAllEspecializacionIncluidaNP(ie , idpu );
@@ -340,10 +344,17 @@ empresa.setClave(clave);
                
                }
             response.setContentType("application/json; charset=UTF-8");
+             Gson gson=new Gson(); 
+            
+            Type listType = new TypeToken<ArrayList<EspecializacionIncluida>>(){}.getType();
+         
+           String json = gson.toJson(ei);
+           
+           List<EspecializacionIncluida> espeIn = new Gson().fromJson(json, listType);
                 OutputStream outputStream= response.getOutputStream();
-                Gson gson=new Gson();  
                 
-               outputStream.write(gson.toJson(ei).getBytes());
+                
+               outputStream.write(gson.toJson(espeIn).getBytes());
               outputStream.flush();
                  
            //  request.setAttribute("listarPuestosNP", ei);
