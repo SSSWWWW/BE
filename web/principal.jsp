@@ -239,6 +239,13 @@
                 });            
             });
             
+            var circle = new google.maps.Circle({
+            map: map,
+             radius: 16093,    // 10 miles in metres
+             fillColor: '#AA0000'
+             });
+              circle.bindTo('center', marker, 'position');
+            
      
 
             
