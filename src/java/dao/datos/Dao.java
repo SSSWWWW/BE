@@ -1143,7 +1143,7 @@ public class Dao {
         
        double radi = Integer.valueOf(rad);
        
-    //  radi = radi * 2.5;
+      radi = radi * 2.5;
        
        System.out.println("Latitud a " + lat);
         System.out.println("Longitud " + lon);
@@ -1169,6 +1169,9 @@ public class Dao {
                      
                      */
           
+          
+          for(int j = 0 ; j < listEmp.size() ; j++){
+          
           String sql="select ESPECIALIZACION_INCLUIDAS.idPuesto, ESPECIALIZACION_INCLUIDAS.idespecializacion, ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion, ESPECIALIZACION_INCLUIDAS.idEmp, "
                    +
 " ROUND(6371*ASIN(SQRT(POWER(SIN((%s - abs(%s)) * pi()/180 / 2), 2) + \n" +
@@ -1181,7 +1184,7 @@ public class Dao {
 "ORDER BY distance;";
           
           System.out.println("SQL SOLO " + sql);
-            sql = String.format(sql, lonaux , listEmp.get(i).getLongitud(),  lonaux ,  listEmp.get(i).getLongitud() , lataux, listEmp.get(i).getLatitud(),  cl[i] , por[i]  , radi);
+            sql = String.format(sql, lonaux , listEmp.get(j).getLongitud(),  lonaux ,  listEmp.get(j).getLongitud() , lataux, listEmp.get(j).getLatitud(),  cl[i] , por[i]  , radi);
             
             System.out.println(sql);  
             ResultSet rs =  db.executeQuery(sql);
@@ -1200,7 +1203,7 @@ public class Dao {
                 
                 }while(rs.next());
                 
-            }}
+            }}}
      
         return estados;    
                 
