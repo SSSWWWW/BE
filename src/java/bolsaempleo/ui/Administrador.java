@@ -363,8 +363,9 @@ admin.setClave(clave);
             
             String lat = request.getParameter("longitud");
             String lon = request.getParameter("latitud");
+            String rad = request.getParameter("circle_radius");
             
-            List<EspecializacionIncluida> ei = model.instance().getEspecializacionIncluidaID(clrs , porcen , lat, lon);
+            List<EspecializacionIncluida> ei = model.instance().getEspecializacionIncluidaID(clrs , porcen , lat, lon, rad);
             
             List<Puestos> puestos = model.instance().getPuestosPorID(ei);
             

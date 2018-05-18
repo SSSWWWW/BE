@@ -32,6 +32,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
+import logica.model;
 
 
 
@@ -1126,7 +1127,7 @@ public class Dao {
          
          
          
-              public List<EspecializacionIncluida> EspecializacionIdPuesto(String cl[] , String por[] , String lat, String lon) throws Exception{
+              public List<EspecializacionIncluida> EspecializacionIdPuesto(String cl[] , String por[] , String lat, String lon, String rad) throws Exception{
         
         EspecializacionIncluida esin = new EspecializacionIncluida();
         
@@ -1137,8 +1138,13 @@ public class Dao {
        double lataux = Double.valueOf(lat);
        double la = lataux - 0.20;
        
+       
        lataux = lataux + 0.20;
         
+       double radi = Integer.valueOf(rad);
+       
+    //  radi = radi * 2.5;
+       
        System.out.println("Latitud a " + lat);
         System.out.println("Longitud " + lon);
         
@@ -1151,6 +1157,7 @@ public class Dao {
             
                 System.out.println("porcentaje vacio");
                 
+              List<Empresa> listEmp = model.instance().getAllEmpresa();
                 
                  for(int i=0; i<cl.length; i++){
           /*  String sql="select ESPECIALIZACION_INCLUIDAS.idPuesto, ESPECIALIZACION_INCLUIDAS.idespecializacion, ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion, ESPECIALIZACION_INCLUIDAS.idEmp  from"+
@@ -1158,19 +1165,23 @@ public class Dao {
                    
                      "where ESPECIALIZACION_INCLUIDAS.idespecializacion ='%s' and ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion ='%s'";
           
-                     
-                     
-                     
+                    
                      
                      */
           
-          String sql="select ESPECIALIZACION_INCLUIDAS.idPuesto, ESPECIALIZACION_INCLUIDAS.idespecializacion, ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion, ESPECIALIZACION_INCLUIDAS.idEmp  from"+
+          String sql="select ESPECIALIZACION_INCLUIDAS.idPuesto, ESPECIALIZACION_INCLUIDAS.idespecializacion, ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion, ESPECIALIZACION_INCLUIDAS.idEmp, "
+                   +
+" ROUND(6371*ASIN(SQRT(POWER(SIN((%s - abs(%s)) * pi()/180 / 2), 2) + \n" +
+" COS(abs(%s) * pi() / 180) * COS(%s * pi()/180) * POWER(SIN((%s - %s)*pi()/180 / 2),2))) - 10)\n" +
+"\n" +
+" as 'distance'  from"+
                     "  ESPECIALIZACION_INCLUIDAS , empresa  "+
                     " where ESPECIALIZACION_INCLUIDAS.idEmp = empresa.idEmp and ESPECIALIZACION_INCLUIDAS.idespecializacion ='%s' and ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion ='%s' " +
-                   " and empresa.longitud between %s and  %s and empresa.latitud between %s and %s";
+                   "  HAVING distance < %s \n" +
+"ORDER BY distance;";
           
-          
-            sql = String.format(sql,cl[i] , por[i] ,  lo, lonaux, la , lataux);
+          System.out.println("SQL SOLO " + sql);
+            sql = String.format(sql, lonaux , listEmp.get(i).getLongitud(),  lonaux ,  listEmp.get(i).getLongitud() , lataux, listEmp.get(i).getLatitud(),  cl[i] , por[i]  , radi);
             
             System.out.println(sql);  
             ResultSet rs =  db.executeQuery(sql);

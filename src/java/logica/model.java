@@ -421,8 +421,8 @@ public class model {
            
            
            
-            public List<EspecializacionIncluida> getEspecializacionIncluidaID(String[] cl , String [] por , String lat , String lon) throws Exception{
-            return  dao.EspecializacionIdPuesto(cl , por , lat , lon);
+            public List<EspecializacionIncluida> getEspecializacionIncluidaID(String[] cl , String [] por , String lat , String lon, String rad) throws Exception{
+            return  dao.EspecializacionIdPuesto(cl , por , lat , lon, rad);
        }
            
            public EspecializacionIncluida getEspecializacionIncluida1(String p) throws Exception{

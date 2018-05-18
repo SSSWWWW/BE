@@ -241,12 +241,16 @@
             
             var circle = new google.maps.Circle({
             map: map,
-             radius: 16093,    // 10 miles in metres
+             radius: 5000,    //  in metres
              fillColor: '#AA0000'
              });
               circle.bindTo('center', marker, 'position');
             
-     
+            google.maps.event.addDomListener(
+   document.getElementById('circle_radius'), 'change', function() {
+       circle.setRadius(document.getElementById('circle_radius').value * 1000);
+   });
+    
 
             
             // Create new marker on single click event on the map
@@ -267,7 +271,9 @@
         
        
         <div class = "map" style="margin: 0 0 0 302px;  ">
-            <h1>Localizacion</h1>
+            <h1 style="display: inline-block;">Localizacion</h1>
+            <input  style="width: 8%; " class="formfield" type="text" name="circle_radius" id="circle_radius">
+         
             <div id = "map" ></div>
         </div>
 </div>
