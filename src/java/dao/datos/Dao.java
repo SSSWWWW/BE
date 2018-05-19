@@ -1143,7 +1143,7 @@ public class Dao {
         
        double radi = Integer.valueOf(rad);
        
-      radi = radi * 2.5;
+    // radi = radi * 1.5;
        
        System.out.println("Latitud a " + lat);
         System.out.println("Longitud " + lon);

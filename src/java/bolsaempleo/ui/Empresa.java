@@ -396,15 +396,19 @@ empresa.setClave(clave);
         
            try{
                
+               System.out.println("EN EDITAR PUESTO");
                 
 //<editor-fold defaultstate="collapsed" desc="...">
-        String nombrePuesto   = request.getParameter("nombrePuesto");
-        String idPuesto = request.getParameter("idpu");
-        String descripcionPuesto   = request.getParameter("descripcionPuesto");
-        String salarioPuesto   = request.getParameter("salarioPuesto");
+        String nombrePuesto   = request.getParameter("nombPues");
+        String idPuesto = request.getParameter("idP");
+        String descripcionPuesto   = request.getParameter("descri");
+        String salarioPuesto   = request.getParameter("salPu");
        
       
-        String estado = request.getParameter("estado");
+        String estado = request.getParameter("estad");
+        
+     System.out.println("PUESTO EDITAR Nombre " + nombrePuesto + " id : " + idPuesto + " descripcion: " + descripcionPuesto + " salario:  " +salarioPuesto + " estado : "+ estado);
+
         
        int idpu = Integer.parseInt(idPuesto);
        float salarioPu = Float.parseFloat(salarioPuesto);
@@ -421,6 +425,8 @@ empresa.setClave(clave);
        
            est = false;
        }
+       
+       System.out.println("PUESTO EDITAR " + descripcionPuesto + " " + est + " " + idpu + " " +nombrePuesto + " "+ salarioPu);
        
        Puestos puestos = new Puestos();
        

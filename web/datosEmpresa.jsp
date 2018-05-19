@@ -27,6 +27,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  
 </head>
 
     
@@ -237,24 +238,25 @@
        
     
          // alert("You have reached the limit of adding  inputs " + idpuesto);
-          document.getElementById("leg").innerHTML = "Editar puesto";
-          document.getElementById("ag").value = "Editar";
-           document.getElementById("nombrePuesto").value = nombre;
-           document.getElementById("descripcionPuesto").value = descripcion;
-            document.getElementById("salarioPuesto").value = salario;
-            document.getElementById("estado").value = estado;
-            document.getElementById("caracteristicas").style.display  = "none";
-            document.getElementById("porcentaje").style.display  = "none";
+     //     document.getElementById("leg").innerHTML = "Editar puesto";
+       //   document.getElementById("ag").value = "Editar";
+           document.getElementById("nombPues").value = nombre;
+           document.getElementById("descri").value = descripcion;
+            document.getElementById("salPu").value = salario;
+        //    document.getElementById("estado").value = estado;
+       //     document.getElementById("caracteristicas").style.display  = "none";
+        //    document.getElementById("porcentaje").style.display  = "none";
+            document.getElementById("idP").value = idpuesto;
          
-            document.getElementById("nombrePuesto").readOnly = "true";
-            document.getElementById("descripcionPuesto").readOnly = "true";
+            document.getElementById("nombPues").readOnly = "true";
+            document.getElementById("descri").readOnly = "true";
           //   $("caracteristicas").toggle();
            //  $("porcentaje").toggle();
            // $("#caracteristicas").hide();
            // $("#porcentaje").hide();
             
             
-          document.getElementById("formpuesto").action = 'editarpuesto';
+     //     document.getElementById("formpuesto").action = 'editarpuesto';
        
          
           
@@ -300,6 +302,42 @@
     }
     
     
+    var myModal = document.getElementById('myyModal');
+    
+    window.onclick = function(event) {
+   
+    
+    if (event.target == myModal ) {
+        
+         
+        myModal.style.display = "none";
+    }
+    
+   // $("#nombrePues").val(np);
+	
+    
+}
+    
+    
+    function cerrarModalPuesto(){
+    
+    
+    document.getElementById('myyModal').style.display='none';
+   
+}
+
+
+
+$( "input" ).on( "click", function() {
+        
+     //   window.alert($( "input:checked" ).val());
+            $('#es').val($( "input:checked" ).val());
+      
+    });
+    
+    
+
+    
 </script>    
 
 
@@ -318,8 +356,8 @@
               <thead style="background-color: slateblue"><tr><td>Nombre</td></tr></thead>
               <tbody style="height: 250px;">
                 <% for(Puestos s: puestosListaEmp){ %>
-                <tr><td id="idpues" value="<%= s.getIdPuesto()%>" onClick="editar('<%= s.getIdPuesto()%>' , '<%= s.getNombrePuesto() %>' , '<%=s.getDescripcionPuesto() %>' , '<%=s.getSalario() %>', '<%=s.isEstado() %>');" ><%= s.getNombrePuesto() %></td>
-
+                <tr>
+                      <td  onClick="editar('<%= s.getIdPuesto()%>' , '<%= s.getNombrePuesto() %>' , '<%=s.getDescripcionPuesto() %>' , '<%=s.getSalario() %>', '<%=s.isEstado() %>');" ><%= s.getNombrePuesto() %>&#160; <img  src='images/edit.png'  class='icon' onclick="document.getElementById('myyModal').style.display='block'" style="width:auto;"></td>
                      </tr>
                <% } %>
             </tbody>
@@ -409,6 +447,60 @@
  
   
            
+            
+            
+            
+            
+            
+   <div id="myyModal" class="modal">
+  
+  <form class="modal-content animate" action="editarpuesto" method="POST">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('myyModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+      
+    </div>
+
+    <div class="container">
+      
+     <input class="formfield" type="text" name="nombPues" id="nombPues" ><br>
+
+     
+      <input class="formfield" type="text" name="descri" id="descri"><br>
+      
+     <input class="formfield" type="number" id="salPu" name="salPu"  ><br>
+     
+     <input class="formfield" type="hidden" id="idP" name="idP"  ><br>
+     
+     
+ <div>
+    <input type="radio" name="estad" value="true" id="estad" class="check" checked="checked" >
+    <label for="publico">Publico</label>
+  </div>
+  <div>
+    <input type="radio" name="estad" value="false" id="estad" class="check" >
+    <label for="privado">Privado</label>
+  </div>
+     
+     
+    
+     
+     
+     
+
+        
+      <button type="submit">Editar</button>
+      
+    </div>
+
+    
+  </form>
+</div>  
+            
+            
+            
+            
+            
+            
        
 
              
