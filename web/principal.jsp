@@ -303,7 +303,7 @@ $("div").click(function (evt) {
               <tbody style="height: 250px;">
                 <% for(Puestos s: buscarPuestos){ %>
                      <tr><td><%= s.getNombrePuesto() %></td><td><%= s.getDescripcionPuesto() %></td>
-                     <td><%= s.getSalario()  %></td></tr><br>
+                     <td><%= s.getSalario()  %></td><td><%= s.getLatitud()  %></td> <td><%= s.getLongitud()  %></td>  </tr><br>
                <% } %>
             </tbody>
             </table>

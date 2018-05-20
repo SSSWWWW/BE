@@ -37,7 +37,7 @@ import logica.model;
  */
 
     @WebServlet(name = "Empresa", urlPatterns = {"/LoginEm", "/LogoutEm" , "/agregarEmpresa" , 
-    "/listarCaracteristicas", "/agregarPuesto" , "/listarPuestosEmp" , "/editarpuesto", "/listarPuestosNP"})
+    "/listarCaracteristicas", "/agregarPuesto" , "/listarPuestosEmp" , "/editarpuesto", "/listarPuestosNP" , "/deletePuesto"})
 public class Empresa extends HttpServlet {
 
     /**
@@ -84,6 +84,10 @@ public class Empresa extends HttpServlet {
             
             case "/listarPuestosNP":
             this.dolistarPuestosNP(request,response);
+            break; 
+            
+             case "/deletePuesto":
+            this.dodeletePuesto(request,response);
             break; 
             
             
@@ -389,6 +393,26 @@ empresa.setClave(clave);
                 request.getRequestDispatcher("Error.jsp").forward( request, response);
           }		
 	}  
+        
+        
+         protected void dodeletePuesto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+           try{
+               
+               String idEmp   = request.getParameter("idPues");
+                
+                model.instance().deletePuestos(idEmp);
+                //request.setAttribute("idEmp", puestos);
+                request.getRequestDispatcher("datosEmpresa.jsp").forward( request, response);
+		
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("datosEmpresa.jsp").forward( request, response);
+          }		
+	}  
+        
         
         
         

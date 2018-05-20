@@ -19,6 +19,9 @@ public class Puestos  implements java.io.Serializable {
      
      private String nombreEspecializacion;
      private String porcentajeespecializacion;
+     
+     private String latitud;
+     private String longitud;
 
     public Puestos() {
     }
@@ -29,12 +32,14 @@ public class Puestos  implements java.io.Serializable {
 
     
     
-    public Puestos(Integer idPuesto, String nombrePuesto, Float salario, String descripcionPuesto, boolean estado) {
+    public Puestos( String lat, String lon,Integer idPuesto, String nombrePuesto, Float salario, String descripcionPuesto, boolean estado) {
         this.idPuesto = idPuesto;
         this.nombrePuesto = nombrePuesto;
         this.salario = salario;
         this.descripcionPuesto = descripcionPuesto;
         this.estado = estado;
+        this.latitud = lat;
+        this.longitud = lon;
     }
 
     public Puestos(Integer idPuesto, String nombrePuesto, Float salario, String descripcionPuesto, boolean estado, String nombreEspecializacion, String porcentajeespecializacion) {
@@ -57,6 +62,25 @@ public class Puestos  implements java.io.Serializable {
         this.descripcionPuesto = descripcionPuesto;
         this.estado = estado;
     }
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
+    }
+     
+     
+     
 
     public String getNombreEspecializacion() {
         return nombreEspecializacion;

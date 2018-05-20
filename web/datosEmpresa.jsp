@@ -146,31 +146,35 @@
     opacity: 1; /* Firefox */
 } </style>
         
-        
+ 
+    
         
         <%  List<Caracteristicas> c = model.instance().getAllCaracteristicas(); %>
         
        <br>  <form action="agregarPuesto"  id="formpuesto"  method="POST" class="fem">
                       <legend id="leg" >Agregar nuevo puesto</legend>
-           <input class="formfield" type="text" name="nombrePuesto" id="nombrePuesto" value="${param.nombrePuesto}" placeholder="Nombre Puesto" required ><br>
-           <input class="formfield" type="text" id="descripcionPuesto" name="descripcionPuesto" value="${param.descripcionPuesto}" placeholder="Descripcion" required><br>
-           <input class="formfield" type="number" id="salarioPuesto" name="salarioPuesto" value="${param.salarioPuesto}" placeholder="Salario" required><br>
+                      
+                      <div class="form-group">
+                      
+           <input style="width: 300px;" class="formfield" type="text" name="nombrePuesto" id="nombrePuesto" value="${param.nombrePuesto}" placeholder="Nombre Puesto" required ><br>
+           <input style="width: 300px; height: 200px;" class="formfield" type="text" id="descripcionPuesto" name="descripcionPuesto" value="${param.descripcionPuesto}" placeholder="Descripcion" required><br>
+           <input style="width: 300px;" class="formfield" type="number" id="salarioPuesto" name="salarioPuesto" value="${param.salarioPuesto}" placeholder="Salario" required><br>
           <input class="formfield" type="hidden" id="nombreempresa" name="nombreempresa" value="<%=empresa.getNombreEmp() %>" placeholder="Salario" required>
             
           <input class="formfield" type="hidden" id="idpu" name="idpu">
 
           
-             <select name="estado" id="estado">
+             <select class="custom-select" name="estado" id="estado">
                  
-               <option value="true">Estado</option>   
+               <option selected value="true">Estado</option>   
               <option value="true">Publico</option>
               <option value="false">Privado</option>
                </select><br>
               
               
-             <select  name="caracteristicas" id="caracteristicas">
+             <select class="custom-select"   name="caracteristicas" id="caracteristicas">
                  
-              <option value="" selected>Caracteristicas</option>
+              <option selected value="" selected>Caracteristicas</option>
                  
                 <% for(Caracteristicas sc : c){ %>
                 
@@ -195,18 +199,21 @@
    
 
            
-              <select style="display: none;" name="id" id="id">
+              <select   style="display: none;" name="id" id="id">
              <option value="<%= empresa.getIdEmp() %>"><%= empresa.getIdEmp() %></option>
 
                   </select>
 
                
-              <input class="formfield" type="number" id="porcentaje" name="porcentaje" value="${param.porcentaje}" placeholder="Porcentaje caracteristica" ><br>    
+              <input style="width: 300px;" class="formfield" type="number" id="porcentaje" name="porcentaje" value="${param.porcentaje}" placeholder="Porcentaje caracteristica" ><br>    
               
            
               
               
            <input id="ag" class="formfield" type="submit" value="Agregar Puesto">
+           
+                      </div>
+           
            </form>
               
                      <%
@@ -241,6 +248,7 @@
      //     document.getElementById("leg").innerHTML = "Editar puesto";
        //   document.getElementById("ag").value = "Editar";
            document.getElementById("nombPues").value = nombre;
+           document.getElementById("nombPu").value = nombre;
            document.getElementById("descri").value = descripcion;
             document.getElementById("salPu").value = salario;
         //    document.getElementById("estado").value = estado;
@@ -248,6 +256,7 @@
         //    document.getElementById("porcentaje").style.display  = "none";
             document.getElementById("idP").value = idpuesto;
          
+         document.getElementById("idPues").value = idpuesto;
             document.getElementById("nombPues").readOnly = "true";
             document.getElementById("descri").readOnly = "true";
           //   $("caracteristicas").toggle();
@@ -303,6 +312,7 @@
     
     
     var myModal = document.getElementById('myyModal');
+    var modalBorrar = document.getElementById('modalBorrar');
     
     window.onclick = function(event) {
    
@@ -311,6 +321,12 @@
         
          
         myModal.style.display = "none";
+    }
+    
+     if (event.target == modalBorrar ) {
+        
+         
+        modalBorrar.style.display = "none";
     }
     
    // $("#nombrePues").val(np);
@@ -349,7 +365,7 @@ $( "input" ).on( "click", function() {
             
             <jsp:useBean id="puestosListaEmp" scope="request" type="List<Puestos>" class="java.util.ArrayList"/>
             
-              <div style="overflow-x: auto; width:250px; height: 100px;">
+          
 
             <table style="overflow-x: auto; width:250px; height: 100px;" class="tablecarac table-bordered table-sm">
               
@@ -357,12 +373,15 @@ $( "input" ).on( "click", function() {
               <tbody style="height: 250px;">
                 <% for(Puestos s: puestosListaEmp){ %>
                 <tr>
-                      <td  onClick="editar('<%= s.getIdPuesto()%>' , '<%= s.getNombrePuesto() %>' , '<%=s.getDescripcionPuesto() %>' , '<%=s.getSalario() %>', '<%=s.isEstado() %>');" ><%= s.getNombrePuesto() %>&#160; <img  src='images/edit.png'  class='icon' onclick="document.getElementById('myyModal').style.display='block'" style="width:auto;"></td>
+                      <td  onClick="editar('<%= s.getIdPuesto()%>' , '<%= s.getNombrePuesto() %>' , '<%=s.getDescripcionPuesto() %>' , '<%=s.getSalario() %>', '<%=s.isEstado() %>');" ><%= s.getNombrePuesto() %>&#160; <img  src='images/pencil.svg'  class='icon' onclick="document.getElementById('myyModal').style.display='block'" style="width:auto;">
+                      <img  onclick="document.getElementById('modalborrar').style.display='block'"  src='images/trashcan.svg'  class='icon'  style="width:auto;">
+                      
+                      </td>
                      </tr>
                <% } %>
             </tbody>
             </table>
-              </div>
+             
       </div>
     </div>
               
@@ -452,7 +471,7 @@ $( "input" ).on( "click", function() {
             
             
             
-   <div id="myyModal" class="modal">
+   <div  id="myyModal" class="modal">
   
   <form class="modal-content animate" action="editarpuesto" method="POST">
     <div class="imgcontainer">
@@ -481,12 +500,6 @@ $( "input" ).on( "click", function() {
     <label for="privado">Privado</label>
   </div>
      
-     
-    
-     
-     
-     
-
         
       <button type="submit">Editar</button>
       
@@ -495,6 +508,48 @@ $( "input" ).on( "click", function() {
     
   </form>
 </div>  
+            
+            
+    
+            
+            
+            
+            
+            
+            
+            
+             <div  id="modalborrar" class="modal">
+  
+  <form class="modal-content animate" action="deletePuesto" method="POST">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('modalborrar').style.display='none'" class="close" title="Close Modal">&times;</span>
+      
+    </div>
+
+    <div class="container">
+      
+     <input class="formfield" type="text" name="nombPu" id="nombPu" ><br>
+
+     
+     
+     <input class="formfield" type="hidden" id="idPues" name="idPues"  ><br>
+     
+        
+      <button type="submit">Desactivar</button>
+      
+    </div>
+
+    
+  </form>
+</div>  
+            
+            
+            
+            
+            
+   
+            
+            
             
             
             

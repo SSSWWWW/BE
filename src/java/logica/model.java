@@ -215,7 +215,7 @@ public class model {
                     dao.PuestosUpdate(p);
        }
 
-        public void deletePuestos(Puestos p) throws Exception{
+        public void deletePuestos(String p) throws Exception{
 
             dao.PuestosDelete(p);
        }

@@ -1402,13 +1402,13 @@ public class Dao {
           
             
             for(int i=0; i<pues.size(); i++){
-            String sql="select puestos.nombrePuesto, puestos.salario, puestos.descripcionPuesto, puestos.estado, puestos.idPuesto from"+
-                    "  puestos "+
-                    "where puestos.idPuesto  ='%s' and puestos.estado = '1'";
+            String sql="select empresa.latitud, empresa.longitud, puestos.nombrePuesto, puestos.salario, puestos.descripcionPuesto, puestos.estado, puestos.idPuesto from"+
+                    "  puestos , empresa, puestos_publicados "+
+                    "where puestos.idPuesto  ='%s' and puestos.estado = '1' and puestos.idPuesto = puestos_publicados.idPuesto and puestos_publicados.idPuesto = puestos.idPuesto ";
             sql = String.format(sql,pues.get(i));
             ResultSet rs =  db.executeQuery(sql);
              while (rs.next()) {
-                estados.add(puestos(rs));
+                estados.add(puestos1(rs));
             }}
         }catch (SQLException ex) { }
         return estados;    
@@ -1420,13 +1420,13 @@ public class Dao {
            
             
             for(int i=0; i<ei.size(); i++){
-            String sql="select puestos.nombrePuesto, puestos.salario, puestos.descripcionPuesto, puestos.estado, puestos.idPuesto from"+
-                    "  puestos "+
-                    "where puestos.idPuesto  ='%s' and puestos.estado = '1'";
+            String sql="select empresa.latitud, empresa.longitud, puestos.nombrePuesto, puestos.salario, puestos.descripcionPuesto, puestos.estado, puestos.idPuesto from"+
+                    "  puestos , empresa, puestos_publicados "+
+                    "where puestos.idPuesto  ='%s' and puestos.estado = '1' and puestos.idPuesto = puestos_publicados.idPuesto and puestos_publicados.idPuesto = puestos.idPuesto ";
             sql = String.format(sql,ei.get(i).getIdPuesto());
             ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
-                estados.add(puestos(rs));
+                estados.add(puestos1(rs));
             }}
         } catch (SQLException ex) { }
         return estados;    
@@ -1595,6 +1595,27 @@ public class Dao {
             return null;
         }
     }
+    
+    
+    private Puestos puestos1(ResultSet rs){
+        try {
+            Puestos ec= new Puestos();
+          
+                ec.setDescripcionPuesto(rs.getString("descripcionPuesto"));
+                ec.setIdPuesto(rs.getInt("idPuesto"));
+                ec.setNombrePuesto(rs.getString("nombrePuesto"));
+                ec.setSalario(rs.getFloat("salario"));
+                ec.setEstado(rs.getBoolean("estado"));
+                ec.setLatitud(rs.getString("latitud"));
+                ec.setLongitud(rs.getString("longitud"));
+                
+        
+            return ec;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    
      
               public void PuestosUpdate(Puestos p) throws Exception{
         
@@ -1662,9 +1683,12 @@ public class Dao {
               
               
               
-                 public void PuestosDelete(Puestos p) throws Exception{
-        String sql="delete from bolsaempleo.puestos where idPuesto='%s'";
-        sql = String.format(sql,p.getIdPuesto());
+                 public void PuestosDelete(String p) throws Exception{
+        String sql="update bolsaempleo.puestos set puestos.estado='3' where idPuesto='%s'";
+        sql = String.format(sql, p );
+        
+        System.out.println("PUESTO DELETE " + sql);
+        
         int count=db.executeUpdate(sql);
         if (count==0){
             throw new Exception("puesto no existe");
