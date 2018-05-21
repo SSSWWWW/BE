@@ -10,174 +10,135 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Places Searchbox</title>
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      .controls {
-        margin-top: 10px;
-        border: 1px solid transparent;
-        border-radius: 2px 0 0 2px;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        height: 32px;
-        outline: none;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-      }
+  
+   <img id="map" src="http://maps.google.com/staticmap?center=43.963415,-92.460594&zoom=14&markers=Comfort+Suites,+4141+Maine+Ave+SE,+Rochester,+MN++55904&size=300x400&sensor=TRUE_OR_FALSE&key=ABQIAAAA6-Rq-t8XwsqXeXws3DleLBSI_7XewNJfovQwsmZjGMbTG7rp6BQaj3bwm-gy7nGQPyWKPTd3zPtcVA" alt="Map" /> 
+   
+    <p><button onclick="geoFindMe()">Show my location</button></p>
+<div id="out"></div>
 
-      #pac-input {
-        background-color: #fff;
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-        margin-left: 12px;
-        padding: 0 11px 0 13px;
-        text-overflow: ellipsis;
-        width: 300px;
-      }
+<script> 
+    
+    function geoFindMe() {
+  var output = document.getElementById("out");
 
-      #pac-input:focus {
-        border-color: #4d90fe;
-      }
+  if (!navigator.geolocation){
+    output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+    return;
+  }
 
-      .pac-container {
-        font-family: Roboto;
-      }
+  function success(position) {
+    var latitude  = position.coords.latitude;
+    var longitude = position.coords.longitude;
 
-      #type-selector {
-        color: #fff;
-        background-color: #4d90fe;
-        padding: 5px 11px 0px 11px;
-      }
+    output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
 
-      #type-selector label {
-        font-family: Roboto;
-        font-size: 13px;
-        font-weight: 300;
-      }
-      #target {
-        width: 345px;
-      }
-    </style>
-  </head>
-  <body>
-    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-    <div id="map"></div>
-    <script>
-      // This example adds a search box to a map, using the Google Place Autocomplete
-      // feature. People can enter geographical searches. The search box will return a
-      // pick list containing a mix of places and predicted search terms.
+    var img = new Image();
+    img.src = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude + "&zoom=13&size=300x300&sensor=false";
 
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+    output.appendChild(img);
+  }
 
-      function initAutocomplete() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -33.8688, lng: 151.2195},
-          zoom: 13,
-          mapTypeId: 'roadmap'
-        });
+  function error() {
+    output.innerHTML = "Unable to retrieve your location";
+  }
 
-        // Create the search box and link it to the UI element.
-        var input = document.getElementById('pac-input');
-        var searchBox = new google.maps.places.SearchBox(input);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+  output.innerHTML = "<p>Locating?</p>";
 
-        // Bias the SearchBox results towards current map's viewport.
-        map.addListener('bounds_changed', function() {
-          searchBox.setBounds(map.getBounds());
-        });
-
-        var markers = [];
-        // Listen for the event fired when the user selects a prediction and retrieve
-        // more details for that place.
-        searchBox.addListener('places_changed', function() {
-          var places = searchBox.getPlaces();
-
-          if (places.length == 0) {
-            return;
-          }
-
-          // Clear out the old markers.
-          markers.forEach(function(marker) {
-            marker.setMap(null);
-          });
-          markers = [];
-
-          // For each place, get the icon, name and location.
-          var bounds = new google.maps.LatLngBounds();
-          places.forEach(function(place) {
-            if (!place.geometry) {
-              console.log("Returned place contains no geometry");
-              return;
-            }
-            var icon = {
-              url: place.icon,
-              size: new google.maps.Size(71, 71),
-              origin: new google.maps.Point(0, 0),
-              anchor: new google.maps.Point(17, 34),
-              scaledSize: new google.maps.Size(25, 25)
-            };
-
-            // Create a marker for each place.
-            markers.push(new google.maps.Marker({
+  navigator.geolocation.getCurrentPosition(success, error);
+}
+    
+ </script>
+  
+ 
+ 
+ <script type="text/javascript">
+        var map;
+        
+        function initMap() {                            
+            var latitude = 10; // YOUR LATITUDE VALUE
+            var longitude = -84; // YOUR LONGITUDE VALUE
+            
+             // Create the search box and link it to the UI element.
+       
+            
+            var myLatLng = {lat: latitude, lng: longitude};
+            
+            map = new google.maps.Map(document.getElementById('map'), {
+              center: myLatLng,
+              zoom: 8.2,
+              disableDoubleClickZoom: true, // disable the default map zoom on double click
+            });
+            
+            // Update lat/long value of div when anywhere in the map is clicked    
+            google.maps.event.addListener(map,'dragend',function(event) {                
+                 document.getElementById('latclicked').value = event.latLng.lat();
+                  document.getElementById('longclicked').value =  event.latLng.lng();
+            });
+            
+            // Update lat/long value of div when you move the mouse over the map
+            google.maps.event.addListener(map,'mousemove',function(event) {
+                document.getElementById('latmoved').innerHTML = event.latLng.lat();
+                document.getElementById('longmoved').innerHTML = event.latLng.lng();
+            });
+                    
+            var marker = new google.maps.Marker({
+              position: myLatLng,
               map: map,
-              icon: icon,
-              title: place.name,
-              position: place.geometry.location
-            }));
+              
+              draggable: true,
+              //title: 'Hello World'
+              
+              // setting latitude & longitude as title of the marker
+              // title is shown when you hover over the marker
+              title: latitude + ', ' + longitude 
+            });    
+            
+            // Update lat/long value of div when the marker is clicked
+            marker.addListener('dragend', function(event) {              
+               document.getElementById('latclicked').value = event.latLng.lat();
+                  document.getElementById('longclicked').value =  event.latLng.lng();
+            });
+            
+            // Create new marker on double click event on the map
+            google.maps.event.addListener(map,'dragend',function(event) {
+                var marker = new google.maps.Marker({
+                  position: event.latLng, 
+                  map: map, 
+                
+                  title: event.latLng.lat()+', '+event.latLng.lng()
+                });
+                
+                // Update lat/long value of div when the marker is clicked
+                marker.addListener('dragend', function() {
+                  document.getElementById('latclicked').value = event.latLng.lat();
+                  document.getElementById('longclicked').value =  event.latLng.lng();
+                });            
+            });
+            
+            var circle = new google.maps.Circle({
+            map: map,
+             radius: 5000,    //  in metres
+             fillColor: '#AA0000'
+             });
+              circle.bindTo('center', marker, 'position');
+            
+            google.maps.event.addDomListener(
+   document.getElementById('circle_radius'), 'change', function() {
+       circle.setRadius(document.getElementById('circle_radius').value * 1000);
+   });
+    
 
-// Add circle overlay and bind to marker
-var circle = new google.maps.Circle({
-  map: map,
-  radius: 16093,    // 10 miles in metres
-  fillColor: '#AA0000'
-});
-circle.bindTo('center', marker, 'position');
+            
+            // Create new marker on single click event on the map
+            /*google.maps.event.addListener(map,'click',function(event) {
+                var marker = new google.maps.Marker({
+                  position: event.latLng, 
+                  map: map, 
+                  title: event.latLng.lat()+', '+event.latLng.lng()
+                });                
+            });*/
+        }
+        </script>
 
-            if (place.geometry.viewport) {
-              // Only geocodes have viewport.
-              bounds.union(place.geometry.viewport);
-            } else {
-              bounds.extend(place.geometry.location);
-            }
-          });
-          map.fitBounds(bounds);
-          
-          
-          
-        });
-      }
-
-    </script>
-     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA&libraries=places&callback=initAutocomplete"
-         async defer></script>
-  </body>
-  
-  
-   <div   class="container" style=" border: dotted; width: 100%; height:50%; margin:0; display: flex; flex-direction: column;  ">
-                 
-                    <div class="reg" style="  text-align: left; background: slateblue; flex-grow: 1; display: flex;">
-          
-         
-          
-  
-          
-             </div>
-                 
-             </div>
-  
+ 
 </html>

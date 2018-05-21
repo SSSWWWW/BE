@@ -39,7 +39,12 @@
           }          
         </style>   
 
-  
+  <style>          
+          #map1 { 
+            height: 100px;    
+            width: 270px;            
+          }          
+        </style> 
   
   
   <body>
@@ -66,7 +71,7 @@
          <% for(Puestos s: c){ %>
       <div class="item active" style="height: 120px; right:40px; " >
           
-           <div  class="box" onClick="mostrarPuesto('<%= s.getNombrePuesto() %>' , '<%= s.getDescripcionPuesto() %>' , '<%= s.getSalario() %>' , '<%= s.getIdPuesto() %>' );"  >
+           <div  class="box" onClick="mostrarPuesto('<%= s.getNombrePuesto() %>' , '<%= s.getDescripcionPuesto() %>' , '<%= s.getSalario() %>' , '<%= s.getIdPuesto() %>' , '<%= s.getLongitud() %>' , '<%= s.getLatitud() %>' );"  >
                <a  id="nopu" onclick="document.getElementById('modalpuesto').style.display='block'" style="width:auto;" ><%= s.getNombrePuesto()%></a>
                
                <p style="font-size: 70%;"> <%=s.getDescripcionPuesto() %> </p>
@@ -173,27 +178,45 @@
   
   <input type="hidden" id="latclicked"  name="latitud" value="${param.latitud}">
   
+  
+ 
    
 
    
 
 <script type="text/javascript">
-        var map;
+        var map , map1;
         
-        function initMap() {                            
+        function initMap() { 
+            
+            
+           
+            
+            
             var latitude = 10; // YOUR LATITUDE VALUE
             var longitude = -84; // YOUR LONGITUDE VALUE
             
-             // Create the search box and link it to the UI element.
+        
        
             
             var myLatLng = {lat: latitude, lng: longitude};
+           
             
             map = new google.maps.Map(document.getElementById('map'), {
               center: myLatLng,
               zoom: 8.2,
               disableDoubleClickZoom: true, // disable the default map zoom on double click
             });
+            
+             map1 = new google.maps.Map(document.getElementById('map1'), {
+              center: myLatLng,
+              zoom: 16,
+              disableDoubleClickZoom: true, // disable the default map zoom on double click
+            });
+            
+      
+            
+            
             
             // Update lat/long value of div when anywhere in the map is clicked    
             google.maps.event.addListener(map,'dragend',function(event) {                
@@ -210,13 +233,19 @@
             var marker = new google.maps.Marker({
               position: myLatLng,
               map: map,
+              
               draggable: true,
               //title: 'Hello World'
               
               // setting latitude & longitude as title of the marker
               // title is shown when you hover over the marker
               title: latitude + ', ' + longitude 
-            });    
+            });  
+            
+            
+            
+            
+            
             
             // Update lat/long value of div when the marker is clicked
             marker.addListener('dragend', function(event) {              
@@ -229,6 +258,7 @@
                 var marker = new google.maps.Marker({
                   position: event.latLng, 
                   map: map, 
+                
                   title: event.latLng.lat()+', '+event.latLng.lng()
                 });
                 
@@ -261,7 +291,147 @@
                   title: event.latLng.lat()+', '+event.latLng.lng()
                 });                
             });*/
+        
+        
         }
+        
+        
+        
+        function mostrarPuesto(nombrePuesto , descripcion, salario, idpuesto, lat , lon ){
+    
+    
+    
+    document.getElementById("nombrePues").value = nombrePuesto;
+    $("#desPues").val(descripcion);
+    $("#sal").val(salario);
+    $("#idEmp").val(idpuesto);
+    
+    puestos = idpuesto;
+    
+        $.ajax({type: "POST", 
+                  url:"listarPuestosNP", 
+                  data: {puestoA: puestos},
+                  dataType:"json",
+                   
+                    success: function(obj){
+                  
+     
+                                   
+                   for(var i=0;i<obj.length;i++)
+                   {  
+                       
+                    var input = document.createElement('div');
+                    input.id = "nuDiv";
+                   
+                    var carac = obj[i].nombreEspecializacion;
+                   
+                    var porcen = obj[i].porcentajeEspecializacion;
+                    
+                   
+          
+          input.innerHTML = " <table> <tr> <td style=' padding-right: 80px; text-align: center;'> &#160;&#160;&#160;"  +carac+"</td> <td style=' padding-right: 80px; text-align: center;'>"+porcen+"</td> <tr> </table>";
+          document.getElementById("caracDiv").appendChild(input);   
+                    
+                    
+               
+            
+            
+                       
+               //      window.alert(obj[i].nombreEspecializacion + " " + obj[i].porcentajeEspecializacion);
+                   }
+                   },
+                  error: function(status){
+                         window.alert("Error");
+                    }                    
+                });         
+                
+                
+             
+   
+    
+    
+}
+        
+        
+        //this can now be called from anywhere
+function placeMarker(location) {
+  var marker2 = new google.maps.Marker({
+    position: location,
+   
+    map: map1
+    
+ 
+    
+  });
+}
+        
+        
+        
+           function mostrarPuesto1(nombrePuesto , descripcion, salario, idpuesto, lat, lon ){
+    
+    
+    
+    document.getElementById("nombrePues1").value = nombrePuesto;
+    $("#desPues1").val(descripcion);
+    $("#sal1").val(salario);
+    $("#idEmp1").val(idpuesto);
+    
+    puestos = idpuesto;
+    
+        $.ajax({type: "POST", 
+                  url:"listarPuestosNP", 
+                  data: {puestoA: puestos},
+                  dataType:"json",
+                   
+                    success: function(obj){
+                  
+     
+                                   
+                   for(var i=0;i<obj.length;i++)
+                   {  
+                       
+                    var input = document.createElement('div');
+                    input.id = "nuDiv";
+                   
+                    var carac = obj[i].nombreEspecializacion;
+                   
+                    var porcen = obj[i].porcentajeEspecializacion;
+                    
+                   
+          
+          input.innerHTML = " <table> <tr> <td style=' padding-right: 80px; text-align: center;'> &#160;&#160;&#160;"  +carac+"</td> <td style=' padding-right: 80px; text-align: center;'>"+porcen+"</td> <tr> </table>";
+          document.getElementById("caracDiv1").appendChild(input);   
+                    
+       var la= lat;
+       var lo = lon;
+           
+                 
+                  
+                var latlng = new google.maps.LatLng(lat, lon);
+                  
+             //    window.alert("lat " + myLatLng.lat + " lon " + myLatLng.lng);
+             
+             placeMarker(latlng);   
+             map1.setCenter(latlng);
+       
+                  
+               
+                       
+               //      window.alert(obj[i].nombreEspecializacion + " " + obj[i].porcentajeEspecializacion);
+                   }
+                   },
+                  error: function(status){
+                         window.alert("Error");
+                    }                    
+                });         
+                
+                
+    
+    
+}
+        
+        
+        
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA&callback=initMap"
         async defer></script>
@@ -300,13 +470,17 @@ $("div").click(function (evt) {
             <table class="table table-striped">
               
               <thead><tr><td>Nombre</td><td>Descripcion</td><td>Salario</td></tr></thead>
-              <tbody style="height: 250px;">
+              <tbody   style="height: 250px;">
                 <% for(Puestos s: buscarPuestos){ %>
-                     <tr><td><%= s.getNombrePuesto() %></td><td><%= s.getDescripcionPuesto() %></td>
-                     <td><%= s.getSalario()  %></td><td><%= s.getLatitud()  %></td> <td><%= s.getLongitud()  %></td>  </tr><br>
+                
+                     <tr onClick="mostrarPuesto1('<%= s.getNombrePuesto() %>' , '<%= s.getDescripcionPuesto() %>' , '<%= s.getSalario() %>' , '<%= s.getIdPuesto() %>' , ' <%= s.getLongitud() %>' , <%= s.getLatitud() %> );"  ><td onclick="document.getElementById('modalpuesto1').style.display='block'"  ><%= s.getNombrePuesto() %></td><td><%= s.getDescripcionPuesto() %></td>
+                     <td><%= s.getSalario()  %></td><td id="lonpu" value="<%= s.getLatitud()  %>" ></td> <td id="latpu" value="<%= s.getLongitud()  %>"></td>  </tr><br>
                <% } %>
             </tbody>
             </table>
+            
+            <div id="out"></div>
+            
       </div>
     </div>
     
@@ -414,12 +588,69 @@ $("div").click(function (evt) {
                    
                    
                    
-                   
-            
-                   
-            
-            
+      
+      
+      
+  <div id="modalpuesto1" class="modal" >
+  
+  <form class="modal-content animate"  method="post" >
+    <div class="imgcontainer">
+      <span onclick="cerrarModalPuesto();" class="close" title="Close Modal">&times;</span>
+       <img src='images/login.jpg' alt="Avatar" class="avatar">
+    </div>
 
+    <div class="container" >
+      
+     <input class="formfield" type="text" name="nombrePues1" id="nombrePues1">
+
+     <input class="formfield" type="text" name="desPues1" id="desPues1">
+     
+     <input class="formfield" type="text" name="sal1" id="sal1">
+     
+
+     <div id="caracDiv1"> 
+         
+        
+         <table style="border-spacing: 10px; border-collapse: separate; ">
+             <tr>
+              <div id="caracDiv1">   
+             <th>Caracteristica</th>
+             <th>Porcentaje</th>
+             </tr>
+         
+         </table>
+               
+     </div>
+             
+             
+               <div class = "map1" style="margin: 0 0 0 302px;  ">
+            
+         
+            <div id = "map1" ></div>
+        </div>
+             
+             
+     
+ 
+            
+    </div>
+
+    
+  </form>
+</div>               
+            
+                   
+            
+       
+
+        
+        
+        
+        
+     
+        
+        
+        
                       
 
 <script>
@@ -429,6 +660,8 @@ var modal = document.getElementById('id01');
 var modal1 = document.getElementById('id02');
 
 var modalpuesto = document.getElementById('modalpuesto');
+
+var modalpuesto1 = document.getElementById('modalpuesto1');
 
 var np = document.getElementById('nopu');
 
@@ -449,60 +682,23 @@ window.onclick = function(event) {
         modalpuesto.style.display = "none";
     }
     
+    
+      if (event.target == modalpuesto1 ) {
+        
+         
+        modalpuesto1.style.display = "none";
+    }
+    
    // $("#nombrePues").val(np);
 	
     
 }
 
-function mostrarPuesto(nombrePuesto , descripcion, salario, idpuesto ){
-    
-    
-    
-    document.getElementById("nombrePues").value = nombrePuesto;
-    $("#desPues").val(descripcion);
-    $("#sal").val(salario);
-    $("#idEmp").val(idpuesto);
-    
-    puestos = idpuesto;
-    
-        $.ajax({type: "POST", 
-                  url:"listarPuestosNP", 
-                  data: {puestoA: puestos},
-                  dataType:"json",
-                   
-                    success: function(obj){
-                  
-     
-                                   
-                   for(var i=0;i<obj.length;i++)
-                   {  
-                       
-                    var input = document.createElement('div');
-                    input.id = "nuDiv";
-                   
-                    var carac = obj[i].nombreEspecializacion;
-                   
-                    var porcen = obj[i].porcentajeEspecializacion;
-                    
-                   
-          
-          input.innerHTML = " <table> <tr> <td style=' padding-right: 80px; text-align: center;'> &#160;&#160;&#160;"  +carac+"</td> <td style=' padding-right: 80px; text-align: center;'>"+porcen+"</td> <tr> </table>";
-          document.getElementById("caracDiv").appendChild(input);   
-                    
-            
-                       
-               //      window.alert(obj[i].nombreEspecializacion + " " + obj[i].porcentajeEspecializacion);
-                   }
-                   },
-                  error: function(status){
-                         window.alert("Error");
-                    }                    
-                });         
-                
-                
-    
-    
-}
+
+
+
+
+
 
 
 function cerrarModalPuesto(){
@@ -522,6 +718,13 @@ function cerrarModalPuesto(){
          //    window.close();
          }
         
+         
+         
+         
+         
+         
+      
+         
          
             
 

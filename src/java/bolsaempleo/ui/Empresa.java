@@ -524,6 +524,9 @@ empresa.setClave(clave);
         String contrasena   = request.getParameter("contrasena");
         String latitud   = request.getParameter("latitud");
         String longitud = request.getParameter("longitud");
+        
+      
+        
         processRequest(request, response);
     }
 
