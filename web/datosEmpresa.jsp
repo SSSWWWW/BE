@@ -267,10 +267,50 @@
             
      //     document.getElementById("formpuesto").action = 'editarpuesto';
        
-         
-          
-          
           document.getElementById("idpu").value = idpuesto;
+          
+          
+           puestos = idpuesto;
+    
+        $.ajax({type: "POST", 
+                  url:"listarPuestosNP", 
+                  data: {puestoA: puestos},
+                  dataType:"json",
+                   
+                    success: function(obj){
+                  
+     
+                                   
+                   for(var i=0;i<obj.length;i++)
+                   {  
+                       
+                    var input = document.createElement('div');
+                    input.id = "nuDiv";
+                   
+                    var carac = obj[i].nombreEspecializacion;
+                   
+                    var porcen = obj[i].porcentajeEspecializacion;
+                    
+                   
+          
+          input.innerHTML = " <table> <tr> <td style=' padding-right: 80px; text-align: center;'> &#160;&#160;&#160;"  +carac+"</td> <td style=' padding-right: 80px; text-align: center;'>"+porcen+" \n\
+\n\
+\n\
+<img  src='images/pencil.svg'  class='icon' onclick='document.getElementById('myyModal').style.display='block'' style='width:auto;'></td> <tr> </table>";
+          document.getElementById("caracDiv").appendChild(input);   
+                    
+                    
+               
+            
+            
+                       
+               //      window.alert(obj[i].nombreEspecializacion + " " + obj[i].porcentajeEspecializacion);
+                   }
+                   },
+                  error: function(status){
+                         window.alert("Error");
+                    }                    
+                });         
    
 }
 
@@ -334,12 +374,13 @@
     
 }
     
+
     
     function cerrarModalPuesto(){
     
     
     document.getElementById('myyModal').style.display='none';
-   
+   window.location.reload(false);
 }
 
 
@@ -475,7 +516,7 @@ $( "input" ).on( "click", function() {
   
   <form class="modal-content animate" action="editarpuesto" method="POST">
     <div class="imgcontainer">
-      <span onclick="document.getElementById('myyModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <span onclick="cerrarModalPuesto();" class="close" title="Close Modal">&times;</span>
       
     </div>
 
@@ -499,6 +540,20 @@ $( "input" ).on( "click", function() {
     <input type="radio" name="estad" value="false" id="estad" class="check" >
     <label for="privado">Privado</label>
   </div>
+     
+      <div id="caracDiv"> 
+         
+        
+         <table style="border-spacing: 10px; border-collapse: separate; ">
+             <tr>
+              <div id="caracDiv">   
+             <th>Caracteristica</th>
+             <th>Porcentaje</th>
+             </tr>
+         
+         </table>
+               
+     </div>
      
         
       <button type="submit">Editar</button>
