@@ -1242,7 +1242,7 @@ public class Dao {
     }
               
               
-                    public List<EspecializacionIncluidaOferente> EspecializacionIdOferente(String cl[]) throws Exception{
+                   public List<EspecializacionIncluidaOferente> EspecializacionIdOferente(String cl[], String por[]) throws Exception{
         
         EspecializacionIncluidaOferente eio = new EspecializacionIncluidaOferente();
         
@@ -1253,8 +1253,8 @@ public class Dao {
             for(int i=0; i<cl.length; i++){
             String sql="select distinct ESPECIALIZACION_INCLUIDASOFERENTE.CEDULAOFERENTE, ESPECIALIZACION_INCLUIDASOFERENTE.idespecializacion, ESPECIALIZACION_INCLUIDASOFERENTE.porcentajeEspecializacion  from"+
                     "  ESPECIALIZACION_INCLUIDASOFERENTE "+
-                    "where ESPECIALIZACION_INCLUIDASOFERENTE.idespecializacion ='%s' ";
-            sql = String.format(sql,cl[i]);
+                    "where ESPECIALIZACION_INCLUIDASOFERENTE.idespecializacion ='%s' and ESPECIALIZACION_INCLUIDASOFERENTE.porcentajeespecializacion ='%s'  ";
+            sql = String.format(sql,cl[i], por[i]);
             ResultSet rs =  db.executeQuery(sql);
             
          /*   if(rs.next() == false){

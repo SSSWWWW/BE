@@ -459,10 +459,17 @@ $( "input" ).on( "click", function() {
                           <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
                       <% for(Especializacion esp : es){ %>
                      
-                       <li>
+                      <li>
  
-                           <a> &#160; &#160; <input type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %> &#160;&#160;&#160</a>
-
+                           <a > &#160; &#160; <input  type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %>&#160;&#160;&#160</a>
+                          
+                           
+                       <a> &#160; &#160;    <span style="position:relative;">
+                       <input  disabled="disabled" type="number" min="1" max="100" id="porcentaj"  name="porcentaje"   >
+                       <div style="position:absolute; left:0; right:0; top:0; bottom:0; cursor: pointer;" ></div>
+                        </span> &#160;&#160;&#160</a>
+                           
+                           
                        </li>
 
                        <% } %>
@@ -481,8 +488,17 @@ $( "input" ).on( "click", function() {
               <% } %>
  </table>
     </div>
-        <input class="formfield"  type="submit" value="Buscar Puesto">
+        <input class="formfield"  type="submit" value="Buscar Oferente">
 </form>
+ 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+ <script>
+     
+$("div").click(function (evt) {
+    $(this).ready().prev("input[disabled]").prop("disabled", false).focus();
+});
+     
+ </script> 
                   
   <div id="body" style="margin: 0 auto; width:85%; display: inline-block; margin-left:20px;">   
         <div id="listar" class="area" style="width:50%;">   
@@ -495,8 +511,11 @@ $( "input" ).on( "click", function() {
                 <% for(Oferente s: buscarOferente){ %>
                      <tr><td><%= s.getNombreOferente() %></td><td><%= s.getPrimerApellido() %></td>
                      <td><%= s.getCorreoOferente()  %></td><td><%= s.getUbicacion()  %></td>
-                     <td> <a href="<%=getServletContext().getRealPath("/").concat("CV/") %><%=s.getCedulaOferente()%>.pdf"><%=s.getCedulaOferente()%>.pdf</a></tr><br>
-               <% } %>
+                     
+              <td><form method="get" action="downloadpdf" enctype="multipart/form-data"> <input type="hidden"  name="cedula" value="<%= s.getCedulaOferente() %>">  <input type="submit" value="Descargar CV" name="download" id="download" /> </form>    </td>
+              
+              
+              <% } %>
             </tbody>
             </table>
       </div>
@@ -505,7 +524,29 @@ $( "input" ).on( "click", function() {
               </div>   
  
  
-  
+  <script>
+      
+     function downloadFile(urlToSend) {
+         
+         window.alert("en download");
+         
+     var req = new XMLHttpRequest();
+     req.open("GET", urlToSend, true);
+     req.responseType = "blob";
+     req.onload = function (event) {
+         var blob = req.response;
+         var fileName = req.getResponseHeader("fileName") //if you have the fileName header available
+         var link=document.createElement('a');
+         link.href=window.URL.createObjectURL(blob);
+         link.download=fileName;
+         link.click();
+     };
+
+     req.send();
+ }
+      
+      
+      </script>
            
             
             

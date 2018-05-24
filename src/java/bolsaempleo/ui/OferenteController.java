@@ -344,8 +344,10 @@ oferente.setClave(clave);
            try{
                
                String clrs[] = request.getParameterValues("names");
+               
+               String porcen[] = request.getParameterValues("porcentaje"); 
             
-            List<EspecializacionIncluidaOferente> ei = model.instance().getEspecializacionIDOferente(clrs);
+            List<EspecializacionIncluidaOferente> ei = model.instance().getEspecializacionIDOferente(clrs, porcen);
             
             List<Oferente> oferente = model.instance().getOferentePorID(ei);
             

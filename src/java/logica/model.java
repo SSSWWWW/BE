@@ -387,8 +387,8 @@ public class model {
            return dao.caracteristicasPorcentaje(p);
        }
             
-         public List<EspecializacionIncluidaOferente> getEspecializacionIDOferente(String[] cl) throws Exception{
-            return  dao.EspecializacionIdOferente(cl);
+         public List<EspecializacionIncluidaOferente> getEspecializacionIDOferente(String[] cl, String[]por) throws Exception{
+            return  dao.EspecializacionIdOferente(cl, por);
        }    
            
          
