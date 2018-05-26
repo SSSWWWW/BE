@@ -26,17 +26,87 @@ import javax.servlet.http.Part;
  *
  * @author pc
  */
-@WebServlet(name = "FileUploadServlet", urlPatterns = {"/upload"})
+@WebServlet(name = "FileUploadServlet", urlPatterns = {"/upload" , "/uploadfoto"})
 @MultipartConfig
 public class FileUploadServlet extends HttpServlet {
+    
+    
+    
+    
+    
+    
+    
+    
+    
     private final static Logger LOGGER =
             Logger.getLogger(FileUploadServlet.class.getCanonicalName());
     
-    protected void processRequest(HttpServletRequest request,
-        HttpServletResponse response)
-        throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
+     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+             throws ServletException, IOException {
+    switch(request.getServletPath()){
+        case "/upload":
+            this.doupload(request,response);
+            break;
+      
+           case "/uploadfoto":
+            this.douploadfoto(request,response);
+            break;
+            
+            
+            
+    }
+  }
+    
+     protected void douploadfoto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    // Create path components to save the file
+    final String path = request.getParameter("destination");
+    final Part filePart = request.getPart("file");
+    final String fileName = getFileName(filePart);
+    String nombreEmp = request.getParameter("nombreEmp");
 
+    OutputStream out = null;
+    InputStream filecontent = null;
+    final PrintWriter writer = response.getWriter();
+
+    try {
+       // out = new FileOutputStream(new File(path + File.separator+ cedula+".pdf"));
+        
+        out = new FileOutputStream(new File(getServletContext().getRealPath("/")+"Logos/"+nombreEmp+".svg"));
+        
+        
+        filecontent = filePart.getInputStream();
+
+        int read = 0;
+        final byte[] bytes = new byte[1024];
+
+        while ((read = filecontent.read(bytes)) != -1) {
+            out.write(bytes, 0, read);
+        }
+        request.getRequestDispatcher("datosEmpresa.jsp").
+                forward( request, response);
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("datosEmpresa.jsp").forward( request, response);
+          } finally {
+        if (out != null) {
+            out.close();
+        }
+        if (filecontent != null) {
+            filecontent.close();
+        }
+        if (writer != null) {
+            writer.close();
+        }
+    }
+}
+
+     
+    
+    protected void doupload(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
     // Create path components to save the file
     final String path = request.getParameter("destination");
     final Part filePart = request.getPart("file");
@@ -80,6 +150,11 @@ public class FileUploadServlet extends HttpServlet {
         }
     }
 }
+    
+    
+    
+    
+    
 
 private String getFileName(final Part part) {
     final String partHeader = part.getHeader("content-disposition");

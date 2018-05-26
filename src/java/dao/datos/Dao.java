@@ -1579,7 +1579,26 @@ public class Dao {
             
             
    /*********************************************************************/ 
-    private Puestos puestos(ResultSet rs){
+    private Puestos puestos2(ResultSet rs){
+        try {
+            Puestos ec= new Puestos();
+          
+                ec.setDescripcionPuesto(rs.getString("descripcionPuesto"));
+                ec.setIdPuesto(rs.getInt("idPuesto"));
+                ec.setNombrePuesto(rs.getString("nombrePuesto"));
+                ec.setSalario(rs.getFloat("salario"));
+                ec.setEstado(rs.getBoolean("estado"));
+                ec.setNombreEmpresa(rs.getString("nombreEmp"));
+                
+        
+            return ec;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+            
+            
+            private Puestos puestos(ResultSet rs){
         try {
             Puestos ec= new Puestos();
           
@@ -1785,13 +1804,19 @@ public class Dao {
         
             public List<Puestos> PuestosGetAll(){
                 
+                
+             
+                
+                
               db.getConnection();    
         List<Puestos> estados=new ArrayList<>();
         try {
-            String sql="select * from puestos where estado = 1 order by idpuesto desc limit 5";
+            String sql="select puestos.descripcionPuesto, puestos.idPuesto, puestos.nombrePuesto, puestos.salario, puestos.estado, empresa.nombreEmp from puestos,\n" +
+"empresa, puestos_publicados where puestos.idPuesto = puestos_publicados.idPuesto and empresa.idEmp = puestos_publicados.idEmp  and \n" +
+"puestos.estado = 1 order by puestos.idpuesto desc limit 5;";
             ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
-                estados.add(puestos(rs));
+                estados.add(puestos2(rs));
             }
         } catch (SQLException ex) { }
         return estados;        

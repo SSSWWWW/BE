@@ -72,11 +72,11 @@
       <div class="item active" style="height: 120px; right:40px; " >
           
            <div  class="box" onClick="mostrarPuesto('<%= s.getNombrePuesto() %>' , '<%= s.getDescripcionPuesto() %>' , '<%= s.getSalario() %>' , '<%= s.getIdPuesto() %>' , '<%= s.getLongitud() %>' , '<%= s.getLatitud() %>' );"  >
-               <a  id="nopu" onclick="document.getElementById('modalpuesto').style.display='block'" style="width:auto;" ><%= s.getNombrePuesto()%></a>
-               
-               <p style="font-size: 70%;"> <%=s.getDescripcionPuesto() %> </p>
-               <p style="font-size: 70%;"> ₡ <%=s.getSalario() %> </p>
-               
+               <a  id="nopu"  ><%= s.getNombrePuesto()%></a>
+             
+               <div class="carousel-item">
+               <img onclick="document.getElementById('modalpuesto').style.display='block'" style="width:auto;" src="${pageContext.request.contextPath}/Logos/<%= s.getNombreEmpresa() %>.jpg" alt="art" width="164" height="130">
+               </div>
               
 </div>
          
@@ -550,7 +550,7 @@ $("div").click(function (evt) {
   <form class="modal-content animate"  method="post" >
     <div class="imgcontainer">
       <span onclick="cerrarModalPuesto();" class="close" title="Close Modal">&times;</span>
-       <img src='images/login.jpg' alt="Avatar" class="avatar">
+  
     </div>
 
     <div class="container" >

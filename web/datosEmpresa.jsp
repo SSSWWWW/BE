@@ -36,8 +36,11 @@
 
 
 
-<div style= 'background-image:  url("images/wallpaper.jpg"); height: 100px; width: 2300px;' > 
- </div>
+<div style= ' height: 100px; width: 1300px;' > 
+ 
+<img style= " max-height:100%; max-width:100%;" src="${pageContext.request.contextPath}/Logos/<%= empresa.getNombreEmp() %>.jpg" /> 
+
+</div>
 
 <div class = "datOf" style=" float:left; display:inline-block; vertical-align:top; ">
     
@@ -53,14 +56,23 @@
         <tr><td><%=empresa.getDescripcionEmp() %></td></tr><br><br>
         <tr><td><%=empresa.getCorreoEmp() %></td></tr>
         <tr><td><%=empresa.getTelefono() %></td></tr>
+    
+     
         <div class = "map" style="  width: 270px; height: 100px;top: 80px; "  >
             <div id = "map" style="  width: 270px; height: 100px; top: 80px; "></div>
         </div><br>
+        
+        
+        
     </table>
     
+        
+        
       
     
    </div>
+        
+        
         
         
   <br>
@@ -225,19 +237,348 @@
               
             </div>
               
+
+  
               
-              <div class="container" style="display:inline-block; width:200px; height: 540px; ">
+              <div class="container" style="display:inline-block;  overflow-y:scroll; position:relative; width:200px; height: 180px; ">
   <form action="listarPuestosEmp" method="get" class = "formoferente">
   
   <input type="hidden"  name="idEmp" value="<%=empresa.getIdEmp() %>"><br>
    
  
-<input type="submit"  value="Ver Puestos Publicados" >
+<input type="submit"  value="Puestos Publicados" >
 
  </form>
+  
+  
+         
+      
+            
+            <jsp:useBean id="puestosListaEmp" scope="request" type="List<Puestos>" class="java.util.ArrayList"/>
+            
+          
 
+            <table style="overflow-x: auto; ;" class="tablecarac table-bordered table-sm">
+              
+              <thead style="background-color: slateblue"><tr><td>Nombre</td></tr></thead>
+              <tbody >
+                <% for(Puestos s: puestosListaEmp){ %>
+                <tr>
+                      <td  onClick="editar('<%= s.getIdPuesto()%>' , '<%= s.getNombrePuesto() %>' , '<%=s.getDescripcionPuesto() %>' , '<%=s.getSalario() %>', '<%=s.isEstado() %>');" ><%= s.getIdPuesto() %>&#160; <img  src='images/pencil.svg'  class='icon' onclick="document.getElementById('myyModal').style.display='block'" style="width:auto;">
+                      <img  onclick="document.getElementById('modalborrar').style.display='block'"  src='images/trashcan.svg'  class='icon'  style="width:auto;">
+                      
+                      </td>
+                     </tr>
+               <% } %>
+            </tbody>
+            </table>
+   
+    
+            
+             </div>
+            
+            
+                 <div class="container" style="display:inline-block; width:350px; height: 540px; ">
+                   
+ <form method="POST" action="uploadfoto" enctype="multipart/form-data" onsubmit="alert('Logo agregado!')">
+             <legend>Subir logo</legend>
+           <input type="file" value="<%= empresa.getNombreEmp() %>" name="file" id="file" /> <br/>
+            Buscar:
+            
+            <input type="hidden"  name="cedula" value="<%= empresa.getNombreEmp() %>">
+            
+            <input type="submit" value="Subir" name="upload" id="upload" />
+            
+                   <%
+    if(null!=request.getAttribute("error"))
+    {
+       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
+    }
+%>
+            
+            
+        </form>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        </div>
+            
+            
+              
+           
+             
+  
+              <div class="container" style=" float:left; display:inline-block; width:400px; height: 540px; ">
+                  <%  List<Caracteristicas> cc = model.instance().getAllCaracteristicas(); %>
+                  
+                  <h1 style="text-align: left; font-size: 150%;">Buscar Oferente </h1>
+
+<form style="float: left;" class = "formempresa"  action="buscarOferente" method="get">
+    
+     
+    <div style="overflow-x: auto; width:250px; height: 89px;">
+ <table class="tablecarac table-bordered table-sm">
+    
+       <% for(Caracteristicas sc : cc){ %>
+     <ul>
+              <li>
+                  
+                <a> <%= sc.getNombreCaracteristica()  %> </a>
+ 
+                <ul>
+                     
+                     <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
+                    <% for(Area_Trabajo artr : at){ %>
+                 <li>
+ 
+                     <a> &#160;&#160;<%= artr.getNombreAreaTrabajo()  %> </a>
+         
+                     <ul>
+                          <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
+                      <% for(Especializacion esp : es){ %>
+                     
+                      <li>
+ 
+                           <a > &#160; &#160; <input  type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %>&#160;&#160;&#160</a>
+                          
+                           
+                       <a> &#160; &#160;    <span style="position:relative;">
+                       <input  disabled="disabled" type="number" min="1" max="100" id="porcentaj"  name="porcentaje"   >
+                       <div style="position:absolute; left:0; right:0; top:0; bottom:0; cursor: pointer;" ></div>
+                        </span> &#160;&#160;&#160</a>
+                           
+                           
+                       </li>
+
+                       <% } %>
+                     </ul><br><br>
+ 
+                 </li>
+                 
+                    <% } %>
+
+                </ul>
+
+              </li>
+ 
+            </ul><br>
+     
+              <% } %>
+ </table>
+    </div>
+        <input class="formfield"  type="submit" value="Buscar Oferente">
+</form>
+ 
+ 
+ 
+ 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+ <script>
+     
+$("div").click(function (evt) {
+    $(this).ready().prev("input[disabled]").prop("disabled", false).focus();
+});
+     
+ </script> 
+                  
+  <div id="body" style="margin: 0 auto; width:85%; display: inline-block; margin-left:20px;">   
+        <div id="listar" class="area" style="width:50%;">   
+            <br>
+            <jsp:useBean id="buscarOferente" scope="request" type="List<Oferente>" class="java.util.ArrayList"/>
+            <table class="tablecarac table-bordered table-sm">
+              
+              <thead style="background-color: slateblue"><tr><td>Nombre</td><td>Apellido</td><td>Correo</td><td>Ubicacion</td><td>Curriculum</td></tr></thead>
+              <tbody style="height: 250px;">
+                <% for(Oferente s: buscarOferente){ %>
+                     <tr><td><%= s.getNombreOferente() %></td><td><%= s.getPrimerApellido() %></td>
+                     <td><%= s.getCorreoOferente()  %></td><td><%= s.getUbicacion()  %></td>
+                     
+              <td><form method="get" action="downloadpdf" enctype="multipart/form-data"> <input type="hidden"  name="cedula" value="<%= s.getCedulaOferente() %>">  <input type="submit" value="Descargar CV" name="download" id="download" /> </form>    </td>
+              
+              
+              <% } %>
+            </tbody>
+            </table>
+      </div>
+    </div>
+                  
+              </div>   
+            
+          
+        
+ 
+  <script>
+      
+     function downloadFile(urlToSend) {
+         
+         window.alert("en download");
+         
+     var req = new XMLHttpRequest();
+     req.open("GET", urlToSend, true);
+     req.responseType = "blob";
+     req.onload = function (event) {
+         var blob = req.response;
+         var fileName = req.getResponseHeader("fileName") //if you have the fileName header available
+         var link=document.createElement('a');
+         link.href=window.URL.createObjectURL(blob);
+         link.download=fileName;
+         link.click();
+     };
+
+     req.send();
+ }
+      
+      
+      
+      function add(){
+	empresa = <%= empresa.getIdEmp() %> ;
+        data=new FormData();
+        
+        data.append("foto",$("#foto")[0].files[0]);
+            $.ajax({type: "POST", 
+                  url:"PersonaAdd", 
+                  data: data,
+                  processData: false,
+                  contentType: false,                  
+                  success: 
+                    function(obj){
+                        updateList(obj); 
+                        $("#formulario").trigger("reset");
+                    },
+                  error: function(status){
+                         window.alert("Error");
+                    }                    
+                });      
+  }
+      
+      
+      
+      </script>
+           
+            
+            
+            
+            
+            
+   <div  id="myyModal" class="modal">
+  
+  <form class="modal-content animate" action="editarpuesto" method="POST">
+    <div class="imgcontainer">
+      <span onclick="cerrarModalPuesto();" class="close" title="Close Modal">&times;</span>
+      
+    </div>
+
+    <div class="container">
+      
+     <input class="formfield" type="text" name="nombPues" id="nombPues" ><br>
+
+     
+      <input class="formfield" type="text" name="descri" id="descri"><br>
+      
+     <input class="formfield" type="number" id="salPu" name="salPu"  ><br>
+     
+     <input class="formfield" type="hidden" id="idP" name="idP"  ><br>
+     
+     
+ <div>
+    <input type="radio" name="estad" value="true" id="estad" class="check" checked="checked" >
+    <label for="publico">Publico</label>
+  </div>
+  <div>
+    <input type="radio" name="estad" value="false" id="estad" class="check" >
+    <label for="privado">Privado</label>
+  </div>
+     
+      <div id="caracDiv"> 
+         
+        
+         <table style="border-spacing: 10px; border-collapse: separate; ">
+             <tr>
+              <div id="caracDiv">   
+             <th>Caracteristica</th>
+             <th>Porcentaje</th>
+             </tr>
+         
+         </table>
+               
+     </div>
+     
+        
+      <button type="submit">Editar</button>
+      
+    </div>
+     
+     
+     
+
+    
+  </form>
+</div>  
+            
+            
+    
+            
+            
+            
+            
+            
+            
+            
+             <div  id="modalborrar" class="modal">
+  
+  <form class="modal-content animate" action="deletePuesto" method="POST">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('modalborrar').style.display='none'" class="close" title="Close Modal">&times;</span>
+      
+    </div>
+
+    <div class="container">
+      
+     <input class="formfield" type="text" name="nombPu" id="nombPu" ><br>
+
+     
+     
+     <input class="formfield" type="hidden" id="idPues" name="idPues"  ><br>
+     
+        
+      <button type="submit">Desactivar</button>
+      
+    </div>
+
+    
+  </form>
+</div>  
+      
+      
+      
+            
+            
+            
+            
+            
+   
+            
+            
+            
+            
+            
+            
+            
+            
+       
+
+             
+            
+<div class = "salir" style="position:fixed ; top:0%; right:0%;">
+    <ul class="menu">
+        <li><a href="#"><%=empresa.getIdEmp() %>-<%=empresa.getNombreEmp() %><img class="inline" src="images/down.png" alt=""></a>
+            <ul class="menuitem" > <li> <a href="Logout">Salir</a></li> </ul>
+        </li>
+    </ul>
+           
+         
+            
+</div>
+            
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script> 
     
     function editar(idpuesto , nombre , descripcion , salario , estado){
@@ -396,276 +737,6 @@ $( "input" ).on( "click", function() {
 
     
 </script>    
-
-
- 
-              
-              
-               <div id="body" >   
-        <div id="listar" class="area" style="width:50%;">   
-            
-            <jsp:useBean id="puestosListaEmp" scope="request" type="List<Puestos>" class="java.util.ArrayList"/>
-            
-          
-
-            <table style="overflow-x: auto; width:250px; height: 100px;" class="tablecarac table-bordered table-sm">
-              
-              <thead style="background-color: slateblue"><tr><td>Nombre</td></tr></thead>
-              <tbody style="height: 250px;">
-                <% for(Puestos s: puestosListaEmp){ %>
-                <tr>
-                      <td  onClick="editar('<%= s.getIdPuesto()%>' , '<%= s.getNombrePuesto() %>' , '<%=s.getDescripcionPuesto() %>' , '<%=s.getSalario() %>', '<%=s.isEstado() %>');" ><%= s.getNombrePuesto() %>&#160; <img  src='images/pencil.svg'  class='icon' onclick="document.getElementById('myyModal').style.display='block'" style="width:auto;">
-                      <img  onclick="document.getElementById('modalborrar').style.display='block'"  src='images/trashcan.svg'  class='icon'  style="width:auto;">
-                      
-                      </td>
-                     </tr>
-               <% } %>
-            </tbody>
-            </table>
-             
-      </div>
-    </div>
-              
-              
-              </div>
-  
-  
-              <div class="container" style=" float:right; display:inline-block; width:700px; height: 540px;">
-                  <%  List<Caracteristicas> cc = model.instance().getAllCaracteristicas(); %>
-                  
-                  <h1 style="text-align: left; font-size: 150%;">Buscar Oferente </h1>
-
-<form style="float: left;" class = "formempresa"  action="buscarOferente" method="get">
-    
-     
-    <div style="overflow-x: auto; width:250px; height: 89px;">
- <table class="tablecarac table-bordered table-sm">
-    
-       <% for(Caracteristicas sc : cc){ %>
-     <ul>
-              <li>
-                  
-                <a> <%= sc.getNombreCaracteristica()  %> </a>
- 
-                <ul>
-                     
-                     <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
-                    <% for(Area_Trabajo artr : at){ %>
-                 <li>
- 
-                     <a> &#160;&#160;<%= artr.getNombreAreaTrabajo()  %> </a>
-         
-                     <ul>
-                          <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
-                      <% for(Especializacion esp : es){ %>
-                     
-                      <li>
- 
-                           <a > &#160; &#160; <input  type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %>&#160;&#160;&#160</a>
-                          
-                           
-                       <a> &#160; &#160;    <span style="position:relative;">
-                       <input  disabled="disabled" type="number" min="1" max="100" id="porcentaj"  name="porcentaje"   >
-                       <div style="position:absolute; left:0; right:0; top:0; bottom:0; cursor: pointer;" ></div>
-                        </span> &#160;&#160;&#160</a>
-                           
-                           
-                       </li>
-
-                       <% } %>
-                     </ul><br><br>
- 
-                 </li>
-                 
-                    <% } %>
-
-                </ul>
-
-              </li>
- 
-            </ul><br>
-     
-              <% } %>
- </table>
-    </div>
-        <input class="formfield"  type="submit" value="Buscar Oferente">
-</form>
- 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
- <script>
-     
-$("div").click(function (evt) {
-    $(this).ready().prev("input[disabled]").prop("disabled", false).focus();
-});
-     
- </script> 
-                  
-  <div id="body" style="margin: 0 auto; width:85%; display: inline-block; margin-left:20px;">   
-        <div id="listar" class="area" style="width:50%;">   
-            <br>
-            <jsp:useBean id="buscarOferente" scope="request" type="List<Oferente>" class="java.util.ArrayList"/>
-            <table class="tablecarac table-bordered table-sm">
-              
-              <thead style="background-color: slateblue"><tr><td>Nombre</td><td>Apellido</td><td>Correo</td><td>Ubicacion</td><td>Curriculum</td></tr></thead>
-              <tbody style="height: 250px;">
-                <% for(Oferente s: buscarOferente){ %>
-                     <tr><td><%= s.getNombreOferente() %></td><td><%= s.getPrimerApellido() %></td>
-                     <td><%= s.getCorreoOferente()  %></td><td><%= s.getUbicacion()  %></td>
-                     
-              <td><form method="get" action="downloadpdf" enctype="multipart/form-data"> <input type="hidden"  name="cedula" value="<%= s.getCedulaOferente() %>">  <input type="submit" value="Descargar CV" name="download" id="download" /> </form>    </td>
-              
-              
-              <% } %>
-            </tbody>
-            </table>
-      </div>
-    </div>
-                  
-              </div>   
- 
- 
-  <script>
-      
-     function downloadFile(urlToSend) {
-         
-         window.alert("en download");
-         
-     var req = new XMLHttpRequest();
-     req.open("GET", urlToSend, true);
-     req.responseType = "blob";
-     req.onload = function (event) {
-         var blob = req.response;
-         var fileName = req.getResponseHeader("fileName") //if you have the fileName header available
-         var link=document.createElement('a');
-         link.href=window.URL.createObjectURL(blob);
-         link.download=fileName;
-         link.click();
-     };
-
-     req.send();
- }
-      
-      
-      </script>
-           
-            
-            
-            
-            
-            
-   <div  id="myyModal" class="modal">
-  
-  <form class="modal-content animate" action="editarpuesto" method="POST">
-    <div class="imgcontainer">
-      <span onclick="cerrarModalPuesto();" class="close" title="Close Modal">&times;</span>
-      
-    </div>
-
-    <div class="container">
-      
-     <input class="formfield" type="text" name="nombPues" id="nombPues" ><br>
-
-     
-      <input class="formfield" type="text" name="descri" id="descri"><br>
-      
-     <input class="formfield" type="number" id="salPu" name="salPu"  ><br>
-     
-     <input class="formfield" type="hidden" id="idP" name="idP"  ><br>
-     
-     
- <div>
-    <input type="radio" name="estad" value="true" id="estad" class="check" checked="checked" >
-    <label for="publico">Publico</label>
-  </div>
-  <div>
-    <input type="radio" name="estad" value="false" id="estad" class="check" >
-    <label for="privado">Privado</label>
-  </div>
-     
-      <div id="caracDiv"> 
-         
-        
-         <table style="border-spacing: 10px; border-collapse: separate; ">
-             <tr>
-              <div id="caracDiv">   
-             <th>Caracteristica</th>
-             <th>Porcentaje</th>
-             </tr>
-         
-         </table>
-               
-     </div>
-     
-        
-      <button type="submit">Editar</button>
-      
-    </div>
-
-    
-  </form>
-</div>  
-            
-            
-    
-            
-            
-            
-            
-            
-            
-            
-             <div  id="modalborrar" class="modal">
-  
-  <form class="modal-content animate" action="deletePuesto" method="POST">
-    <div class="imgcontainer">
-      <span onclick="document.getElementById('modalborrar').style.display='none'" class="close" title="Close Modal">&times;</span>
-      
-    </div>
-
-    <div class="container">
-      
-     <input class="formfield" type="text" name="nombPu" id="nombPu" ><br>
-
-     
-     
-     <input class="formfield" type="hidden" id="idPues" name="idPues"  ><br>
-     
-        
-      <button type="submit">Desactivar</button>
-      
-    </div>
-
-    
-  </form>
-</div>  
-            
-            
-            
-            
-            
-   
-            
-            
-            
-            
-            
-            
-            
-            
-       
-
-             
-            
-<div class = "salir" style="position:fixed ; top:0%; right:0%;">
-    <ul class="menu">
-        <li><a href="#"><%=empresa.getIdEmp() %>-<%=empresa.getNombreEmp() %><img class="inline" src="images/down.png" alt=""></a>
-            <ul class="menuitem" > <li> <a href="Logout">Salir</a></li> </ul>
-        </li>
-    </ul>
-           
-         
-            
-</div>
             
              <a href = "principal.jsp" target = "_self" style="position: fixed;top: 0%;left: 0%;">Regresar</a></center>
             
