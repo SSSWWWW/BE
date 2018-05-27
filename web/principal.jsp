@@ -71,11 +71,11 @@
          <% for(Puestos s: c){ %>
       <div class="item active" style="height: 120px; right:40px; " >
           
-           <div  class="box" onClick="mostrarPuesto('<%= s.getNombrePuesto() %>' , '<%= s.getDescripcionPuesto() %>' , '<%= s.getSalario() %>' , '<%= s.getIdPuesto() %>' , '<%= s.getLongitud() %>' , '<%= s.getLatitud() %>' );"  >
+           <div  class="box" onClick="mostrarPuesto('<%= s.getNombrePuesto() %>' , '<%= s.getDescripcionPuesto() %>' , '<%= s.getSalario() %>' , '<%= s.getIdPuesto() %>' , '<%= s.getLongitud() %>' , '<%= s.getLatitud() %>' , '<%= s.getNombreEmpresa() %>' );"  >
                <a  id="nopu"  ><%= s.getNombrePuesto()%></a>
              
                <div class="carousel-item">
-               <img onclick="document.getElementById('modalpuesto').style.display='block'" style="width:auto;" src="${pageContext.request.contextPath}/Logos/<%= s.getNombreEmpresa() %>.jpg" alt="art" width="164" height="130">
+               <img onclick="document.getElementById('modalpuesto').style.display='block'" style= " max-height:20%; max-width:20%;" src="<%= s.getNombreEmpresa() %>" >
                </div>
               
 </div>
@@ -297,7 +297,7 @@
         
         
         
-        function mostrarPuesto(nombrePuesto , descripcion, salario, idpuesto, lat , lon ){
+        function mostrarPuesto(nombrePuesto , descripcion, salario, idpuesto, lat , lon, nombreemp ){
     
     
     
@@ -305,6 +305,7 @@
     $("#desPues").val(descripcion);
     $("#sal").val(salario);
     $("#idEmp").val(idpuesto);
+    $("#modalim").attr('src', nombreemp);
     
     puestos = idpuesto;
     
@@ -471,11 +472,18 @@ $("div").click(function (evt) {
               
               <thead><tr><td>Nombre</td><td>Descripcion</td><td>Salario</td></tr></thead>
               <tbody   style="height: 250px;">
-                <% for(Puestos s: buscarPuestos){ %>
-                
+                  <% 
+                      int con =0;
+                      for(Puestos s: buscarPuestos){ %>
+                     
+                      <% con++; if(con < 2) { %>
                      <tr onClick="mostrarPuesto1('<%= s.getNombrePuesto() %>' , '<%= s.getDescripcionPuesto() %>' , '<%= s.getSalario() %>' , '<%= s.getIdPuesto() %>' , ' <%= s.getLongitud() %>' , <%= s.getLatitud() %> );"  ><td onclick="document.getElementById('modalpuesto1').style.display='block'"  ><%= s.getNombrePuesto() %></td><td><%= s.getDescripcionPuesto() %></td>
                      <td><%= s.getSalario()  %></td><td id="lonpu" value="<%= s.getLatitud()  %>" ></td> <td id="latpu" value="<%= s.getLongitud()  %>"></td>  </tr><br>
-               <% } %>
+             
+              
+             <% } %>
+             
+              <% } %>
             </tbody>
             </table>
             
@@ -512,6 +520,15 @@ $("div").click(function (evt) {
        <button type="submit">Ingresar</button>
       
     </div>
+      
+            <%
+    if(null!=request.getAttribute("error"))
+    {
+       
+        
+       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
+    }
+%>
 
     
   </form>
@@ -554,8 +571,10 @@ $("div").click(function (evt) {
     </div>
 
     <div class="container" >
+        
+        <img  style= " max-height:20%; max-width:20%;" id="modalim" src="" >
       
-     <input class="formfield" type="text" name="nombrePues" id="nombrePues">
+     <input class="formfield" type="text" name="nombrePues" id="nombrePues" style="width:200px;"><br>
 
      <input class="formfield" type="text" name="desPues" id="desPues">
      

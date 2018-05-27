@@ -37,7 +37,7 @@ import logica.model;
  */
 
     @WebServlet(name = "Empresa", urlPatterns = {"/LoginEm", "/LogoutEm" , "/agregarEmpresa" , 
-    "/listarCaracteristicas", "/agregarPuesto" , "/listarPuestosEmp" , "/editarpuesto", "/listarPuestosNP" , "/deletePuesto"})
+    "/listarCaracteristicas", "/agregarPuesto" , "/listarPuestosEmp" , "/editarpuesto", "/listarPuestosNP" , "/deletePuesto" , "/subirUrl"})
 public class Empresa extends HttpServlet {
 
     /**
@@ -91,6 +91,11 @@ public class Empresa extends HttpServlet {
             break; 
             
             
+              case "/subirUrl":
+            this.dosubirUrl(request,response);
+            break; 
+            
+            
             
     }
   }
@@ -120,7 +125,7 @@ empresa.setClave(clave);
       }
       catch(Exception e){	
 	request.setAttribute("error","Credenciales incorrectas..");
-	request.getRequestDispatcher("Error.jsp").
+	request.getRequestDispatcher("principal.jsp").
                 forward( request, response);
       }		
     }
@@ -155,7 +160,7 @@ empresa.setClave(clave);
 //</editor-fold>
         model.instance().addEmpresa(empresa);
 	s.setAttribute("empresa",empresa);
-	request.getRequestDispatcher("datosEmpresa.jsp").
+	request.getRequestDispatcher("principal.jsp").
                 forward( request, response);
           }
           catch(Exception e){
@@ -414,6 +419,27 @@ empresa.setClave(clave);
 	}  
         
         
+         
+         
+         protected void dosubirUrl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+           try{
+               
+               String idEmp   = request.getParameter("idEmp");
+               String url =  request.getParameter("url");
+                
+                model.instance().subirUrlEmpresa(idEmp, url);
+                //request.setAttribute("idEmp", puestos);
+                request.getRequestDispatcher("datosEmpresa.jsp").forward( request, response);
+		
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("datosEmpresa.jsp").forward( request, response);
+          }		
+	}  
+         
         
         
            protected void doeditarpuesto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

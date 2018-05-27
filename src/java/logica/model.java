@@ -194,6 +194,15 @@ public class model {
            return dao.EmpresaGet(emp);
        }
           
+           public void ActivarEmpresa(String a) throws Exception{
+            dao.EmpresaActivar(a);
+       }
+           
+            public void subirUrlEmpresa(String a, String url) throws Exception{
+            dao.EmpresaUrl(a, url);
+       }
+          
+          
            public Empresa getEmpresa1(String a) throws Exception{
            return dao.EmpresaGet1(a);
        }

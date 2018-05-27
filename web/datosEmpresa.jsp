@@ -38,8 +38,9 @@
 
 <div style= ' height: 100px; width: 1300px;' > 
  
-<img style= " max-height:100%; max-width:100%;" src="${pageContext.request.contextPath}/Logos/<%= empresa.getNombreEmp() %>.jpg" /> 
-
+    <img style= " max-height:100%; max-width:100%;" src="<%= empresa.getUrlllogo() %>" /> 
+  
+    
 </div>
 
 <div class = "datOf" style=" float:left; display:inline-block; vertical-align:top; ">
@@ -280,12 +281,11 @@
             
                  <div class="container" style="display:inline-block; width:350px; height: 540px; ">
                    
- <form method="POST" action="uploadfoto" enctype="multipart/form-data" onsubmit="alert('Logo agregado!')">
-             <legend>Subir logo</legend>
-           <input type="file" value="<%= empresa.getNombreEmp() %>" name="file" id="file" /> <br/>
-            Buscar:
+ <form method="POST" action="subirUrl"  onsubmit="alert('Url agregado!')">
             
-            <input type="hidden"  name="cedula" value="<%= empresa.getNombreEmp() %>">
+             <input type="text"  name="url" id="url"  placeholder="Url de logo">
+            
+            <input type="hidden"  name="idEmp" id="idEmp"  value="<%= empresa.getIdEmp() %>">
             
             <input type="submit" value="Subir" name="upload" id="upload" />
             

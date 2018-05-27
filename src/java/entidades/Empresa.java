@@ -23,12 +23,46 @@ public class Empresa  implements java.io.Serializable {
      private String correoEmp;
      private Date fechaRegistro;
      private String clave;
+     private boolean estado;
+     private String urlllogo;
 
 
     public Empresa() {
         
         
     }
+
+    public Empresa(Integer idEmp, String nombreEmp, String telefono, String latitud, String longitud, String descripcionEmp, String correoEmp, Date fechaRegistro, String clave, boolean estado, String urlllogo) {
+        this.idEmp = idEmp;
+        this.nombreEmp = nombreEmp;
+        this.telefono = telefono;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.descripcionEmp = descripcionEmp;
+        this.correoEmp = correoEmp;
+        this.fechaRegistro = fechaRegistro;
+        this.clave = clave;
+        this.estado = estado;
+        this.urlllogo = urlllogo;
+    }
+    
+    
+    
+
+    public Empresa(Integer idEmp, String nombreEmp, String telefono, String latitud, String longitud, String descripcionEmp, String correoEmp, Date fechaRegistro, String clave, boolean estado) {
+        this.idEmp = idEmp;
+        this.nombreEmp = nombreEmp;
+        this.telefono = telefono;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.descripcionEmp = descripcionEmp;
+        this.correoEmp = correoEmp;
+        this.fechaRegistro = fechaRegistro;
+        this.clave = clave;
+        this.estado = estado;
+    }
+    
+    
 
     public Empresa(String clave, Integer idEmp, String nombreEmp, String ubicacionEmp, String latitud, String longitud, String descripcionEmp, String correoEmp, Date fechaRegistro) {
         this.clave = clave;
@@ -111,6 +145,22 @@ public class Empresa  implements java.io.Serializable {
     
     public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
+    }
+
+    public boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public String getUrlllogo() {
+        return urlllogo;
+    }
+
+    public void setUrlllogo(String urlllogo) {
+        this.urlllogo = urlllogo;
     }
 
 

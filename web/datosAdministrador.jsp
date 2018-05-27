@@ -328,7 +328,10 @@ function addInput1(divName){
               <thead  style="background-color: slateblue"><tr><td>Nombre Empresa</td></tr></thead>
               <tbody style="height: 250px;">
                 <% for(Empresa s: empresasLista){ %>
-                <tr><td id="idpues" value="<%= s.getIdEmp() %>"  ><%= s.getNombreEmp() %></td>
+                <tr><td  onClick="editar('<%= s.getNombreEmp() %>' , '<%= s.getIdEmp() %>' );"  id="idpues" value="<%= s.getIdEmp() %>"  ><%= s.getNombreEmp() %>
+                    <img  onclick="document.getElementById('modalborrar').style.display='block'"  src='images/edit.png'  class='icon'  style="width:auto;">
+                    
+                    </td>
 
                      </tr>
                <% } %> 
@@ -377,6 +380,70 @@ function addInput1(divName){
   
           </div>   
               
+            
+         <script>
+             
+             
+                var modalBorrar = document.getElementById('modalBorrar');
+    
+    window.onclick = function(event) {
+   
+    
+  
+    
+     if (event.target == modalBorrar ) {
+        
+         
+        modalBorrar.style.display = "none";
+    }
+    
+    }
+    
+    function editar(nombreemp, idempresa ){
+    
+       
+    
+         // alert("You have reached the limit of adding  inputs " + idpuesto);
+     //     document.getElementById("leg").innerHTML = "Editar puesto";
+       //   document.getElementById("ag").value = "Editar";
+           document.getElementById("nombEmp").value = nombreemp;
+           document.getElementById("idEmp").value = idempresa;
+        
+           
+           
+    }
+    
+             
+             
+             </script>
+            
+            
+            
+            
+             <div  id="modalborrar" class="modal">
+  
+  <form class="modal-content animate" action="activarEmpresa" method="POST">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('modalborrar').style.display='none'" class="close" title="Close Modal">&times;</span>
+      
+    </div>
+
+    <div class="container">
+      
+     <input class="formfield" type="text" name="nombEmp" id="nombEmp" ><br>
+
+     
+     
+     <input class="formfield" type="hidden" id="idEmp" name="idEmp"  ><br>
+     
+        
+      <button type="submit">Activar</button>
+      
+    </div>
+
+    
+  </form>
+</div>  
        
             
                

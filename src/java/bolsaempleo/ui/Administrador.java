@@ -27,7 +27,7 @@ import logica.model;
  *
  * @author pc
  */
-@WebServlet(name = "Administrador", urlPatterns = { "/LoginAd", "/LogoutAd" , "/agregarAdministrador" , "/agregarCaracteristica" , "/agregarAreaTrabajo", "/agregarEspecialidad", "/listarPuestos" , "/buscarPuestos" , "/listarEmpresas" , "/listarOferentes"})
+@WebServlet(name = "Administrador", urlPatterns = { "/LoginAd", "/LogoutAd" , "/agregarAdministrador" , "/agregarCaracteristica" , "/agregarAreaTrabajo", "/agregarEspecialidad", "/listarPuestos" , "/buscarPuestos" , "/listarEmpresas" , "/listarOferentes" , "/activarEmpresa"})
 public class Administrador extends HttpServlet {
 
     /**
@@ -81,7 +81,13 @@ public class Administrador extends HttpServlet {
             
           case "/listarOferentes":
             this.listarOferentes(request,response);
-            break;       
+            break;   
+            
+            
+            
+            case "/activarEmpresa":
+            this.activarEmpresa(request,response);
+            break;  
             
             
     }
@@ -161,6 +167,25 @@ admin.setClave(clave);
       }		
     }
     
+    
+    
+       protected void activarEmpresa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+           try{
+               
+               String idEmp   = request.getParameter("idEmp");
+                
+                model.instance().ActivarEmpresa(idEmp);
+                //request.setAttribute("idEmp", puestos);
+                request.getRequestDispatcher("datosAdministrador.jsp").forward( request, response);
+		
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("datosAdministrador.jsp").forward( request, response);
+          }		
+	}  
     
     
       protected void listarOferentes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

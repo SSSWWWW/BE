@@ -72,7 +72,7 @@ public class FileUploadServlet extends HttpServlet {
     try {
        // out = new FileOutputStream(new File(path + File.separator+ cedula+".pdf"));
         
-        out = new FileOutputStream(new File(getServletContext().getRealPath("/")+"Logos/"+nombreEmp+".svg"));
+        out = new FileOutputStream(new File(getServletContext().getRealPath("/")+"Logos/"+nombreEmp+".jpeg"));
         
         
         filecontent = filePart.getInputStream();

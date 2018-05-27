@@ -1402,9 +1402,9 @@ public class Dao {
           
             
             for(int i=0; i<pues.size(); i++){
-            String sql="select empresa.latitud, empresa.longitud, puestos.nombrePuesto, puestos.salario, puestos.descripcionPuesto, puestos.estado, puestos.idPuesto from"+
+            String sql="select distinct empresa.latitud, empresa.longitud, puestos.nombrePuesto, puestos.salario, puestos.descripcionPuesto, puestos.estado, puestos.idPuesto from"+
                     "  puestos , empresa, puestos_publicados "+
-                    "where puestos.idPuesto  ='%s' and puestos.estado = '1' and puestos.idPuesto = puestos_publicados.idPuesto and puestos_publicados.idPuesto = puestos.idPuesto ";
+                    "where puestos.idPuesto  ='%s' and puestos.estado = '1' and puestos.idPuesto = puestos_publicados.idPuesto  limit 1 ";
             sql = String.format(sql,pues.get(i));
             ResultSet rs =  db.executeQuery(sql);
              while (rs.next()) {
@@ -1420,9 +1420,9 @@ public class Dao {
            
             
             for(int i=0; i<ei.size(); i++){
-            String sql="select empresa.latitud, empresa.longitud, puestos.nombrePuesto, puestos.salario, puestos.descripcionPuesto, puestos.estado, puestos.idPuesto from"+
+            String sql="select distinct empresa.latitud, empresa.longitud, puestos.nombrePuesto, puestos.salario, puestos.descripcionPuesto, puestos.estado, puestos.idPuesto from"+
                     "  puestos , empresa, puestos_publicados "+
-                    "where puestos.idPuesto  ='%s' and puestos.estado = '1' and puestos.idPuesto = puestos_publicados.idPuesto and puestos_publicados.idPuesto = puestos.idPuesto ";
+                    "where puestos.idPuesto  ='%s' and puestos.estado = '1' and puestos.idPuesto = puestos_publicados.idPuesto  limit 1";
             sql = String.format(sql,ei.get(i).getIdPuesto());
             ResultSet rs =  db.executeQuery(sql);
             while (rs.next()) {
@@ -1588,7 +1588,7 @@ public class Dao {
                 ec.setNombrePuesto(rs.getString("nombrePuesto"));
                 ec.setSalario(rs.getFloat("salario"));
                 ec.setEstado(rs.getBoolean("estado"));
-                ec.setNombreEmpresa(rs.getString("nombreEmp"));
+                ec.setNombreEmpresa(rs.getString("urllogo"));
                 
         
             return ec;
@@ -1811,7 +1811,7 @@ public class Dao {
               db.getConnection();    
         List<Puestos> estados=new ArrayList<>();
         try {
-            String sql="select puestos.descripcionPuesto, puestos.idPuesto, puestos.nombrePuesto, puestos.salario, puestos.estado, empresa.nombreEmp from puestos,\n" +
+            String sql="select puestos.descripcionPuesto, puestos.idPuesto, puestos.nombrePuesto, puestos.salario, puestos.estado, empresa.urllogo from puestos,\n" +
 "empresa, puestos_publicados where puestos.idPuesto = puestos_publicados.idPuesto and empresa.idEmp = puestos_publicados.idEmp  and \n" +
 "puestos.estado = 1 order by puestos.idpuesto desc limit 5;";
             ResultSet rs =  db.executeQuery(sql);
@@ -1861,6 +1861,8 @@ public class Dao {
                 ec.setLatitud(rs.getString("latitud"));
                 ec.setLongitud(rs.getString("longitud"));
                 ec.setIdEmp(rs.getInt("idEmp"));
+                ec.setEstado(rs.getBoolean("estado"));
+                ec.setUrlllogo(rs.getString("urllogo"));
         
             return ec;
         } catch (SQLException ex) {
@@ -1895,8 +1897,8 @@ public class Dao {
            
             
             System.out.println("en oferenteAdd");
-        String sql="insert into bolsaempleo.empresa (clave, nombreEmp , latitud , longitud, descripcionEmp, correoEmp, telefonoEmp ) "+
-                "values(?, ? ,? ,? ,? ,? ,?)";
+        String sql="insert into bolsaempleo.empresa (clave, nombreEmp , latitud , longitud, descripcionEmp, correoEmp, telefonoEmp, estado ) "+
+                "values(?, ? ,? ,? ,? ,? ,?, ?)";
         //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
         db.getConnection();
         PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
@@ -1910,6 +1912,9 @@ public class Dao {
         preparedStmt.setString (5, p.getDescripcionEmp());
         preparedStmt.setString (6, p.getCorreoEmp());
         preparedStmt.setString (7, p.getTelefono());
+        preparedStmt.setBoolean(8, false);
+        
+        
                 
       
        preparedStmt.execute();
@@ -1934,8 +1939,8 @@ public class Dao {
         }*/
             
         db.getConnection();    
-        String sql="select * from empresa where correoEmp='%s'";
-        sql = String.format(sql, emp.getCorreoEmp());
+        String sql="select * from empresa where correoEmp='%s' and clave = '%s' and estado = '1'";
+        sql = String.format(sql, emp.getCorreoEmp(), emp.getClave());
         ResultSet rs =  db.executeQuery(sql);
         if (rs.next()) {
             return empresa(rs);
@@ -1965,6 +1970,45 @@ public class Dao {
             
         }
     }
+        
+        
+        
+        public void EmpresaActivar(String a) throws Exception{
+            
+            
+         
+            
+       db.getConnection();    
+        String sql="update empresa set empresa.estado = '1' where idEmp='%s'";
+        sql = String.format(sql, a);
+        
+        System.out.println("EMPRESA ACTIVAR " + sql);
+        
+           int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("habilidad no existe");
+        }
+    }
+        
+        
+         public void EmpresaUrl(String a, String url) throws Exception{
+            
+       db.getConnection();    
+        String sql="update empresa set empresa.urllogo = '%s' where idEmp='%s'";
+        sql = String.format(sql, url , a);
+        
+        System.out.println("EMPRESA ACTIVAR " + sql);
+        
+           int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("habilidad no existe");
+        }
+    }
+        
+        
+        
+        
+        
         
         
                 public List<Empresa> EmpresaGetAll(){
