@@ -112,6 +112,8 @@ correoEmp varchar(50) unique,
 idEmp  int AUTO_INCREMENT,
 fechaRegistro DATETIME DEFAULT CURRENT_TIMESTAMP,
 clave varchar(55),
+urlLogo varchar(100),
+estado boolean;
 
 CONSTRAINT PK_EMP PRIMARY KEY (idEmp)
 
