@@ -20,10 +20,26 @@ public class Oferente  implements java.io.Serializable {
      private String correoOferente;
      private String ubicacion;
      private String clave;
+     private boolean estado;
+     
+     
      private Set<Aplicado> aplicados = new HashSet<Aplicado>(0);
      private Set<ServiciosPublicados> serviciosPublicadoses = new HashSet<ServiciosPublicados>(0);
 
     public Oferente() {
+    }
+
+    public Oferente(String cedulaOferente, String nombreOferente, String primerApellido, String segundoApellido, String celular, String nacionalidad, String correoOferente, String ubicacion, String clave, boolean estado) {
+        this.cedulaOferente = cedulaOferente;
+        this.nombreOferente = nombreOferente;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.celular = celular;
+        this.nacionalidad = nacionalidad;
+        this.correoOferente = correoOferente;
+        this.ubicacion = ubicacion;
+        this.clave = clave;
+        this.estado = estado;
     }
 
     
@@ -122,6 +138,14 @@ public class Oferente  implements java.io.Serializable {
     
     public void setServiciosPublicadoses(Set<ServiciosPublicados> serviciosPublicadoses) {
         this.serviciosPublicadoses = serviciosPublicadoses;
+    }
+
+    public boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
 

@@ -364,10 +364,14 @@ function addInput1(divName){
 
             <table style="overflow-x: auto; width:250px; height: 389px;" class="tablecarac table-bordered table-sm">
               
-              <thead  style="background-color: slateblue"><tr><td>Nombre Empresa</td></tr></thead>
+              <thead  style="background-color: slateblue"><tr><td>Nombre Oferente</td></tr></thead>
               <tbody style="height: 250px;">
                 <% for(Oferente s: oferentesLista){ %>
-                <tr><td id="idpues" value="<%= s.getCedulaOferente() %>"  ><%= s.getNombreOferente() %></td>
+                <tr><td onClick="editarOf('<%= s.getNombreOferente() %>' , '<%= s.getCedulaOferente() %>' );"  id="idpues" value="<%= s.getCedulaOferente() %>"  ><%= s.getNombreOferente() %>
+                    
+                    <img  onclick="document.getElementById('modaloferente').style.display='block'"  src='images/edit.png'  class='icon'  style="width:auto;">
+                    
+                    </td>
 
                      </tr>
                <% } %> 
@@ -386,6 +390,8 @@ function addInput1(divName){
              
                 var modalBorrar = document.getElementById('modalBorrar');
     
+     var modaloferente = document.getElementById('modaloferente');
+    
     window.onclick = function(event) {
    
     
@@ -395,6 +401,13 @@ function addInput1(divName){
         
          
         modalBorrar.style.display = "none";
+    }
+    
+    
+      if (event.target == modaloferente ) {
+        
+         
+        modaloferente.style.display = "none";
     }
     
     }
@@ -408,6 +421,20 @@ function addInput1(divName){
        //   document.getElementById("ag").value = "Editar";
            document.getElementById("nombEmp").value = nombreemp;
            document.getElementById("idEmp").value = idempresa;
+        
+           
+           
+    }
+    
+        function editarOf(nombreof, idof ){
+    
+       
+    
+         // alert("You have reached the limit of adding  inputs " + idpuesto);
+     //     document.getElementById("leg").innerHTML = "Editar puesto";
+       //   document.getElementById("ag").value = "Editar";
+           document.getElementById("nombOf").value = nombreof;
+           document.getElementById("idOf").value = idof;
         
            
            
@@ -445,6 +472,36 @@ function addInput1(divName){
   </form>
 </div>  
        
+             
+             
+             
+             
+             
+             
+                   <div  id="modaloferente" class="modal">
+  
+  <form class="modal-content animate" action="activarOferente" method="POST">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('modaloferente').style.display='none'" class="close" title="Close Modal">&times;</span>
+      
+    </div>
+
+    <div class="container">
+      
+     <input class="formfield" type="text" name="nombOf" id="nombOf" ><br>
+
+     
+     
+     <input class="formfield" type="hidden" id="idOf" name="idOf"  ><br>
+     
+        
+      <button type="submit">Activar</button>
+      
+    </div>
+
+    
+  </form>
+</div>  
             
                
             

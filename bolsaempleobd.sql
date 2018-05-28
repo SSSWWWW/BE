@@ -31,6 +31,7 @@ CREATE TABLE OFERENTE
   correoOferente varchar(50),
   ubicacion varchar(60),
   clave varchar(55),
+  estado boolean;
  
   CONSTRAINT PK_OFERENTE PRIMARY KEY (cedulaOferente)
   );

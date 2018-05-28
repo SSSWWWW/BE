@@ -27,7 +27,7 @@ import logica.model;
  *
  * @author pc
  */
-@WebServlet(name = "Administrador", urlPatterns = { "/LoginAd", "/LogoutAd" , "/agregarAdministrador" , "/agregarCaracteristica" , "/agregarAreaTrabajo", "/agregarEspecialidad", "/listarPuestos" , "/buscarPuestos" , "/listarEmpresas" , "/listarOferentes" , "/activarEmpresa"})
+@WebServlet(name = "Administrador", urlPatterns = { "/LoginAd", "/LogoutAd" , "/agregarAdministrador" , "/agregarCaracteristica" , "/agregarAreaTrabajo", "/agregarEspecialidad", "/listarPuestos" , "/buscarPuestos" , "/listarEmpresas" , "/listarOferentes" , "/activarEmpresa" , "/activarOferente"})
 public class Administrador extends HttpServlet {
 
     /**
@@ -87,6 +87,10 @@ public class Administrador extends HttpServlet {
             
             case "/activarEmpresa":
             this.activarEmpresa(request,response);
+            break;  
+            
+             case "/activarOferente":
+            this.activarOferente(request,response);
             break;  
             
             
@@ -187,6 +191,27 @@ admin.setClave(clave);
           }		
 	}  
     
+       
+       
+       protected void activarOferente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+           try{
+               
+               String idOf   = request.getParameter("idOf");
+                
+                model.instance().ActivarOferente(idOf);
+                //request.setAttribute("idEmp", puestos);
+                request.getRequestDispatcher("datosAdministrador.jsp").forward( request, response);
+		
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("datosAdministrador.jsp").forward( request, response);
+          }		
+	}  
+       
+       
     
       protected void listarOferentes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         

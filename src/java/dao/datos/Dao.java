@@ -1972,12 +1972,24 @@ public class Dao {
     }
         
         
+          public void OferenteActivar(String a) throws Exception{
+           
+       db.getConnection();    
+        String sql="update oferente set oferente.estado = '1' where cedulaOferente='%s'";
+        sql = String.format(sql, a);
+        
+        System.out.println("Oferente ACTIVAR " + sql);
+        
+           int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("no se pudo activar oferente");
+        }
+    }
+        
+        
         
         public void EmpresaActivar(String a) throws Exception{
-            
-            
-         
-            
+           
        db.getConnection();    
         String sql="update empresa set empresa.estado = '1' where idEmp='%s'";
         sql = String.format(sql, a);
@@ -2125,8 +2137,8 @@ public class Dao {
         
           
           db.getConnection();
-          String sql="select * from oferente where correoOferente='%s'";
-        sql = String.format(sql, of.getCorreoOferente());
+          String sql="select * from oferente where correoOferente='%s' and clave='%s'  and  estado = '1'";
+        sql = String.format(sql, of.getCorreoOferente(), of.getClave());
         ResultSet rs =  db.executeQuery(sql);
         if (rs.next()) {
             System.out.println("retorna oferente");
@@ -2169,8 +2181,8 @@ public class Dao {
            
             
             System.out.println("en oferenteAdd");
-        String sql="insert into bolsaempleo.oferente (clave, cedulaOferente , nombreOferente , primerApellido , segundoApellido , celular, nacionalidad, correoOferente, ubicacion  ) "+
-                "values(?, ? ,? ,? ,? ,?, ?, ?, ?)";
+        String sql="insert into bolsaempleo.oferente (clave, cedulaOferente , nombreOferente , primerApellido , segundoApellido , celular, nacionalidad, correoOferente, ubicacion, estado  ) "+
+                "values(?, ? ,? ,? ,? ,?, ?, ?, ?, ?)";
         //db.cnx = DriverManager.getConnection("jdbc:mysql://localhost/"+"bolsaempleo" , "root" , "root");
         db.getConnection();
         PreparedStatement preparedStmt = db.cnx.prepareStatement(sql);
@@ -2184,6 +2196,8 @@ public class Dao {
         preparedStmt.setString (7, p.getNacionalidad());
         preparedStmt.setString (8, p.getCorreoOferente());
         preparedStmt.setString (9, p.getUbicacion());
+        preparedStmt.setBoolean(10, false);
+        
         
       
       
@@ -2230,6 +2244,7 @@ public class Dao {
                 ec.setUbicacion(rs.getString("ubicacion"));
                 ec.setClave(rs.getString("clave"));
                 ec.setCelular(rs.getString("celular"));
+                ec.setEstado(rs.getBoolean("estado"));
                    
             
             return ec;

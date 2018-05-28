@@ -164,7 +164,7 @@ oferente.setClave(clave);
       }
       catch(Exception e){	
 	request.setAttribute("error","Credenciales incorrectas..");
-	request.getRequestDispatcher("Error.jsp").
+	request.getRequestDispatcher("principal.jsp").
                 forward( request, response);
       }		
     }

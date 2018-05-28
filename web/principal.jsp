@@ -555,6 +555,15 @@ $("div").click(function (evt) {
       
     </div>
 
+      
+              <%
+    if(null!=request.getAttribute("error"))
+    {
+       
+        
+       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
+    }
+%>
     
   </form>
 </div>                  

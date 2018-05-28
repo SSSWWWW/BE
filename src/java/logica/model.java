@@ -198,6 +198,10 @@ public class model {
             dao.EmpresaActivar(a);
        }
            
+             public void ActivarOferente(String a) throws Exception{
+            dao.OferenteActivar(a);
+       }
+           
             public void subirUrlEmpresa(String a, String url) throws Exception{
             dao.EmpresaUrl(a, url);
        }
