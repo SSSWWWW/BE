@@ -31,7 +31,7 @@ CREATE TABLE OFERENTE
   correoOferente varchar(50),
   ubicacion varchar(60),
   clave varchar(55),
-  estado boolean;
+  estado boolean,
  
   CONSTRAINT PK_OFERENTE PRIMARY KEY (cedulaOferente)
   );
@@ -114,7 +114,7 @@ idEmp  int AUTO_INCREMENT,
 fechaRegistro DATETIME DEFAULT CURRENT_TIMESTAMP,
 clave varchar(55),
 urlLogo varchar(100),
-estado boolean;
+estado boolean,
 
 CONSTRAINT PK_EMP PRIMARY KEY (idEmp)
 

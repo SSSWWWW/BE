@@ -72,11 +72,13 @@
       <div class="item active" style="height: 120px; right:40px; " >
           
            <div  class="box" onClick="mostrarPuesto('<%= s.getNombrePuesto() %>' , '<%= s.getDescripcionPuesto() %>' , '<%= s.getSalario() %>' , '<%= s.getIdPuesto() %>' , '<%= s.getLongitud() %>' , '<%= s.getLatitud() %>' , '<%= s.getNombreEmpresa() %>' );"  >
-               <a  id="nopu"  ><%= s.getNombrePuesto()%></a>
-             
+              
                <div class="carousel-item">
                <img onclick="document.getElementById('modalpuesto').style.display='block'" style= " max-height:20%; max-width:20%;" src="<%= s.getNombreEmpresa() %>" >
                </div>
+               <a  id="nopu"  ><%= s.getNombrePuesto()%></a>
+             
+               
               
 </div>
          
