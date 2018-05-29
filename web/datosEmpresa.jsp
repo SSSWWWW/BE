@@ -28,7 +28,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   
+
+  
 </head>
+
+
 
     
     
@@ -36,14 +40,26 @@
 
 
 
-<div style= ' height: 100px; width: 1300px;' > 
+<div style= ' height: 100px; width: 1300px;  display:inline-block; ' > 
  
-    <img style= " max-height:100%; max-width:100%;" src="<%= empresa.getUrlllogo() %>" /> 
+    <img style= " max-height:100%; max-width:100%;" src="<%= empresa.getUrlllogo() %>" />
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Opciones</span> 
   
     
 </div>
+    
+     
+  <div id="mySidenav" class="sidenav" >
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">Informacion de empresa</a>
+  <a href="#">Agregar puesto</a>
+  <a onclick="document.getElementById('modalurl').style.display='block'" href="#">Subir url logo</a>
+  <a href="#">Buscar Oferente</a>
+  <a href="#">Ver puestos publicados</a>
+</div>
 
-<div class = "datOf" style=" float:left; display:inline-block; vertical-align:top; ">
+
+<div class = "datOf" style=" float:left; display:inline-block;  ">
     
    <div  >
        <table style="      left: 0px;
@@ -279,27 +295,7 @@
              </div>
             
             
-                 <div class="container" style="display:inline-block; width:350px; height: 540px; ">
-                   
- <form method="POST" action="subirUrl"  onsubmit="alert('Url agregado!')">
             
-             <input type="text"  name="url" id="url"  placeholder="Url de logo">
-            
-            <input type="hidden"  name="idEmp" id="idEmp"  value="<%= empresa.getIdEmp() %>">
-            
-            <input type="submit" value="Subir" name="upload" id="upload" />
-            
-                   <%
-    if(null!=request.getAttribute("error"))
-    {
-       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
-    }
-%>
-            
-            
-        </form>
-
-        </div>
             
             
               
@@ -737,8 +733,129 @@ $( "input" ).on( "click", function() {
 
     
 </script>    
+
+
+
+
+
+
+<div id="modalurl" class="modal" >
+  
+  <form class="modal-content animate"  method="POST" action="subirUrl"  onsubmit="alert('Url agregado!')" >
+    <div class="imgcontainer">
+      <span onclick="cerrarModalPuesto();" class="close" title="Close Modal">&times;</span>
+  
+         <input type="text"  name="url" id="url"  placeholder="Url de logo">
+            
+            <input type="hidden"  name="idEmp" id="idEmp"  value="<%= empresa.getIdEmp() %>">
+            
+            <input style='background:slateblue;' type="submit" value="Subir" name="upload" id="upload" />
+            
+                   <%
+    if(null!=request.getAttribute("error"))
+    {
+       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
+    }
+%>
+            
+         
+      </div> 
+
+     </form>
+</div>           
+
+<script>
+    
+    
+    var modalurl = document.getElementById('modalurl');
+
+
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modalurl ) {
+        modalurl.style.display = "none";
+    }
+    
+    }
+    
+    </script>
+
+
+
+
+
+
             
              <a href = "principal.jsp" target = "_self" style="position: fixed;top: 0%;left: 0%;">Regresar</a></center>
             
 </body>
+
+
+<style>
+body {
+    font-family: "Lato", sans-serif;
+    transition: background-color .5s;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+
+
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+    document.body.style.backgroundColor = "white";
+}
+</script>
+
 </html>

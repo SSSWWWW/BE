@@ -370,7 +370,7 @@ function placeMarker(location) {
         
         
         
-           function mostrarPuesto1(nombrePuesto , descripcion, salario, idpuesto, lat, lon ){
+           function mostrarPuesto1(nombrePuesto , descripcion, salario, idpuesto, lat, lon, nombreem ){
     
     
     
@@ -378,6 +378,7 @@ function placeMarker(location) {
     $("#desPues1").val(descripcion);
     $("#sal1").val(salario);
     $("#idEmp1").val(idpuesto);
+    $("#modali").attr('src', nombreem);
     
     puestos = idpuesto;
     
@@ -479,8 +480,8 @@ $("div").click(function (evt) {
                       for(Puestos s: buscarPuestos){ %>
                      
                       <% con++; if(con < 2) { %>
-                     <tr onClick="mostrarPuesto1('<%= s.getNombrePuesto() %>' , '<%= s.getDescripcionPuesto() %>' , '<%= s.getSalario() %>' , '<%= s.getIdPuesto() %>' , ' <%= s.getLongitud() %>' , <%= s.getLatitud() %> );"  ><td onclick="document.getElementById('modalpuesto1').style.display='block'"  ><%= s.getNombrePuesto() %></td><td><%= s.getDescripcionPuesto() %></td>
-                     <td><%= s.getSalario()  %></td><td id="lonpu" value="<%= s.getLatitud()  %>" ></td> <td id="latpu" value="<%= s.getLongitud()  %>"></td>  </tr><br>
+                     <tr onClick="mostrarPuesto1('<%= s.getNombrePuesto() %>' , '<%= s.getDescripcionPuesto() %>' , '<%= s.getSalario() %>' , '<%= s.getIdPuesto() %>' , ' <%= s.getLongitud() %>' , '<%= s.getLatitud() %>', '<%= s.getUrlEmpresa() %>' );"  ><td onclick="document.getElementById('modalpuesto1').style.display='block'"  ><%= s.getNombrePuesto() %></td><td><%= s.getDescripcionPuesto() %></td>
+                     <td><%= s.getSalario()  %>  </td><td id="lonpu" value="<%= s.getLatitud()  %>" ></td> <td id="latpu" value="<%= s.getLongitud()  %>"></td>  </tr><br>
              
               
              <% } %>
@@ -519,7 +520,7 @@ $("div").click(function (evt) {
       <input class="formfield" type="text" name="correoEmpresa" placeholder="Usuario" required><br>
        <input class="formfield" type="password" name="clave" placeholder="Clave" required><br>
            
-       <button type="submit">Ingresar</button>
+       <button style='background: slateblue;' type="submit">Ingresar</button>
       
     </div>
       
@@ -553,7 +554,7 @@ $("div").click(function (evt) {
      
       <input class="formfield" type="password" name="clave" placeholder="Clave" required><br>
         
-      <button type="submit">Ingresar</button>
+      <button style='background: slateblue;' type="submit">Ingresar</button>
       
     </div>
 
@@ -626,7 +627,7 @@ $("div").click(function (evt) {
   <form class="modal-content animate"  method="post" >
     <div class="imgcontainer">
       <span onclick="cerrarModalPuesto();" class="close" title="Close Modal">&times;</span>
-       <img src='images/login.jpg' alt="Avatar" class="avatar">
+       <img  style= " max-height:20%; max-width:20%;" id="modali" src="" >
     </div>
 
     <div class="container" >

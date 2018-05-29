@@ -1348,7 +1348,7 @@ public class Dao {
         
         System.out.println("cantidad especializaciones  " + cantidadEspecializaciones );
         
-        if(cantidadEspecializaciones > 1){ 
+       
         
         int idpues = ei.get(0).getIdPuesto();
         
@@ -1402,9 +1402,9 @@ public class Dao {
           
             
             for(int i=0; i<pues.size(); i++){
-            String sql="select distinct empresa.latitud, empresa.longitud, puestos.nombrePuesto, puestos.salario, puestos.descripcionPuesto, puestos.estado, puestos.idPuesto from"+
+            String sql="select empresa.latitud, empresa.longitud, empresa.urllogo, puestos.nombrePuesto, puestos.salario, puestos.descripcionPuesto, puestos.estado, puestos.idPuesto from"+
                     "  puestos , empresa, puestos_publicados "+
-                    "where puestos.idPuesto  ='%s' and puestos.estado = '1' and puestos.idPuesto = puestos_publicados.idPuesto  limit 1 ";
+                    "where puestos.idPuesto  ='%s' and puestos.estado = '1' and puestos.idPuesto = puestos_publicados.idPuesto";
             sql = String.format(sql,pues.get(i));
             ResultSet rs =  db.executeQuery(sql);
              while (rs.next()) {
@@ -1413,26 +1413,6 @@ public class Dao {
         }catch (SQLException ex) { }
         return estados;    
         
-        } else {
-        
-        
-           try {
-           
-            
-            for(int i=0; i<ei.size(); i++){
-            String sql="select distinct empresa.latitud, empresa.longitud, puestos.nombrePuesto, puestos.salario, puestos.descripcionPuesto, puestos.estado, puestos.idPuesto from"+
-                    "  puestos , empresa, puestos_publicados "+
-                    "where puestos.idPuesto  ='%s' and puestos.estado = '1' and puestos.idPuesto = puestos_publicados.idPuesto  limit 1";
-            sql = String.format(sql,ei.get(i).getIdPuesto());
-            ResultSet rs =  db.executeQuery(sql);
-            while (rs.next()) {
-                estados.add(puestos1(rs));
-            }}
-        } catch (SQLException ex) { }
-        return estados;    
-        
-        
-        }
         
         
         
@@ -1627,6 +1607,8 @@ public class Dao {
                 ec.setEstado(rs.getBoolean("estado"));
                 ec.setLatitud(rs.getString("latitud"));
                 ec.setLongitud(rs.getString("longitud"));
+                ec.setUrlEmpresa(rs.getString("urllogo"));
+                
                 
         
             return ec;
