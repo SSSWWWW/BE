@@ -1322,7 +1322,7 @@ public class Dao {
     }
               
          
-       public List<Puestos> EspecializacionToGetPuesto1(List<EspecializacionIncluida> ei) throws Exception{
+      public List<Puestos> EspecializacionToGetPuesto1(List<EspecializacionIncluida> ei) throws Exception{
         
         
         
@@ -1404,7 +1404,7 @@ public class Dao {
             for(int i=0; i<pues.size(); i++){
             String sql="select empresa.latitud, empresa.longitud, empresa.urllogo, puestos.nombrePuesto, puestos.salario, puestos.descripcionPuesto, puestos.estado, puestos.idPuesto from"+
                     "  puestos , empresa, puestos_publicados "+
-                    "where puestos.idPuesto  ='%s' and puestos.estado = '1' and puestos.idPuesto = puestos_publicados.idPuesto";
+                    "where puestos.idPuesto  ='%s' and puestos.estado = '1' and puestos.idPuesto = puestos_publicados.idPuesto and empresa.idEmp = puestos_publicados.idEmp ";
             sql = String.format(sql,pues.get(i));
             ResultSet rs =  db.executeQuery(sql);
              while (rs.next()) {
