@@ -446,7 +446,7 @@ function placeMarker(location) {
        
         <div class = "map" style="margin: 0 0 0 302px;  ">
             <h1 style="display: inline-block;">Localizacion</h1>
-            <input  style="width: 8%; " class="formfield" type="text" name="circle_radius" id="circle_radius">
+            <input  style="width:60px; height: 60px;  -webkit-border-radius: 65px;-moz-border-radius: 65px; border-radius: 65px; " class="formfield" type="text" name="circle_radius" id="circle_radius">
          
             <div id = "map" ></div>
         </div>
@@ -471,9 +471,9 @@ $("div").click(function (evt) {
         <div id="listar" class="area" style="width:50%;">   
             <br>
             <jsp:useBean id="buscarPuestos" scope="request" type="List<Puestos>" class="java.util.ArrayList"/>
-            <table class="table table-striped">
+            <table class="table">
               
-              <thead><tr><td>Nombre</td><td>Descripcion</td><td>Salario</td></tr></thead>
+              <thead style='background: slateblue; color: white;' ><tr><td>Nombre</td><td>Descripcion</td><td>Salario</td></tr></thead>
               <tbody   style="height: 250px;">
                   <% 
                       int con =0;

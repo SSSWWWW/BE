@@ -171,3 +171,9 @@ span.psw {
        width: 50%;
     }
 }
+
+
+.inline {
+   display:inline-block;
+   margin-right:5px;
+}

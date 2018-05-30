@@ -22,11 +22,16 @@
  <link href="css/principal.css" rel="stylesheet" type="text/css"/>  
  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  
   <link href="css/datosEmpresa.css" rel="stylesheet" type="text/css"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  
+  
+  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
 
   
@@ -43,7 +48,8 @@
 <div style= ' height: 100px; width: 1300px;  display:inline-block; ' > 
  
     <img style= " max-height:100%; max-width:100%;" src="<%= empresa.getUrlllogo() %>" />
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Opciones</span> 
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span> 
+    
   
     
 </div>
@@ -51,21 +57,48 @@
      
   <div id="mySidenav" class="sidenav" >
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#">Informacion de empresa</a>
-  <a href="#">Agregar puesto</a>
+  
+  <a onclick="document.getElementById('modalinfo').style.display='block'" href="#">Agregar puesto</a>
   <a onclick="document.getElementById('modalurl').style.display='block'" href="#">Subir url logo</a>
-  <a href="#">Buscar Oferente</a>
-  <a href="#">Ver puestos publicados</a>
+
 </div>
+    
+    <div  style=" float:left; display:inline-block; width:200px; height:200px; ">
+        
+        
+    </div>
+    
+
+<input type="button" class="inline" id="infoempresa" value="Informacion de Empresa">
+<input type="button" class="inline" id="buscaroferente"  value="Buscar Oferente">
+<input type="button" class="inline" id="verpuestos"  value="Ver puestos"> <br><br><br>
+
+<script>
+$(document).ready(function(){
+    $("#infoempresa").click(function(){
+        $("#divEmp").show();
+        $("#divPuestos").hide();
+        $("#divBuscarOferente").hide();
+    });
+     $("#buscaroferente").click(function(){
+        $("#divEmp").hide();
+        $("#divPuestos").hide();
+        $("#divBuscarOferente").show();
+    });
+    $("#verpuestos").click(function(){
+        $("#divEmp").hide();
+        $("#divPuestos").show();
+        $("#divBuscarOferente").hide();
+    });
+});
+</script>
 
 
-<div class = "datOf" style=" float:left; display:inline-block;  ">
+<div class = "datOf" id="divEmp" style=" float:left; display:inline-block;  ">
     
    <div  >
-       <table style="      left: 0px;
-    position: absolute;
-    top: 110px;
-    width: 270px;" class="tablecarac table-bordered table-sm">
+       <table style=" left: 450px;position: absolute;top: 140px;width: 270px;"
+              class="tablecarac table-bordered table-sm">
 
         
         <tr><td>Empresa</td></tr><br><br>
@@ -75,8 +108,8 @@
         <tr><td><%=empresa.getTelefono() %></td></tr>
     
      
-        <div class = "map" style="  width: 270px; height: 100px;top: 80px; "  >
-            <div id = "map" style="  width: 270px; height: 100px; top: 80px; "></div>
+        <div class = "map" style="  width: 270px; height: 300px;top: 4px; left: 250px;"  >
+            <div id = "map" style="  width: 270px; height: 300px; top: 4px; left: 250px;"></div>
         </div><br>
         
         
@@ -178,86 +211,14 @@
  
     
         
-        <%  List<Caracteristicas> c = model.instance().getAllCaracteristicas(); %>
         
-       <br>  <form action="agregarPuesto"  id="formpuesto"  method="POST" class="fem">
-                      <legend id="leg" >Agregar nuevo puesto</legend>
-                      
-                      <div class="form-group">
-                      
-           <input style="width: 300px;" class="formfield" type="text" name="nombrePuesto" id="nombrePuesto" value="${param.nombrePuesto}" placeholder="Nombre Puesto" required ><br>
-           <input style="width: 300px; height: 200px;" class="formfield" type="text" id="descripcionPuesto" name="descripcionPuesto" value="${param.descripcionPuesto}" placeholder="Descripcion" required><br>
-           <input style="width: 300px;" class="formfield" type="number" id="salarioPuesto" name="salarioPuesto" value="${param.salarioPuesto}" placeholder="Salario" required><br>
-          <input class="formfield" type="hidden" id="nombreempresa" name="nombreempresa" value="<%=empresa.getNombreEmp() %>" placeholder="Salario" required>
-            
-          <input class="formfield" type="hidden" id="idpu" name="idpu">
-
-          
-             <select class="custom-select" name="estado" id="estado">
-                 
-               <option selected value="true">Estado</option>   
-              <option value="true">Publico</option>
-              <option value="false">Privado</option>
-               </select><br>
-              
-              
-             <select class="custom-select"   name="caracteristicas" id="caracteristicas">
-                 
-              <option selected value="" selected>Caracteristicas</option>
-                 
-                <% for(Caracteristicas sc : c){ %>
-                
-                <option > <%= sc.getNombreCaracteristica()%></option>
-                        
-                        <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
-                        <% for(Area_Trabajo artr : at){ %>
-                        <option >&#160; <%= artr.getNombreAreaTrabajo()  %></option>
-                      <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
-                       <% for(Especializacion esp : es){ %>
-                       <option value="<%= esp.getNombreEspecializacion() %>">&#160;&#160;&#160; <%= esp.getNombreEspecializacion() %></option>
-                        
-                 <% } %>
-                                
-               <% } %>
-               
-           <% } %>
-               </select><br>
-               
-                 
-           <input class="formfield" type="hidden" id="aux" name="aux" placeholder="Porcentaje caracteristica" >   
-   
-
-           
-              <select   style="display: none;" name="id" id="id">
-             <option value="<%= empresa.getIdEmp() %>"><%= empresa.getIdEmp() %></option>
-
-                  </select>
-
-               
-              <input style="width: 300px;" class="formfield" type="number" id="porcentaje" name="porcentaje" value="${param.porcentaje}" placeholder="Porcentaje caracteristica" ><br>    
-              
-           
-              
-              
-           <input id="ag" class="formfield" type="submit" value="Agregar Puesto">
-           
-                      </div>
-           
-           </form>
-              
-                     <%
-    if(null!=request.getAttribute("error"))
-    {
-       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
-    }
-%>
               
             </div>
               
 
   
               
-              <div class="container" style="display:inline-block;  overflow-y:scroll; position:relative; width:200px; height: 180px; ">
+              <div class="container" id="divPuestos" style="display:none;  width:200px; height: 180px; ">
   <form action="listarPuestosEmp" method="get" class = "formoferente">
   
   <input type="hidden"  name="idEmp" value="<%=empresa.getIdEmp() %>"><br>
@@ -302,7 +263,7 @@
            
              
   
-              <div class="container" style=" float:left; display:inline-block; width:400px; height: 540px; ">
+              <div class="container" id="divBuscarOferente" style=" float:left; display:none; width:400px; height: 540px; ">
                   <%  List<Caracteristicas> cc = model.instance().getAllCaracteristicas(); %>
                   
                   <h1 style="text-align: left; font-size: 150%;">Buscar Oferente </h1>
@@ -498,7 +459,7 @@ $("div").click(function (evt) {
      </div>
      
         
-      <button type="submit">Editar</button>
+      <button style="background:slateblue;" type="submit">Editar</button>
       
     </div>
      
@@ -535,7 +496,7 @@ $("div").click(function (evt) {
      <input class="formfield" type="hidden" id="idPues" name="idPues"  ><br>
      
         
-      <button type="submit">Desactivar</button>
+      <button style="background:slateblue;" type="submit">Desactivar</button>
       
     </div>
 
@@ -737,6 +698,99 @@ $( "input" ).on( "click", function() {
 
 
 
+<div id="modalinfo" class="modal" >
+  
+      
+  
+       
+      <%  List<Caracteristicas> c = model.instance().getAllCaracteristicas(); %>
+        
+         <form action="agregarPuesto"  id="formpuesto"  method="POST" class="modal-content animate">
+           
+           <span onclick="cerrarModalPuesto();" class="close" title="Close Modal">&times;</span>
+                      <legend id="leg" >Agregar nuevo puesto</legend>
+                      
+                       <div class="container">
+                      
+           <input style="width: 300px;" class="formfield" type="text" name="nombrePuesto" id="nombrePuesto" value="${param.nombrePuesto}" placeholder="Nombre Puesto" required ><br>
+           <input style="width: 300px; height: 200px;" class="formfield" type="text" id="descripcionPuesto" name="descripcionPuesto" value="${param.descripcionPuesto}" placeholder="Descripcion" required><br>
+           <input style="width: 300px;" class="formfield" type="number" id="salarioPuesto" name="salarioPuesto" value="${param.salarioPuesto}" placeholder="Salario" required><br>
+          <input class="formfield" type="hidden" id="nombreempresa" name="nombreempresa" value="<%=empresa.getNombreEmp() %>" placeholder="Salario" required>
+            
+          <input class="formfield" type="hidden" id="idpu" name="idpu">
+
+          
+             <select class="custom-select" name="estado" id="estado">
+                 
+               <option selected value="true">Estado</option>   
+              <option value="true">Publico</option>
+              <option value="false">Privado</option>
+               </select><br>
+              
+              
+             <select class="custom-select"   name="caracteristicas" id="caracteristicas">
+                 
+              <option selected value="" selected>Caracteristicas</option>
+                 
+                <% for(Caracteristicas sc : c){ %>
+                
+                <option > <%= sc.getNombreCaracteristica()%></option>
+                        
+                        <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
+                        <% for(Area_Trabajo artr : at){ %>
+                        <option >&#160; <%= artr.getNombreAreaTrabajo()  %></option>
+                      <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
+                       <% for(Especializacion esp : es){ %>
+                       <option value="<%= esp.getNombreEspecializacion() %>">&#160;&#160;&#160; <%= esp.getNombreEspecializacion() %></option>
+                        
+                 <% } %>
+                                
+               <% } %>
+               
+           <% } %>
+               </select><br>
+               
+                 
+           <input class="formfield" type="hidden" id="aux" name="aux" placeholder="Porcentaje caracteristica" >   
+   
+
+           
+              <select   style="display: none;" name="id" id="id">
+             <option value="<%= empresa.getIdEmp() %>"><%= empresa.getIdEmp() %></option>
+
+                  </select>
+
+               
+              <input style="width: 300px;" class="formfield" type="number" id="porcentaje" name="porcentaje" value="${param.porcentaje}" placeholder="Porcentaje caracteristica" ><br>    
+              
+           
+              
+              
+           <input id="ag" class="formfield" type="submit" value="Agregar Puesto">
+           
+                      </div>
+           
+           </form>
+              
+                     <%
+    if(null!=request.getAttribute("error"))
+    {
+       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
+    }
+%>
+        
+        
+        
+   
+    
+            
+         
+      
+
+
+</div>    
+
+
 
 
 <div id="modalurl" class="modal" >
@@ -768,6 +822,7 @@ $( "input" ).on( "click", function() {
     
     
     var modalurl = document.getElementById('modalurl');
+    var modalinfo = document.getElementById('modalinfo');
 
 
 
@@ -775,6 +830,10 @@ $( "input" ).on( "click", function() {
 window.onclick = function(event) {
     if (event.target == modalurl ) {
         modalurl.style.display = "none";
+    }
+    
+     if (event.target == modalinfo ) {
+        modalinfo.style.display = "none";
     }
     
     }

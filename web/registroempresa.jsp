@@ -166,5 +166,12 @@ window.onclick = function(event) {
 }
 </script>
 
+                  <%
+    if(null!=request.getAttribute("error"))
+    {
+       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
+    }
+%>
+
 </body>
 </html>
