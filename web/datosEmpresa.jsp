@@ -229,20 +229,24 @@ $(document).ready(function(){
  </form>
   
   
+  <input type="button" value="Submit" onclick="mostrarPuestos(<%= empresa.getIdEmp() %> )">
+  
+  
+  
          
       
             
             <jsp:useBean id="puestosListaEmp" scope="request" type="List<Puestos>" class="java.util.ArrayList"/>
             
           
-
+            <div id="puestosDiv"> 
             <table style="overflow-x: auto; ;" class="tablecarac table-bordered table-sm">
               
               <thead style="background-color: slateblue"><tr><td>Nombre</td></tr></thead>
               <tbody >
                 <% for(Puestos s: puestosListaEmp){ %>
                 <tr>
-                      <td  onClick="editar('<%= s.getIdPuesto()%>' , '<%= s.getNombrePuesto() %>' , '<%=s.getDescripcionPuesto() %>' , '<%=s.getSalario() %>', '<%=s.isEstado() %>');" ><%= s.getIdPuesto() %>&#160; <img  src='images/pencil.svg'  class='icon' onclick="document.getElementById('myyModal').style.display='block'" style="width:auto;">
+                      <td  onClick="editar('<%= s.getIdPuesto()%>' , '<%= s.getNombrePuesto() %>' , '<%=s.getDescripcionPuesto() %>' , '<%=s.getSalario() %>', '<%=s.isEstado() %>');" ><%= s.getNombrePuesto() %>&#160; <img  src='images/pencil.svg'  class='icon' onclick="document.getElementById('myyModal').style.display='block'" style="width:auto;">
                       <img  onclick="document.getElementById('modalborrar').style.display='block'"  src='images/trashcan.svg'  class='icon'  style="width:auto;">
                       
                       </td>
@@ -250,6 +254,7 @@ $(document).ready(function(){
                <% } %>
             </tbody>
             </table>
+            </div>
    
     
             
@@ -595,7 +600,9 @@ $("div").click(function (evt) {
 \n\
 \n\
 <img  src='images/pencil.svg'  class='icon' onclick='document.getElementById('myyModal').style.display='block'' style='width:auto;'></td> <tr> </table>";
-          document.getElementById("caracDiv").appendChild(input);   
+          document.getElementById("caracDiv").appendChild(input); 
+          
+          
                     
                     
                
@@ -611,6 +618,65 @@ $("div").click(function (evt) {
                 });         
    
 }
+
+
+function mostrarPuestos(idemp){
+    
+  //   window.alert("en mostrarpuestos " + idemp);
+    
+          
+           empresa = idemp;
+    
+        $.ajax({type: "POST", 
+                  url:"listarPuestosEmp1", 
+                  data: {empresaA: empresa},
+                  dataType:"json",
+                   
+                    success: function(obj){
+                  
+     
+                                   
+                   for(var i=0;i<obj.length;i++)
+                   {  
+                       
+                    var input = document.createElement('div');
+                    input.id = "nuDiv";
+                   
+                    var carac = obj[i].nombrePuesto;
+                     var idpu = obj[i].idPuesto;
+                    var descrip = obj[i].descripcionPuesto;
+                    var salario = obj[i].salario;
+                    var estado = obj[i].estado;
+                   
+                //  window.alert("en for " + carac + " "+idpu+" " +descrip+" " + salario + " "+estado);
+                    
+                   
+          
+          input.innerHTML = " <table> <tr> <td onclick=editar("+idpu+","+carac+","+descrip+","+salario+","+estado+")" + " style=' padding-right: 80px; text-align: center;'> &#160;&#160;&#160;"  +carac+"</td> <td style=' padding-right: 80px; text-align: center;'> \n\
+\n\
+\n\
+<img id='imgid'  src='images/pencil.svg'  class='icon'  onClick='document.getElementById('myyModal').style.display='block'' style='width:auto;'></td> <tr> </table>";
+          document.getElementById("puestosDiv").appendChild(input);  
+          
+                    
+                   // input.onclick = document.getElementById('myymodal').style.display='block';
+          
+          
+            
+                       
+               //      window.alert(obj[i].nombreEspecializacion + " " + obj[i].porcentajeEspecializacion);
+                   }
+                   },
+                  error: function(status){
+                         window.alert("Error");
+                    }                    
+                });         
+   
+}
+
+
+
+
 
  
 

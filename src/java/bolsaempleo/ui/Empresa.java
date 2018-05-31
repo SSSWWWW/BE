@@ -37,7 +37,7 @@ import logica.model;
  */
 
     @WebServlet(name = "Empresa", urlPatterns = {"/LoginEm", "/LogoutEm" , "/agregarEmpresa" , 
-    "/listarCaracteristicas", "/agregarPuesto" , "/listarPuestosEmp" , "/editarpuesto", "/listarPuestosNP" , "/deletePuesto" , "/subirUrl"})
+    "/listarCaracteristicas", "/agregarPuesto" , "/listarPuestosEmp" , "/listarPuestosEmp1"     ,"/editarpuesto", "/listarPuestosNP" , "/deletePuesto" , "/subirUrl"})
 public class Empresa extends HttpServlet {
 
     /**
@@ -75,6 +75,11 @@ public class Empresa extends HttpServlet {
             
             case "/listarPuestosEmp":
             this.dolistarPuestosEmp(request,response);
+            break; 
+            
+            
+             case "/listarPuestosEmp1":
+            this.dolistarPuestosEmp1(request,response);
             break; 
             
              case "/editarpuesto":
@@ -387,6 +392,8 @@ empresa.setClave(clave);
            try{
                
                String idEmp   = request.getParameter("idEmp");
+               
+             
                 
                 List<Puestos> puestos = model.instance().getAllPuestos1(idEmp);
 		request.setAttribute("puestosListaEmp", puestos);
@@ -398,6 +405,52 @@ empresa.setClave(clave);
                 request.getRequestDispatcher("Error.jsp").forward( request, response);
           }		
 	}  
+        
+        
+      protected void dolistarPuestosEmp1(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+           try{
+               
+               String idEmp   = request.getParameter("idEmp");
+               
+               System.out.println("EN DOLISTAR " + idEmp);
+               
+                BufferedReader reader = request.getReader();
+        Gson gson = new Gson();
+        Empresa empresaId = gson.fromJson(reader, Empresa.class);
+                
+        System.out.println("EN DOLISTAR 2 " + empresaId);
+        
+          System.out.println("ADENTRO NP");
+               
+               String empI = request.getParameter("empresaA");
+               
+               System.out.println("EN DOLISTAR 3 : " + empI);
+        
+                List<Puestos> puestos = model.instance().getAllPuestos1(empI);
+				
+				 response.setContentType("application/json; charset=UTF-8");
+            
+            
+            Type listType = new TypeToken<ArrayList<Puestos>>(){}.getType();
+         
+           String json = gson.toJson(puestos);
+		   
+		     List<Puestos> espeIn = new Gson().fromJson(json, listType);
+                OutputStream outputStream= response.getOutputStream();
+                
+                
+               outputStream.write(gson.toJson(espeIn).getBytes());
+              outputStream.flush();
+				
+		
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("Error.jsp").forward( request, response);
+          }		
+	} 
         
         
          protected void dodeletePuesto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

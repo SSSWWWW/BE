@@ -26,6 +26,7 @@ public class Puestos  implements java.io.Serializable {
      private String nombreEmpresa;
      
      private String urlEmpresa;
+     private Integer idEmpresa;
 
     public Puestos() {
     }
@@ -33,6 +34,8 @@ public class Puestos  implements java.io.Serializable {
     public Puestos(Integer idPuesto) {
         this.idPuesto = idPuesto;
     }
+    
+    
 
     public Puestos(Integer idPuesto, String nombrePuesto, Float salario, String descripcionPuesto, boolean estado, String nombreEspecializacion, String porcentajeespecializacion, String latitud, String longitud, String nombreEmpresa) {
         this.idPuesto = idPuesto;
@@ -80,7 +83,19 @@ public class Puestos  implements java.io.Serializable {
         this.salario = salario;
         this.descripcionPuesto = descripcionPuesto;
         this.estado = estado;
+      
     }
+
+    public Puestos(Integer idPuesto, String nombrePuesto, Float salario, String descripcionPuesto, boolean estado) {
+        this.idPuesto = idPuesto;
+        this.nombrePuesto = nombrePuesto;
+        this.salario = salario;
+        this.descripcionPuesto = descripcionPuesto;
+        this.estado = estado;
+    }
+     
+     
+     
 
     public Puestos(Integer idPuesto, String nombrePuesto, Float salario, String descripcionPuesto, boolean estado, String nombreEspecializacion, String porcentajeespecializacion, String latitud, String longitud, String nombreEmpresa, String urlEmpresa) {
         this.idPuesto = idPuesto;
@@ -190,6 +205,14 @@ public class Puestos  implements java.io.Serializable {
 
     public void setUrlEmpresa(String urlEmpresa) {
         this.urlEmpresa = urlEmpresa;
+    }
+
+    public Integer getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(Integer idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
     
      

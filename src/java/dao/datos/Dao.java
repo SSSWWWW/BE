@@ -1809,7 +1809,7 @@ public class Dao {
               db.getConnection();    
         List<Puestos> estados=new ArrayList<>();
         try {
-            String sql="select distinct * from puestos inner join puestos_publicados where puestos.idpuesto "
+            String sql="select puestos.nombrePuesto, puestos.salario, puestos.descripcionPuesto, puestos.estado, puestos.idpuesto from puestos inner join puestos_publicados where puestos.idpuesto "
                     + " = puestos_publicados.idpuesto and puestos_publicados.idemp = '%s'";
              sql = String.format(sql, a);
             ResultSet rs =  db.executeQuery(sql);

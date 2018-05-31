@@ -32,6 +32,12 @@ public class Empresa  implements java.io.Serializable {
         
     }
 
+    public Empresa(Integer idEmp) {
+        this.idEmp = idEmp;
+    }
+    
+    
+
     public Empresa(Integer idEmp, String nombreEmp, String telefono, String latitud, String longitud, String descripcionEmp, String correoEmp, Date fechaRegistro, String clave, boolean estado, String urlllogo) {
         this.idEmp = idEmp;
         this.nombreEmp = nombreEmp;
