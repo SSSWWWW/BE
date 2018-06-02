@@ -1019,6 +1019,32 @@ public class Dao {
         }
     }
                   
+                            private EspecializacionIncluida EspecializacionIncluida3(ResultSet rs){
+        try {
+            EspecializacionIncluida ec= new EspecializacionIncluida();
+          
+                ec.setIdespecializacion(rs.getInt("idespecializacion"));
+                ec.setPorcentajeEspecializacion(rs.getInt("porcentajeEspecializacion"));
+        
+            return ec;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+                            
+        private EspecializacionIncluida EspecializacionIncluida4(ResultSet rs){
+        try {
+            EspecializacionIncluida ec= new EspecializacionIncluida();
+          
+                ec.setPorcentajeEspecializacion(rs.getInt("porcentajeEspecializacion"));
+        
+            return ec;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+                  
+                  
                   
             public List<EspecializacionIncluida> EspecializacionIncluidaGetNP(String p , String ip) throws Exception{
         
@@ -1059,6 +1085,58 @@ public class Dao {
         }
     }
     
+                public List<EspecializacionIncluida> idEspecializacionIncluida(String idPuesto) {
+                
+                   db.getConnection();
+                   List<EspecializacionIncluida> estados=new ArrayList<>();
+      
+        try {
+           
+            String sql="select  ESPECIALIZACION_INCLUIDAS.idespecializacion, ESPECIALIZACION_INCLUIDAS.porcentajeespecializacion from "+
+                    "  ESPECIALIZACION_INCLUIDAS "+
+                    "where ESPECIALIZACION_INCLUIDAS.idPuesto ='%s'";
+            sql = String.format(sql, idPuesto);
+            System.out.println(sql);
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(EspecializacionIncluida3(rs));
+            }
+            
+            
+        } catch (SQLException ex) { }
+       
+        
+        return estados;
+               
+                }
+                 
+                
+                      public List<EspecializacionIncluida> porcentajeEspecializacionIncluida(String idPuesto) {
+                
+                   db.getConnection();
+                   List<EspecializacionIncluida> estados=new ArrayList<>();
+      
+        try {
+           
+            String sql="select  ESPECIALIZACION_INCLUIDAS.porcentajeEspecializacion from "+
+                    "  ESPECIALIZACION_INCLUIDAS "+
+                    "where ESPECIALIZACION_INCLUIDAS.idPuesto ='%s'";
+            sql = String.format(sql, idPuesto);
+            System.out.println(sql);
+            ResultSet rs =  db.executeQuery(sql);
+            while (rs.next()) {
+                estados.add(EspecializacionIncluida3(rs));
+            }
+            
+            
+        } catch (SQLException ex) { }
+       
+        
+        return estados;
+               
+                }
+                
+                 
         
       public void EspecializacionIncluidaAdd(EspecializacionIncluida p) throws Exception{
            
@@ -1240,6 +1318,70 @@ public class Dao {
         
         
     }
+              
+              
+              
+                   public List<EspecializacionIncluidaOferente> EspecializacionIdOferente1(List<EspecializacionIncluida> esppor) throws Exception{
+        
+        EspecializacionIncluidaOferente eio = new EspecializacionIncluidaOferente();
+        
+           db.getConnection();
+        List<EspecializacionIncluidaOferente> estados = new ArrayList<>();
+        try {
+           
+            for(int i=0; i< esppor.size(); i++){
+            String sql="select distinct ESPECIALIZACION_INCLUIDASOFERENTE.CEDULAOFERENTE, ESPECIALIZACION_INCLUIDASOFERENTE.idespecializacion, ESPECIALIZACION_INCLUIDASOFERENTE.porcentajeEspecializacion  from"+
+                    "  ESPECIALIZACION_INCLUIDASOFERENTE "+
+                    "where ESPECIALIZACION_INCLUIDASOFERENTE.idespecializacion ='%s' and ESPECIALIZACION_INCLUIDASOFERENTE.porcentajeespecializacion ='%s'  ";
+            sql = String.format(sql,esppor.get(i).getIdespecializacion(), esppor.get(i).getPorcentajeEspecializacion());
+            System.out.println("EN EspecializacionIdOferente1 " + sql);
+            
+            ResultSet rs =  db.executeQuery(sql);
+            
+         /*   if(rs.next() == false){
+            
+            eio.setCedulaOferente("00");
+            eio.setIdespecializacion(00);
+            eio.setPorcentajeEspecializacion(00);
+                
+            estados.add(eio);
+            
+            }
+            
+            while (rs.next()) {
+                estados.add(EspecializacionIncluidaOferente(rs));
+            }*/
+            
+            if (rs.next() == false) {
+            eio.setCedulaOferente("00");
+            eio.setIdespecializacion(00);
+            eio.setPorcentajeEspecializacion(00);
+                
+            estados.add(eio);
+            } else {
+                
+                do{
+                
+                    estados.add(EspecializacionIncluidaOferente(rs));
+                
+                }while(rs.next());
+                
+            }}
+        } catch (SQLException ex) { }
+        return estados;    
+        
+        
+    } 
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
               
               
                    public List<EspecializacionIncluidaOferente> EspecializacionIdOferente(String cl[], String por[]) throws Exception{

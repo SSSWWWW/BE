@@ -22,6 +22,19 @@ public class EspecializacionIncluida {
     public EspecializacionIncluida() {
     }
 
+    public EspecializacionIncluida(int idespecializacion) {
+        this.idespecializacion = idespecializacion;
+    }
+
+    public EspecializacionIncluida(int idespecializacion, int porcentajeEspecializacion) {
+        this.idespecializacion = idespecializacion;
+        this.porcentajeEspecializacion = porcentajeEspecializacion;
+    }
+
+    
+    
+    
+    
     public EspecializacionIncluida(int idPuesto, int idespecializacion, int porcentajeEspecializacion, int idEmp) {
         this.idPuesto = idPuesto;
         this.idespecializacion = idespecializacion;

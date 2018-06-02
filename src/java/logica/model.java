@@ -249,6 +249,19 @@ public class model {
            return dao.EspecializacionToGetPuesto1(p);
        }
            
+           public List<EspecializacionIncluida> idEspecializacionIncluida (String idPuesto) throws Exception{
+           
+           return dao.idEspecializacionIncluida(idPuesto);
+           
+           }
+           
+           public List<EspecializacionIncluida> porcentajeEspecializacionIncluida (String idPuesto) throws Exception{
+           
+           return dao.porcentajeEspecializacionIncluida(idPuesto);
+           
+           }
+           
+           
          
           
 
@@ -402,6 +415,10 @@ public class model {
             
          public List<EspecializacionIncluidaOferente> getEspecializacionIDOferente(String[] cl, String[]por) throws Exception{
             return  dao.EspecializacionIdOferente(cl, por);
+       }    
+         
+         public List<EspecializacionIncluidaOferente> getEspecializacionIDOferente1(List<EspecializacionIncluida> esppor) throws Exception{
+            return  dao.EspecializacionIdOferente1(esppor);
        }    
            
          

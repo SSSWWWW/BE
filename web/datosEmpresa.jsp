@@ -44,20 +44,33 @@
 <jsp:useBean id="empresa" scope="session" type="Empresa" />
 
 
-
-<div style= ' height: 100px; width: 1300px;  display:inline-block; ' > 
+<div id="wrapper">
+<div style= ' height: 100px; width: 500px;  z-index: 1; position: absolute; top: 0px; left: 0px; display:inline-block; '  > 
  
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+    
     <img style= " max-height:100%; max-width:100%;" src="<%= empresa.getUrlllogo() %>" />
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span> 
-    
   
-    
 </div>
+    
+         
+         
+           <div class = "map" style="  width: 270px; height: 100px;top: 4px; left: 10px; z-index: 1; position: absolute; top: 0px; left: 505px; display:inline-block; "  >
+            <div id = "map" style="  width: 270px; height: 100px; top: 4px; left: 10px; z-index: 1; position: absolute; top: 0px;  display:inline-block; "></div>
+        </div><br>
+    
+    
+        
+</div>
+         
+         
+            
     
      
   <div id="mySidenav" class="sidenav" >
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   
+  <a onclick="document.getElementById('infoemp').style.display='block'" href="#">Informacion Empresa</a>
   <a onclick="document.getElementById('modalinfo').style.display='block'" href="#">Agregar puesto</a>
   <a onclick="document.getElementById('modalurl').style.display='block'" href="#">Subir url logo</a>
 
@@ -69,9 +82,9 @@
     </div>
     
 
-<input type="button" class="inline" id="infoempresa" value="Informacion de Empresa">
-<input type="button" class="inline" id="buscaroferente"  value="Buscar Oferente">
-<input type="button" class="inline" id="verpuestos"  value="Ver puestos"> <br><br><br>
+<input type="hidden" class="inline" id="infoempresa" value="Informacion de Empresa">
+<input type="hidden" class="inline" id="buscaroferente"  value="Buscar Oferente">
+<input type="hidden" class="inline" id="verpuestos"  value="Ver puestos"> <br><br><br>
 
 <script>
 $(document).ready(function(){
@@ -94,34 +107,7 @@ $(document).ready(function(){
 </script>
 
 
-<div class = "datOf" id="divEmp" style=" float:left; display:inline-block;  ">
-    
-   <div  >
-       <table style=" left: 450px;position: absolute;top: 140px;width: 270px;"
-              class="tablecarac table-bordered table-sm">
 
-        
-        <tr><td>Empresa</td></tr><br><br>
-        <tr><td><%=empresa.getNombreEmp() %></td></tr><br><br>
-        <tr><td><%=empresa.getDescripcionEmp() %></td></tr><br><br>
-        <tr><td><%=empresa.getCorreoEmp() %></td></tr>
-        <tr><td><%=empresa.getTelefono() %></td></tr>
-    
-     
-        <div class = "map" style="  width: 270px; height: 300px;top: 4px; left: 250px;"  >
-            <div id = "map" style="  width: 270px; height: 300px; top: 4px; left: 250px;"></div>
-        </div><br>
-        
-        
-        
-    </table>
-    
-        
-        
-      
-    
-   </div>
-        
         
         
         
@@ -218,7 +204,7 @@ $(document).ready(function(){
 
   
               
-              <div class="container" id="divPuestos" style="display:none;  width:200px; height: 180px; ">
+              <div class="container" id="divPuestos" style="display:inline-block; left:300px;  width:200px; height: 180px; ">
   <form action="listarPuestosEmp" method="get" class = "formoferente">
   
   <input type="hidden"  name="idEmp" value="<%=empresa.getIdEmp() %>"><br>
@@ -248,8 +234,8 @@ $(document).ready(function(){
                 <tr>
                       <td  onClick="editar('<%= s.getIdPuesto()%>' , '<%= s.getNombrePuesto() %>' , '<%=s.getDescripcionPuesto() %>' , '<%=s.getSalario() %>', '<%=s.isEstado() %>');" ><%= s.getNombrePuesto() %>&#160; <img  src='images/pencil.svg'  class='icon' onclick="document.getElementById('myyModal').style.display='block'" style="width:auto;">
                       <img  onclick="document.getElementById('modalborrar').style.display='block'"  src='images/trashcan.svg'  class='icon'  style="width:auto;">
-                      
                       </td>
+                      <td onClick="buscarOf(<%= s.getIdPuesto()%>);"  ><img  onclick="document.getElementById('modalof').style.display='block'"  src='person/login.svg'  class='icon'  style="width:auto;"> </td>
                      </tr>
                <% } %>
             </tbody>
@@ -268,22 +254,21 @@ $(document).ready(function(){
            
              
   
-              <div class="container" id="divBuscarOferente" style=" float:left; display:none; width:400px; height: 540px; ">
+              <div class="container" id="divBuscarOferente" style=" float:left;  width:400px; height: 540px; ">
                   <%  List<Caracteristicas> cc = model.instance().getAllCaracteristicas(); %>
                   
-                  <h1 style="text-align: left; font-size: 150%;">Buscar Oferente </h1>
+                  <h1 style="text-align: center; font-size: 150%;">Buscar Oferente </h1>
 
 <form style="float: left;" class = "formempresa"  action="buscarOferente" method="get">
     
-     
-    <div style="overflow-x: auto; width:250px; height: 89px;">
+ 
  <table class="tablecarac table-bordered table-sm">
     
        <% for(Caracteristicas sc : cc){ %>
      <ul>
               <li>
                   
-                <a> <%= sc.getNombreCaracteristica()  %> </a>
+                <a>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <%= sc.getNombreCaracteristica()  %> </a>
  
                 <ul>
                      
@@ -299,7 +284,7 @@ $(document).ready(function(){
                      
                       <li>
  
-                           <a > &#160; &#160; <input  type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %>&#160;&#160;&#160</a>
+                           <a >&#160; &#160; <input type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %>&#160;&#160;&#160;</a>
                           
                            
                        <a> &#160; &#160;    <span style="position:relative;">
@@ -325,7 +310,7 @@ $(document).ready(function(){
      
               <% } %>
  </table>
-    </div>
+
         <input class="formfield"  type="submit" value="Buscar Oferente">
 </form>
  
@@ -415,7 +400,46 @@ $("div").click(function (evt) {
       
       </script>
            
-            
+      <div  id="modalof" class="modal">
+  
+  <form class="modal-content animate" action="editarpuesto" method="POST">
+    <div class="imgcontainer">
+      <span onclick="cerrarModalPuesto();" class="close" title="Close Modal">&times;</span>
+      
+    </div>
+
+    <div class="container">
+      
+  
+      <div id="caracof"> 
+         
+        
+         <table style="border-spacing: 10px; border-collapse: separate; ">
+             <tr>
+              <div id="caracof">   
+             <th>Nombre</th>
+             <th>Apellido</th>
+             </tr>
+         
+         </table>
+               
+     </div>
+     
+   
+      
+    </div>
+     
+     
+     
+
+    
+  </form>
+</div>      
+      
+      
+      
+      
+      
             
             
             
@@ -542,6 +566,52 @@ $("div").click(function (evt) {
             
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script> 
+    
+    
+       function buscarOf(idpuesto){
+
+           puestos = idpuesto;
+    
+        $.ajax({type: "POST", 
+                  url:"buscarOf", 
+                  data: {puestoA: puestos},
+                  dataType:"json",
+                   
+                    success: function(obj){
+                  
+     
+                                   
+                   for(var i=0;i<obj.length;i++)
+                   {  
+                       
+                    var input = document.createElement('div');
+                    input.id = "nuDiv";
+                   
+                    var nombreOf = obj[i].nombreOferente;
+                   
+                    var primerApellido = obj[i].primerApellido;
+                    
+                    var cedula = obj[i].cedulaOferente;
+                    
+                   
+          
+          input.innerHTML = " <table> <tr> <td style=' padding-right: 80px; text-align: center;'> &#160;&#160;&#160;"  +nombreOf+"</td> <td style=' padding-right: 80px; text-align: center;'>"+primerApellido+" \n\
+\n\
+\n\
+<img  src='images/pencil.svg'  class='icon' onclick='document.getElementById('myyModal').style.display='block'' style='width:auto;'></td> <tr> </table>";
+          document.getElementById("caracof").appendChild(input); 
+          
+          
+                   }
+                   },
+                  error: function(status){
+                         window.alert("Error");
+                    }                    
+                });         
+   
+}
+    
+    
     
     function editar(idpuesto , nombre , descripcion , salario , estado){
     
@@ -717,6 +787,7 @@ function mostrarPuestos(idemp){
     
     var myModal = document.getElementById('myyModal');
     var modalBorrar = document.getElementById('modalBorrar');
+    var infoemp = document.getElementById('infoemp');
     
     window.onclick = function(event) {
    
@@ -731,6 +802,12 @@ function mostrarPuestos(idemp){
         
          
         modalBorrar.style.display = "none";
+    }
+    
+     if (event.target == infoemp ) {
+        
+         
+        infoemp.style.display = "none";
     }
     
    // $("#nombrePues").val(np);
@@ -882,13 +959,37 @@ $( "input" ).on( "click", function() {
       </div> 
 
      </form>
-</div>           
+</div>     
+
+
+<div id="infoemp" class="modal" >
+  
+  <form class="modal-content animate"  >
+    <div class="imgcontainer">
+      <span onclick="cerrarModalPuesto();" class="close" title="Close Modal">&times;</span>
+  
+      <input type="text"  name="url" id="url"  placeholder="Url de logo" value="<%= empresa.getNombreEmp() %>">
+      <input type="text"  name="url" id="url"  placeholder="Url de logo" value="<%= empresa.getCorreoEmp() %>">
+      <input type="text"  name="url" id="url"  placeholder="Url de logo" value="<%= empresa.getTelefono() %>">
+
+      
+      </div> 
+
+     </form>
+</div>         
+
+
+
+
+
 
 <script>
     
     
     var modalurl = document.getElementById('modalurl');
     var modalinfo = document.getElementById('modalinfo');
+    
+    var modalof = document.getElementById('modalof');
 
 
 
@@ -900,6 +1001,10 @@ window.onclick = function(event) {
     
      if (event.target == modalinfo ) {
         modalinfo.style.display = "none";
+    }
+    
+    if (event.target == modalof ) {
+        modalof.style.display = "none";
     }
     
     }
@@ -940,7 +1045,7 @@ body {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: slateblue;
     display: block;
     transition: 0.3s;
 }

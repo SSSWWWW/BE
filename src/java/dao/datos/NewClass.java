@@ -34,8 +34,30 @@ public class NewClass {
           d = new Dao();
           
           model m;
+          
+          String id = "3";
+          
+          List<EspecializacionIncluida> es = model.instance().idEspecializacionIncluida(id);
+          
+
+          
+          for(EspecializacionIncluida car : es){
+          
+               
+                System.out.println("nombre especializacion " + car.getIdespecializacion());
+                System.out.println("nombre especializacion " + car.getPorcentajeEspecializacion());
+               
+               
+               }
+          
+        
+           
+          
        
-           PuestosPublicados pp = model.instance().getPuestosPublicados("3");
+          
+         
+       
+     /*     PuestosPublicados pp = model.instance().getPuestosPublicados("3");
            
            System.out.println("empresa id " + pp.getIdEmpresa());
           

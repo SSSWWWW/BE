@@ -14,6 +14,8 @@ import entidades.Caracteristicas;
 import entidades.CaracteristicasIncluidos;
 import entidades.Especializacion;
 import entidades.EspecializacionIncluida;
+import entidades.EspecializacionIncluidaOferente;
+import entidades.Oferente;
 import entidades.Puestos;
 import entidades.PuestosPublicados;
 import java.io.BufferedReader;
@@ -37,7 +39,7 @@ import logica.model;
  */
 
     @WebServlet(name = "Empresa", urlPatterns = {"/LoginEm", "/LogoutEm" , "/agregarEmpresa" , 
-    "/listarCaracteristicas", "/agregarPuesto" , "/listarPuestosEmp" , "/listarPuestosEmp1"     ,"/editarpuesto", "/listarPuestosNP" , "/deletePuesto" , "/subirUrl"})
+    "/listarCaracteristicas", "/agregarPuesto" , "/listarPuestosEmp" , "/listarPuestosEmp1"     ,"/editarpuesto", "/listarPuestosNP" , "/deletePuesto" , "/subirUrl" , "/buscarOf"})
 public class Empresa extends HttpServlet {
 
     /**
@@ -98,6 +100,10 @@ public class Empresa extends HttpServlet {
             
               case "/subirUrl":
             this.dosubirUrl(request,response);
+            break; 
+            
+            case "/buscarOf":
+            this.buscarOf(request,response);
             break; 
             
             
@@ -309,6 +315,61 @@ empresa.setClave(clave);
                 request.getRequestDispatcher("Error.jsp").forward( request, response);
           }		
 	} 
+       
+       
+       
+       
+       
+           protected void buscarOf(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+             System.out.println("AFUERA NP");
+             
+           try{
+               
+           
+               
+               System.out.println("ADENTRO NP");
+               
+               String puesto = request.getParameter("puestoA");
+               
+               System.out.println("IDPUESTO : " + puesto);
+               
+            
+               
+                List<EspecializacionIncluida> esppor = model.instance().idEspecializacionIncluida(puesto);
+                
+                
+                
+            List<EspecializacionIncluidaOferente> ei = model.instance().getEspecializacionIDOferente1(esppor);
+            
+            List<Oferente> oferente = model.instance().getOferentePorID(ei);
+            response.setContentType("application/json; charset=UTF-8");
+             Gson gson=new Gson(); 
+            
+            Type listType = new TypeToken<ArrayList<Oferente>>(){}.getType();
+         
+           String json = gson.toJson(oferente);
+           
+           List<EspecializacionIncluida> espeIn = new Gson().fromJson(json, listType);
+                OutputStream outputStream= response.getOutputStream();
+                
+                
+               outputStream.write(gson.toJson(espeIn).getBytes());
+              outputStream.flush();
+                 
+           //  request.setAttribute("listarPuestosNP", ei);
+             //   request.getRequestDispatcher("principal.jsp").forward( request, response);
+             
+             
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("datosEmpresa.jsp").forward( request, response);
+          }		
+	}  
+       
+       
        
        
        
