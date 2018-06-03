@@ -40,7 +40,6 @@
 
 
     
-    
 <jsp:useBean id="empresa" scope="session" type="Empresa" />
 
 
@@ -70,9 +69,9 @@
   <div id="mySidenav" class="sidenav" >
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   
-  <a onclick="document.getElementById('infoemp').style.display='block'" href="#">Informacion Empresa</a>
-  <a onclick="document.getElementById('modalinfo').style.display='block'" href="#">Agregar puesto</a>
-  <a onclick="document.getElementById('modalurl').style.display='block'" href="#">Subir url logo</a>
+  <a onclick="document.getElementById('infoemp').style.display='block'" href="#" style="font-size: 120%;">Informacion Empresa</a>
+  <a onclick="document.getElementById('modalinfo').style.display='block'" href="#" style="font-size: 120%;">Agregar puesto</a>
+  <a onclick="document.getElementById('modalurl').style.display='block'" href="#" style="font-size: 120%;">Subir url logo</a>
 
 </div>
     
@@ -204,18 +203,18 @@ $(document).ready(function(){
 
   
               
-              <div class="container" id="divPuestos" style="display:inline-block; left:300px;  width:200px; height: 180px; ">
+              <div class="container" id="divPuestos" style="display:inline-block; left:300px;  width:500px; height: 580px;  background-color:rgba(192,192,192,0.2); border-style: ridge;">
   <form action="listarPuestosEmp" method="get" class = "formoferente">
   
   <input type="hidden"  name="idEmp" value="<%=empresa.getIdEmp() %>"><br>
    
  
-<input type="submit"  value="Puestos Publicados" >
+<button class="btn btn-outline-secondary" style="background:slateblue; width:160px; font-weight: bold;"  type="submit" value="Puestos Publicados">Puestos Publicados</button>
 
  </form>
   
   
-  <input type="button" value="Submit" onclick="mostrarPuestos(<%= empresa.getIdEmp() %> )">
+  <input type="hidden" value="Submit" onclick="mostrarPuestos(<%= empresa.getIdEmp() %> )">
   
   
   
@@ -228,14 +227,14 @@ $(document).ready(function(){
             <div id="puestosDiv"> 
             <table style="overflow-x: auto; ;" class="tablecarac table-bordered table-sm">
               
-              <thead style="background-color: slateblue"><tr><td>Nombre</td></tr></thead>
+              <thead style="background-color: slateblue"><tr><td style="width:150px; font-weight: bold;">Nombre</td></tr></thead>
               <tbody >
                 <% for(Puestos s: puestosListaEmp){ %>
                 <tr>
                       <td  onClick="editar('<%= s.getIdPuesto()%>' , '<%= s.getNombrePuesto() %>' , '<%=s.getDescripcionPuesto() %>' , '<%=s.getSalario() %>', '<%=s.isEstado() %>');" ><%= s.getNombrePuesto() %>&#160; <img  src='images/pencil.svg'  class='icon' onclick="document.getElementById('myyModal').style.display='block'" style="width:auto;">
                       <img  onclick="document.getElementById('modalborrar').style.display='block'"  src='images/trashcan.svg'  class='icon'  style="width:auto;">
                       </td>
-                      <td onClick="buscarOf(<%= s.getIdPuesto()%>);"  ><img  onclick="document.getElementById('modalof').style.display='block'"  src='person/login.svg'  class='icon'  style="width:auto;"> </td>
+                      <td  style="width:40px;"  onClick="buscarOf(<%= s.getIdPuesto()%>);"  ><img  onclick="document.getElementById('modalof').style.display='block'"  src='images/person.svg'  class='icon'  style="width:auto;"> </td>
                      </tr>
                <% } %>
             </tbody>
@@ -254,21 +253,21 @@ $(document).ready(function(){
            
              
   
-              <div class="container" id="divBuscarOferente" style=" float:left;  width:400px; height: 540px; ">
+              <div class="container" id="divBuscarOferente" style=" float:left;  width:450px; height: 580px; background-color:rgba(192,192,192,0.2); border-style: ridge; ">
                   <%  List<Caracteristicas> cc = model.instance().getAllCaracteristicas(); %>
                   
-                  <h1 style="text-align: center; font-size: 150%;">Buscar Oferente </h1>
+                  <h1 style="text-align: center; font-size: 150%; font-weight: bold; ">Buscar Oferente </h1>
 
 <form style="float: left;" class = "formempresa"  action="buscarOferente" method="get">
     
  
- <table class="tablecarac table-bordered table-sm">
+ <table style='padding-right: 10px;' class="tablecarac table-bordered table-sm">
     
        <% for(Caracteristicas sc : cc){ %>
      <ul>
               <li>
                   
-                <a>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <%= sc.getNombreCaracteristica()  %> </a>
+                <a>&#160;&#160; <%= sc.getNombreCaracteristica()  %> </a>
  
                 <ul>
                      
@@ -276,7 +275,7 @@ $(document).ready(function(){
                     <% for(Area_Trabajo artr : at){ %>
                  <li>
  
-                     <a> &#160;&#160;<%= artr.getNombreAreaTrabajo()  %> </a>
+                     <a> &#160;&#160;&#160;&#160;&#160;&#160;<%= artr.getNombreAreaTrabajo()  %> </a>
          
                      <ul>
                           <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
@@ -284,13 +283,13 @@ $(document).ready(function(){
                      
                       <li>
  
-                           <a >&#160; &#160; <input type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %>&#160;&#160;&#160;</a>
+                           <a >&#160; &#160;&#160;&#160;&#160;&#160; <input type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %>&#160;&#160;&#160;</a>
                           
                            
-                       <a> &#160; &#160;    <span style="position:relative;">
+                       <a> &#160;&#160;&#160;&#160;&#160;&#160;    <span style="position:relative;">
                        <input  disabled="disabled" type="number" min="1" max="100" id="porcentaj"  name="porcentaje"   >
                        <div style="position:absolute; left:0; right:0; top:0; bottom:0; cursor: pointer;" ></div>
-                        </span> &#160;&#160;&#160</a>
+                        </span> &#160;&#160;&#160;&#160;&#160;&#160;</a>
                            
                            
                        </li>
@@ -309,9 +308,14 @@ $(document).ready(function(){
             </ul><br>
      
               <% } %>
+              
+              
+              <button class="btn btn-outline-secondary" style="background:slateblue; font-weight: bold;"  type="submit" value="Buscar Oferente">Buscar Oferente</button>
+              
  </table>
-
-        <input class="formfield"  type="submit" value="Buscar Oferente">
+        
+        
+        
 </form>
  
  
@@ -326,13 +330,13 @@ $("div").click(function (evt) {
      
  </script> 
                   
-  <div id="body" style="margin: 0 auto; width:85%; display: inline-block; margin-left:20px;">   
+  <div id="body" style="margin: 0 auto; width:85%; display: inline-block;">   
         <div id="listar" class="area" style="width:50%;">   
             <br>
             <jsp:useBean id="buscarOferente" scope="request" type="List<Oferente>" class="java.util.ArrayList"/>
             <table class="tablecarac table-bordered table-sm">
               
-              <thead style="background-color: slateblue"><tr><td>Nombre</td><td>Apellido</td><td>Correo</td><td>Ubicacion</td><td>Curriculum</td></tr></thead>
+              <thead style="background-color: slateblue"><tr><td style="font-weight: bold;">Nombre</td><td style="font-weight: bold;">Apellido</td><td style="font-weight: bold;">Correo</td><td style="font-weight: bold;">Ubicacion</td><td style="font-weight: bold;">Curriculum</td></tr></thead>
               <tbody style="height: 250px;">
                 <% for(Oferente s: buscarOferente){ %>
                      <tr><td><%= s.getNombreOferente() %></td><td><%= s.getPrimerApellido() %></td>
@@ -417,8 +421,11 @@ $("div").click(function (evt) {
          <table style="border-spacing: 10px; border-collapse: separate; ">
              <tr>
               <div id="caracof">   
-             <th>Nombre</th>
-             <th>Apellido</th>
+             <th style='padding-right: 5px; font-weight: bold;'>Nombre</th>
+             <th style='padding-right: 40px; font-weight: bold;'>Apellido</th>
+             <th style='padding-right: 70px; font-weight: bold;'>Correo</th>
+             <th style='padding-right: 25px; font-weight: bold;'>Ubicacion</th>
+             <th>Curriculum</th>
              </tr>
          
          </table>
@@ -488,7 +495,7 @@ $("div").click(function (evt) {
      </div>
      
         
-      <button style="background:slateblue;" type="submit">Editar</button>
+      <button style="background:slateblue; font-weight: bold;" type="submit">Editar</button>
       
     </div>
      
@@ -525,7 +532,7 @@ $("div").click(function (evt) {
      <input class="formfield" type="hidden" id="idPues" name="idPues"  ><br>
      
         
-      <button style="background:slateblue;" type="submit">Desactivar</button>
+      <button style="background:slateblue; font-weight: bold;" type="submit">Desactivar</button>
       
     </div>
 
@@ -593,12 +600,16 @@ $("div").click(function (evt) {
                     
                     var cedula = obj[i].cedulaOferente;
                     
+                    var correoOf = obj[i].correoOferente;
+                    
+                    var ubicacionOf = obj[i].ubicacion;
+                    
                    
           
-          input.innerHTML = " <table> <tr> <td style=' padding-right: 80px; text-align: center;'> &#160;&#160;&#160;"  +nombreOf+"</td> <td style=' padding-right: 80px; text-align: center;'>"+primerApellido+" \n\
+          input.innerHTML = " <table> <tr> <td style=' padding-right: 40px; text-align: center;'> &#160;&#160;&#160;"  +nombreOf+"</td> <td style=' padding-right: 40px; text-align: center;'>"+primerApellido+" \n\
 \n\
 \n\
-<img  src='images/pencil.svg'  class='icon' onclick='document.getElementById('myyModal').style.display='block'' style='width:auto;'></td> <tr> </table>";
+</td><td style=' padding-right: 40px; text-align: center;'>"+correoOf+"</td><td style=' padding-right: 40px; text-align: center;'>"+ubicacionOf+"</td><td><form method='get' action='downloadpdf' enctype='multipart/form-data'> <input type='hidden'  name='cedula' value="+cedula+">  <input type='submit' value='Descargar CV' name='download' id='download' /> </form>    </td> <tr> </table>";
           document.getElementById("caracof").appendChild(input); 
           
           
@@ -851,7 +862,7 @@ $( "input" ).on( "click", function() {
          <form action="agregarPuesto"  id="formpuesto"  method="POST" class="modal-content animate">
            
            <span onclick="cerrarModalPuesto();" class="close" title="Close Modal">&times;</span>
-                      <legend id="leg" >Agregar nuevo puesto</legend>
+                      <legend id="leg" style="background: slateblue;" >Agregar nuevo puesto</legend>
                       
                        <div class="container">
                       
@@ -907,9 +918,8 @@ $( "input" ).on( "click", function() {
               <input style="width: 300px;" class="formfield" type="number" id="porcentaje" name="porcentaje" value="${param.porcentaje}" placeholder="Porcentaje caracteristica" ><br>    
               
            
-              
-              
-           <input id="ag" class="formfield" type="submit" value="Agregar Puesto">
+             
+           <button class="btn btn-outline-secondary" style="background:slateblue;"  type="submit" value="Agregar Puesto">Agregar Puesto</button>
            
                       </div>
            
@@ -968,9 +978,9 @@ $( "input" ).on( "click", function() {
     <div class="imgcontainer">
       <span onclick="cerrarModalPuesto();" class="close" title="Close Modal">&times;</span>
   
-      <input type="text"  name="url" id="url"  placeholder="Url de logo" value="<%= empresa.getNombreEmp() %>">
-      <input type="text"  name="url" id="url"  placeholder="Url de logo" value="<%= empresa.getCorreoEmp() %>">
-      <input type="text"  name="url" id="url"  placeholder="Url de logo" value="<%= empresa.getTelefono() %>">
+      <input type="text"    value="<%= empresa.getNombreEmp() %>">
+      <input type="text"    value="<%= empresa.getCorreoEmp() %>">
+      <input type="text"    value="<%= empresa.getTelefono() %>">
 
       
       </div> 
@@ -1029,7 +1039,7 @@ body {
 }
 
 .sidenav {
-    height: 100%;
+    height: 40%;
     width: 0;
     position: fixed;
     z-index: 1;
@@ -1076,8 +1086,8 @@ body {
 
 <script>
 function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
+    document.getElementById("mySidenav").style.width = "230px";
+    document.getElementById("main").style.marginLeft = "230px";
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
 }
 

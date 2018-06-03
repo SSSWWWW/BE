@@ -264,7 +264,7 @@ function addInput1(divName){
      <ul>
               <li>
                   
-                <a> <%= sc.getNombreCaracteristica()  %> </a>
+                <a> <%= sc.getNombreCaracteristica()  %> <img   src='images/plus.svg'  class='icon'  style="width:auto;"> </a>
  
                 <ul>
                      
@@ -272,7 +272,7 @@ function addInput1(divName){
                     <% for(Area_Trabajo artr : at){ %>
                  <li>
  
-                     <a> &#160;&#160;<%= artr.getNombreAreaTrabajo()  %> </a>
+                     <a> &#160;&#160;<%= artr.getNombreAreaTrabajo()  %> <img   src='images/plus.svg'  class='icon'  style="width:auto;"> </a>
          
                      <ul>
                           <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
@@ -323,7 +323,7 @@ function addInput1(divName){
             
               <div style="overflow-x: auto; width:250px; height: 389px;">
 
-            <table style="overflow-x: auto; width:250px; height: 389px;" class="tablecarac table-bordered table-sm">
+            <table style="overflow-x: auto; " class="tablecarac table-bordered table-sm">
               
               <thead  style="background-color: slateblue"><tr><td>Nombre Empresa</td></tr></thead>
               <tbody style="height: 250px;">
@@ -362,7 +362,7 @@ function addInput1(divName){
             
               <div style="overflow-x: auto; width:250px; height: 389px;">
 
-            <table style="overflow-x: auto; width:250px; height: 389px;" class="tablecarac table-bordered table-sm">
+            <table style="overflow-x: auto; " class="tablecarac table-bordered table-sm">
               
               <thead  style="background-color: slateblue"><tr><td>Nombre Oferente</td></tr></thead>
               <tbody style="height: 250px;">
@@ -447,7 +447,7 @@ function addInput1(divName){
             
             
             
-             <div  id="modalborrar" class="modal">
+             <div  id="modalborrar" class="modal" style="width:40%;" >
   
   <form class="modal-content animate" action="activarEmpresa" method="POST">
     <div class="imgcontainer">
@@ -464,7 +464,7 @@ function addInput1(divName){
      <input class="formfield" type="hidden" id="idEmp" name="idEmp"  ><br>
      
         
-      <button type="submit">Activar</button>
+      <button style="background-color: slateblue;" type="submit">Activar</button>
       
     </div>
 
@@ -478,7 +478,7 @@ function addInput1(divName){
              
              
              
-                   <div  id="modaloferente" class="modal">
+                   <div  id="modaloferente" class="modal" style="width:40%;">
   
   <form class="modal-content animate" action="activarOferente" method="POST">
     <div class="imgcontainer">
@@ -495,7 +495,7 @@ function addInput1(divName){
      <input class="formfield" type="hidden" id="idOf" name="idOf"  ><br>
      
         
-      <button type="submit">Activar</button>
+      <button style="background-color: slateblue;" type="submit">Activar</button>
       
     </div>
 
