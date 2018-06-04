@@ -314,6 +314,7 @@ oferente.setClave(clave);
                 String error = e.getMessage(); 	
                 request.setAttribute("error",error);
                 request.getRequestDispatcher("registrooferente.jsp").forward( request, response);
+                System.out.println(error);
           }
         
         

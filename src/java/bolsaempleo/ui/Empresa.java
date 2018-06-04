@@ -185,7 +185,7 @@ empresa.setClave(clave);
                 String error = e.getMessage(); 	
                 request.setAttribute("error",error);
                 request.getRequestDispatcher("registroempresa.jsp").forward( request, response);
-                
+                System.out.println(error);
                 
           }
         

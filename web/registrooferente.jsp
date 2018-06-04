@@ -21,10 +21,12 @@
   <body>
   
       
-        <%
+                  <%
     if(null!=request.getAttribute("error"))
+    
     {
-       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
+              
+       out.println("<h1>Usuario ya esta registrado...Intente de nuevo con otros datos</h1>"); 
     }
 %>
       

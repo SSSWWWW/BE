@@ -40,11 +40,18 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
     
      
        
+                   <%
+    if(null!=request.getAttribute("error"))
     
+    {
+              
+       out.println("<h1>Empresa ya esta registrada...Intente de nuevo con otro nombre</h1>"); 
+    }
+%>
 
 
   
-  <form id="formEmpresa" class="modal-content animate" action="agregarEmpresa" method="get">
+  <form name="formEmpresa" id="formEmpresa"  action="agregarEmpresa" method="get" onsubmit="return validation();" >
     <div class="imgcontainer">
       
       <img src='images/empresa.png' alt="Avatar" class="avatar">
@@ -169,6 +176,7 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
     
 
 
+
 <script>
 // Get the modal
 var modal = document.getElementById('id01');
@@ -181,15 +189,26 @@ window.onclick = function(event) {
 }
 </script>
 
-                  <%
-    if(null!=request.getAttribute("error"))
-    
-    {
-       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
-    }
-%>
+   
 
- 
+
+
+<script>
+function validation() {
+   var x = document.forms["formEmpresa"]["email"].value;
+    if (x === null || x === "") {
+        alert("username cannot be empty..!!");
+        return false;
+    }
+    
+    if(null!==request.getAttribute("error")){
+        
+         alert("error en base de datos");
+        return false;
+        
+    }
+    
+</script>
 
 
 
