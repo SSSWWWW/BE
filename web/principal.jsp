@@ -21,7 +21,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link rel = "stylesheet" href = "css/principal.css">
+
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -113,52 +113,33 @@
 </div><br><br><br>
     
           
-<%  List<Caracteristicas> cc = model.instance().getAllCaracteristicas(); %>
-
-<div id="wrapper">
-
- <div style=" float:left; display:inline-block;   width: 400px;"> 
-
-<h1 style="text-align: left; font-size: 150%;">Buscar Empleo </h1>
-
-<form style="float: left;" class = "formempresa"  action="buscarPuestos" method="get">
-    
+     <%  List<Caracteristicas> cc = model.instance().getAllCaracteristicas(); %>
      
- 
- <table style="font-size: 10px;">
-    
-       <% for(Caracteristicas sc : cc){ %>
-     <ul>
-              <li>
-                  
-                <a style="font-size: 10px;"> <%= sc.getNombreCaracteristica()  %> </a>
- 
-                <ul>
-                     
-                     <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
-                    <% for(Area_Trabajo artr : at){ %>
-                 <li>
- 
-                     <a > &#160;&#160;<%= artr.getNombreAreaTrabajo()  %> </a>
-         
-                     <ul>
-                          <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
-                      <% for(Especializacion esp : es){ %>
-                     
-                       <li>
- 
-                           <a > &#160; &#160; <input  type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %>&#160;&#160;&#160</a>
-                          
-                           
-                       <a> &#160; &#160;    <span style="position:relative;">
+   
+
+ <div style=" float:left; display:inline-block;   width: 400px; "> 
+     
+     <form  class = "formempresa"  action="buscarPuestos" method="get">
+  
+         <% for(Caracteristicas sc : cc){ %>
+  
+<ul class="tree" id="tree">
+  <li><a ><%= sc.getNombreCaracteristica()  %></a>
+    <ul>
+        <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
+        <% for(Area_Trabajo artr : at){ %>
+      <li><a><%= artr.getNombreAreaTrabajo()  %></a>
+        <ul>
+            <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
+            <% for(Especializacion esp : es){ %>
+          <li><a> &#160; &#160; <input type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %></li>
+          
+          <a><span style="position:relative;">
                        <input  disabled="disabled" type="number" min="1" max="100" id="porcentaj"  name="porcentaje"   >
                        <div style="position:absolute; left:0; right:0; top:0; bottom:0; cursor: pointer;" ></div>
                         </span> &#160;&#160;&#160</a>
-                           
-                           
-                       </li>
-
-                       <% } %>
+          
+        <% } %>
                      </ul>
  
                  </li>
@@ -173,7 +154,52 @@
      
               <% } %>
  </table>
- </div>
+              
+              
+      
+ <script>
+
+
+var tree = document.querySelectorAll('ul.tree a:not(:last-child)');
+for(var i = 0; i < tree.length; i++){
+    tree[i].addEventListener('click', function(e) {
+        var parent = e.target.parentElement;
+        var classList = parent.classList;
+        if(classList.contains("open")) {
+            classList.remove('open');
+            var opensubs = parent.querySelectorAll(':scope .open');
+            for(var i = 0; i < opensubs.length; i++){
+                opensubs[i].classList.remove('open');
+            }
+        } else {
+            classList.add('open');
+        }
+    });
+}
+
+</script>
+
+
+<style>
+    
+ ul.tree li {
+    list-style-type: none;
+    position: relative;
+   
+}
+
+ul.tree li ul {
+    display: none;
+}
+
+ul.tree li.open > ul {
+    display: block;
+}
+   
+    
+    </style>
+  
+ 
  
  
   <input type="hidden" id="longclicked"  name="longitud" value="${param.longitud}">
@@ -440,34 +466,20 @@ function placeMarker(location) {
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA&callback=initMap"
         async defer></script>
         
-        
+       
+    
        
         
        
-        <div class = "map" style="margin: 0 0 0 302px;  ">
+        <div class = "map" style="margin: 0 0 110 302px;   ">
             <h1 style="display: inline-block;">Localizacion</h1>
             <input  style="width:60px; height: 60px;  -webkit-border-radius: 65px;-moz-border-radius: 65px; border-radius: 65px; " class="formfield" type="text" name="circle_radius" id="circle_radius">
          
             <div id = "map" ></div>
         </div>
 </div>
- 
- 
-
-<button style = "background-color: slateblue;   width: 100%;  color: white; padding: 14px 20px;" type="submit">Buscar puesto</button>
-
-</form>
- 
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
- <script>
-     
-$("div").click(function (evt) {
-    $(this).ready().prev("input[disabled]").prop("disabled", false).focus();
-});
-     
- </script>    
-
-  <div id="body" style="margin: 0 auto; width:85%; display: inline-block; margin-left:20px;">   
+  
+   <div id="body" style="margin: 0 auto; width:85%;  margin-left:720px; top:200px; ">   
         <div id="listar" class="area" style="width:50%;">   
             <br>
             <jsp:useBean id="buscarPuestos" scope="request" type="List<Puestos>" class="java.util.ArrayList"/>
@@ -494,7 +506,24 @@ $("div").click(function (evt) {
             
       </div>
     </div>
-    
+  
+ 
+ 
+
+<button style = "background-color: slateblue;   width: 100%;  color: white; padding: 14px 20px;" type="submit">Buscar puesto</button>
+
+</form>
+ 
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+ <script>
+     
+$("div").click(function (evt) {
+    $(this).ready().prev("input[disabled]").prop("disabled", false).focus();
+});
+     
+ </script>    
+
+  
 
               
               <!--a href = "registroempresa.html" target = "_self">Registro empresa</a><br><br>

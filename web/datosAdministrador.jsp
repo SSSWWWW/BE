@@ -65,119 +65,14 @@ function addInput1(divName){
              <script src="/wp-includes/js/addInput.js" language="Javascript" type="text/javascript"></script>
             
              
-                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js" type="text/javascript"></script>
-        <script type="text/javascript"> 
-       
-       $(function(){
-    var $caracteristica = $('#caracteristica');
-    var $caracteristicaenarea = $('#caracteristicaenarea');
-    function onChange() {
-        $caracteristicaenarea.val($caracteristica.val());
-    };
-    $('#caracteristica')
-        .change(onChange)
-        .keyup(onChange);
-});
-      
             
-        </script>
         
-          <script type="text/javascript"> 
-       
-       $(function(){
-    var $areatrabajo = $('#areatrabajo');
-    var $areaenespecialidad = $('#areaenespecialidad');
-    function onChange() {
-        $areaenespecialidad.val($areatrabajo.val());
-    };
-    $('#areatrabajo')
-        .change(onChange)
-        .keyup(onChange);
-});
-      
-            
-        </script>
+        
         
         
      
         
-        <script src="js/jquery.js"></script>
-        <script>
-            $(document).ready(function(){
-                document.getElementById("caracteristica").value = localStorage.getItem("item1");
-                
-               
-               
-            });
-        </script>
-        <script>
-            $(window).on('beforeunload', function() {
-                localStorage.setItem("item1",document.getElementById("caracteristica").value);
-                
-                
-               
-            });
-
-        </script>
         
-        
-        <script src="js/jquery.js"></script>
-        <script>
-            $(document).ready(function(){
-                document.getElementById("caracteristicaenarea").value = localStorage.getItem("item3");
-                
-               
-               
-            });
-        </script>
-        <script>
-            $(window).on('beforeunload', function() {
-                localStorage.setItem("item3",document.getElementById("caracteristicaenarea").value);
-                
-                
-               
-            });
-
-        </script>
-        
-        
-         <script src="js/jquery.js"></script>
-        <script>
-            $(document).ready(function(){
-                document.getElementById("areatrabajo").value = localStorage.getItem("item2");
-                
-               
-               
-            });
-        </script>
-        <script>
-            $(window).on('beforeunload', function() {
-                localStorage.setItem("item2",document.getElementById("areatrabajo").value);
-                
-                
-               
-            });
-
-        </script>
-        
-          <script src="js/jquery.js"></script>
-        <script>
-            $(document).ready(function(){
-                document.getElementById("areaenespecialidad").value = localStorage.getItem("item5");
-                
-               
-               
-            });
-        </script>
-        <script>
-            $(window).on('beforeunload', function() {
-                localStorage.setItem("item5",document.getElementById("areaenespecialidad").value);
-                
-                
-               
-            });
-
-        </script>
         
    
          <script type="text/javascript"> 
@@ -224,7 +119,7 @@ function addInput1(divName){
             <form id="form2" action="agregarAreaTrabajo" method="post" style="margin-left: 20px;"  onsubmit="alert('Area de trabajo agregada!')">
             
                <div id="dynamicInput">
-                 <input type="text" placeholder="2 - area de trabajo" name="areatrabajo"  id="areatrabajo">
+                 <input style='width:155px;' type="text" placeholder="2 - area de trabajo" name="areatrabajo"  id="areatrabajo">
                  <input class="formfield" type="hidden" id="caracteristicaenarea" name="caracteristicaenarea"  placeholder="1 - caracteristica "><br>   
                </div>
      
@@ -235,9 +130,9 @@ function addInput1(divName){
             <form action="agregarEspecialidad"  name="espef" id="espef" method="post" style="margin-left: 40px;" >
 
                 <div id="especilidadInput">
-                <input type="text" placeholder="3 - Especialidad" name="especialidad">
+                <input style='width:155px;' type="text" placeholder="3 - Especialidad" name="especialidad">
                 <input type="hidden" placeholder="%" name="porcentaje">
-                 <input class="formfield" type="hidden" id="areaenespecialidad" name="areaenespecialidad"  placeholder="3 - area "><br> 
+                 <input class="formfield" type="hidden" id="areaenespecialidad" name="areaenespecialidad"  ><br> 
                 </div>
                 <input type="button" value="+" onClick="addInput1('especilidadInput');">
                 
@@ -248,44 +143,27 @@ function addInput1(divName){
                  <input class="formfield"  type="submit" value="Agregar">
              </form>
               
+            <h2> Caracteristicas Registradas  </h2>  
               
-              <%  List<Caracteristicas> cc = model.instance().getAllCaracteristicas(); %>
-                  
-                  <h1 style="text-align: left; font-size: 150%;">Caracteristicas registradas </h1>
-
-
-    
-     
-                  <div style="overflow-x: auto; width:250px; height: 389px;">
-
- <table>
-    
-       <% for(Caracteristicas sc : cc){ %>
-     <ul>
-              <li>
-                  
-                <a> <%= sc.getNombreCaracteristica()  %> <img   src='images/plus.svg'  class='icon'  style="width:auto;"> </a>
- 
-                <ul>
-                     
-                     <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
-                    <% for(Area_Trabajo artr : at){ %>
-                 <li>
- 
-                     <a> &#160;&#160;<%= artr.getNombreAreaTrabajo()  %> <img   src='images/plus.svg'  class='icon'  style="width:auto;"> </a>
-         
-                     <ul>
-                          <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
-                      <% for(Especializacion esp : es){ %>
-                     
-                       <li>
- 
-                           <a> &#160; &#160; <input type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %> &#160;&#160;&#160</a>
-
-                       </li>
-
-                       <% } %>
-                     </ul><br><br>
+           <%  List<Caracteristicas> cc = model.instance().getAllCaracteristicas(); %>
+  
+         <% for(Caracteristicas sc : cc){ %>
+  
+<ul class="tree">
+  <li><a href="#"><%= sc.getNombreCaracteristica()  %><img  onclick="agregarcarac('<%= sc.getNombreCaracteristica()  %>')" src='images/plus.svg'  class='icon'  style="width:auto;"></a>
+    <ul>
+        <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
+        <% for(Area_Trabajo artr : at){ %>
+      <li><a href="#"><%= artr.getNombreAreaTrabajo()  %> <img onclick="agregararea('<%= sc.getNombreCaracteristica()  %>' , '<%= artr.getNombreAreaTrabajo()  %>')"  src='images/plus.svg'  class='icon'  style="width:auto;"></a>
+        <ul>
+            <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
+            <% for(Especializacion esp : es){ %>
+            <li><a href="#"> <%= esp.getNombreEspecializacion()  %> </a></li>
+          
+          
+          
+        <% } %>
+                     </ul>
  
                  </li>
                  
@@ -295,15 +173,99 @@ function addInput1(divName){
 
               </li>
  
-            </ul><br>
+            </ul>
      
               <% } %>
  </table>
               
               
+      
+ <script>
+
+
+var tree = document.querySelectorAll('ul.tree a:not(:last-child)');
+for(var i = 0; i < tree.length; i++){
+    tree[i].addEventListener('click', function(e) {
+        var parent = e.target.parentElement;
+        var classList = parent.classList;
+        if(classList.contains("open")) {
+            classList.remove('open');
+            var opensubs = parent.querySelectorAll(':scope .open');
+            for(var i = 0; i < opensubs.length; i++){
+                opensubs[i].classList.remove('open');
+            }
+        } else {
+            classList.add('open');
+        }
+    });
+}
+
+</script>
+
+
+<style>
+    
+ ul.tree li {
+    list-style-type: none;
+    position: relative;
+}
+
+ul.tree li ul {
+    display: none;
+}
+
+ul.tree li.open > ul {
+    display: block;
+}
+   
+    
+    </style>
+  
+              
+              
       </div>
  
       </div>
+ 
+ <script>
+     
+     
+        function agregarcarac (carac){
+            
+        
+         document.getElementById("caracteristica").value = carac;
+         document.getElementById("caracteristica").focus();
+         document.getElementById("caracteristicaenarea").value = carac;
+         
+       
+     }
+     
+     function agregararea (carac, area){
+         
+         document.getElementById("caracteristica").value = carac;
+         
+         document.getElementById("caracteristicaenarea").value = carac;
+         
+         document.getElementById("areaenespecialidad").value = area;
+         
+         
+         
+         document.getElementById("areatrabajo").value = area;
+         
+         
+         
+          document.getElementById("caracteristica").focus();
+          
+           document.getElementById("areatrabajo").focus();
+         
+         
+         
+         
+     }
+     
+     
+    
+     </script>
  
           <div class="container" style="display:inline-block; width:300px; height: 540px; ">
   <form action="listarEmpresas" method="get" class = "formoferente">

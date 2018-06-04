@@ -39,7 +39,7 @@ import logica.model;
  */
 
     @WebServlet(name = "Empresa", urlPatterns = {"/LoginEm", "/LogoutEm" , "/agregarEmpresa" , 
-    "/listarCaracteristicas", "/agregarPuesto" , "/listarPuestosEmp" , "/listarPuestosEmp1"     ,"/editarpuesto", "/listarPuestosNP" , "/deletePuesto" , "/subirUrl" , "/buscarOf"})
+    "/listarCaracteristicas", "/agregarPuesto" , "/listarPuestosEmp" , "/listarPuestosEmp1"     ,"/editarpuesto", "/listarPuestosNP" , "/deletePuesto" , "/subirUrl" , "/buscarOf" , "/agregarCar"})
 public class Empresa extends HttpServlet {
 
     /**
@@ -74,6 +74,13 @@ public class Empresa extends HttpServlet {
         case "/agregarPuesto":
             this.doagregarPuesto(request,response);
             break; 
+            
+            
+            case "/agregarCar":
+            this.doagregarCar(request,response);
+            break; 
+            
+            
             
             case "/listarPuestosEmp":
             this.dolistarPuestosEmp(request,response);
@@ -178,11 +185,58 @@ empresa.setClave(clave);
                 String error = e.getMessage(); 	
                 request.setAttribute("error",error);
                 request.getRequestDispatcher("registroempresa.jsp").forward( request, response);
+                
+                
           }
         
         
         }
     
+    
+            
+            
+   protected void doagregarCar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+         try{
+                 System.out.println("en do Login");
+        
+//<editor-fold defaultstate="collapsed" desc="...">
+        
+        String ideem = request.getParameter("idEmp");
+        String idepuesto = request.getParameter("idpues");
+        String idesp = request.getParameter("caracteristicas");
+        String porcen = request.getParameter("porcentaje");
+        
+        int idem = Integer.parseInt(ideem);
+        int ip = Integer.parseInt(idepuesto);
+        int iesp = Integer.parseInt(idesp);
+        int por = Integer.parseInt(porcen);
+        
+
+        EspecializacionIncluida esi = new EspecializacionIncluida();
+        
+  
+        esi.setIdEmp(idem);
+        esi.setIdPuesto(ip);
+        esi.setIdespecializacion(iesp);
+        esi.setPorcentajeEspecializacion(por);
+
+
+        model.instance().addEspecializacionIncluida(esi);
+        
+	request.getRequestDispatcher("datosEmpresa.jsp").
+                forward( request, response);
+          }
+          catch(Exception e){
+                String error = e.getMessage(); 	
+                request.setAttribute("error",error);
+                request.getRequestDispatcher("datosEmpresa.jsp").forward( request, response);
+          }
+        
+        
+        }
+             
+            
     
     
    protected void doagregarPuesto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

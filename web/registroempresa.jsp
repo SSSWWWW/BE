@@ -10,9 +10,23 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
 
 <!DOCTYPE html>
 <html>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel = "stylesheet" href = "css/forms.css">
+
+
+
+
    <title>Registro Empresa</title>
  <style>          
           #map { 
@@ -29,11 +43,10 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
     
 
 
-<div id="id01" class="modal">
   
-  <form class="modal-content animate" action="agregarEmpresa" method="get">
+  <form id="formEmpresa" class="modal-content animate" action="agregarEmpresa" method="get">
     <div class="imgcontainer">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      
       <img src='images/empresa.png' alt="Avatar" class="avatar">
     </div>
 
@@ -143,6 +156,8 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
             <div id = "map" ></div>
         </div>
       
+        
+        
         <button type="submit">Registrar</button>
 
   </form>
@@ -152,7 +167,7 @@ AIzaSyBrXs6HgONS-8MYrHKdnSFs3VQBbt5EYaA
     <center>
       <a href = "principal.jsp" target = "_self">Regresar</a></center>
     
-</div>
+
 
 <script>
 // Get the modal
@@ -168,10 +183,15 @@ window.onclick = function(event) {
 
                   <%
     if(null!=request.getAttribute("error"))
+    
     {
        out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
     }
 %>
+
+ 
+
+
 
 </body>
 </html>

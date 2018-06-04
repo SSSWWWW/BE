@@ -203,7 +203,7 @@ $(document).ready(function(){
 
   
               
-              <div class="container" id="divPuestos" style="display:inline-block; left:300px;  width:500px; height: 580px;  background-color:rgba(192,192,192,0.2); border-style: ridge;">
+              <div class="container" id="divPuestos" style="display:inline-block; left:300px;  width:500px; height: 580px;  background-color:rgba(192,192,192,0.2); border: 1px solid rgba(192,192,192,0.6);">
   <form action="listarPuestosEmp" method="get" class = "formoferente">
   
   <input type="hidden"  name="idEmp" value="<%=empresa.getIdEmp() %>"><br>
@@ -234,7 +234,8 @@ $(document).ready(function(){
                       <td  onClick="editar('<%= s.getIdPuesto()%>' , '<%= s.getNombrePuesto() %>' , '<%=s.getDescripcionPuesto() %>' , '<%=s.getSalario() %>', '<%=s.isEstado() %>');" ><%= s.getNombrePuesto() %>&#160; <img  src='images/pencil.svg'  class='icon' onclick="document.getElementById('myyModal').style.display='block'" style="width:auto;">
                       <img  onclick="document.getElementById('modalborrar').style.display='block'"  src='images/trashcan.svg'  class='icon'  style="width:auto;">
                       </td>
-                      <td  style="width:40px;"  onClick="buscarOf(<%= s.getIdPuesto()%>);"  ><img  onclick="document.getElementById('modalof').style.display='block'"  src='images/person.svg'  class='icon'  style="width:auto;"> </td>
+                      <td  style="width:20px;"  onClick="buscarOf(<%= s.getIdPuesto()%>);"  ><img  onclick="document.getElementById('modalof').style.display='block'"  src='images/person.svg'  class='icon'  style="width:auto;"> </td>
+                      <td  style="width:20px;"  onClick="agregarCar(<%= s.getIdPuesto()%>);"  ><img  onclick="document.getElementById('agregarcarac').style.display='block'"  src='images/plus.svg'  class='icon'  style="width:auto;"> </td>
                      </tr>
                <% } %>
             </tbody>
@@ -253,49 +254,35 @@ $(document).ready(function(){
            
              
   
-              <div class="container" id="divBuscarOferente" style=" float:left;  width:450px; height: 580px; background-color:rgba(192,192,192,0.2); border-style: ridge; ">
-                  <%  List<Caracteristicas> cc = model.instance().getAllCaracteristicas(); %>
-                  
-                  <h1 style="text-align: center; font-size: 150%; font-weight: bold; ">Buscar Oferente </h1>
+              <div class="container" id="divBuscarOferente" style=" float:left;  width:450px; height: 580px; background-color:rgba(192,192,192,0.2); border: 1px solid rgba(192,192,192,0.6); ">
+                 <%  List<Caracteristicas> cc = model.instance().getAllCaracteristicas(); %>
+     
+   
 
-<form style="float: left;" class = "formempresa"  action="buscarOferente" method="get">
-    
- 
- <table style='padding-right: 10px;' class="tablecarac table-bordered table-sm">
-    
-       <% for(Caracteristicas sc : cc){ %>
-     <ul>
-              <li>
-                  
-                <a>&#160;&#160; <%= sc.getNombreCaracteristica()  %> </a>
- 
-                <ul>
-                     
-                     <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
-                    <% for(Area_Trabajo artr : at){ %>
-                 <li>
- 
-                     <a> &#160;&#160;&#160;&#160;&#160;&#160;<%= artr.getNombreAreaTrabajo()  %> </a>
-         
-                     <ul>
-                          <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
-                      <% for(Especializacion esp : es){ %>
-                     
-                      <li>
- 
-                           <a >&#160; &#160;&#160;&#160;&#160;&#160; <input type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %>&#160;&#160;&#160;</a>
-                          
-                           
-                       <a> &#160;&#160;&#160;&#160;&#160;&#160;    <span style="position:relative;">
+ <div style=" float:left; display:inline-block;   width: 400px; "> 
+     
+     <form  class = "formempresa"  action="buscarOferente" method="get">
+  
+         <% for(Caracteristicas sc : cc){ %>
+  
+<ul class="tree" id="tree">
+  <li><a ><%= sc.getNombreCaracteristica()  %></a>
+    <ul>
+        <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
+        <% for(Area_Trabajo artr : at){ %>
+      <li><a><%= artr.getNombreAreaTrabajo()  %></a>
+        <ul>
+            <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
+            <% for(Especializacion esp : es){ %>
+          <li><a> &#160; &#160; <input type="checkbox" name="names" value="<%= esp.getIdespecializacion()  %>"/> <%= esp.getNombreEspecializacion() %></li>
+          
+          <a><span style="position:relative;">
                        <input  disabled="disabled" type="number" min="1" max="100" id="porcentaj"  name="porcentaje"   >
                        <div style="position:absolute; left:0; right:0; top:0; bottom:0; cursor: pointer;" ></div>
-                        </span> &#160;&#160;&#160;&#160;&#160;&#160;</a>
-                           
-                           
-                       </li>
-
-                       <% } %>
-                     </ul><br><br>
+                        </span> &#160;&#160;&#160</a>
+          
+        <% } %>
+                     </ul>
  
                  </li>
                  
@@ -305,11 +292,55 @@ $(document).ready(function(){
 
               </li>
  
-            </ul><br>
+            </ul>
      
               <% } %>
+ </table>
               
               
+      
+ <script>
+
+
+var tree = document.querySelectorAll('ul.tree a:not(:last-child)');
+for(var i = 0; i < tree.length; i++){
+    tree[i].addEventListener('click', function(e) {
+        var parent = e.target.parentElement;
+        var classList = parent.classList;
+        if(classList.contains("open")) {
+            classList.remove('open');
+            var opensubs = parent.querySelectorAll(':scope .open');
+            for(var i = 0; i < opensubs.length; i++){
+                opensubs[i].classList.remove('open');
+            }
+        } else {
+            classList.add('open');
+        }
+    });
+}
+
+</script>
+
+
+<style>
+    
+ ul.tree li {
+    list-style-type: none;
+    position: relative;
+   
+}
+
+ul.tree li ul {
+    display: none;
+}
+
+ul.tree li.open > ul {
+    display: block;
+}
+   
+    
+    </style>
+                
               <button class="btn btn-outline-secondary" style="background:slateblue; font-weight: bold;"  type="submit" value="Buscar Oferente">Buscar Oferente</button>
               
  </table>
@@ -573,6 +604,18 @@ $("div").click(function (evt) {
             
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script> 
+    
+    
+    function agregarCar(idpuesto){
+
+           
+           document.getElementById("idpues").value = idpuesto;
+           
+           
+}
+    
+    
+    
     
     
        function buscarOf(idpuesto){
@@ -972,15 +1015,15 @@ $( "input" ).on( "click", function() {
 </div>     
 
 
-<div id="infoemp" class="modal" >
+<div id="infoemp" class="modal"  >
   
   <form class="modal-content animate"  >
     <div class="imgcontainer">
       <span onclick="cerrarModalPuesto();" class="close" title="Close Modal">&times;</span>
   
-      <input type="text"    value="<%= empresa.getNombreEmp() %>">
-      <input type="text"    value="<%= empresa.getCorreoEmp() %>">
-      <input type="text"    value="<%= empresa.getTelefono() %>">
+      <input style="background:slateblue; font-weight: bold;" type="text"    value="<%= empresa.getNombreEmp() %>">
+      <input style="background:slateblue; font-weight: bold;" type="text"    value="<%= empresa.getCorreoEmp() %>">
+      <input style="background:slateblue; font-weight: bold;" type="text"    value="<%= empresa.getTelefono() %>">
 
       
       </div> 
@@ -990,6 +1033,69 @@ $( "input" ).on( "click", function() {
 
 
 
+      
+      
+      
+      <div id="agregarcarac" class="modal" >
+  
+  <form class="modal-content animate"  method="POST" action="agregarCar"  onsubmit="alert('Caracteristica agregado!')" >
+    <div class="imgcontainer">
+      <span onclick="cerrarModalPuesto();" class="close" title="Close Modal">&times;</span>
+  
+         <input type="hidden"  name="idpues" id="idpues"  >
+            
+            <select class="custom-select"   name="caracteristicas" id="caracteristicas">
+                 
+              <option selected value="" selected>Caracteristicas</option>
+                 
+                <% for(Caracteristicas sc : c){ %>
+                
+                <option > <%= sc.getNombreCaracteristica()%></option>
+                        
+                        <% List<Area_Trabajo> at = model.instance().getArea_Trabajo( sc.getNombreCaracteristica());%>
+                        <% for(Area_Trabajo artr : at){ %>
+                        <option >&#160; <%= artr.getNombreAreaTrabajo()  %></option>
+                      <% List<Especializacion> es = model.instance().getEspecializacion(artr.getNombreAreaTrabajo());%>
+                       <% for(Especializacion esp : es){ %>
+                       <option value="<%= esp.getIdespecializacion() %>">&#160;&#160;&#160; <%= esp.getNombreEspecializacion() %></option>
+                        
+                 <% } %>
+                                
+               <% } %>
+               
+           <% } %>
+               </select><br>
+               
+                 
+           <input class="formfield" type="hidden" id="aux" name="aux" placeholder="Porcentaje caracteristica" >   
+   
+
+           
+              <select   style="display: none;" name="idEmp" id="idEmp">
+             <option value="<%= empresa.getIdEmp() %>"><%= empresa.getIdEmp() %></option>
+
+                  </select>
+
+               
+              <input style="width: 300px;" class="formfield" type="number" id="porcentaje" name="porcentaje" value="${param.porcentaje}" placeholder="Porcentaje caracteristica" ><br>    
+              
+           
+             
+           <button class="btn btn-outline-secondary" style="background:slateblue;"  type="submit" value="Agregar Caracteristica">Agregar Caracteristica</button>
+           
+            
+                   <%
+    if(null!=request.getAttribute("error"))
+    {
+       out.println("Se ha dado el siguiente error... " + request.getAttribute("error") + "...Intente de nuevo"); 
+    }
+%>
+            
+         
+      </div> 
+
+     </form>
+</div>     
 
 
 
@@ -1000,6 +1106,13 @@ $( "input" ).on( "click", function() {
     var modalinfo = document.getElementById('modalinfo');
     
     var modalof = document.getElementById('modalof');
+    
+    var agregarcarac = document.getElementById('agregarcarac');
+    
+    
+    
+    
+
 
 
 
@@ -1016,6 +1129,13 @@ window.onclick = function(event) {
     if (event.target == modalof ) {
         modalof.style.display = "none";
     }
+    
+     if (event.target == agregarcarac ) {
+        agregarcarac.style.display = "none";
+    }
+    
+    
+    
     
     }
     
